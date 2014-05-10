@@ -1,0 +1,214 @@
+# depslib dependency file v1.0
+1399657293 source:c:\users\sonicyang\desktop\c++ hw\final project\main.cpp
+	<iostream>
+	<curses.h>
+	<cstdlib>
+	<fstream>
+	<string>
+	<cerrno>
+	"json/reader.h"
+	"json/value.h"
+	"point.h"
+	"gmap.h"
+	"Controller.h"
+
+1268379096 source:c:\users\sonicyang\desktop\c++ hw\final project\src\lib_json\json_reader.cpp
+	<json/reader.h>
+	<json/value.h>
+	<utility>
+	<cstdio>
+	<cassert>
+	<cstring>
+	<iostream>
+	<stdexcept>
+
+1268379096 source:c:\users\sonicyang\desktop\c++ hw\final project\src\lib_json\json_value.cpp
+	<iostream>
+	<json/value.h>
+	<json/writer.h>
+	<utility>
+	<stdexcept>
+	<cstring>
+	<cassert>
+	<cpptl/conststring.h>
+	<cstddef>
+	"json_batchallocator.h"
+	"json_internalarray.inl"
+	"json_internalmap.inl"
+	"json_valueiterator.inl"
+
+1268379096 c:\users\sonicyang\desktop\c++ hw\final project\src\lib_json\json_batchallocator.h
+	<stdlib.h>
+	<assert.h>
+
+1268379096 c:\users\sonicyang\desktop\c++ hw\final project\src\lib_json\json_internalarray.inl
+
+1268379096 c:\users\sonicyang\desktop\c++ hw\final project\src\lib_json\json_internalmap.inl
+
+1268379096 c:\users\sonicyang\desktop\c++ hw\final project\src\lib_json\json_valueiterator.inl
+
+1268379096 source:c:\users\sonicyang\desktop\c++ hw\final project\src\lib_json\json_writer.cpp
+	<json/writer.h>
+	<utility>
+	<assert.h>
+	<stdio.h>
+	<string.h>
+	<iostream>
+	<sstream>
+	<iomanip>
+
+1215966292 source:c:\users\sonicyang\desktop\c++ hw\final project\src\curses\pdcclip.c
+	"pdcwin.h"
+
+1215966292 source:c:\users\sonicyang\desktop\c++ hw\final project\src\curses\pdcdisp.c
+	"pdcwin.h"
+	<stdlib.h>
+	<string.h>
+
+1215966292 source:c:\users\sonicyang\desktop\c++ hw\final project\src\curses\pdcgetsc.c
+	"pdcwin.h"
+
+1216541524 source:c:\users\sonicyang\desktop\c++ hw\final project\src\curses\pdckbd.c
+	"pdcwin.h"
+
+1216541524 source:c:\users\sonicyang\desktop\c++ hw\final project\src\curses\pdcscrn.c
+	"pdcwin.h"
+
+1215966292 source:c:\users\sonicyang\desktop\c++ hw\final project\src\curses\pdcsetsc.c
+	"pdcwin.h"
+
+1215966292 source:c:\users\sonicyang\desktop\c++ hw\final project\src\curses\pdcutil.c
+	"pdcwin.h"
+
+1215887792 c:\users\sonicyang\desktop\c++ hw\final project\src\curses\pdcwin.h
+	<windows.h>
+	<curspriv.h>
+
+1216098806 c:\users\sonicyang\desktop\c++ hw\final project\include\curses.h
+	<stdarg.h>
+	<stddef.h>
+	<stdio.h>
+	<wchar.h>
+
+1268379096 c:\users\sonicyang\desktop\c++ hw\final project\include\json\reader.h
+	"features.h"
+	"value.h"
+	<deque>
+	<stack>
+	<string>
+	<iostream>
+
+1268379096 c:\users\sonicyang\desktop\c++ hw\final project\include\json\features.h
+	"forwards.h"
+
+1268379096 c:\users\sonicyang\desktop\c++ hw\final project\include\json\forwards.h
+	"config.h"
+
+1268379096 c:\users\sonicyang\desktop\c++ hw\final project\include\json\config.h
+	<cpptl/config.h>
+
+1268379096 c:\users\sonicyang\desktop\c++ hw\final project\include\json\value.h
+	"forwards.h"
+	<string>
+	<vector>
+	<map>
+	<cpptl/smallmap.h>
+	<cpptl/forwards.h>
+
+1268379096 c:\users\sonicyang\desktop\c++ hw\final project\include\json\writer.h
+	"value.h"
+	<vector>
+	<string>
+	<iostream>
+
+1399701877 source:c:\users\sonicyang\desktop\c++ hw\final project\src\gmap.cpp
+	<cstdlib>
+	<cstring>
+	<string>
+	"gmap.h"
+	"point.h"
+	"utils.h"
+	"json/reader.h"
+	"json/value.h"
+	<string>
+	<curses.h>
+	"chararray2d.h"
+	"mapobject.h"
+
+1399701839 c:\users\sonicyang\desktop\c++ hw\final project\include\gmap.h
+	"point.h"
+	<string>
+	<set>
+	<map>
+	"mapobject.h"
+	"chararray2d.h"
+
+1399694135 c:\users\sonicyang\desktop\c++ hw\final project\include\point.h
+
+1399699962 c:\users\sonicyang\desktop\c++ hw\final project\include\utils.h
+	<fstream>
+	<string>
+	<cerrno>
+
+1399694184 source:c:\users\sonicyang\desktop\c++ hw\final project\src\point.cpp
+	"point.h"
+
+1399558647 source:c:\users\sonicyang\desktop\c++ hw\final project\src\utils.cpp
+	"utils.h"
+	<fstream>
+	<string>
+	<cerrno>
+
+1399694395 source:c:\users\sonicyang\desktop\c++ hw\final project\src\controller.cpp
+	"controller.h"
+	<cstdlib>
+	<cstring>
+	<string>
+	"gmap.h"
+	"point.h"
+	"utils.h"
+	"json/reader.h"
+	"json/value.h"
+	<string>
+	<curses.h>
+	"render.h"
+
+1399694345 c:\users\sonicyang\desktop\c++ hw\final project\include\controller.h
+	<map>
+	"gmap.h"
+	<string>
+	<curses.h>
+	"render.h"
+	"mapobject.h"
+
+1399655294 c:\users\sonicyang\desktop\c++ hw\final project\include\render.h
+	"point.h"
+	"gmap.h"
+	"mapobject.h"
+	<curses.h>
+
+1399701855 source:c:\users\sonicyang\desktop\c++ hw\final project\src\render.cpp
+	"render.h"
+	"gmap.h"
+	"point.h"
+	<curses.h>
+	<locale>
+
+1399693469 c:\users\sonicyang\desktop\c++ hw\final project\include\mapobject.h
+	<string>
+	"point.h"
+
+1399654866 source:c:\users\sonicyang\desktop\c++ hw\final project\src\mapobject.cpp
+	"mapobject.h"
+	<string>
+
+1399701012 c:\users\sonicyang\desktop\c++ hw\final project\include\chararray2d.h
+	"point.h"
+	<string>
+
+1399702076 source:c:\users\sonicyang\desktop\c++ hw\final project\src\chararray2d.cpp
+	"Point.h"
+	<string>
+	<cstring>
+	"chararray2d.h"
+
