@@ -23,7 +23,6 @@ Controller::Controller(char* maplist) : rdr()
         for(int i = 0; i < map_count; i++){
             gmap tmp(root["Path"][i].asString().c_str());
             map_list.insert (map_list.begin(), std::pair<std::string,gmap>(tmp.Getname(),tmp));
-            map_count++;
         }
         default_map = current_map = root["Default"].asString();
 

@@ -5,6 +5,7 @@
 		<Option title="Final Project" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
+		<Option virtualFolders="include\;src\model\;src\controller\;src\tools\;" />
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/Debug/Final Project" prefix_auto="1" extension_auto="1" />
@@ -46,13 +47,20 @@
 		<Unit filename="include/json/value.h" />
 		<Unit filename="include/json/writer.h" />
 		<Unit filename="include/mapobject.h" />
+		<Unit filename="include/objplayer.h" />
 		<Unit filename="include/point.h" />
 		<Unit filename="include/render.h" />
 		<Unit filename="include/utils.h" />
 		<Unit filename="main.cpp" />
-		<Unit filename="src/chararray2d.cpp" />
-		<Unit filename="src/controller.cpp" />
-		<Unit filename="src/gmap.cpp" />
+		<Unit filename="src/chararray2d.cpp">
+			<Option virtualFolder="src/tools/" />
+		</Unit>
+		<Unit filename="src/controller.cpp">
+			<Option virtualFolder="src/controller/" />
+		</Unit>
+		<Unit filename="src/gmap.cpp">
+			<Option virtualFolder="src/model/" />
+		</Unit>
 		<Unit filename="src/lib_json/json_batchallocator.h" />
 		<Unit filename="src/lib_json/json_internalarray.inl" />
 		<Unit filename="src/lib_json/json_internalmap.inl" />
@@ -61,10 +69,19 @@
 		<Unit filename="src/lib_json/json_valueiterator.inl" />
 		<Unit filename="src/lib_json/json_writer.cpp" />
 		<Unit filename="src/lib_json/sconscript" />
-		<Unit filename="src/mapobject.cpp" />
-		<Unit filename="src/point.cpp" />
+		<Unit filename="src/mapobject.cpp">
+			<Option virtualFolder="src/model/" />
+		</Unit>
+		<Unit filename="src/objplayer.cpp">
+			<Option virtualFolder="src/model/" />
+		</Unit>
+		<Unit filename="src/point.cpp">
+			<Option virtualFolder="src/tools/" />
+		</Unit>
 		<Unit filename="src/render.cpp" />
-		<Unit filename="src/utils.cpp" />
+		<Unit filename="src/utils.cpp">
+			<Option virtualFolder="src/tools/" />
+		</Unit>
 		<Extensions>
 			<code_completion />
 			<envvars />

@@ -17,13 +17,12 @@ using namespace std;
 
 int main()
 {
+    system("cd");
+    Controller gCtl("data/maps/maplist.lst");
 
     cbreak();
     noecho();
     keypad(stdscr, TRUE);
-
-
-    Controller gCtl("data/maps/maplist.lst");
 
     for(;;){
         int c = getch();
