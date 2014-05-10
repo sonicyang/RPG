@@ -31,10 +31,7 @@ Controller::Controller(char* maplist) : rdr()
         std::cout << "Failed to parse configuration\n"  << reader.getFormatedErrorMessages();
     }
 
-    cbreak();
-    noecho();
-    keypad(stdscr, TRUE);
-
+    Player = objPlayer("Player", 0, 0, 1, 1, "^>v<", EAST);
 }
 
 Controller::~Controller()
@@ -47,11 +44,30 @@ gmap Controller::get_CurrentMap(){
 
 void Controller::updateScreen(){
     rdr.render_map(map_list[current_map]);
-    rdr.render_map_object(map_list[current_map].getPlayer());
+    rdr.render_Player(Player);
     rdr.update();
     return;
 }
 
-int movePlayer(Point a){
-
+int Controller::setPlayerPos(Point a){
+    if(map_list[current_map].isOutOfBound(a))
+        return -1;
+    if(map_list[current_map].isObstacle(a))
+        return -1;
+    Player.SetCord(a);
 }
+
+int Controller::movePlayer(Point a){
+    Point curr = Player.GetCord();
+    if(a.m_y != 0)
+        Player.setFaceing(a.m_y + 1);
+    else
+        Player.setFaceing(a.m_x * -1 + 2);
+    return setPlayerPos(curr + a);
+}
+
+Point Controller::getPlayerPos(){
+    return Player.GetCord();
+}
+
+

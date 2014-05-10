@@ -15,7 +15,7 @@ class objPlayer : public mapObject
         objPlayer(const objPlayer& other);
         objPlayer& operator=(const objPlayer& other);
 
-        std::string Geticon() { return icon_list; };
+        virtual char Geticon() { return icon_list[facing]; };
 
         int getFaceing() { return facing; }
         void setFaceing(int);

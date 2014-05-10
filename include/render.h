@@ -1,6 +1,7 @@
 #include "point.h"
 #include "gmap.h"
 #include "mapobject.h"
+#include "objPlayer.h"
 #include <curses.h>
 
 #ifndef RENDER_H
@@ -16,7 +17,7 @@ class render
         Point Getscreen_max() { return screen_max; }
 
         void render_map(gmap);
-        void render_map_object(mapObject);
+        void render_Player(objPlayer);
         void update();
     protected:
     private:

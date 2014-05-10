@@ -212,7 +212,7 @@
 	<cstring>
 	"chararray2d.h"
 
-1399657293 source:c:\users\sonicyang\github\rpg\main.cpp
+1399741906 source:c:\users\sonicyang\github\rpg\main.cpp
 	<iostream>
 	<curses.h>
 	<cstdlib>
@@ -252,7 +252,7 @@
 
 1399694135 c:\users\sonicyang\github\rpg\include\point.h
 
-1399712659 c:\users\sonicyang\github\rpg\include\gmap.h
+1399741827 c:\users\sonicyang\github\rpg\include\gmap.h
 	"point.h"
 	<string>
 	<set>
@@ -260,7 +260,7 @@
 	"mapobject.h"
 	"chararray2d.h"
 
-1399741372 c:\users\sonicyang\github\rpg\include\mapobject.h
+1399742132 c:\users\sonicyang\github\rpg\include\mapobject.h
 	<string>
 	"point.h"
 
@@ -268,18 +268,20 @@
 	"point.h"
 	<string>
 
-1399694345 c:\users\sonicyang\github\rpg\include\controller.h
+1399741796 c:\users\sonicyang\github\rpg\include\controller.h
 	<map>
 	"gmap.h"
 	<string>
 	<curses.h>
 	"render.h"
 	"mapobject.h"
+	"objPlayer.h"
 
-1399655294 c:\users\sonicyang\github\rpg\include\render.h
+1399742047 c:\users\sonicyang\github\rpg\include\render.h
 	"point.h"
 	"gmap.h"
 	"mapobject.h"
+	"objPlayer.h"
 	<curses.h>
 
 1399702076 source:c:\users\sonicyang\github\rpg\src\chararray2d.cpp
@@ -288,7 +290,7 @@
 	<cstring>
 	"chararray2d.h"
 
-1399711673 source:c:\users\sonicyang\github\rpg\src\controller.cpp
+1399742020 source:c:\users\sonicyang\github\rpg\src\controller.cpp
 	"controller.h"
 	<cstdlib>
 	<cstring>
@@ -307,7 +309,7 @@
 	<string>
 	<cerrno>
 
-1399740114 source:c:\users\sonicyang\github\rpg\src\gmap.cpp
+1399741931 source:c:\users\sonicyang\github\rpg\src\gmap.cpp
 	<cstdlib>
 	<cstring>
 	<string>
@@ -375,7 +377,7 @@
 1399694184 source:c:\users\sonicyang\github\rpg\src\point.cpp
 	"point.h"
 
-1399710957 source:c:\users\sonicyang\github\rpg\src\render.cpp
+1399742084 source:c:\users\sonicyang\github\rpg\src\render.cpp
 	"render.h"
 	"gmap.h"
 	"point.h"
@@ -388,7 +390,14 @@
 	<string>
 	<cerrno>
 
-1399711530 source:c:\users\sonicyang\github\rpg\src\mapobject.cpp
+1399741942 source:c:\users\sonicyang\github\rpg\src\mapobject.cpp
 	"mapobject.h"
 	<string>
+
+1399742118 c:\users\sonicyang\github\rpg\include\objplayer.h
+	<mapObject.h>
+	<string>
+
+1399742004 source:c:\users\sonicyang\github\rpg\src\objplayer.cpp
+	"objplayer.h"
 

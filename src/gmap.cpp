@@ -11,7 +11,7 @@
 #include "chararray2d.h"
 #include "mapobject.h"
 
-gmap::gmap() : Player("Player", 0, 0, 0, 0, "^>v<", 0)
+gmap::gmap()
 {
     this->m_name = "NULL";
 
@@ -44,8 +44,6 @@ gmap::gmap(const char * filename)
             blocks.insert(root["Blocks"][i].asString()[0]);
         }
 
-        Player = mapObject("Player", 0, 0, root["Player"]["x"].asInt(), root["Player"]["y"].asInt(), "^>v<", EAST);
-
     }else{
         std::cout  << "Failed to parse configuration\n"  << reader.getFormatedErrorMessages();
     }
@@ -64,8 +62,6 @@ gmap::gmap(const gmap& other)
     m_data_state = other.m_data_state;
 
     blocks = other.blocks;
-
-    Player = other.Player;
 }
 
 gmap& gmap::operator=(const gmap& rhs)
@@ -78,38 +74,17 @@ gmap& gmap::operator=(const gmap& rhs)
         m_data_state = rhs.m_data_state;
 
         blocks = rhs.blocks;
-
-        Player = rhs.Player;
     return *this;
-}
-
-const mapObject& gmap::getPlayer(){
-    return Player;
-}
-
-int gmap::setPlayerPos(Point a){
-    if(a.m_x >= m_size.m_x || a.m_y >= m_size.m_y || a.m_y < 0 || a.m_x < 0)
-        return -1;
-    if(isObstacle(a))
-        return -1;
-    Player.SetCord(a);
-}
-
-int gmap::movePlayer(Point a){
-    Point curr = Player.GetCord();
-    if(a.m_y != 0)
-        Player.setFaceing(a.m_y + 1);
-    else
-        Player.setFaceing(a.m_x * -1 + 2);
-    return setPlayerPos(curr + a);
-}
-
-Point gmap::getPlayerPos(){
-    return Player.GetCord();
 }
 
 bool gmap::isObstacle(Point a){
     if(blocks.find(m_data[a.m_y][a.m_x]) != blocks.end())
+        return true;
+    return false;
+}
+
+bool gmap::isOutOfBound(Point a){
+    if(a.m_x >= m_size.m_x || a.m_y >= m_size.m_y || a.m_y < 0 || a.m_x < 0)
         return true;
     return false;
 }

@@ -22,6 +22,9 @@ class Controller
 
         void updateScreen();
 
+        int setPlayerPos(Point a);
+        Point getPlayerPos();
+
         int movePlayer(Point a);
     protected:
     private:

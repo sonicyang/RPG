@@ -1,7 +1,7 @@
 #include "mapobject.h"
 #include <string>
 
-mapObject::mapObject() : name("NULL"), ID(0), type(0), icon("M")
+mapObject::mapObject() : name("NULL"), ID(0), type(0), icon('M')
 {
     Cord.m_x = 0;
     Cord.m_y = 0;

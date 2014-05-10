@@ -15,9 +15,10 @@ class mapObject
 {
     public:
         friend class gmap;
+        friend class Controller;
 
         mapObject();
-        mapObject(std::string, int, int, int, int, char, int);
+        mapObject(std::string, int, int, int, int, char);
         ~mapObject();
         mapObject(const mapObject& other);
         mapObject& operator=(const mapObject& other);
@@ -25,7 +26,7 @@ class mapObject
         Point GetCord() { return Cord; }
         int GetID() { return ID; }
         int Gettype() { return type; }
-        char Geticon() { return icon; }
+        virtual char Geticon() { return icon; }
 
     protected:
         Point Cord;

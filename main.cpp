@@ -18,6 +18,11 @@ using namespace std;
 int main()
 {
 
+    cbreak();
+    noecho();
+    keypad(stdscr, TRUE);
+
+
     Controller gCtl("data/maps/maplist.lst");
 
     for(;;){

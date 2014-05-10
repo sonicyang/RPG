@@ -26,6 +26,7 @@ class gmap
         CharArray2D Getdata() { return m_data; }
 
         bool isObstacle(Point);
+        bool isOutOfBound(Point);
 
         const mapObject& getPlayer();
         int setPlayerPos(Point);
@@ -43,7 +44,6 @@ class gmap
         CharArray2D m_data_state;
         std::set<char> blocks;
 
-        mapObject Player;
         std::map<Point,mapObject> objects;
 };
 
