@@ -8,18 +8,20 @@
 class objPlayer : public mapObject
 {
     public:
-        mapObject();
-        mapObject(std::string, int, int, int, int, std::string, int);
+        objPlayer();
+        objPlayer(std::string n, int i, int t, int x, int y, std::string ic, int f);
         ~objPlayer();
 
         objPlayer(const objPlayer& other);
         objPlayer& operator=(const objPlayer& other);
 
+        std::string Geticon() { return icon_list; };
+
         int getFaceing() { return facing; }
         void setFaceing(int);
     protected:
     private:
-        std::string icon;
+        std::string icon_list;
         int facing;
 };
 

@@ -44,6 +44,8 @@ int main()
             case KEY_END:
                 return 0;
         }
+
+        gCtl.updateScreen();
     }
 
     system("pause");

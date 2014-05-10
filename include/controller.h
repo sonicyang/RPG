@@ -4,6 +4,7 @@
 #include <curses.h>
 #include "render.h"
 #include "mapobject.h"
+#include "objPlayer.h"
 
 using namespace std;
 
@@ -20,6 +21,8 @@ class Controller
         gmap get_CurrentMap();
 
         void updateScreen();
+
+        int movePlayer(Point a);
     protected:
     private:
         render rdr;

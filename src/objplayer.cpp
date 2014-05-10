@@ -2,7 +2,14 @@
 
 objPlayer::objPlayer() : mapObject("NULL", 0, 0 , 0, 0, "@")
 {
-    //ctor
+    icon_list = "^>v<";
+    facing = 0;
+}
+
+objPlayer::objPlayer(std::string n, int i, int t, int x, int y, std::string ic, int f) : mapObject(n, i, t, x, y, "@")
+{
+    icon_list = ic;
+    facing = f;
 }
 
 objPlayer::~objPlayer()
@@ -10,15 +17,18 @@ objPlayer::~objPlayer()
     //dtor
 }
 
-objPlayer::objPlayer(const objPlayer& other)
+objPlayer::objPlayer(const objPlayer& other) : mapObject(other)
 {
-    //copy ctor
+    icon_list = other.icon_list;
+    facing = other.facing;
 }
 
 objPlayer& objPlayer::operator=(const objPlayer& rhs)
 {
     if (this == &rhs) return *this; // handle self assignment
-    //assignment operator
+        mapObject::operator=(rhs);
+        icon_list = rhs.icon_list;
+        facing = rhs.facing;
     return *this;
 }
 

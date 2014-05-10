@@ -51,3 +51,7 @@ void Controller::updateScreen(){
     rdr.update();
     return;
 }
+
+int movePlayer(Point a){
+
+}

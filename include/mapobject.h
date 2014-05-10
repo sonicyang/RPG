@@ -25,7 +25,7 @@ class mapObject
         Point GetCord() { return Cord; }
         int GetID() { return ID; }
         int Gettype() { return type; }
-        char Geticon() { return icon[facing]; }
+        char Geticon() { return icon; }
 
     protected:
         Point Cord;
