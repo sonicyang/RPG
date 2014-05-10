@@ -28,10 +28,6 @@ class gmap
         bool isObstacle(Point);
         bool isOutOfBound(Point);
 
-        const mapObject& getPlayer();
-        int setPlayerPos(Point);
-        int movePlayer(Point);
-        Point getPlayerPos();
         bool isPlayerFacingObject();
 
         mapObject& getObject(Point);
