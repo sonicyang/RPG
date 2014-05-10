@@ -30,7 +30,7 @@ void render::render_map(gmap toRender){
 }
 
 void render::render_map_object(mapObject mo){
-    mvaddch(mo.GetCord().Get_y() + offset.m_y, mo.GetCord().Get_x()*2 + offset.m_x,mo.Geticon());
+    mvaddch(mo.GetCord().Get_y() + offset.m_y, mo.GetCord().Get_x()*2 + offset.m_x, mo.Geticon());
     move(24,50);
 }
 

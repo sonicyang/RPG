@@ -11,7 +11,7 @@
 #include "chararray2d.h"
 #include "mapobject.h"
 
-gmap::gmap() : Player("Player", 0, 0, 0, 0, '@')
+gmap::gmap() : Player("Player", 0, 0, 0, 0, "^>v<", 0)
 {
     this->m_name = "NULL";
 
@@ -44,7 +44,7 @@ gmap::gmap(const char * filename)
             blocks.insert(root["Blocks"][i].asString()[0]);
         }
 
-        Player = mapObject("Player", 0, 0, root["Player"]["x"].asInt(), root["Player"]["y"].asInt(), '@');
+        Player = mapObject("Player", 0, 0, root["Player"]["x"].asInt(), root["Player"]["y"].asInt(), "^>v<", EAST);
 
     }else{
         std::cout  << "Failed to parse configuration\n"  << reader.getFormatedErrorMessages();
@@ -97,6 +97,10 @@ int gmap::setPlayerPos(Point a){
 
 int gmap::movePlayer(Point a){
     Point curr = Player.GetCord();
+    if(a.m_y != 0)
+        Player.setFaceing(a.m_y + 1);
+    else
+        Player.setFaceing(a.m_x * -1 + 2);
     return setPlayerPos(curr + a);
 }
 

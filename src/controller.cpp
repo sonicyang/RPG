@@ -65,6 +65,12 @@ void Controller::waitUserCommand(){
         case KEY_DOWN:
             map_list[current_map].movePlayer(Point(0,1));
             break;
+        case 'z':
+
+            break;
+        case 'x':
+
+            break;
         case KEY_END:
             exit(1);
     }
