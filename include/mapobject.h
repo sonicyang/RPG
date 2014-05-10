@@ -17,7 +17,7 @@ class mapObject
         friend class gmap;
 
         mapObject();
-        mapObject(std::string, int, int, int, int, std::string, int);
+        mapObject(std::string, int, int, int, int, char, int);
         ~mapObject();
         mapObject(const mapObject& other);
         mapObject& operator=(const mapObject& other);
@@ -26,8 +26,7 @@ class mapObject
         int GetID() { return ID; }
         int Gettype() { return type; }
         char Geticon() { return icon[facing]; }
-        int getFaceing() { return facing; }
-        void setFaceing(int);
+
     protected:
         Point Cord;
         void SetCord(Point val) { Cord = val; }
@@ -35,8 +34,8 @@ class mapObject
         int ID;
         std::string name;
         int type;
-        std::string icon;
-        int facing;
+        char icon;
+
 };
 
 #endif // MAPOBJECT_H

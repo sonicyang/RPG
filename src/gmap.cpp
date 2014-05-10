@@ -113,3 +113,9 @@ bool gmap::isObstacle(Point a){
         return true;
     return false;
 }
+
+bool gmap::isPlayerFacingObject(){
+
+}
+
+

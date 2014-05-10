@@ -25,12 +25,15 @@ class gmap
 
         CharArray2D Getdata() { return m_data; }
 
+        bool isObstacle(Point);
+
         const mapObject& getPlayer();
         int setPlayerPos(Point);
         int movePlayer(Point);
         Point getPlayerPos();
+        bool isPlayerFacingObject();
 
-        bool isObstacle(Point);
+        mapObject& getObject(Point);
 
     protected:
     private:
@@ -41,7 +44,7 @@ class gmap
         std::set<char> blocks;
 
         mapObject Player;
-        std::map<int,mapObject> objects;
+        std::map<Point,mapObject> objects;
 };
 
 #endif // GMAP_H

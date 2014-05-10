@@ -20,7 +20,6 @@ class Controller
         gmap get_CurrentMap();
 
         void updateScreen();
-        void waitUserCommand();
     protected:
     private:
         render rdr;
@@ -29,6 +28,8 @@ class Controller
         int map_count;
         string default_map;
         string current_map;
+
+        objPlayer Player;
 };
 
 #endif // CONTROLLER_H

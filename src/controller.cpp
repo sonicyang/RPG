@@ -23,6 +23,7 @@ Controller::Controller(char* maplist) : rdr()
         for(int i = 0; i < map_count; i++){
             gmap tmp(root["Path"][i].asString().c_str());
             map_list.insert (map_list.begin(), std::pair<std::string,gmap>(tmp.Getname(),tmp));
+            map_count++;
         }
         default_map = current_map = root["Default"].asString();
 
@@ -48,31 +49,5 @@ void Controller::updateScreen(){
     rdr.render_map(map_list[current_map]);
     rdr.render_map_object(map_list[current_map].getPlayer());
     rdr.update();
-    return;
-}
-void Controller::waitUserCommand(){
-    int c = getch();
-    switch (c) {
-        case KEY_LEFT:
-            map_list[current_map].movePlayer(Point(-1,0));
-            break;
-        case KEY_RIGHT:
-            map_list[current_map].movePlayer(Point(1,0));
-            break;
-        case KEY_UP:
-            map_list[current_map].movePlayer(Point(0,-1));
-            break;
-        case KEY_DOWN:
-            map_list[current_map].movePlayer(Point(0,1));
-            break;
-        case 'z':
-
-            break;
-        case 'x':
-
-            break;
-        case KEY_END:
-            exit(1);
-    }
     return;
 }
