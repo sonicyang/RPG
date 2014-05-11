@@ -30,6 +30,7 @@ class mapObject
         int Gettype() { return type; }
         virtual char Geticon() const { return icon; }
 
+        const std::vector<std::string>& getTrigger() const { return trigger; };
     protected:
         Point Cord;
         void SetCord(Point val) { Cord = val; }

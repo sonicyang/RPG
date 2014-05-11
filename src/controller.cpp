@@ -111,7 +111,20 @@ void Controller::TriggerMapObject(){
     if(!obj)
         return;
 
+    for(int i = 0; i< obj->getTrigger().size(); i++)
+        execEvent(obj->getTrigger()[i]);
+}
 
+void Controller::execEvent(std::string comm){
+    std::vector<std::string> ss = split(comm, '|');
+    int commd = atoi(ss[0].c_str());
+    switch(commd){
+        case 1:
+            stat = conversation;
+
+            break;
+    }
+    return;
 }
 
 

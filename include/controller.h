@@ -37,8 +37,10 @@ class Controller
         int movePlayer(Point a);
 
         void TriggerMapObject();
+        void execEvent(std::string);
 
         int getStat() { return stat; };
+
     protected:
     private:
         render rdr;
