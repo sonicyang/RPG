@@ -266,7 +266,7 @@
 	"point.h"
 	<string>
 
-1399786947 c:\users\sonicyang\github\rpg\include\controller.h
+1399787990 c:\users\sonicyang\github\rpg\include\controller.h
 	<map>
 	"gmap.h"
 	<string>
@@ -275,7 +275,7 @@
 	"mapobject.h"
 	"objPlayer.h"
 
-1399742047 c:\users\sonicyang\github\rpg\include\render.h
+1399787984 c:\users\sonicyang\github\rpg\include\render.h
 	"point.h"
 	"gmap.h"
 	"mapobject.h"

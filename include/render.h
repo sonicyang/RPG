@@ -18,6 +18,8 @@ class render
 
         void render_map(gmap);
         void render_Player(objPlayer);
+        void render_prompt(std::string);
+
         void update();
     protected:
     private:
@@ -27,3 +29,4 @@ class render
 };
 
 #endif // RENDER_H
+

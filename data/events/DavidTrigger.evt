@@ -1,6 +1,8 @@
 {
 	"Name" : "DavidTrigger",
 	"Command" : [
-				"01|Hello!"
+				"00|02",
+				"01|Hello",
+				"00|01"
 				]
 }

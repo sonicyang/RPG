@@ -40,6 +40,10 @@ void render::render_Player(objPlayer mo){
     move(24,50);
 }
 
+void render_prompt(std::string s){
+
+}
+
 void render::update(){
     refresh();
     return;

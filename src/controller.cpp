@@ -45,6 +45,8 @@ gmap Controller::get_CurrentMap(){
 void Controller::updateScreen(){
     rdr.render_map(map_list[current_map]);
     rdr.render_Player(Player);
+    if(stat == conversation)
+        rdr.render_prompt(prompt);
     rdr.update();
     return;
 }
@@ -119,9 +121,12 @@ void Controller::execEvent(std::string comm){
     std::vector<std::string> ss = split(comm, '|');
     int commd = atoi(ss[0].c_str());
     switch(commd){
+        case 0:
+            stat = atoi(ss[1].c_str());
+            stat = (!stat)? onMap : stat;
+            break;
         case 1:
-            stat = conversation;
-
+            prompt = ss[1];
             break;
     }
     return;

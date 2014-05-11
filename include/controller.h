@@ -52,6 +52,8 @@ class Controller
 
         objPlayer Player;
 
+        std::string prompt;
+
         int stat = 1;
 };
 
