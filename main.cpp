@@ -21,6 +21,8 @@ int main()
     noecho();
     keypad(stdscr, TRUE);
 
+    gCtl.updateScreen();
+
     for(;;){
         int c = getch();
         switch (c) {
