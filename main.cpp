@@ -7,8 +7,7 @@
 
 #include "point.h"
 #include "Controller.h"
-
-#include <windows.h>
+#include <unistd.h>
 
 using namespace std;
 
@@ -28,7 +27,7 @@ int main()
 
     for(;;){
         gCtl.getParseUserInput();
-        Sleep(33);
+        usleep(33333);
         gCtl.updateScreen();
     }
 

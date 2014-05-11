@@ -57,14 +57,14 @@ class Controller
         string current_map;
 
         objPlayer Player;
-        inv inventory;
+        //inv inventory;
 
         vector<event> eventStack;
 
         PROM prompt;
 
-        battle currBattle;
-        vector<GeneralPlayer> members;
+        //battle currBattle;
+        //vector<GeneralPlayer> members;
 
         void setStat(int s);
         void restoreStat();
