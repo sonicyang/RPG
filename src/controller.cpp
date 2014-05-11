@@ -86,7 +86,10 @@ void Controller::getParseUserInput(){
 
                 break;
                 case 'z':
+                    execEvent();
+                    break;
                 case 'x':
+                    eventStack.stk.clear();
                     execEvent();
                     break;
                 case KEY_END:
