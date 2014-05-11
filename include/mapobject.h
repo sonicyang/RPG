@@ -1,5 +1,6 @@
 #include <string>
 #include "point.h"
+#include <vector>
 
 #ifndef MAPOBJECT_H
 #define MAPOBJECT_H
@@ -18,7 +19,7 @@ class mapObject
         friend class Controller;
 
         mapObject();
-        mapObject(std::string, int, int, int, int, char);
+        mapObject(std::string, int, int, int, int, char, std::string);
         ~mapObject();
         mapObject(const mapObject& other);
         mapObject& operator=(const mapObject& other);
@@ -37,6 +38,8 @@ class mapObject
         std::string name;
         int type;
         char icon;
+
+        std::vector<std::string> trigger;
 
 };
 

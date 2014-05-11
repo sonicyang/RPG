@@ -10,6 +10,6 @@
 				"x"		:	4,
 				"y"		:	4,
 				"Icon"	:	"X",
-				"Trigger" : "DavidTrigger"
+				"Trigger" : "data/events/DavidTrigger.evt"
 				}]
 }

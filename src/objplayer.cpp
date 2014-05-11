@@ -1,12 +1,12 @@
 #include "objplayer.h"
 
-objPlayer::objPlayer() : mapObject("NULL", 0, 0 , 0, 0, '@')
+objPlayer::objPlayer() : mapObject("NULL", 0, 0 , 0, 0, '@', "")
 {
     icon_list = "^>v<";
     facing = 0;
 }
 
-objPlayer::objPlayer(std::string n, int i, int t, int x, int y, std::string ic, int f) : mapObject(n, i, t, x, y, '@')
+objPlayer::objPlayer(std::string n, int i, int t, int x, int y, std::string ic, int f) : mapObject(n, i, t, x, y, '@', "")
 {
     icon_list = ic;
     facing = f;

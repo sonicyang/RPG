@@ -1,0 +1,6 @@
+{
+	"Name" : "DavidTrigger",
+	"Command" : [
+				"01|Hello!"
+				]
+}
