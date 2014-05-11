@@ -45,8 +45,7 @@ gmap Controller::get_CurrentMap(){
 void Controller::updateScreen(){
     rdr.render_map(map_list[current_map]);
     rdr.render_Player(Player);
-    if(stat == conversation)
-        rdr.render_prompt(prompt);
+
     rdr.update();
     return;
 }
@@ -94,18 +93,18 @@ Point Controller::getPlayerPos(){
 void Controller::TriggerMapObject(){
     Point cordFacing = Player.GetCord();
     int facing = Player.getFacing();
-    switch(stat){
+    switch(facing){
         case 0:
-            cordFacing += Point(-1,0);
+            cordFacing += Point(0,-1);
             break;
         case 1:
-            cordFacing += Point(0,1);
-            break;
-        case 2:
             cordFacing += Point(1,0);
             break;
+        case 2:
+            cordFacing += Point(0,1);
+            break;
         case 3:
-            cordFacing += Point(0,-1);
+            cordFacing += Point(-1,0);
             break;
     }
 
@@ -113,29 +112,41 @@ void Controller::TriggerMapObject(){
     if(!obj)
         return;
 
-    eventStack = obj->getTrigger();
-
-
+    loadEventStack(obj->getTrigger());
 }
 
 void Controller::loadEventStack(std::vector<std::string> trig){
-    stat = pending;
+    eventStack = trig;
+    setStat(pending);
 }
 
-void Controller::execEvent(std::string comm){
-    std::vector<std::string> ss = split(comm, '|');
+int Controller::execEvent(){
+    if(eventStack.size() == 0)
+        return -1;
+
+    std::vector<std::string> ss = split(eventStack.back(), '|');
+    eventStack.pop_back();
+
     int commd = atoi(ss[0].c_str());
+    int s;
     switch(commd){
         case 0:
-            stat = atoi(ss[1].c_str());
-            stat = (!stat)? onMap : stat;
-            break;
+            s = atoi(ss[1].c_str());
+            s = (!stat)? onMap : stat;
+            setStat(s);
+            return 0;
         case 1:
             prompt = ss[1];
-            break;
+            rdr.render_prompt(prompt);
+            return 1;
     }
-    return;
+
+    return 1;
 }
 
+void Controller::setStat(int s){
+    stat = s;
+    return;
+}
 
 

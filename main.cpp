@@ -22,6 +22,9 @@ int main()
     keypad(stdscr, TRUE);
 
     for(;;){
+        if(!gCtl.execEvent())
+            continue;
+
         int c = getch();
         switch (c) {
             case KEY_LEFT:

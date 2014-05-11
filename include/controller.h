@@ -39,7 +39,7 @@ class Controller
 
         void TriggerMapObject();
         void loadEventStack(std::vector<std::string>);
-        void execEvent(std::string);
+        int execEvent();
 
         int getStat() { return stat; };
 
@@ -58,6 +58,7 @@ class Controller
 
         std::string prompt;
 
+        void setStat(int s);
         int stat = 1;
 };
 
