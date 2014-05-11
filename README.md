@@ -10,7 +10,7 @@ Function is still implementing.
 Require a Story, it some one could supply, tell me plz.
 
 Compile Requirement:
-  Code::Blocks
-  curses(ncurses, pdcurses)
+1. Code::Blocks
+2. curses(ncurses, pdcurses)
   
 
