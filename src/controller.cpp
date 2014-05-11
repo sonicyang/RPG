@@ -10,6 +10,7 @@
 #include <string>
 #include <curses.h>
 #include "render.h"
+#include <algorithm>
 
 Controller::Controller(char* maplist) : rdr()
 {
@@ -45,7 +46,8 @@ gmap Controller::get_CurrentMap(){
 void Controller::updateScreen(){
     rdr.render_map(map_list[current_map]);
     rdr.render_Player(Player);
-
+    if(stat == conversation)
+        rdr.render_prompt(prompt);
     rdr.update();
     return;
 }
@@ -61,7 +63,10 @@ void Controller::move(Point a){
 void Controller::trigger(){
     switch(stat){
         case onMap:
-                TriggerMapObject();
+            TriggerMapObject();
+            break;
+        case conversation:
+            execEvent();
             break;
     }
 }
@@ -113,10 +118,13 @@ void Controller::TriggerMapObject(){
         return;
 
     loadEventStack(obj->getTrigger());
+    execEvent();
+    return;
 }
 
 void Controller::loadEventStack(std::vector<std::string> trig){
     eventStack = trig;
+    std::reverse(eventStack.begin(),eventStack.end());
     setStat(pending);
 }
 
@@ -132,12 +140,12 @@ int Controller::execEvent(){
     switch(commd){
         case 0:
             s = atoi(ss[1].c_str());
-            s = (!stat)? onMap : stat;
+            s = ((s == 0)? onMap : s);
             setStat(s);
+            execEvent();
             return 0;
         case 1:
             prompt = ss[1];
-            rdr.render_prompt(prompt);
             return 1;
     }
 
