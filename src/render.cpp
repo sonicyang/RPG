@@ -52,6 +52,20 @@ void render::render_prompt(std::string s){
     return;
 }
 
+void render::render_prompt(std::string s, std::string whom){
+    mvaddstr(18, 0, "=========");
+    mvaddstr(19, 0, "|       |");
+    mvaddstr(20, 0, "======================================================================================");
+    mvaddch(21, 0, '|');mvaddch(21, 79, '|');
+    mvaddch(22, 0, '|');mvaddch(22, 79, '|');
+    mvaddch(23, 0, '|');mvaddch(23, 79, '|');
+    mvaddstr(24, 0, "================================================================================");
+
+    mvaddstr(19, 1, whom.c_str());
+    mvaddstr(21, 1, s.c_str());
+    return;
+}
+
 void render::update(){
     refresh();
     return;

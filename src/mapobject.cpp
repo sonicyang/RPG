@@ -28,6 +28,8 @@ mapObject::mapObject(std::string n, int i, int t, int x, int y, char ic, std::st
             for(int i = 0; i < root["Command"].size(); i++){
                 trigger.stk[i] = root["Command"][i].asString();
             }
+
+            trigger.trigBy = name;
         }else{
             std::cout << "Failed to parse configuration\n"  << reader.getFormatedErrorMessages();
             exit(128);

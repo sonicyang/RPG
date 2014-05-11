@@ -19,6 +19,7 @@ class render
         void render_map(gmap);
         void render_Player(objPlayer);
         void render_prompt(std::string);
+        void render_prompt(std::string, std::string);
 
         void update();
     protected:

@@ -47,7 +47,7 @@ void Controller::updateScreen(){
     rdr.render_map(map_list[current_map]);
     rdr.render_Player(Player);
     if(stat == conversation)
-        rdr.render_prompt(prompt);
+        rdr.render_prompt(prompt.prom, prompt.whom);
     rdr.update();
     return;
 }
@@ -145,9 +145,10 @@ int Controller::execEvent(){
             s = ((s == 0)? onMap : s);
             setStat(s);
             execEvent();
-            return 0;*/
+            return 0;*/ //Removed after implementing event type
         case 1:
-            prompt = ss[1];
+            prompt.prom = ss[1];
+            prompt.whom = eventStack.trigBy;
             return 1;
     }
 

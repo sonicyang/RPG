@@ -19,6 +19,11 @@ enum Stats{
     menu
 };
 
+struct PROM{
+    std::string whom;
+    std::string prom;
+};
+
 class Controller
 {
     public:
@@ -56,7 +61,7 @@ class Controller
 
         event eventStack;
 
-        std::string prompt;
+        PROM prompt;
 
         void setStat(int s);
         void restoreStat();
