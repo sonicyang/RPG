@@ -48,6 +48,25 @@ void Controller::updateScreen(){
     return;
 }
 
+void Controller::move(Point a){
+    switch(stat){
+        case onMap:
+                movePlayer(a);
+            break;
+    }
+}
+
+void Controller::trigger(){
+    switch(stat){
+        case onMap:
+                TriggerMapObject();
+            break;
+    }
+}
+void Controller::esc(){
+
+}
+
 int Controller::setPlayerPos(Point a){
     if(map_list[current_map].isOutOfBound(a))
         return -1;
@@ -59,14 +78,40 @@ int Controller::setPlayerPos(Point a){
 int Controller::movePlayer(Point a){
     Point curr = Player.GetCord();
     if(a.m_y != 0)
-        Player.setFaceing(a.m_y + 1);
+        Player.setFacing(a.m_y + 1);
     else
-        Player.setFaceing(a.m_x * -1 + 2);
+        Player.setFacing(a.m_x * -1 + 2);
     return setPlayerPos(curr + a);
 }
 
 Point Controller::getPlayerPos(){
     return Player.GetCord();
 }
+
+void Controller::TriggerMapObject(){
+    Point cordFacing = Player.GetCord();
+    int facing = Player.getFacing();
+    switch(stat){
+        case 0:
+            cordFacing += Point(-1,0);
+            break;
+        case 1:
+            cordFacing += Point(0,1);
+            break;
+        case 2:
+            cordFacing += Point(1,0);
+            break;
+        case 3:
+            cordFacing += Point(0,-1);
+            break;
+    }
+
+    mapObject* obj = map_list[current_map].getObject(cordFacing);
+    if(!obj)
+        return;
+
+
+}
+
 
 

@@ -30,7 +30,7 @@ class gmap
 
         bool isPlayerFacingObject();
 
-        mapObject& getObject(Point);
+        mapObject* getObject(Point);
 
     protected:
     private:

@@ -32,7 +32,7 @@ objPlayer& objPlayer::operator=(const objPlayer& rhs)
     return *this;
 }
 
-void objPlayer::setFaceing(int f){
+void objPlayer::setFacing(int f){
     if(f < 0 || f > 3)
         return;
     facing = f;

@@ -89,8 +89,10 @@ bool gmap::isOutOfBound(Point a){
     return false;
 }
 
-bool gmap::isPlayerFacingObject(){
-
+mapObject* gmap::getObject(Point a){
+    if(objects.find(a) != objects.end())
+        return &(objects[a]);
+    return NULL;
 }
 
 

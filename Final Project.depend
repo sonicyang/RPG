@@ -212,17 +212,14 @@
 	<cstring>
 	"chararray2d.h"
 
-1399742264 source:c:\users\sonicyang\github\rpg\main.cpp
+1399772831 source:c:\users\sonicyang\github\rpg\main.cpp
 	<iostream>
 	<curses.h>
 	<cstdlib>
 	<fstream>
 	<string>
 	<cerrno>
-	"json/reader.h"
-	"json/value.h"
 	"point.h"
-	"gmap.h"
 	"Controller.h"
 
 1268379096 c:\users\sonicyang\github\rpg\include\json\reader.h
@@ -250,9 +247,9 @@
 	<cpptl/smallmap.h>
 	<cpptl/forwards.h>
 
-1399694135 c:\users\sonicyang\github\rpg\include\point.h
+1399775754 c:\users\sonicyang\github\rpg\include\point.h
 
-1399741827 c:\users\sonicyang\github\rpg\include\gmap.h
+1399775142 c:\users\sonicyang\github\rpg\include\gmap.h
 	"point.h"
 	<string>
 	<set>
@@ -268,7 +265,7 @@
 	"point.h"
 	<string>
 
-1399741796 c:\users\sonicyang\github\rpg\include\controller.h
+1399774050 c:\users\sonicyang\github\rpg\include\controller.h
 	<map>
 	"gmap.h"
 	<string>
@@ -290,7 +287,7 @@
 	<cstring>
 	"chararray2d.h"
 
-1399742409 source:c:\users\sonicyang\github\rpg\src\controller.cpp
+1399775172 source:c:\users\sonicyang\github\rpg\src\controller.cpp
 	"controller.h"
 	<cstdlib>
 	<cstring>
@@ -309,7 +306,7 @@
 	<string>
 	<cerrno>
 
-1399741931 source:c:\users\sonicyang\github\rpg\src\gmap.cpp
+1399775195 source:c:\users\sonicyang\github\rpg\src\gmap.cpp
 	<cstdlib>
 	<cstring>
 	<string>
@@ -394,10 +391,10 @@
 	"mapobject.h"
 	<string>
 
-1399742118 c:\users\sonicyang\github\rpg\include\objplayer.h
+1399774070 c:\users\sonicyang\github\rpg\include\objplayer.h
 	<mapObject.h>
 	<string>
 
-1399742004 source:c:\users\sonicyang\github\rpg\src\objplayer.cpp
+1399774080 source:c:\users\sonicyang\github\rpg\src\objplayer.cpp
 	"objplayer.h"
 

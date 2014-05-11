@@ -4,11 +4,8 @@
 #include <fstream>
 #include <string>
 #include <cerrno>
-#include "json/reader.h"
-#include "json/value.h"
 
 #include "point.h"
-#include "gmap.h"
 #include "Controller.h"
 
 using namespace std;
@@ -28,22 +25,22 @@ int main()
         int c = getch();
         switch (c) {
             case KEY_LEFT:
-                gCtl.movePlayer(Point(-1,0));
+                gCtl.move(Point(-1,0));
                 break;
             case KEY_RIGHT:
-                gCtl.movePlayer(Point(1,0));
+                gCtl.move(Point(1,0));
                 break;
             case KEY_UP:
-                gCtl.movePlayer(Point(0,-1));
+                gCtl.move(Point(0,-1));
                 break;
             case KEY_DOWN:
-                gCtl.movePlayer(Point(0,1));
+                gCtl.move(Point(0,1));
                 break;
             case 'z':
-
+                gCtl.trigger();
                 break;
             case 'x':
-
+                gCtl.esc();
                 break;
             case KEY_END:
                 return 0;

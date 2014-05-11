@@ -36,6 +36,8 @@ class Controller
         Point getPlayerPos();
         int movePlayer(Point a);
 
+        void TriggerMapObject();
+
         int getStat() { return stat; };
     protected:
     private:

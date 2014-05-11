@@ -17,8 +17,8 @@ class objPlayer : public mapObject
 
         virtual char Geticon() { return icon_list[facing]; };
 
-        int getFaceing() { return facing; }
-        void setFaceing(int);
+        int getFacing() { return facing; }
+        void setFacing(int);
     protected:
     private:
         std::string icon_list;

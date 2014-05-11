@@ -21,7 +21,15 @@ class Point
         unsigned int m_x;
         unsigned int m_y;
 
+        bool operator<(const Point&) const;
+        bool operator<=(const Point&) const;
+        bool operator>(const Point&) const;
+        bool operator>=(const Point&) const;
+        bool operator==(const Point&) const;
+        bool operator!=(const Point&) const;
+
         Point operator+(const Point&);
+        const Point& operator+=(const Point&);
     protected:
     private:
 
