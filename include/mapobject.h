@@ -24,6 +24,7 @@ class mapObject
         mapObject& operator=(const mapObject& other);
 
         Point GetCord() { return Cord; }
+        std::string Getname() { return name; }
         int GetID() { return ID; }
         int Gettype() { return type; }
         virtual char Geticon() const { return icon; }

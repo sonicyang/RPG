@@ -26,27 +26,27 @@ Point& Point::operator=(const Point& rhs)
 
 bool Point::operator<(const Point& a) const{
     if(m_x == a.m_x)
-        return m_y < m_y;
-    return m_x < m_x;
+        return m_y < a.m_y;
+    return m_x < a.m_x;
 }
 bool Point::operator<=(const Point& a) const{
-    return Point::operator==(a) && Point::operator<(a);
+    return operator==(a) || operator<(a);
 }
 bool Point::operator>(const Point& a) const{
     if(m_x == a.m_x)
-        return m_y > m_y;
-    return m_x > m_x;
+        return m_y > a.m_y;
+    return m_x > a.m_x;
 }
 bool Point::operator>=(const Point& a) const{
-    return Point::operator==(a) && Point::operator>(a);
+    return operator==(a) || operator>(a);
 }
 bool Point::operator==(const Point& a) const{
-    if(m_x == a.m_x && m_y == a.m_y)
+    if((m_x == a.m_x) && (m_y == a.m_y))
         return true;
     return false;
 }
 bool Point::operator!=(const Point& a) const{
-    return !Point::operator==(a);
+    return !operator==(a);
 }
 
 Point Point::operator+(const Point& a){
