@@ -12,7 +12,8 @@ using namespace std;
 #define CONTROLLER_H
 
 enum Stats{
-    onMap = 1,
+    pending = 0,
+    onMap,
     conversation,
     battle,
     menu
@@ -37,6 +38,7 @@ class Controller
         int movePlayer(Point a);
 
         void TriggerMapObject();
+        void loadEventStack(std::vector<std::string>);
         void execEvent(std::string);
 
         int getStat() { return stat; };
@@ -51,6 +53,8 @@ class Controller
         string current_map;
 
         objPlayer Player;
+
+        std::vector<std::string> eventStack;
 
         std::string prompt;
 

@@ -113,8 +113,13 @@ void Controller::TriggerMapObject(){
     if(!obj)
         return;
 
-    for(int i = 0; i< obj->getTrigger().size(); i++)
-        execEvent(obj->getTrigger()[i]);
+    eventStack = obj->getTrigger();
+
+
+}
+
+void Controller::loadEventStack(std::vector<std::string> trig){
+    stat = pending;
 }
 
 void Controller::execEvent(std::string comm){

@@ -275,7 +275,7 @@
 	"mapobject.h"
 	"objPlayer.h"
 
-1399787984 c:\users\sonicyang\github\rpg\include\render.h
+1399788344 c:\users\sonicyang\github\rpg\include\render.h
 	"point.h"
 	"gmap.h"
 	"mapobject.h"
@@ -288,7 +288,7 @@
 	<cstring>
 	"chararray2d.h"
 
-1399787514 source:c:\users\sonicyang\github\rpg\src\controller.cpp
+1399787935 source:c:\users\sonicyang\github\rpg\src\controller.cpp
 	"controller.h"
 	<cstdlib>
 	<cstring>
@@ -376,7 +376,7 @@
 1399780742 source:c:\users\sonicyang\github\rpg\src\point.cpp
 	"point.h"
 
-1399778820 source:c:\users\sonicyang\github\rpg\src\render.cpp
+1399788355 source:c:\users\sonicyang\github\rpg\src\render.cpp
 	"render.h"
 	"gmap.h"
 	"point.h"
