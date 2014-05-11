@@ -15,3 +15,6 @@ Compile Requirement:
   
 
 License Under GPL v2
+
+
+PS Exit Program by Pressing END Key
