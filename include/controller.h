@@ -14,7 +14,7 @@ using namespace std;
 enum Stats{
     pending = 0,
     onMap,
-    conversation,
+    inEvent,
     battle,
     menu
 };

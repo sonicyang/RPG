@@ -71,7 +71,7 @@ void Controller::getParseUserInput(){
                     exit(1);
             }
             break;
-        case conversation:
+        case inEvent:
             switch (c) {
                 case KEY_LEFT:
 
@@ -102,7 +102,7 @@ void Controller::getParseUserInput(){
 void Controller::updateScreen(){
     rdr.render_map(map_list[current_map]);
     rdr.render_Player(Player);
-    if(stat == conversation)
+    if(stat == inEvent)
         rdr.render_prompt(prompt.prom, prompt.whom);
     rdr.update();
     return;
