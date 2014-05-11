@@ -14,3 +14,4 @@ Compile Requirement:
 2. curses(ncurses, pdcurses)
   
 
+License Under GPL v2
