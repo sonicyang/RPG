@@ -26,6 +26,12 @@ void render::render_map(gmap toRender){
             mvaddch(i + offset.m_y,j*2 + offset.m_x, toRender.Getdata()[i][j]);
         }
     }
+
+    std::map<Point,mapObject>::const_iterator it = toRender.getObjects().begin();
+    for(; it != toRender.getObjects().end(); it++){
+        mvaddch(it->first.m_y + offset.m_y, it->first.m_x*2 + offset.m_x, it->second.Geticon());
+    }
+
     return;
 }
 

@@ -26,7 +26,7 @@ class mapObject
         Point GetCord() { return Cord; }
         int GetID() { return ID; }
         int Gettype() { return type; }
-        virtual char Geticon() { return icon; }
+        virtual char Geticon() const { return icon; }
 
     protected:
         Point Cord;

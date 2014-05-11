@@ -31,6 +31,7 @@ class gmap
         bool isPlayerFacingObject();
 
         mapObject* getObject(Point);
+        const std::map<Point,mapObject>& getObjects() { return objects; };
 
     protected:
     private:

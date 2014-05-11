@@ -44,8 +44,15 @@ gmap::gmap(const char * filename)
             blocks.insert(root["Blocks"][i].asString()[0]);
         }
 
+        for(int i = 0; i < root["Objects"].size(); i++){
+            Point cord(root["Objects"][i]["x"].asInt(), root["Objects"][i]["y"].asInt());
+            mapObject toAdd(root["Objects"][i]["Name"].asString(), i, root["Objects"][i]["Type"].asInt(), cord.m_x, cord.m_y, root["Objects"][i]["Icon"].asString()[0]);
+            objects.insert(std::pair<Point,mapObject>(cord, toAdd));
+        }
+
     }else{
         std::cout  << "Failed to parse configuration\n"  << reader.getFormatedErrorMessages();
+        exit(128);
     }
 }
 
@@ -62,6 +69,8 @@ gmap::gmap(const gmap& other)
     m_data_state = other.m_data_state;
 
     blocks = other.blocks;
+
+    objects = other.objects;
 }
 
 gmap& gmap::operator=(const gmap& rhs)
@@ -74,11 +83,14 @@ gmap& gmap::operator=(const gmap& rhs)
         m_data_state = rhs.m_data_state;
 
         blocks = rhs.blocks;
+        objects = rhs.objects;
     return *this;
 }
 
 bool gmap::isObstacle(Point a){
     if(blocks.find(m_data[a.m_y][a.m_x]) != blocks.end())
+        return true;
+    if(objects.find(a) != objects.end())
         return true;
     return false;
 }

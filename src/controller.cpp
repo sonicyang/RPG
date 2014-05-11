@@ -28,6 +28,7 @@ Controller::Controller(char* maplist) : rdr()
 
     }else{
         std::cout << "Failed to parse configuration\n"  << reader.getFormatedErrorMessages();
+        exit(128);
     }
 
     Player = objPlayer("Player", 0, 0, 1, 1, "^>v<", EAST);
