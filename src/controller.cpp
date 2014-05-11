@@ -122,28 +122,30 @@ void Controller::TriggerMapObject(){
     return;
 }
 
-void Controller::loadEventStack(std::vector<std::string> trig){
+void Controller::loadEventStack(event trig){
     eventStack = trig;
-    std::reverse(eventStack.begin(),eventStack.end());
-    setStat(pending);
+    std::reverse(eventStack.stk.begin(), eventStack.stk.end());
+    setStat(eventStack.type);
 }
 
 int Controller::execEvent(){
-    if(eventStack.size() == 0)
+    if(eventStack.stk.size() == 0){
+        restoreStat();
         return -1;
+    }
 
-    std::vector<std::string> ss = split(eventStack.back(), '|');
-    eventStack.pop_back();
+    std::vector<std::string> ss = split(eventStack.stk.back(), '|');
+    eventStack.stk.pop_back();
 
     int commd = atoi(ss[0].c_str());
     int s;
     switch(commd){
-        case 0:
+        /*case 0:
             s = atoi(ss[1].c_str());
             s = ((s == 0)? onMap : s);
             setStat(s);
             execEvent();
-            return 0;
+            return 0;*/
         case 1:
             prompt = ss[1];
             return 1;
@@ -153,8 +155,16 @@ int Controller::execEvent(){
 }
 
 void Controller::setStat(int s){
+    _stat.push_back(stat);
     stat = s;
     return;
 }
 
+void Controller::restoreStat(){
+    if(_stat.size() > 0){
+        stat = _stat.back();
+        _stat.pop_back();
+    }
+    return;
+}
 

@@ -38,7 +38,7 @@ class Controller
         int movePlayer(Point a);
 
         void TriggerMapObject();
-        void loadEventStack(std::vector<std::string>);
+        void loadEventStack(event);
         int execEvent();
 
         int getStat() { return stat; };
@@ -54,12 +54,14 @@ class Controller
 
         objPlayer Player;
 
-        std::vector<std::string> eventStack;
+        event eventStack;
 
         std::string prompt;
 
         void setStat(int s);
+        void restoreStat();
         int stat = 1;
+        vector<int> _stat;
 };
 
 #endif // CONTROLLER_H

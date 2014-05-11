@@ -12,6 +12,11 @@ enum faceing{
     WEST
 };
 
+struct event{
+    int type;
+    std::vector<std::string> stk;
+};
+
 class mapObject
 {
     public:
@@ -30,7 +35,7 @@ class mapObject
         int Gettype() { return type; }
         virtual char Geticon() const { return icon; }
 
-        const std::vector<std::string>& getTrigger() const { return trigger; };
+        const event& getTrigger() const { return trigger; };
     protected:
         Point Cord;
         void SetCord(Point val) { Cord = val; }
@@ -40,7 +45,7 @@ class mapObject
         int type;
         char icon;
 
-        std::vector<std::string> trigger;
+        event trigger;
 
 };
 
