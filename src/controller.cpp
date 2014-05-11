@@ -89,16 +89,14 @@ void Controller::getParseUserInput(){
                     execEvent();
                     break;
                 case 'x':
-                    eventStack.stk.clear();
+                    eventStack.back().stk.clear();
                     execEvent();
                     break;
                 case KEY_END:
                     exit(1);
             }
             break;
-
     }
-
 }
 
 void Controller::updateScreen(){
@@ -152,19 +150,20 @@ Point Controller::getPlayerFacing(){
 }
 
 void Controller::loadEventStack(event trig){
-    eventStack = trig;
-    std::reverse(eventStack.stk.begin(), eventStack.stk.end());
-    setStat(eventStack.type);
+    std::reverse(trig.stk.begin(), trig.stk.end());
+    setStat(trig.type);
+    eventStack.push_back(trig);
 }
 
 int Controller::execEvent(){
-    if(eventStack.stk.size() == 0){
+    if(eventStack.back().stk.size() == 0){
         restoreStat();
+        eventStack.pop_back();
         return -1;
     }
 
-    std::vector<std::string> ss = split(eventStack.stk.back(), '|');
-    eventStack.stk.pop_back();
+    std::vector<std::string> ss = split(eventStack.back().stk.back(), '|');
+    eventStack.back().stk.pop_back();
 
     int commd = atoi(ss[0].c_str());
     int s;
@@ -177,7 +176,7 @@ int Controller::execEvent(){
             return 0;*/ //Removed after implementing event type
         case 1:
             prompt.prom = ss[1];
-            prompt.whom = eventStack.trigBy;
+            prompt.whom = eventStack.back().trigBy;
             return 1;
     }
 

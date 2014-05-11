@@ -57,7 +57,7 @@ class Controller
 
         objPlayer Player;
 
-        event eventStack;
+        vector<event> eventStack;
 
         PROM prompt;
 
