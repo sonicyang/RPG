@@ -15,7 +15,6 @@ enum Stats{
     pending = 0,
     onMap,
     inEvent,
-    battle,
     menu
 };
 
@@ -44,8 +43,10 @@ class Controller
         void loadEventStack(event);
         int execEvent();
 
-        int getStat() { return stat; };
 
+
+
+        int getStat() { return stat; };
     protected:
     private:
         render rdr;
@@ -56,10 +57,14 @@ class Controller
         string current_map;
 
         objPlayer Player;
+        inv inventory;
 
         vector<event> eventStack;
 
         PROM prompt;
+
+        battle currBattle;
+        vector<GeneralPlayer> members;
 
         void setStat(int s);
         void restoreStat();

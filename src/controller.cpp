@@ -151,7 +151,7 @@ Point Controller::getPlayerFacing(){
 
 void Controller::loadEventStack(event trig){
     std::reverse(trig.stk.begin(), trig.stk.end());
-    setStat(trig.type);
+    setStat(inEvent);
     eventStack.push_back(trig);
 }
 
@@ -166,14 +166,11 @@ int Controller::execEvent(){
     eventStack.back().stk.pop_back();
 
     int commd = atoi(ss[0].c_str());
-    int s;
     switch(commd){
-        /*case 0:
-            s = atoi(ss[1].c_str());
-            s = ((s == 0)? onMap : s);
-            setStat(s);
-            execEvent();
-            return 0;*/ //Removed after implementing event type
+        case 0:
+            /*currBattle = battle(ss[1]);
+            currBattle.exec();
+            return 0;*/
         case 1:
             prompt.prom = ss[1];
             prompt.whom = eventStack.back().trigBy;

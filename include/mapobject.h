@@ -13,7 +13,6 @@ enum faceing{
 };
 
 struct event{
-    int type;
     std::vector<std::string> stk;
     std::string trigBy;
 };

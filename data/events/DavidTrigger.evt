@@ -1,6 +1,5 @@
 {
 	"Name" : "DavidTrigger",
-	"Type" : 2,
 	"Command" : [
 				"01|Hello",
 				"01|I'm David",
