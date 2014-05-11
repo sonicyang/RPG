@@ -32,17 +32,15 @@ class Controller
 
         gmap get_CurrentMap();
 
+        void getParseUserInput();
         void updateScreen();
-
-        void move(Point a);
-        void trigger();
-        void esc();
 
         int setPlayerPos(Point a);
         Point getPlayerPos();
+        Point getPlayerFacing();
         int movePlayer(Point a);
 
-        void TriggerMapObject();
+        event getCurentMapObjectEvent(Point);
         void loadEventStack(event);
         int execEvent();
 

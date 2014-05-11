@@ -8,6 +8,8 @@
 #include "point.h"
 #include "Controller.h"
 
+#include <windows.h>
+
 using namespace std;
 
 
@@ -20,34 +22,13 @@ int main()
     cbreak();
     noecho();
     keypad(stdscr, TRUE);
+    nodelay(stdscr, true);
 
     gCtl.updateScreen();
 
     for(;;){
-        int c = getch();
-        switch (c) {
-            case KEY_LEFT:
-                gCtl.move(Point(-1,0));
-                break;
-            case KEY_RIGHT:
-                gCtl.move(Point(1,0));
-                break;
-            case KEY_UP:
-                gCtl.move(Point(0,-1));
-                break;
-            case KEY_DOWN:
-                gCtl.move(Point(0,1));
-                break;
-            case 'z':
-                gCtl.trigger();
-                break;
-            case 'x':
-                gCtl.esc();
-                break;
-            case KEY_END:
-                return 0;
-        }
-
+        gCtl.getParseUserInput();
+        Sleep(33);
         gCtl.updateScreen();
     }
 

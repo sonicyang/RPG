@@ -43,6 +43,61 @@ gmap Controller::get_CurrentMap(){
     return map_list[current_map];
 }
 
+void Controller::getParseUserInput(){
+    int c = getch();
+    switch(stat){
+        case onMap:
+            switch (c) {
+                case KEY_LEFT:
+                    movePlayer(Point(-1,0));
+                    break;
+                case KEY_RIGHT:
+                    movePlayer(Point(1,0));
+                    break;
+                case KEY_UP:
+                    movePlayer(Point(0,-1));
+                    break;
+                case KEY_DOWN:
+                    movePlayer(Point(0,1));
+                    break;
+                case 'z':{
+                    mapObject* obj = map_list[current_map].getObject(getPlayerFacing());
+                    if(!obj)
+                        return;
+                    loadEventStack(obj->getTrigger());
+                    execEvent();
+                    break;}
+                case KEY_END:
+                    exit(1);
+            }
+            break;
+        case conversation:
+            switch (c) {
+                case KEY_LEFT:
+
+                    break;
+                case KEY_RIGHT:
+
+                    break;
+                case KEY_UP:
+
+                    break;
+                case KEY_DOWN:
+
+                break;
+                case 'z':
+                case 'x':
+                    execEvent();
+                    break;
+                case KEY_END:
+                    exit(1);
+            }
+            break;
+
+    }
+
+}
+
 void Controller::updateScreen(){
     rdr.render_map(map_list[current_map]);
     rdr.render_Player(Player);
@@ -50,28 +105,6 @@ void Controller::updateScreen(){
         rdr.render_prompt(prompt.prom, prompt.whom);
     rdr.update();
     return;
-}
-
-void Controller::move(Point a){
-    switch(stat){
-        case onMap:
-                movePlayer(a);
-            break;
-    }
-}
-
-void Controller::trigger(){
-    switch(stat){
-        case onMap:
-            TriggerMapObject();
-            break;
-        case conversation:
-            execEvent();
-            break;
-    }
-}
-void Controller::esc(){
-
 }
 
 int Controller::setPlayerPos(Point a){
@@ -95,7 +128,7 @@ Point Controller::getPlayerPos(){
     return Player.GetCord();
 }
 
-void Controller::TriggerMapObject(){
+Point Controller::getPlayerFacing(){
     Point cordFacing = Player.GetCord();
     int facing = Player.getFacing();
     switch(facing){
@@ -112,14 +145,7 @@ void Controller::TriggerMapObject(){
             cordFacing += Point(-1,0);
             break;
     }
-
-    mapObject* obj = map_list[current_map].getObject(cordFacing);
-    if(!obj)
-        return;
-
-    loadEventStack(obj->getTrigger());
-    execEvent();
-    return;
+    return cordFacing;
 }
 
 void Controller::loadEventStack(event trig){
