@@ -1,5 +1,6 @@
 #include <string>
 #include "point.h"
+#include "eventcontroller.h"
 #include <vector>
 
 #ifndef MAPOBJECT_H
@@ -10,11 +11,6 @@ enum faceing{
     EAST,
     SOUTH,
     WEST
-};
-
-struct event{
-    std::vector<std::string> stk;
-    std::string trigBy;
 };
 
 class mapObject

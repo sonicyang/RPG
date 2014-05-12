@@ -39,8 +39,9 @@ void Controller::getParseUserInput(){
                     break;
                 case 'z':
                     if(mapCtl.isPlayerFacingObject()){
-                        loadEventStack(mapCtl.getPlayerFacingObject().getTrigger());
-                        execEvent();
+                        evtCtl.reversePushEventStack(mapCtl.getPlayerFacingObject().getTrigger());
+                        this->setStat(inEvent);
+                        evtCtl.execEvent();
                     }
                     break;
                 case KEY_END:
@@ -62,11 +63,12 @@ void Controller::getParseUserInput(){
 
                 break;
                 case 'z':
-                    execEvent();
+                    if(evtCtl.execEvent() < 0)
+                        this->restoreStat();
                     break;
                 case 'x':
-                    eventStack.back().stk.clear();
-                    execEvent();
+                    evtCtl.popEventStack();
+                    this->restoreStat();
                     break;
                 case KEY_END:
                     exit(1);
@@ -82,37 +84,6 @@ void Controller::updateScreen(){
         rdr.render_prompt(prompt.prom, prompt.whom);
     rdr.update();
     return;
-}
-
-void Controller::loadEventStack(event trig){
-    std::reverse(trig.stk.begin(), trig.stk.end());
-    setStat(inEvent);
-    eventStack.push_back(trig);
-}
-
-int Controller::execEvent(){
-    if(eventStack.back().stk.size() == 0){
-        restoreStat();
-        eventStack.pop_back();
-        return -1;
-    }
-
-    std::vector<std::string> ss = split(eventStack.back().stk.back(), '|');
-    eventStack.back().stk.pop_back();
-
-    int commd = atoi(ss[0].c_str());
-    switch(commd){
-        case 0:
-            /*currBattle = battle(ss[1]);
-            currBattle.exec();
-            return 0;*/
-        case 1:
-            prompt.whom = ss[1];
-            prompt.prom = ss[2];
-            return 1;
-    }
-
-    return 1;
 }
 
 void Controller::setStat(int s){

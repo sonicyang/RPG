@@ -4,6 +4,7 @@
 #include <curses.h>
 #include "render.h"
 #include "mapcontroller.h"
+#include "eventcontroller.h"
 #include "mapobject.h"
 #include "objPlayer.h"
 
@@ -30,38 +31,17 @@ class Controller
         Controller();
         ~Controller();
 
-        gmap get_CurrentMap();
-
         void getParseUserInput();
         void updateScreen();
-
-        int setPlayerPos(Point a);
-        Point getPlayerPos();
-        Point getPlayerFacing();
-        int movePlayer(Point a);
-
-        event getCurentMapObjectEvent(Point);
-        void loadEventStack(event);
-        int execEvent();
-
-
-
 
         int getStat() { return stat; };
     protected:
     private:
         render rdr;
         mapController mapCtl;
+        eventController evtCtl;
 
-        std::map<std::string,gmap> map_list;
-        int map_count;
-        string default_map;
-        string current_map;
-
-        objPlayer Player;
         //inv inventory;
-
-        vector<event> eventStack;
 
         PROM prompt;
 
