@@ -7,6 +7,7 @@
 #include "eventcontroller.h"
 #include "mapobject.h"
 #include "objPlayer.h"
+#include <deque>
 
 using namespace std;
 
@@ -27,6 +28,7 @@ class Controller
         ~Controller();
 
         void getParseUserInput();
+        bool processCtlCall();
         void updateScreen();
 
         int getStat() { return stat; };
@@ -36,6 +38,8 @@ class Controller
         mapController mapCtl;
         eventController evtCtl;
 
+        bool userInputPending = false;
+        std::deque<std::string> ctlCall;
         //inv inventory;
 
         prompt prom;

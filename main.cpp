@@ -27,8 +27,9 @@ int main()
 
     for(;;){
         gCtl.getParseUserInput();
-        usleep(33333);
+        gCtl.processCtlCall();
         gCtl.updateScreen();
+        usleep(33333);
     }
 
     system("pause");

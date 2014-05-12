@@ -1,4 +1,5 @@
 #include <vector>
+#include <deque>
 #include "prompt.h"
 
 #ifndef EVENTCONTROLLER_H
@@ -12,19 +13,17 @@ struct event{
 class eventController
 {
     public:
-        eventController(prompt& P);
+        eventController(std::deque<std::string>&);
         ~eventController();
 
         void reversePushEventStack(event trig);
         void popEventStack();
         int execCurrentEvent();
 
-        void loadPrompt(prompt& P);
-
     protected:
     private:
          std::vector<event> eventStack;
-         prompt& pp;
+         std::deque<std::string>& ctlCallStack;
 };
 
 #endif // EVENTCONTROLLER_H

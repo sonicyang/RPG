@@ -12,7 +12,7 @@
 #include "render.h"
 #include <algorithm>
 
-Controller::Controller() : rdr(), mapCtl("data/maps/maplist.lst"), evtCtl(prom)
+Controller::Controller() : rdr(), mapCtl("data/maps/maplist.lst"), evtCtl(ctlCall)
 {
 }
 
@@ -49,34 +49,60 @@ void Controller::getParseUserInput(){
             }
             break;
         case inEvent:
-            switch (c) {
-                case KEY_LEFT:
+            if(userInputPending){
+                switch (c) {
+                    case KEY_LEFT:
 
-                    break;
-                case KEY_RIGHT:
+                        break;
+                    case KEY_RIGHT:
 
-                    break;
-                case KEY_UP:
+                        break;
+                    case KEY_UP:
 
-                    break;
-                case KEY_DOWN:
+                        break;
+                    case KEY_DOWN:
 
-                break;
-                case 'z':
-                    if(evtCtl.execCurrentEvent() < 0){
+                        break;
+                    case 'z':
+                        if(evtCtl.execCurrentEvent() < 0){
+                            evtCtl.popEventStack();
+                            this->restoreStat();
+                        }
+                        break;
+                    case 'x':
                         evtCtl.popEventStack();
                         this->restoreStat();
-                    }
-                    break;
-                case 'x':
+                        break;
+                    case KEY_END:
+                        exit(1);
+                }
+            }else{
+                if(evtCtl.execCurrentEvent() < 0){
                     evtCtl.popEventStack();
                     this->restoreStat();
-                    break;
-                case KEY_END:
-                    exit(1);
+                }
             }
             break;
     }
+}
+
+bool Controller::processCtlCall(){
+    if(ctlCall.size() == 0)
+        return 1;
+    int commd = atoi(ctlCall[0].c_str());
+    switch(commd){
+        case 1:
+            prom.loadMessaage(ctlCall[1],ctlCall[2]);
+            userInputPending = 1;
+            return 1;
+        case 2:
+            prom.discardMessage();
+            userInputPending = 0;
+            return 0;
+    }
+
+    ctlCall.clear();
+    return 1;
 }
 
 void Controller::updateScreen(){

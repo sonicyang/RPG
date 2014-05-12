@@ -3,7 +3,7 @@
 #include "utils.h"
 #include "eventcontroller.h"
 
-eventController::eventController(prompt& P) : pp(P)
+eventController::eventController(std::deque<std::string>& s) : ctlCallStack(s)
 {
 }
 
@@ -12,10 +12,6 @@ eventController::~eventController()
     //dtor
 }
 
-void eventController::loadPrompt(prompt& P){
-    pp = P;
-    return;
-}
 
 void eventController::reversePushEventStack(event trig){
     std::reverse(trig.stk.begin(), trig.stk.end());
@@ -26,7 +22,6 @@ void eventController::reversePushEventStack(event trig){
 void eventController::popEventStack(){
     if(eventStack.size() > 0){
         eventStack.pop_back();
-        pp.discardMessage();
     }
     return;
 }
@@ -35,8 +30,6 @@ int eventController::execCurrentEvent(){
     if(eventStack.back().stk.size() == 0){
         return -1;
     }
-
-    pp.discardMessage();
 
     std::vector<std::string> ss = split(eventStack.back().stk.back(), '|');
     eventStack.back().stk.pop_back();
@@ -48,9 +41,13 @@ int eventController::execCurrentEvent(){
             currBattle.exec();
             return 0;*/
         case 1:
-            pp.loadMessaage(ss[2], ss[1]);
-
+            ctlCallStack.push_front(ss[1]);
+            ctlCallStack.push_front(ss[2]);
+            ctlCallStack.push_front("1");
             return 1;
+        case 2:
+            ctlCallStack.push_front("2");
+            return 2;
     }
 
     return 1;
