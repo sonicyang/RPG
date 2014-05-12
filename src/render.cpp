@@ -17,6 +17,8 @@ render::~render()
 
 void render::render_map(gmap toRender){
     clear();
+    mvaddstr(1, 1, "CurrentMap:");
+    addstr(toRender.Getname().c_str());
 
     offset.m_x = screen_max.m_x / 2 - toRender.Getsize().m_x;
     offset.m_y = (screen_max.m_y - toRender.Getsize().m_y)/2;

@@ -212,7 +212,7 @@
 	<cstring>
 	"chararray2d.h"
 
-1399906386 source:c:\users\sonicyang\github\rpg\main.cpp
+1399911445 source:c:\users\sonicyang\github\rpg\main.cpp
 	<iostream>
 	<curses.h>
 	<cstdlib>
@@ -294,7 +294,7 @@
 	<cstring>
 	"chararray2d.h"
 
-1399909385 source:c:\users\sonicyang\github\rpg\src\controller.cpp
+1399909694 source:c:\users\sonicyang\github\rpg\src\controller.cpp
 	"controller.h"
 	<cstdlib>
 	<cstring>
@@ -383,7 +383,7 @@
 1399780742 source:c:\users\sonicyang\github\rpg\src\point.cpp
 	"point.h"
 
-1399909502 source:c:\users\sonicyang\github\rpg\src\render.cpp
+1399909760 source:c:\users\sonicyang\github\rpg\src\render.cpp
 	"render.h"
 	"gmap.h"
 	"point.h"

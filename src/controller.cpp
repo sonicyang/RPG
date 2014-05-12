@@ -114,8 +114,10 @@ void Controller::menuRution(){
         for(int i = 1; i < 24; i++)mvaddch(i, 0, '|'),mvaddch(i, 79, '|');
         mvaddstr(24, 0, "===============================================================================");
         mvaddstr(2, 0, "================================================================================");
-        mvaddstr(1, 38, "MENU");
         for(int i = 3; i < 24; i++)mvaddch(i, 25, '|');
+
+        //Print Useful Data
+        mvaddstr(1, 38, "MENU");
 
         //Print All Options
         for(int i = 0; i < mOption.size(); i++)
@@ -130,10 +132,10 @@ void Controller::menuRution(){
         int c = getch();
         switch (c) {
             case KEY_UP:
-                (cursorPos==0)? 0 : cursorPos--;
+                cursorPos = (cursorPos==0)? mOption.size()-1 : cursorPos - 1;
                 break;
             case KEY_DOWN:
-                (cursorPos == mOption.size()-1)? mOption.size()-1 : cursorPos++;
+                cursorPos = (cursorPos == mOption.size()-1)? 0 : cursorPos + 1;
                 break;
             case 'z':
                 switch(cursorPos){
