@@ -20,11 +20,6 @@ enum Stats{
     menu
 };
 
-struct PROM{
-    std::string whom;
-    std::string prom;
-};
-
 class Controller
 {
     public:
@@ -43,7 +38,7 @@ class Controller
 
         //inv inventory;
 
-        PROM prompt;
+        prompt prom;
 
         //battle currBattle;
         //vector<GeneralPlayer> members;

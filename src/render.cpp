@@ -41,18 +41,7 @@ void render::render_Player(objPlayer mo){
     return;
 }
 
-void render::render_prompt(std::string s){
-    mvaddstr(20, 0, "======================================================================================");
-    mvaddch(21, 0, '|');mvaddch(21, 79, '|');
-    mvaddch(22, 0, '|');mvaddch(22, 79, '|');
-    mvaddch(23, 0, '|');mvaddch(23, 79, '|');
-    mvaddstr(24, 0, "================================================================================");
-
-    mvaddstr(21, 1, s.c_str());
-    return;
-}
-
-void render::render_prompt(std::string s, std::string whom){
+void render::render_prompt(prompt P){
     mvaddstr(18, 0, "=========");
     mvaddstr(19, 0, "|       |");
     mvaddstr(20, 0, "======================================================================================");
@@ -61,8 +50,8 @@ void render::render_prompt(std::string s, std::string whom){
     mvaddch(23, 0, '|');mvaddch(23, 79, '|');
     mvaddstr(24, 0, "================================================================================");
 
-    mvaddstr(19, 1, whom.c_str());
-    mvaddstr(21, 1, s.c_str());
+    mvaddstr(19, 1, P.getWhom().c_str());
+    mvaddstr(21, 1, P.getMessage().c_str());
     return;
 }
 

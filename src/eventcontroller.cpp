@@ -1,9 +1,10 @@
-
+#include "prompt.h"
+#include <algorithm>
+#include "utils.h"
 #include "eventcontroller.h"
 
-eventController::eventController()
+eventController::eventController(prompt& P) : pp(P)
 {
-    //ctor
 }
 
 eventController::~eventController()
@@ -11,22 +12,31 @@ eventController::~eventController()
     //dtor
 }
 
+void eventController::loadPrompt(prompt& P){
+    pp = P;
+    return;
+}
+
 void eventController::reversePushEventStack(event trig){
     std::reverse(trig.stk.begin(), trig.stk.end());
     eventStack.push_back(trig);
+    return;
 }
 
 void eventController::popEventStack(){
-    if(eventStack.size() > 0)
+    if(eventStack.size() > 0){
         eventStack.pop_back();
+        pp.discardMessage();
+    }
+    return;
 }
 
-
-
-int eventController::execEvent(){
+int eventController::execCurrentEvent(){
     if(eventStack.back().stk.size() == 0){
         return -1;
     }
+
+    pp.discardMessage();
 
     std::vector<std::string> ss = split(eventStack.back().stk.back(), '|');
     eventStack.back().stk.pop_back();
@@ -38,8 +48,8 @@ int eventController::execEvent(){
             currBattle.exec();
             return 0;*/
         case 1:
-            prompt.whom = ss[1];
-            prompt.prom = ss[2];
+            pp.loadMessaage(ss[2], ss[1]);
+
             return 1;
     }
 

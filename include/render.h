@@ -2,6 +2,7 @@
 #include "gmap.h"
 #include "mapobject.h"
 #include "objPlayer.h"
+#include "prompt.h"
 #include <curses.h>
 
 #ifndef RENDER_H
@@ -18,8 +19,7 @@ class render
 
         void render_map(gmap);
         void render_Player(objPlayer);
-        void render_prompt(std::string);
-        void render_prompt(std::string, std::string);
+        void render_prompt(prompt P);
 
         void update();
     protected:

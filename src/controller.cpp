@@ -12,7 +12,7 @@
 #include "render.h"
 #include <algorithm>
 
-Controller::Controller() : rdr(), mapCtl("data/maps/maplist.lst")
+Controller::Controller() : rdr(), mapCtl("data/maps/maplist.lst"), evtCtl(prom)
 {
 }
 
@@ -41,7 +41,7 @@ void Controller::getParseUserInput(){
                     if(mapCtl.isPlayerFacingObject()){
                         evtCtl.reversePushEventStack(mapCtl.getPlayerFacingObject().getTrigger());
                         this->setStat(inEvent);
-                        evtCtl.execEvent();
+                        evtCtl.execCurrentEvent();
                     }
                     break;
                 case KEY_END:
@@ -63,8 +63,10 @@ void Controller::getParseUserInput(){
 
                 break;
                 case 'z':
-                    if(evtCtl.execEvent() < 0)
+                    if(evtCtl.execCurrentEvent() < 0){
+                        evtCtl.popEventStack();
                         this->restoreStat();
+                    }
                     break;
                 case 'x':
                     evtCtl.popEventStack();
@@ -80,8 +82,10 @@ void Controller::getParseUserInput(){
 void Controller::updateScreen(){
     rdr.render_map(mapCtl.getCurrentMap());
     rdr.render_Player(mapCtl.getPlayer());
-    if(stat == inEvent)
-        rdr.render_prompt(prompt.prom, prompt.whom);
+    if(prom.hasMessage()){
+        rdr.render_prompt(prom);
+    }
+
     rdr.update();
     return;
 }

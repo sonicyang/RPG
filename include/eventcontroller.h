@@ -1,5 +1,5 @@
 #include <vector>
-
+#include "prompt.h"
 
 #ifndef EVENTCONTROLLER_H
 #define EVENTCONTROLLER_H
@@ -12,15 +12,19 @@ struct event{
 class eventController
 {
     public:
-        eventController();
+        eventController(prompt& P);
         ~eventController();
 
-        void pushEventStack(event trig);
+        void reversePushEventStack(event trig);
+        void popEventStack();
         int execCurrentEvent();
+
+        void loadPrompt(prompt& P);
 
     protected:
     private:
-         vector<event> eventStack;
+         std::vector<event> eventStack;
+         prompt& pp;
 };
 
 #endif // EVENTCONTROLLER_H

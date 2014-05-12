@@ -1,3 +1,5 @@
+#include <string>
+
 #ifndef PROMPT_H
 #define PROMPT_H
 
@@ -8,9 +10,15 @@ class prompt
         prompt();
         ~prompt();
 
-        std::string getMessage() { return m_message; }
+        void discardMessage();
+        void loadMessaage(char*, char*);
+        void loadMessaage(std::string, std::string);
+
+        bool hasMessage(){ return !(m_message.size() == 0); }
+
+        const std::string getMessage() const { return m_message; }
         void setMessage(std::string val) { m_message = val; }
-        std::string getWhom() { return m_whom; }
+        const std::string getWhom() const { return m_whom; }
         void setWhom(std::string val) { m_whom = val; }
     protected:
     private:
