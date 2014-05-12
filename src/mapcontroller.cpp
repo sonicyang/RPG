@@ -49,7 +49,7 @@ int mapController::processInput(int c){
             break;
         case 'z':
             if(isPlayerFacingObject()){
-                ctlCallStack.push_front(&getPlayerFacingObject().getTrigger());
+                ctlCallStack.push_front(new event(getPlayerFacingObject().getTrigger()));
                 ctlCallStack.push_front(new int(-1));
             }
             break;

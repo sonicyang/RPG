@@ -31,7 +31,7 @@ class mapObject
         int Gettype() { return type; }
         virtual char Geticon() const { return icon; }
 
-        event& getTrigger() { return trigger; };
+        const event& getTrigger() const { return trigger; };
     protected:
         Point Cord;
         void SetCord(Point val) { Cord = val; }

@@ -51,6 +51,7 @@ bool Controller::processCtlCall(){
         case 0:
             evtCtl.popEventStack();
             this->restoreStat();
+            prom.discardMessage();
             userInputPending = 0;
             return 0;
         case 1:
