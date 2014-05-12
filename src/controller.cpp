@@ -46,6 +46,7 @@ void Controller::getParseUserInput(){
                     break;
                 case KEY_END:
                     exit(1);
+
             }
             break;
         case inEvent:
@@ -77,10 +78,7 @@ void Controller::getParseUserInput(){
                         exit(1);
                 }
             }else{
-                if(evtCtl.execCurrentEvent() < 0){
-                    evtCtl.popEventStack();
-                    this->restoreStat();
-                }
+                evtCtl.execCurrentEvent();
             }
             break;
     }
@@ -89,10 +87,14 @@ void Controller::getParseUserInput(){
 bool Controller::processCtlCall(){
     if(ctlCall.size() == 0)
         return 1;
-    int commd = atoi(ctlCall[0].c_str());
+    int commd = *(int*)(ctlCall[0]);
     switch(commd){
+        case 0:
+            evtCtl.popEventStack();
+            this->restoreStat();
+            return 0;
         case 1:
-            prom.loadMessaage(ctlCall[1],ctlCall[2]);
+            prom.loadMessaage((char*)(ctlCall[1]), (char*)(ctlCall[2]));
             userInputPending = 1;
             return 1;
         case 2:
@@ -100,6 +102,9 @@ bool Controller::processCtlCall(){
             userInputPending = 0;
             return 0;
     }
+
+    for(int i = 0; i < ctlCall.size(); i++)
+        delete [] ctlCall[i];
 
     ctlCall.clear();
     return 1;

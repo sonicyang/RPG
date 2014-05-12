@@ -13,7 +13,7 @@ struct event{
 class eventController
 {
     public:
-        eventController(std::deque<std::string>&);
+        eventController(std::deque<void*>&);
         ~eventController();
 
         void reversePushEventStack(event trig);
@@ -23,7 +23,7 @@ class eventController
     protected:
     private:
          std::vector<event> eventStack;
-         std::deque<std::string>& ctlCallStack;
+         std::deque<void*>& ctlCallStack;
 };
 
 #endif // EVENTCONTROLLER_H

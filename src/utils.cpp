@@ -4,6 +4,15 @@
 #include <cerrno>
 #include <vector>
 #include <sstream>
+#include <cstring>
+
+char* stringToAllocChar(std::string a){
+    char* s = new char[a.size()];
+    strcpy(s, a.c_str());
+    return s;
+}
+
+
 
 /*All following Code is From StackOverFlow Credit to the Original Author*/
 
