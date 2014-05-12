@@ -18,8 +18,8 @@ gmap::gmap()
     m_size.Set_x(1);
     m_size.Set_y(1);
 
-    m_data = CharArray2D(m_size);
-    m_data_state = CharArray2D(m_size);
+    m_data = Array2D<char>(m_size);
+    m_data_state = Array2D<char>(m_size);
 }
 
 
@@ -37,8 +37,8 @@ gmap::gmap(const char * filename)
         m_size.Set_x(root["Size"]["x"].asInt());
         m_size.Set_y(root["Size"]["y"].asInt());
 
-        m_data = CharArray2D(m_size, root["Floor"].asString());
-        m_data_state = CharArray2D(m_size, root["State"].asString());
+        m_data = Array2D<char>(m_size, root["Floor"].asString());
+        m_data_state = Array2D<char>(m_size, root["State"].asString());
 
         for(int i = 0; i < root["Blocks"].size(); i++){
             blocks.insert(root["Blocks"][i].asString()[0]);

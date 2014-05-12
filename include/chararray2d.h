@@ -1,26 +1,26 @@
 #include "point.h"
 #include <string>
 
-#ifndef CHARARRAY2D_H
-#define CHARARRAY2D_H
+#ifndef ARRAY2D_H
+#define ARRAY2D_H
 
-
-class CharArray2D
+template<class T>
+class Array2D
 {
     public:
-        CharArray2D();
-        CharArray2D(Point);
-        CharArray2D(Point,std::string);
-        ~CharArray2D();
-        CharArray2D(const CharArray2D& other);
-        CharArray2D& operator=(const CharArray2D& other);
+        Array2D();
+        Array2D(Point);
+        Array2D(Point,std::string);
+        ~Array2D();
+        Array2D(const Array2D& other);
+        Array2D& operator=(const Array2D& other);
         int operator=(const std::string&);
-        char* operator[](int subscript);
+        T* operator[](int subscript);
 
         Point size();
     protected:
     private:
-        char** m_data;
+        T** m_data;
         Point m_size;
 };
 
