@@ -16,7 +16,7 @@ using namespace std;
 int main()
 {
     system("cd");
-    Controller gCtl("data/maps/maplist.lst");
+    Controller gCtl;
 
     cbreak();
     noecho();

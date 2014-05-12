@@ -12,35 +12,12 @@
 #include "render.h"
 #include <algorithm>
 
-Controller::Controller(char* maplist) : rdr()
+Controller::Controller() : rdr(), mapCtl("data/maps/maplist.lst")
 {
-    std::string in = get_file_contents(maplist);
-
-    Json::Value root;
-    Json::Reader reader;
-    bool stat = reader.parse( in, root );
-    if (stat){
-        map_count = root.get("Count", 0 ).asInt();
-        for(int i = 0; i < map_count; i++){
-            gmap tmp(root["Path"][i].asString().c_str());
-            map_list.insert (map_list.begin(), std::pair<std::string,gmap>(tmp.Getname(),tmp));
-        }
-        default_map = current_map = root["Default"].asString();
-
-    }else{
-        std::cout << "Failed to parse configuration\n"  << reader.getFormatedErrorMessages();
-        exit(128);
-    }
-
-    Player = objPlayer("Player", 0, 0, 1, 1, "^>v<", EAST);
 }
 
 Controller::~Controller()
 {
-}
-
-gmap Controller::get_CurrentMap(){
-    return map_list[current_map];
 }
 
 void Controller::getParseUserInput(){
@@ -49,24 +26,23 @@ void Controller::getParseUserInput(){
         case onMap:
             switch (c) {
                 case KEY_LEFT:
-                    movePlayer(Point(-1,0));
+                    mapCtl.movePlayer(Point(-1,0));
                     break;
                 case KEY_RIGHT:
-                    movePlayer(Point(1,0));
+                    mapCtl.movePlayer(Point(1,0));
                     break;
                 case KEY_UP:
-                    movePlayer(Point(0,-1));
+                    mapCtl.movePlayer(Point(0,-1));
                     break;
                 case KEY_DOWN:
-                    movePlayer(Point(0,1));
+                    mapCtl.movePlayer(Point(0,1));
                     break;
-                case 'z':{
-                    mapObject* obj = map_list[current_map].getObject(getPlayerFacing());
-                    if(!obj)
-                        return;
-                    loadEventStack(obj->getTrigger());
-                    execEvent();
-                    break;}
+                case 'z':
+                    if(mapCtl.isPlayerFacingObject()){
+                        loadEventStack(mapCtl.getPlayerFacingObject().getTrigger());
+                        execEvent();
+                    }
+                    break;
                 case KEY_END:
                     exit(1);
             }
@@ -100,53 +76,12 @@ void Controller::getParseUserInput(){
 }
 
 void Controller::updateScreen(){
-    rdr.render_map(map_list[current_map]);
-    rdr.render_Player(Player);
+    rdr.render_map(mapCtl.getCurrentMap());
+    rdr.render_Player(mapCtl.getPlayer());
     if(stat == inEvent)
         rdr.render_prompt(prompt.prom, prompt.whom);
     rdr.update();
     return;
-}
-
-int Controller::setPlayerPos(Point a){
-    if(map_list[current_map].isOutOfBound(a))
-        return -1;
-    if(map_list[current_map].isObstacle(a))
-        return -1;
-    Player.SetCord(a);
-}
-
-int Controller::movePlayer(Point a){
-    Point curr = Player.GetCord();
-    if(a.m_y != 0)
-        Player.setFacing(a.m_y + 1);
-    else
-        Player.setFacing(a.m_x * -1 + 2);
-    return setPlayerPos(curr + a);
-}
-
-Point Controller::getPlayerPos(){
-    return Player.GetCord();
-}
-
-Point Controller::getPlayerFacing(){
-    Point cordFacing = Player.GetCord();
-    int facing = Player.getFacing();
-    switch(facing){
-        case 0:
-            cordFacing += Point(0,-1);
-            break;
-        case 1:
-            cordFacing += Point(1,0);
-            break;
-        case 2:
-            cordFacing += Point(0,1);
-            break;
-        case 3:
-            cordFacing += Point(-1,0);
-            break;
-    }
-    return cordFacing;
 }
 
 void Controller::loadEventStack(event trig){
@@ -172,8 +107,8 @@ int Controller::execEvent(){
             currBattle.exec();
             return 0;*/
         case 1:
-            prompt.prom = ss[1];
-            prompt.whom = eventStack.back().trigBy;
+            prompt.whom = ss[1];
+            prompt.prom = ss[2];
             return 1;
     }
 

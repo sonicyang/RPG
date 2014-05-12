@@ -21,7 +21,7 @@ class mapObject
 {
     public:
         friend class gmap;
-        friend class Controller;
+        friend class mapController;
 
         mapObject();
         mapObject(std::string, int, int, int, int, char, std::string);

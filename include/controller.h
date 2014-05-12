@@ -3,6 +3,7 @@
 #include <string>
 #include <curses.h>
 #include "render.h"
+#include "mapcontroller.h"
 #include "mapobject.h"
 #include "objPlayer.h"
 
@@ -26,7 +27,7 @@ struct PROM{
 class Controller
 {
     public:
-        Controller(char* maplist);
+        Controller();
         ~Controller();
 
         gmap get_CurrentMap();
@@ -50,6 +51,7 @@ class Controller
     protected:
     private:
         render rdr;
+        mapController mapCtl;
 
         std::map<std::string,gmap> map_list;
         int map_count;
