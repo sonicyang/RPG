@@ -47,6 +47,8 @@ class Controller
         //battle currBattle;
         //vector<GeneralPlayer> members;
 
+        void menuRution();
+
         void setStat(int s);
         void restoreStat();
         int stat = 1;

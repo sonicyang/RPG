@@ -36,6 +36,7 @@ int eventController::processInput(int c){
             break;
         case KEY_END:
             ctlCallStack.push_front(new int(255));
+            break;
     }
     return 1;
 }

@@ -42,13 +42,15 @@ void render::render_Player(objPlayer mo){
 }
 
 void render::render_prompt(prompt P){
+    attron(A_BOLD);
     mvaddstr(18, 0, "=========");
     mvaddstr(19, 0, "|       |");
-    mvaddstr(20, 0, "======================================================================================");
-    mvaddch(21, 0, '|');mvaddch(21, 79, '|');
-    mvaddch(22, 0, '|');mvaddch(22, 79, '|');
-    mvaddch(23, 0, '|');mvaddch(23, 79, '|');
+    mvaddstr(20, 0, "================================================================================");
+    mvaddstr(21, 0, "|                                                                              |");
+    mvaddstr(22, 0, "|                                                                              |");
+    mvaddstr(23, 0, "|                                                                              |");
     mvaddstr(24, 0, "================================================================================");
+    attroff(A_BOLD);
 
     mvaddstr(19, 1, P.getWhom().c_str());
     mvaddstr(21, 1, P.getMessage().c_str());

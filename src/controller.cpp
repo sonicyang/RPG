@@ -33,6 +33,11 @@ void Controller::getParseUserInput(){
                 evtCtl.execCurrentEvent();
             }
             break;
+        case menu:
+            menuRution();
+            nodelay(stdscr, true);
+            this->restoreStat();
+            break;
     }
 }
 
@@ -41,6 +46,10 @@ bool Controller::processCtlCall(){
         return 1;
     int commd = *(int*)(ctlCall[0]);
     switch(commd){
+        case -2:
+            this->setStat(menu);
+            userInputPending = 0;
+            break;
         case -1:
             mapCtl.getPlayerFacingObject().getTrigger();
             evtCtl.reversePushEventStack(*(event*)(ctlCall[1]));
@@ -50,8 +59,8 @@ bool Controller::processCtlCall(){
             return 1;
         case 0:
             evtCtl.popEventStack();
-            this->restoreStat();
             prom.discardMessage();
+            this->restoreStat();
             userInputPending = 0;
             return 0;
         case 1:
@@ -86,6 +95,71 @@ void Controller::updateScreen(){
     rdr.update();
     return;
 }
+
+void Controller::menuRution(){
+    nodelay(stdscr, false); //Nasty Hack
+
+    std::vector<std::string> mOption(3);
+    mOption[0] = "Team";
+    mOption[1] = "Inventory";
+    mOption[2] = "Exit";
+
+    int cursorPos = 0;
+
+    for(;;){
+        clear();
+
+        //Make Frame and Print Title
+        mvaddstr(0, 0, "================================================================================");
+        for(int i = 1; i < 24; i++)mvaddch(i, 0, '|'),mvaddch(i, 79, '|');
+        mvaddstr(24, 0, "===============================================================================");
+        mvaddstr(2, 0, "================================================================================");
+        mvaddstr(1, 38, "MENU");
+        for(int i = 3; i < 24; i++)mvaddch(i, 25, '|');
+
+        //Print All Options
+        for(int i = 0; i < mOption.size(); i++)
+            mvaddstr(4 + 2*i, 2, mOption[i].c_str());
+
+        //Print Selected Options
+        attron(A_BOLD);
+        mvaddstr(4 + 2*cursorPos, 2, mOption[cursorPos].c_str());
+        attroff(A_BOLD);
+
+        //Wait User input
+        int c = getch();
+        switch (c) {
+            case KEY_UP:
+                (cursorPos==0)? 0 : cursorPos--;
+                break;
+            case KEY_DOWN:
+                (cursorPos == mOption.size()-1)? mOption.size()-1 : cursorPos++;
+                break;
+            case 'z':
+                switch(cursorPos){
+                    case 2:
+                        prom.loadMessaage("Are You Sure?", "System");
+                        rdr.render_prompt(prom);
+                        if(getch() == 'z'){
+                            prom.loadMessaage("Bye", "System");
+                            rdr.render_prompt(prom);
+                            getch();
+                            exit(1);
+                        }
+                        prom.discardMessage();
+                        break;
+                }
+                break;
+            case 'x':
+            case 'q':
+                return;
+                break;
+        }
+    }
+    return;
+}
+
+
 
 void Controller::setStat(int s){
     _stat.push_back(stat);

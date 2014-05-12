@@ -55,6 +55,10 @@ int mapController::processInput(int c){
             break;
         case KEY_END:
             ctlCallStack.push_front(new int(255));
+            break;
+        case 'q':
+            ctlCallStack.push_front(new int(-2));
+            break;
     }
     return 0;
 }
