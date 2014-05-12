@@ -1,0 +1,8 @@
+{
+	"Name" : "TrapTrigger",
+	"triggerType" : 2,
+	"Command" : [
+				"01|System|You fall in a trap...",
+				"02"
+				]
+}

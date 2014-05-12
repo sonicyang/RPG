@@ -5,11 +5,20 @@
 	"State" : "#############          ##          ##          ##          ##          ##          ##          ##          ##          ##          #############",
 	"Blocks" : ["1", "#"],
 	"Objects" : [{
-				"Name" 	: 	"David",
-				"Type" 	: 	1,
-				"x"		:	4,
-				"y"		:	4,
-				"Icon"	:	"X",
-				"Trigger" : "data/events/DavidTrigger.evt"
+					"Name" 	: 	"David",
+					"Type" 	: 	1,
+					"canStep" : 0,
+					"x"		:	4,
+					"y"		:	4,
+					"Icon"	:	"X",
+					"Trigger" : "data/events/DavidTrigger.evt"
+				},{
+					"Name" 	: 	"Trap",
+					"Type" 	: 	1,
+					"canStep" : 1,
+					"x"		:	8,
+					"y"		:	4,
+					"Icon"	:	"O",
+					"Trigger" : "data/events/TrapTrigger.evt"
 				}]
 }

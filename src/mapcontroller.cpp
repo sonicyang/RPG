@@ -49,8 +49,10 @@ int mapController::processInput(int c){
             break;
         case 'z':
             if(isPlayerFacingObject()){
-                ctlCallStack.push_front(new event(getPlayerFacingObject().getTrigger()));
-                ctlCallStack.push_front(new int(-1));
+                if(getPlayerFacingObject().getTrigger().triggerType == buttonTrig){
+                    ctlCallStack.push_front(new event(getPlayerFacingObject().getTrigger()));
+                    ctlCallStack.push_front(new int(-1));
+                }
             }
             break;
         case KEY_END:
@@ -73,6 +75,15 @@ int mapController::setPlayerPosition(Point a){
     if(map_list[currentMap].isObstacle(a))
         return -1;
     player.SetCord(a);
+
+    if(isPlayerOnObject()){
+        if(getPlayerOnObject().getTrigger().triggerType == stepOnTrig){
+            ctlCallStack.push_front(new event(getPlayerOnObject().getTrigger()));
+            ctlCallStack.push_front(new int(-1));
+        }
+    }
+
+    return 1;
 }
 
 int mapController::movePlayer(Point a){
@@ -116,4 +127,15 @@ bool mapController::isPlayerFacingObject(){
 
 mapObject& mapController::getPlayerFacingObject(){
     return *map_list[currentMap].getObject(getPlayerFacing());
+}
+
+bool mapController::isPlayerOnObject(){
+    mapObject* obj = map_list[currentMap].getObject(player.GetCord());
+    if(!obj)
+        return false;
+    return true;
+}
+
+mapObject& mapController::getPlayerOnObject(){
+    return *map_list[currentMap].getObject(player.GetCord());
 }

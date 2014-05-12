@@ -51,10 +51,8 @@ bool Controller::processCtlCall(){
             userInputPending = 0;
             break;
         case -1:
-            mapCtl.getPlayerFacingObject().getTrigger();
             evtCtl.reversePushEventStack(*(event*)(ctlCall[1]));
             this->setStat(inEvent);
-            evtCtl.execCurrentEvent();
             userInputPending = 0;
             return 1;
         case 0:

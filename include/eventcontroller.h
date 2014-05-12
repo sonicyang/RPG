@@ -8,6 +8,12 @@
 struct event{
     std::vector<std::string> stk;
     std::string trigBy;
+    int triggerType;
+};
+
+enum trigType{
+    buttonTrig = 1,
+    stepOnTrig
 };
 
 class eventController

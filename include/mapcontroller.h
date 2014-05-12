@@ -25,6 +25,10 @@ class mapController
         bool isPlayerFacingObject();
         mapObject& getPlayerFacingObject();
 
+        bool isPlayerOnObject();
+        mapObject& getPlayerOnObject();
+
+
     protected:
     private:
         std::string currentMap;

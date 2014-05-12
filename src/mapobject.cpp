@@ -5,13 +5,13 @@
 #include "json/value.h"
 #include "json/reader.h"
 
-mapObject::mapObject() : name("NULL"), ID(0), type(0), icon('M')
+mapObject::mapObject() : name("NULL"), ID(0), type(0), icon('M'), _canStep(false)
 {
     Cord.m_x = 0;
     Cord.m_y = 0;
 }
 
-mapObject::mapObject(std::string n, int i, int t, int x, int y, char ic, std::string trig) : name(n), ID(i), type(t), icon(ic)
+mapObject::mapObject(std::string n, int i, int t, int x, int y, char ic, std::string trig, bool cs) : name(n), ID(i), type(t), icon(ic), _canStep(cs)
 {
     Cord.m_x = x;
     Cord.m_y = y;
@@ -28,6 +28,8 @@ mapObject::mapObject(std::string n, int i, int t, int x, int y, char ic, std::st
             }
 
             trigger.trigBy = name;
+
+            trigger.triggerType = root["triggerType"].asInt();
         }else{
             std::cout << "Failed to parse configuration\n"  << reader.getFormatedErrorMessages();
             exit(128);
@@ -47,6 +49,7 @@ mapObject::mapObject(const mapObject& other)
     Cord = other.Cord;
     icon = other.icon;
     trigger = other.trigger;
+    _canStep = other._canStep;
 }
 
 mapObject& mapObject::operator=(const mapObject& rhs)
@@ -58,6 +61,7 @@ mapObject& mapObject::operator=(const mapObject& rhs)
         Cord = rhs.Cord;
         icon = rhs.icon;
         trigger = rhs.trigger;
+        _canStep = rhs._canStep;
     return *this;
 }
 

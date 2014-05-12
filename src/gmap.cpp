@@ -46,7 +46,7 @@ gmap::gmap(const char * filename)
 
         for(int i = 0; i < root["Objects"].size(); i++){
             Point cord(root["Objects"][i]["x"].asInt(), root["Objects"][i]["y"].asInt());
-            mapObject toAdd(root["Objects"][i]["Name"].asString(), i, root["Objects"][i]["Type"].asInt(), cord.m_x, cord.m_y, root["Objects"][i]["Icon"].asString()[0], root["Objects"][i]["Trigger"].asString());
+            mapObject toAdd(root["Objects"][i]["Name"].asString(), i, root["Objects"][i]["Type"].asInt(), cord.m_x, cord.m_y, root["Objects"][i]["Icon"].asString()[0], root["Objects"][i]["Trigger"].asString(), root["Objects"][i]["canStep"].asInt());
             objects.insert(objects.begin(),std::pair<Point,mapObject>(cord, toAdd));
         }
 
@@ -91,7 +91,8 @@ bool gmap::isObstacle(Point a){
     if(blocks.find(m_data[a.m_y][a.m_x]) != blocks.end())
         return true;
     if(objects.find(a) != objects.end())
-        return true;
+        if(!objects.find(a)->second.canStepOn())
+            return true;
     return false;
 }
 
