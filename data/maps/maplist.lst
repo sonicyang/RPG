@@ -1,5 +1,5 @@
 {
-	"Count" : 1,
-	"Path" : ["data/maps/test.map"],
+	"Count" : 2,
+	"Path" : ["data/maps/test.map", "data/maps/test2.map"],
 	"Default" : "Test"
 }

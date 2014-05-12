@@ -1,0 +1,16 @@
+{
+	"Name" : "Test2",
+	"Size" : { "x" : 6, "y" : 12},
+	"Floor" : "#######    ##    ##    ##    ##    ##    ##    ##    ##    ##    #######",
+	"State" : "#######    ##    ##    ##    ##    ##    ##    ##    ##    ##    #######",
+	"Blocks" : ["1", "#"],
+	"Objects" : [{
+					"Name" 	: 	"David",
+					"Type" 	: 	1,
+					"canStep" : 0,
+					"x"		:	4,
+					"y"		:	4,
+					"Icon"	:	"K",
+					"Trigger" : "data/events/DavidTrigger.evt"
+				}]
+}

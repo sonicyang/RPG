@@ -16,6 +16,7 @@ class mapController
         int processInput(int c);
 
         const gmap& getCurrentMap();
+        void setCurrentMap(char *);
 
         int setPlayerPosition(Point a);
         Point getPlayerPosition();

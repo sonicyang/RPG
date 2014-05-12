@@ -69,6 +69,11 @@ bool Controller::processCtlCall(){
             prom.discardMessage();
             userInputPending = 0;
             return 0;
+        case 3:
+            mapCtl.setCurrentMap((char*)(ctlCall[1]));
+            mapCtl.setPlayerPosition(Point(*(int*)(ctlCall[2]), *(int*)(ctlCall[3])));
+            userInputPending = 0;
+            return 0;
         case 255:
             for(int i = 0; i < ctlCall.size(); i++) //nasty memory Management :(
                 delete [] ctlCall[i];

@@ -1,0 +1,7 @@
+{
+	"Name" : "TrapTrigger",
+	"triggerType" : 2,
+	"Command" : [
+				"03|Test2|2|2"
+				]
+}

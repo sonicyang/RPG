@@ -33,6 +33,12 @@ mapController::~mapController()
     //dtor
 }
 
+void mapController::setCurrentMap(char * a){
+    std::string nn(a);
+    if(map_list.find(a) != map_list.end())
+        currentMap = a;
+}
+
 int mapController::processInput(int c){
     switch (c) {
         case KEY_LEFT:

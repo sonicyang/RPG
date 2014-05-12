@@ -1,7 +1,7 @@
 {
 	"Name" : "Test",
 	"Size" : { "x" : 12, "y" : 12},
-	"Floor" : "#############          ##          ##          ##          ##          ##          ##          ##          ##          ##          #############",
+	"Floor" : "#############          ##          ##           #          ##          ##          ##          ##          ##          ##          #############",
 	"State" : "#############          ##          ##          ##          ##          ##          ##          ##          ##          ##          #############",
 	"Blocks" : ["1", "#"],
 	"Objects" : [{
@@ -20,5 +20,13 @@
 					"y"		:	4,
 					"Icon"	:	"O",
 					"Trigger" : "data/events/TrapTrigger.evt"
+				},{
+					"Name" 	: 	"test2",
+					"Type" 	: 	1,
+					"canStep" : 1,
+					"x"		:	11,
+					"y"		:	3,
+					"Icon"	:	" ",
+					"Trigger" : "data/events/test_test2Trigger.evt"
 				}]
 }

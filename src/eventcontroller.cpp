@@ -77,6 +77,12 @@ int eventController::execCurrentEvent(){
         case 2:
             ctlCallStack.push_front(new int(2));
             return 2;
+        case 3:
+            ctlCallStack.push_front(new int(atoi(ss[3].c_str())));
+            ctlCallStack.push_front(new int(atoi(ss[2].c_str())));
+            ctlCallStack.push_front(stringToAllocChar(ss[1]));
+            ctlCallStack.push_front(new int(3));
+            return 3;
     }
 
     return 1;
