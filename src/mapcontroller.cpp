@@ -3,8 +3,9 @@
 #include "json/reader.h"
 #include "json/value.h"
 #include <cstdlib>
+#include <curses.h>
 
-mapController::mapController(char* maplist)
+mapController::mapController(char* maplist, std::deque<void*>& s) : ctlCallStack(s)
 {
     std::string in = get_file_contents(maplist);
 
@@ -30,6 +31,32 @@ mapController::mapController(char* maplist)
 mapController::~mapController()
 {
     //dtor
+}
+
+int mapController::processInput(int c){
+    switch (c) {
+        case KEY_LEFT:
+            movePlayer(Point(-1,0));
+            break;
+        case KEY_RIGHT:
+            movePlayer(Point(1,0));
+            break;
+        case KEY_UP:
+            movePlayer(Point(0,-1));
+            break;
+        case KEY_DOWN:
+            movePlayer(Point(0,1));
+            break;
+        case 'z':
+            if(isPlayerFacingObject()){
+                ctlCallStack.push_front(&getPlayerFacingObject().getTrigger());
+                ctlCallStack.push_front(new int(-1));
+            }
+            break;
+        case KEY_END:
+            ctlCallStack.push_front(new int(255));
+    }
+    return 0;
 }
 
 const gmap& mapController::getCurrentMap(){

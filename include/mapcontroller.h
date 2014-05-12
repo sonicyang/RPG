@@ -10,8 +10,10 @@
 class mapController
 {
     public:
-        mapController(char* maplist);
+        mapController(char* maplist, std::deque<void*>&);
         ~mapController();
+
+        int processInput(int c);
 
         const gmap& getCurrentMap();
 
@@ -33,6 +35,8 @@ class mapController
         objPlayer player;
 
         Point getPlayerFacing();
+
+        std::deque<void*>& ctlCallStack;
 };
 
 #endif // MAPCONTROLLER_H

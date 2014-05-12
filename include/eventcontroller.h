@@ -16,6 +16,8 @@ class eventController
         eventController(std::deque<void*>&);
         ~eventController();
 
+        int processInput(int c);
+
         void reversePushEventStack(event trig);
         void popEventStack();
         int execCurrentEvent();

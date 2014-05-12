@@ -3,6 +3,7 @@
 #include "utils.h"
 #include <cstring>
 #include "eventcontroller.h"
+#include <curses.h>
 
 eventController::eventController(std::deque<void*>& s) : ctlCallStack(s)
 {
@@ -13,6 +14,31 @@ eventController::~eventController()
     //dtor
 }
 
+int eventController::processInput(int c){
+    switch (c) {
+        case KEY_LEFT:
+
+            break;
+        case KEY_RIGHT:
+
+            break;
+        case KEY_UP:
+
+            break;
+        case KEY_DOWN:
+
+            break;
+        case 'z':
+            execCurrentEvent();
+            break;
+        case 'x':
+            ctlCallStack.push_front(new int(0));
+            break;
+        case KEY_END:
+            ctlCallStack.push_front(new int(255));
+    }
+    return 1;
+}
 
 void eventController::reversePushEventStack(event trig){
     std::reverse(trig.stk.begin(), trig.stk.end());

@@ -12,7 +12,7 @@
 #include "render.h"
 #include <algorithm>
 
-Controller::Controller() : rdr(), mapCtl("data/maps/maplist.lst"), evtCtl(ctlCall)
+Controller::Controller() : rdr(), mapCtl("data/maps/maplist.lst", ctlCall), evtCtl(ctlCall)
 {
 }
 
@@ -24,59 +24,11 @@ void Controller::getParseUserInput(){
     int c = getch();
     switch(stat){
         case onMap:
-            switch (c) {
-                case KEY_LEFT:
-                    mapCtl.movePlayer(Point(-1,0));
-                    break;
-                case KEY_RIGHT:
-                    mapCtl.movePlayer(Point(1,0));
-                    break;
-                case KEY_UP:
-                    mapCtl.movePlayer(Point(0,-1));
-                    break;
-                case KEY_DOWN:
-                    mapCtl.movePlayer(Point(0,1));
-                    break;
-                case 'z':
-                    if(mapCtl.isPlayerFacingObject()){
-                        evtCtl.reversePushEventStack(mapCtl.getPlayerFacingObject().getTrigger());
-                        this->setStat(inEvent);
-                        evtCtl.execCurrentEvent();
-                    }
-                    break;
-                case KEY_END:
-                    exit(1);
-
-            }
+            mapCtl.processInput(c);
             break;
         case inEvent:
             if(userInputPending){
-                switch (c) {
-                    case KEY_LEFT:
-
-                        break;
-                    case KEY_RIGHT:
-
-                        break;
-                    case KEY_UP:
-
-                        break;
-                    case KEY_DOWN:
-
-                        break;
-                    case 'z':
-                        if(evtCtl.execCurrentEvent() < 0){
-                            evtCtl.popEventStack();
-                            this->restoreStat();
-                        }
-                        break;
-                    case 'x':
-                        evtCtl.popEventStack();
-                        this->restoreStat();
-                        break;
-                    case KEY_END:
-                        exit(1);
-                }
+                evtCtl.processInput(c);
             }else{
                 evtCtl.execCurrentEvent();
             }
@@ -89,9 +41,17 @@ bool Controller::processCtlCall(){
         return 1;
     int commd = *(int*)(ctlCall[0]);
     switch(commd){
+        case -1:
+            mapCtl.getPlayerFacingObject().getTrigger();
+            evtCtl.reversePushEventStack(*(event*)(ctlCall[1]));
+            this->setStat(inEvent);
+            evtCtl.execCurrentEvent();
+            userInputPending = 0;
+            return 1;
         case 0:
             evtCtl.popEventStack();
             this->restoreStat();
+            userInputPending = 0;
             return 0;
         case 1:
             prom.loadMessaage((char*)(ctlCall[1]), (char*)(ctlCall[2]));
@@ -100,6 +60,11 @@ bool Controller::processCtlCall(){
         case 2:
             prom.discardMessage();
             userInputPending = 0;
+            return 0;
+        case 255:
+            for(int i = 0; i < ctlCall.size(); i++) //nasty memory Management :(
+                delete [] ctlCall[i];
+            exit(1);
             return 0;
     }
 
