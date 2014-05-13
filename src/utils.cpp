@@ -5,6 +5,7 @@
 #include <vector>
 #include <sstream>
 #include <cstring>
+#include <cstdarg>
 
 char* stringToAllocChar(std::string a){
     char* s = new char[a.size()];
@@ -19,6 +20,19 @@ void recycleMem(std::vector< std::vector<void*> > a){
     }
 }
 
+std::vector<void*> loadStack(int n, ... ){
+    va_list arguments;
+    va_start (arguments, n);
+
+    std::vector<void*> stk;
+
+    for (int i = 0; i < n; i++){
+        stk.push_back(va_arg(arguments, void*));
+    }
+
+    va_end(arguments);
+    return stk;
+}
 
 /*All following Code is From StackOverFlow Credit to the Original Author*/
 

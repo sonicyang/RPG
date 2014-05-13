@@ -34,14 +34,10 @@ int eventController::processInput(int c){
             execCurrentEvent();
             break;
         case 'x':{
-            vector<void*> parmeters;
-            parmeters.push_back(new int(0));
-            ctlCallStack.push_back(parmeters);
+            ctlCallStack.push_back(loadStack(0, new int(0)));
             break;}
         case KEY_END:{
-            vector<void*> parmeters;
-            parmeters.push_back(new int(255));
-            ctlCallStack.push_back(parmeters);
+            ctlCallStack.push_back(loadStack(255, new int(0)));
             break;}
     }
     return 1;
@@ -62,9 +58,7 @@ void eventController::popEventStack(){
 
 int eventController::execCurrentEvent(){
     if(eventStack.back().stk.size() == 0){
-        vector<void*> parmeters;
-        parmeters.push_back(new int(0));
-        ctlCallStack.push_back(parmeters);
+        ctlCallStack.push_back(loadStack(1, new int(0)));
         return -1;
     }
 
@@ -78,24 +72,14 @@ int eventController::execCurrentEvent(){
             currBattle.exec();
             return 0;*/
         case 1:{
-            vector<void*> parmeters;
-            parmeters.push_back(new int(1));
-            parmeters.push_back(stringToAllocChar(ss[2]));
-            parmeters.push_back(stringToAllocChar(ss[1]));
-            ctlCallStack.push_back(parmeters);
+            ctlCallStack.push_back(loadStack(3, new int(1), stringToAllocChar(ss[2]), stringToAllocChar(ss[1])));
             return 1;}
         case 2:{
-            vector<void*> parmeters;
-            parmeters.push_back(new int(2));
-            ctlCallStack.push_back(parmeters);
+            ctlCallStack.push_back(loadStack(1, new int(2)));
             return 2;}
         case 3:{
             vector<void*> parmeters;
-            parmeters.push_back(new int(3));
-            parmeters.push_back(stringToAllocChar(ss[1]));
-            parmeters.push_back(new int(atoi(ss[2].c_str())));
-            parmeters.push_back(new int(atoi(ss[3].c_str())));
-            ctlCallStack.push_back(parmeters);
+            ctlCallStack.push_back(loadStack(4, new int(3), stringToAllocChar(ss[1]), new int(atoi(ss[2].c_str())), new int(atoi(ss[3].c_str()))));
             return 3;}
     }
 

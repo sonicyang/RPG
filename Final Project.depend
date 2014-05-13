@@ -294,7 +294,7 @@
 	<cstring>
 	"chararray2d.h"
 
-1399950584 source:c:\users\sonicyang\github\rpg\src\controller.cpp
+1399950823 source:c:\users\sonicyang\github\rpg\src\controller.cpp
 	"controller.h"
 	<cstdlib>
 	<cstring>
@@ -309,7 +309,7 @@
 	"render.h"
 	<algorithm>
 
-1399950515 c:\users\sonicyang\github\rpg\include\utils.h
+1399952099 c:\users\sonicyang\github\rpg\include\utils.h
 	<fstream>
 	<string>
 	<cerrno>
@@ -390,7 +390,7 @@
 	<curses.h>
 	<locale>
 
-1399950680 source:c:\users\sonicyang\github\rpg\src\utils.cpp
+1399952219 source:c:\users\sonicyang\github\rpg\src\utils.cpp
 	"utils.h"
 	<fstream>
 	<string>
@@ -398,6 +398,7 @@
 	<vector>
 	<sstream>
 	<cstring>
+	<cstdarg>
 
 1399918408 source:c:\users\sonicyang\github\rpg\src\mapobject.cpp
 	"mapobject.h"
@@ -420,7 +421,7 @@
 	"objPLayer.h"
 	"point.h"
 
-1399950672 source:c:\users\sonicyang\github\rpg\src\mapcontroller.cpp
+1399952393 source:c:\users\sonicyang\github\rpg\src\mapcontroller.cpp
 	"mapcontroller.h"
 	"utils.h"
 	"json/reader.h"
@@ -436,7 +437,7 @@
 1399868671 c:\users\sonicyang\github\rpg\include\prompt.h
 	<string>
 
-1399950640 source:c:\users\sonicyang\github\rpg\src\eventcontroller.cpp
+1399952182 source:c:\users\sonicyang\github\rpg\src\eventcontroller.cpp
 	"prompt.h"
 	<algorithm>
 	"utils.h"

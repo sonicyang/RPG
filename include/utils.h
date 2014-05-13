@@ -8,7 +8,7 @@
 
 char* stringToAllocChar(std::string);
 void recycleMem(std::vector< std::vector<void*> >);
-
+std::vector<void*> loadStack(int n, ... );
 
 std::string get_file_contents(const char*);
 std::vector<std::string> &split(const std::string &s, char delim, std::vector<std::string> &elems);

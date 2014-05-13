@@ -31,7 +31,6 @@ void Controller::getParseUserInput(){
                 evtCtl.processInput(c);
             }else{
                 evtCtl.execCurrentEvent();
-                evtCtl.execCurrentEvent();
             }
             break;
         case menu:

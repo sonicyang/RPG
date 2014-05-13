@@ -58,22 +58,15 @@ int mapController::processInput(int c){
         case 'z':{
             if(isPlayerFacingObject()){
                 if(getPlayerFacingObject().getTrigger().triggerType == buttonTrig){
-                    vector<void*> parmeters;
-                    parmeters.push_back(new int(-1));
-                    parmeters.push_back(new event(getPlayerFacingObject().getTrigger()));
-                    ctlCallStack.push_back(parmeters);
+                    ctlCallStack.push_back(loadStack(2, new int(-1), new event(getPlayerFacingObject().getTrigger())));
                 }
             }
             break;}
         case KEY_END:{
-            vector<void*> parmeters;
-            parmeters.push_back(new int(255));
-            ctlCallStack.push_back(parmeters);
+            ctlCallStack.push_back(loadStack(1, new int(255)));
             break;}
         case 'q':{
-            vector<void*> parmeters;
-            parmeters.push_back(new int(-2));
-            ctlCallStack.push_back(parmeters);
+            ctlCallStack.push_back(loadStack(1, -2));
             break;}
     }
     return 0;
@@ -92,10 +85,7 @@ int mapController::setPlayerPosition(Point a){
 
     if(isPlayerOnObject()){
         if(getPlayerOnObject().getTrigger().triggerType == stepOnTrig){
-            vector<void*> parmeters;
-            parmeters.push_back(new int(-1));
-            parmeters.push_back(new event(getPlayerOnObject().getTrigger()));
-            ctlCallStack.push_back(parmeters);
+            ctlCallStack.push_back(loadStack(2, new int(-1), new event(getPlayerOnObject().getTrigger())));
         }
     }
 
