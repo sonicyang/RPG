@@ -16,6 +16,9 @@
 					<Add option="-g" />
 					<Add directory="include" />
 				</Compiler>
+				<Environment>
+					<Variable name="PWD" value="." />
+				</Environment>
 			</Target>
 			<Target title="Release">
 				<Option output="bin/Release/Final Project" prefix_auto="1" extension_auto="1" />
@@ -30,9 +33,14 @@
 					<Add option="-s" />
 				</Linker>
 			</Target>
+			<Environment>
+				<Variable name="PWD" value="." />
+			</Environment>
 		</Build>
 		<Compiler>
+			<Add option="-std=c++11" />
 			<Add option="-Wall" />
+			<Add option="-g" />
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="include/chararray2d.h" />
