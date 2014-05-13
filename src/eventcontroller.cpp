@@ -5,7 +5,9 @@
 #include "eventcontroller.h"
 #include <curses.h>
 
-eventController::eventController(std::deque<void*>& s) : ctlCallStack(s)
+using namespace std;
+
+eventController::eventController(std::vector< std::vector<void*> >& s) : ctlCallStack(s)
 {
 }
 
@@ -31,12 +33,16 @@ int eventController::processInput(int c){
         case 'z':
             execCurrentEvent();
             break;
-        case 'x':
-            ctlCallStack.push_front(new int(0));
-            break;
-        case KEY_END:
-            ctlCallStack.push_front(new int(255));
-            break;
+        case 'x':{
+            vector<void*> parmeters;
+            parmeters.push_back(new int(0));
+            ctlCallStack.push_back(parmeters);
+            break;}
+        case KEY_END:{
+            vector<void*> parmeters;
+            parmeters.push_back(new int(255));
+            ctlCallStack.push_back(parmeters);
+            break;}
     }
     return 1;
 }
@@ -56,7 +62,9 @@ void eventController::popEventStack(){
 
 int eventController::execCurrentEvent(){
     if(eventStack.back().stk.size() == 0){
-        ctlCallStack.push_front(new int(0));
+        vector<void*> parmeters;
+        parmeters.push_back(new int(0));
+        ctlCallStack.push_back(parmeters);
         return -1;
     }
 
@@ -69,20 +77,26 @@ int eventController::execCurrentEvent(){
             /*currBattle = battle(ss[1]);
             currBattle.exec();
             return 0;*/
-        case 1:
-            ctlCallStack.push_front(stringToAllocChar(ss[1]));
-            ctlCallStack.push_front(stringToAllocChar(ss[2]));
-            ctlCallStack.push_front(new int(1));
-            return 1;
-        case 2:
-            ctlCallStack.push_front(new int(2));
-            return 2;
-        case 3:
-            ctlCallStack.push_front(new int(atoi(ss[3].c_str())));
-            ctlCallStack.push_front(new int(atoi(ss[2].c_str())));
-            ctlCallStack.push_front(stringToAllocChar(ss[1]));
-            ctlCallStack.push_front(new int(3));
-            return 3;
+        case 1:{
+            vector<void*> parmeters;
+            parmeters.push_back(new int(1));
+            parmeters.push_back(stringToAllocChar(ss[2]));
+            parmeters.push_back(stringToAllocChar(ss[1]));
+            ctlCallStack.push_back(parmeters);
+            return 1;}
+        case 2:{
+            vector<void*> parmeters;
+            parmeters.push_back(new int(2));
+            ctlCallStack.push_back(parmeters);
+            return 2;}
+        case 3:{
+            vector<void*> parmeters;
+            parmeters.push_back(new int(3));
+            parmeters.push_back(stringToAllocChar(ss[1]));
+            parmeters.push_back(new int(atoi(ss[2].c_str())));
+            parmeters.push_back(new int(atoi(ss[3].c_str())));
+            ctlCallStack.push_back(parmeters);
+            return 3;}
     }
 
     return 1;

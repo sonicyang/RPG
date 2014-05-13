@@ -39,7 +39,7 @@ class Controller
         eventController evtCtl;
 
         bool userInputPending = false;
-        std::deque<void*> ctlCall;
+        std::vector< std::vector<void*> > ctlCall;
         //inv inventory;
 
         prompt prom;

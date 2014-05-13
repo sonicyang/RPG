@@ -31,6 +31,7 @@ void Controller::getParseUserInput(){
                 evtCtl.processInput(c);
             }else{
                 evtCtl.execCurrentEvent();
+                evtCtl.execCurrentEvent();
             }
             break;
         case menu:
@@ -44,14 +45,16 @@ void Controller::getParseUserInput(){
 bool Controller::processCtlCall(){
     if(ctlCall.size() == 0)
         return 1;
-    int commd = *(int*)(ctlCall[0]);
+
+    std::vector<void* >currCall = ctlCall.back();
+    int commd = *(int*)(currCall[0]);
     switch(commd){
         case -2:
             this->setStat(menu);
             userInputPending = 0;
             break;
         case -1:
-            evtCtl.reversePushEventStack(*(event*)(ctlCall[1]));
+            evtCtl.reversePushEventStack(*(event*)(currCall[1]));
             this->setStat(inEvent);
             userInputPending = 0;
             return 1;
@@ -62,7 +65,7 @@ bool Controller::processCtlCall(){
             userInputPending = 0;
             return 0;
         case 1:
-            prom.loadMessaage((char*)(ctlCall[1]), (char*)(ctlCall[2]));
+            prom.loadMessaage((char*)(currCall[1]), (char*)(currCall[2]));
             userInputPending = 1;
             return 1;
         case 2:
@@ -70,21 +73,20 @@ bool Controller::processCtlCall(){
             userInputPending = 0;
             return 0;
         case 3:
-            mapCtl.setCurrentMap((char*)(ctlCall[1]));
-            mapCtl.setPlayerPosition(Point(*(int*)(ctlCall[2]), *(int*)(ctlCall[3])));
+            mapCtl.setCurrentMap((char*)(currCall[1]));
+            mapCtl.setPlayerPosition(Point(*(int*)(currCall[2]), *(int*)(currCall[3])));
             userInputPending = 0;
             return 0;
         case 255:
-            for(int i = 0; i < ctlCall.size(); i++) //nasty memory Management :(
-                delete [] ctlCall[i];
+            recycleMem(ctlCall);
             exit(1);
             return 0;
     }
 
-    for(int i = 0; i < ctlCall.size(); i++)
-        delete [] ctlCall[i];
+    for(int i = 0; i < currCall.size(); i++)
+        delete [] currCall[i];
 
-    ctlCall.clear();
+    ctlCall.pop_back();
     return 1;
 }
 

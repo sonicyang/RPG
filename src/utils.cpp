@@ -12,6 +12,12 @@ char* stringToAllocChar(std::string a){
     return s;
 }
 
+void recycleMem(std::vector< std::vector<void*> > a){
+    for(int i = 0; i < a.size(); i++){
+        for(int j = 0; j < a[i].size(); j++)
+            delete [] a[i][j];
+    }
+}
 
 
 /*All following Code is From StackOverFlow Credit to the Original Author*/

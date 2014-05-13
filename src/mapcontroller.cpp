@@ -5,7 +5,9 @@
 #include <cstdlib>
 #include <curses.h>
 
-mapController::mapController(char* maplist, std::deque<void*>& s) : ctlCallStack(s)
+using namespace std;
+
+mapController::mapController(char* maplist, std::vector< std::vector<void*> >& s) : ctlCallStack(s)
 {
     std::string in = get_file_contents(maplist);
 
@@ -53,20 +55,26 @@ int mapController::processInput(int c){
         case KEY_DOWN:
             movePlayer(Point(0,1));
             break;
-        case 'z':
+        case 'z':{
             if(isPlayerFacingObject()){
                 if(getPlayerFacingObject().getTrigger().triggerType == buttonTrig){
-                    ctlCallStack.push_front(new event(getPlayerFacingObject().getTrigger()));
-                    ctlCallStack.push_front(new int(-1));
+                    vector<void*> parmeters;
+                    parmeters.push_back(new int(-1));
+                    parmeters.push_back(new event(getPlayerFacingObject().getTrigger()));
+                    ctlCallStack.push_back(parmeters);
                 }
             }
-            break;
-        case KEY_END:
-            ctlCallStack.push_front(new int(255));
-            break;
-        case 'q':
-            ctlCallStack.push_front(new int(-2));
-            break;
+            break;}
+        case KEY_END:{
+            vector<void*> parmeters;
+            parmeters.push_back(new int(255));
+            ctlCallStack.push_back(parmeters);
+            break;}
+        case 'q':{
+            vector<void*> parmeters;
+            parmeters.push_back(new int(-2));
+            ctlCallStack.push_back(parmeters);
+            break;}
     }
     return 0;
 }
@@ -84,8 +92,10 @@ int mapController::setPlayerPosition(Point a){
 
     if(isPlayerOnObject()){
         if(getPlayerOnObject().getTrigger().triggerType == stepOnTrig){
-            ctlCallStack.push_front(new event(getPlayerOnObject().getTrigger()));
-            ctlCallStack.push_front(new int(-1));
+            vector<void*> parmeters;
+            parmeters.push_back(new int(-1));
+            parmeters.push_back(new event(getPlayerOnObject().getTrigger()));
+            ctlCallStack.push_back(parmeters);
         }
     }
 

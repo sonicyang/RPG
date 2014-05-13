@@ -10,7 +10,7 @@
 class mapController
 {
     public:
-        mapController(char* maplist, std::deque<void*>&);
+        mapController(char* maplist, std::vector< std::vector<void*> >&);
         ~mapController();
 
         int processInput(int c);
@@ -41,7 +41,7 @@ class mapController
 
         Point getPlayerFacing();
 
-        std::deque<void*>& ctlCallStack;
+        std::vector< std::vector<void*> >& ctlCallStack;
 };
 
 #endif // MAPCONTROLLER_H
