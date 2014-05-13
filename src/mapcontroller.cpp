@@ -66,7 +66,7 @@ int mapController::processInput(int c){
             ctlCallStack.push_back(loadStack(1, new int(255)));
             break;}
         case 'q':{
-            ctlCallStack.push_back(loadStack(1, -2));
+            ctlCallStack.push_back(loadStack(1, new int(-2)));
             break;}
     }
     return 0;

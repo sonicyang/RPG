@@ -421,7 +421,7 @@
 	"objPLayer.h"
 	"point.h"
 
-1399952393 source:c:\users\sonicyang\github\rpg\src\mapcontroller.cpp
+1399957559 source:c:\users\sonicyang\github\rpg\src\mapcontroller.cpp
 	"mapcontroller.h"
 	"utils.h"
 	"json/reader.h"
@@ -447,4 +447,10 @@
 
 1399869489 source:c:\users\sonicyang\github\rpg\src\prompt.cpp
 	"prompt.h"
+
+1220890218 c:\users\sonicyang\github\rpg\include\curses.h
+	<stdarg.h>
+	<stddef.h>
+	<stdio.h>
+	<wchar.h>
 

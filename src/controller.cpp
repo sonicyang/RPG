@@ -150,9 +150,12 @@ void Controller::menuRution(){
                             prom.loadMessaage("Bye", "System");
                             rdr.render_prompt(prom);
                             getch();
-                            exit(1);
+                            ctlCall.push_back(loadStack(-1, new int(255)));
+                            ctlCall.push_back(loadStack(1, new int(255)));
+                            prom.discardMessage();
+                            return;
                         }
-                        prom.discardMessage();
+
                         break;
                 }
                 break;
