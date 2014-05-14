@@ -16,33 +16,33 @@ LIB += -lcurses
 
 OBJDIR = $(PWD)/obj/
 
-OBJ += main.o chararray2d.o controller.o eventcontroller.o gmap.o mapcontroller.o mapobject.o objplayer.o point.o prompt.o render.o utils.o
+OBJ = main.o chararray2d.o controller.o eventcontroller.o gmap.o mapcontroller.o mapobject.o objplayer.o point.o prompt.o render.o utils.o
 OBJ += json_reader.o json_value.o json_writer.o
 
 
 OUT_EXE = RPG
 
 # Game parts
-$(OUT_EXE): $(OBJ)
+$(OUT_EXE): $(addprefix $(OBJDIR),$(OBJ))
 	@echo "    LD    "$@
-	@$(CXX) $(OBJDIR)/*.o $(CXXFLAG) $(LIB) -o $@
+	@$(CXX) $(addprefix $(OBJDIR),$(OBJ)) $(CXXFLAG) $(LIB) -o $@
 
-Debug:  $(OBJ)
+debug:  $(OBJ)
 	@echo " LD-DEBUG  "$@
 	@$(CXX) $(OBJDIR)/$(OBJ) $(CXXFLAG) $(LIB) -o $@
 	
-%.o: $(GAMESRC)/%.cpp
+$(OBJDIR)%.o: $(GAMESRC)/%.cpp
 	@echo "    CC    "$@
-	@$(CXX) $< $(CXXFLAG) $(INCLUDE) -c -o $(OBJDIR)/$*.o
+	@$(CXX) $< $(CXXFLAG) $(INCLUDE) -c -o $@
 
-main.o: $(PWD)/main.cpp
+$(OBJDIR)main.o: $(PWD)/main.cpp
 	@echo "    CC    "$@
-	@$(CXX) $< $(CXXFLAG) $(INCLUDE) -c -o $(OBJDIR)/$*.o
+	@$(CXX) $< $(CXXFLAG) $(INCLUDE) -c -o $@
 
 #Json parts
-%.o: $(JSONSRC)/%.cpp
+$(OBJDIR)%.o: $(JSONSRC)/%.cpp
 	@echo "    CC    "$@
-	@$(CXX) $< $(CXXFLAG) $(INCLUDE) -c -o $(OBJDIR)/$*.o
+	@$(CXX) $< $(CXXFLAG) $(INCLUDE) -c -o $@
 
 
 .PHONY: clean
