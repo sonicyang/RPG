@@ -26,10 +26,10 @@ void help(){
     mvaddstr(4, 2, "This is a Mini RPG Game");
 
     mvaddstr(8, 2, "Key Mapping:");
-    mvaddstr(10, 2, "€t z - Select");
-    mvaddstr(12, 2, "€t x - Cancel");
-    mvaddstr(14, 2, "€t q - Menu");
-    mvaddstr(16, 2, "€t Arrow Keys - Move");
+    mvaddstr(10, 2, "\t z - Select");
+    mvaddstr(12, 2, "\t x - Cancel");
+    mvaddstr(14, 2, "\t q - Menu");
+    mvaddstr(16, 2, "\t Arrow Keys - Move");
 
     getch();
 }
