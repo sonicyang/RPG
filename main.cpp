@@ -47,7 +47,7 @@ void startMenu(){
 
         //Print All Options
         for(int i = 0; i < mOption.size(); i++)
-            mvaddstr(16 + 2*i, 40 - mOption[i].size()/2, mOption[i].c_str());
+        	mvaddstr(16 + 2*i, 40 - mOption[i].size()/2, mOption[i].c_str());
 
         //Print Selected Options
         attron(A_BOLD);
