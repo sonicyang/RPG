@@ -3,40 +3,49 @@ CXXFLAG = -Wall -std=c++11 -g
 
 PWD = .
 
-SRC = $(PWD)/src
+GAMESRC = $(PWD)/src
+JSONSRC = $(PWD)/src/lib_json
 
 # Include flags
 INCLUDE = -I $(PWD)/include
 INCLUDE += $(shell pkg-config --cflags ncurses)
-#INCLUDE += $(shell pkg-config --cflags json)
-#INCLUDE += -I /usr/include/jsoncpp
 
 # Libs flags
 LIB += $(shell pkg-config --libs ncurses)
-LIB += -L$(PWD)/lib/ -lpdcurses
-#LIB += $(shell pkg-config --libs json)
-LIB += -ljsoncpp
+LIB += -lcurses
 
-OBJ = main.o chararray2d.o controller.o eventcontroller.o gmap.o mapcontroller.o mapobject.o objplayer.o point.o prompt.o render.o utils.o
+OBJDIR = $(PWD)/obj/
+
+OBJ += main.o chararray2d.o controller.o eventcontroller.o gmap.o mapcontroller.o mapobject.o objplayer.o point.o prompt.o render.o utils.o
+OBJ += json_reader.o json_value.o json_writer.o
+
 
 OUT_EXE = RPG
 
+# Game parts
 $(OUT_EXE): $(OBJ)
 	@echo "    LD    "$@
-	@$(CXX) $(OBJ) $(CXXFLAG) $(LIB) -o $@
+	@$(CXX) $(OBJDIR)/*.o $(CXXFLAG) $(LIB) -o $@
 
 Debug:  $(OBJ)
 	@echo " LD-DEBUG  "$@
-	@$(CXX) $(OBJ) $(CXXFLAG) $(LIB) -o $@
+	@$(CXX) $(OBJDIR)/$(OBJ) $(CXXFLAG) $(LIB) -o $@
 	
-%.o: $(SRC)/%.cpp
+%.o: $(GAMESRC)/%.cpp
 	@echo "    CC    "$@
-	@$(CXX) $< $(CXXFLAG) $(INCLUDE) -c
+	@$(CXX) $< $(CXXFLAG) $(INCLUDE) -c -o $(OBJDIR)/$*.o
 
 main.o: $(PWD)/main.cpp
 	@echo "    CC    "$@
-	@$(CXX) $< $(CXXFLAG) $(INCLUDE) -c
+	@$(CXX) $< $(CXXFLAG) $(INCLUDE) -c -o $(OBJDIR)/$*.o
+
+#Json parts
+%.o: $(JSONSRC)/%.cpp
+	@echo "    CC    "$@
+	@$(CXX) $< $(CXXFLAG) $(INCLUDE) -c -o $(OBJDIR)/$*.o
+
 
 .PHONY: clean
 clean:
-	rm -frv *.o $(OUT_EXE)
+	rm -frv $(OUT_EXE)
+	rm -frv $(OBJDIR)/*.o

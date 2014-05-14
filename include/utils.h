@@ -2,12 +2,13 @@
 #include <string>
 #include <cerrno>
 #include <vector>
+#include <deque>
 
 #ifndef UTILS_H_INCLUDED
 #define UTILS_H_INCLUDED
 
 char* stringToAllocChar(std::string);
-void recycleMem(std::vector< std::vector<void*> >);
+void recycleMem(std::deque< std::vector<void*> >);
 std::vector<void*> loadStack(int n, ... );
 
 std::string get_file_contents(const char*);

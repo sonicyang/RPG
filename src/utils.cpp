@@ -6,6 +6,7 @@
 #include <sstream>
 #include <cstring>
 #include <cstdarg>
+#include <deque>
 
 char* stringToAllocChar(std::string a){
     char* s = new char[a.size()];
@@ -13,7 +14,7 @@ char* stringToAllocChar(std::string a){
     return s;
 }
 
-void recycleMem(std::vector< std::vector<void*> > a){
+void recycleMem(std::deque< std::vector<void*> > a){
     for(int i = 0; i < a.size(); i++){
         for(int j = 0; j < a[i].size(); j++)
             delete [] a[i][j];

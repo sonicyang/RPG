@@ -4,10 +4,11 @@
 #include "json/value.h"
 #include <cstdlib>
 #include <curses.h>
+#include <deque>
 
 using namespace std;
 
-mapController::mapController(char* maplist, std::vector< std::vector<void*> >& s) : ctlCallStack(s)
+mapController::mapController(char* maplist, std::deque< std::vector<void*> >& s) : ctlCallStack(s)
 {
     std::string in = get_file_contents(maplist);
 
