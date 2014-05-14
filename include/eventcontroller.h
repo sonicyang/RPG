@@ -19,7 +19,7 @@ enum trigType{
 class eventController
 {
     public:
-        eventController(std::vector< std::vector<void*> >&);
+        eventController(std::deque< std::vector<void*> >&);
         ~eventController();
 
         int processInput(int c);
@@ -31,7 +31,7 @@ class eventController
     protected:
     private:
          std::vector<event> eventStack;
-         std::vector< std::vector<void*> >& ctlCallStack;
+         std::deque< std::vector<void*> >& ctlCallStack;
 };
 
 #endif // EVENTCONTROLLER_H

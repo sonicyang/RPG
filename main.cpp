@@ -86,11 +86,10 @@ void startMenu(){
 int main()
 {
     Controller gCtl;
-
     cbreak();
     noecho();
     keypad(stdscr, TRUE);
-
+    
     startMenu();
 
     nodelay(stdscr, true);
@@ -103,6 +102,6 @@ int main()
         usleep(33333);
     }
 
-    system("pause");
+    //system("pause");
     return 0;
 }

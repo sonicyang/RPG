@@ -454,3 +454,239 @@
 	<stdio.h>
 	<wchar.h>
 
+1400044219 source:/Users/sonicyang/Documents/RPG/main.cpp
+	<iostream>
+	<curses.h>
+	<cstdlib>
+	<fstream>
+	<string>
+	<cerrno>
+	"point.h"
+	"Controller.h"
+	<unistd.h>
+
+1400003322 /Users/sonicyang/Documents/RPG/include/point.h
+
+1400003322 source:/Users/sonicyang/Documents/RPG/src/chararray2d.cpp
+	"Point.h"
+	<string>
+	<cstring>
+	"chararray2d.h"
+
+1400003322 /Users/sonicyang/Documents/RPG/include/chararray2d.h
+	"point.h"
+	<string>
+
+1400003322 source:/Users/sonicyang/Documents/RPG/src/controller.cpp
+	"controller.h"
+	<cstdlib>
+	<cstring>
+	<string>
+	"gmap.h"
+	"point.h"
+	"utils.h"
+	"json/reader.h"
+	"json/value.h"
+	<string>
+	<curses.h>
+	"render.h"
+	<algorithm>
+
+1400003322 /Users/sonicyang/Documents/RPG/include/controller.h
+	<map>
+	"gmap.h"
+	<string>
+	<curses.h>
+	"render.h"
+	"mapcontroller.h"
+	"eventcontroller.h"
+	"mapobject.h"
+	"objPlayer.h"
+	<deque>
+
+1400003322 /Users/sonicyang/Documents/RPG/include/gmap.h
+	"point.h"
+	<string>
+	<set>
+	<map>
+	"mapobject.h"
+	"chararray2d.h"
+
+1400003322 /Users/sonicyang/Documents/RPG/include/mapobject.h
+	<string>
+	"point.h"
+	"eventcontroller.h"
+	<vector>
+
+1400003322 /Users/sonicyang/Documents/RPG/include/eventcontroller.h
+	<vector>
+	<deque>
+	"prompt.h"
+
+1400003322 /Users/sonicyang/Documents/RPG/include/prompt.h
+	<string>
+
+1400003322 /Users/sonicyang/Documents/RPG/include/render.h
+	"point.h"
+	"gmap.h"
+	"mapobject.h"
+	"objPlayer.h"
+	"prompt.h"
+	<curses.h>
+
+1400003322 /Users/sonicyang/Documents/RPG/include/mapcontroller.h
+	"gmap.h"
+	"mapObject.h"
+	"objPLayer.h"
+	"point.h"
+
+1400003322 /Users/sonicyang/Documents/RPG/include/utils.h
+	<fstream>
+	<string>
+	<cerrno>
+	<vector>
+
+1400003322 /Users/sonicyang/Documents/RPG/include/json/reader.h
+	"features.h"
+	"value.h"
+	<deque>
+	<stack>
+	<string>
+	<iostream>
+
+1400003322 /Users/sonicyang/Documents/RPG/include/json/features.h
+	"forwards.h"
+
+1400003322 /Users/sonicyang/Documents/RPG/include/json/forwards.h
+	"config.h"
+
+1400003322 /Users/sonicyang/Documents/RPG/include/json/config.h
+	<cpptl/config.h>
+
+1400003322 /Users/sonicyang/Documents/RPG/include/json/value.h
+	"forwards.h"
+	<string>
+	<vector>
+	<map>
+	<cpptl/smallmap.h>
+	<cpptl/forwards.h>
+
+1400003322 source:/Users/sonicyang/Documents/RPG/src/eventcontroller.cpp
+	"prompt.h"
+	<algorithm>
+	"utils.h"
+	<cstring>
+	"eventcontroller.h"
+	<curses.h>
+
+1400003322 source:/Users/sonicyang/Documents/RPG/src/gmap.cpp
+	<cstdlib>
+	<cstring>
+	<string>
+	"gmap.h"
+	"point.h"
+	"utils.h"
+	"json/reader.h"
+	"json/value.h"
+	<string>
+	<curses.h>
+	"chararray2d.h"
+	"mapobject.h"
+
+1400003322 source:/Users/sonicyang/Documents/RPG/src/lib_json/json_reader.cpp
+	<json/reader.h>
+	<json/value.h>
+	<utility>
+	<cstdio>
+	<cassert>
+	<cstring>
+	<iostream>
+	<stdexcept>
+
+1400003322 source:/Users/sonicyang/Documents/RPG/src/lib_json/json_value.cpp
+	<iostream>
+	<json/value.h>
+	<json/writer.h>
+	<utility>
+	<stdexcept>
+	<cstring>
+	<cassert>
+	<cpptl/conststring.h>
+	<cstddef>
+	"json_batchallocator.h"
+	"json_internalarray.inl"
+	"json_internalmap.inl"
+	"json_valueiterator.inl"
+
+1400003322 /Users/sonicyang/Documents/RPG/include/json/writer.h
+	"value.h"
+	<vector>
+	<string>
+	<iostream>
+
+1400003322 /Users/sonicyang/Documents/RPG/src/lib_json/json_batchallocator.h
+	<stdlib.h>
+	<assert.h>
+
+1400003322 /Users/sonicyang/Documents/RPG/src/lib_json/json_internalarray.inl
+
+1400003322 /Users/sonicyang/Documents/RPG/src/lib_json/json_internalmap.inl
+
+1400003322 /Users/sonicyang/Documents/RPG/src/lib_json/json_valueiterator.inl
+
+1400003322 source:/Users/sonicyang/Documents/RPG/src/lib_json/json_writer.cpp
+	<json/writer.h>
+	<utility>
+	<assert.h>
+	<stdio.h>
+	<string.h>
+	<iostream>
+	<sstream>
+	<iomanip>
+
+1400003322 source:/Users/sonicyang/Documents/RPG/src/mapcontroller.cpp
+	"mapcontroller.h"
+	"utils.h"
+	"json/reader.h"
+	"json/value.h"
+	<cstdlib>
+	<curses.h>
+
+1400003322 source:/Users/sonicyang/Documents/RPG/src/mapobject.cpp
+	"mapobject.h"
+	<string>
+	<cstdlib>
+	"utils.h"
+	"json/value.h"
+	"json/reader.h"
+
+1400003322 source:/Users/sonicyang/Documents/RPG/src/objplayer.cpp
+	"objplayer.h"
+
+1400003322 /Users/sonicyang/Documents/RPG/include/objplayer.h
+	<mapObject.h>
+	<string>
+
+1400003322 source:/Users/sonicyang/Documents/RPG/src/point.cpp
+	"point.h"
+
+1400003322 source:/Users/sonicyang/Documents/RPG/src/prompt.cpp
+	"prompt.h"
+
+1400003322 source:/Users/sonicyang/Documents/RPG/src/render.cpp
+	"render.h"
+	"gmap.h"
+	"point.h"
+	<curses.h>
+	<locale>
+
+1400003322 source:/Users/sonicyang/Documents/RPG/src/utils.cpp
+	"utils.h"
+	<fstream>
+	<string>
+	<cerrno>
+	<vector>
+	<sstream>
+	<cstring>
+	<cstdarg>
+

@@ -45,7 +45,7 @@ bool Controller::processCtlCall(){
     if(ctlCall.size() == 0)
         return 1;
 
-    std::vector<void* >currCall = ctlCall.back();
+    std::vector<void*>currCall = ctlCall.front();
     int commd = *(int*)(currCall[0]);
     switch(commd){
         case -2:
@@ -56,36 +56,36 @@ bool Controller::processCtlCall(){
             evtCtl.reversePushEventStack(*(event*)(currCall[1]));
             this->setStat(inEvent);
             userInputPending = 0;
-            return 1;
+            break;
         case 0:
             evtCtl.popEventStack();
             prom.discardMessage();
             this->restoreStat();
             userInputPending = 0;
-            return 0;
+            break;
         case 1:
             prom.loadMessaage((char*)(currCall[1]), (char*)(currCall[2]));
             userInputPending = 1;
-            return 1;
+            break;
         case 2:
             prom.discardMessage();
             userInputPending = 0;
-            return 0;
+            break;
         case 3:
             mapCtl.setCurrentMap((char*)(currCall[1]));
             mapCtl.setPlayerPosition(Point(*(int*)(currCall[2]), *(int*)(currCall[3])));
             userInputPending = 0;
-            return 0;
+            break;
         case 255:
             recycleMem(ctlCall);
             exit(1);
-            return 0;
+            break;
     }
 
     for(int i = 0; i < currCall.size(); i++)
         delete [] currCall[i];
 
-    ctlCall.pop_back();
+    ctlCall.pop_front();
     return 1;
 }
 
