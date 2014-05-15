@@ -34,12 +34,14 @@ class Controller
         int getStat() { return stat; };
     protected:
     private:
+        std::deque< std::vector<void*> > ctlCall;
+
         render rdr;
         mapController mapCtl;
         eventController evtCtl;
 
         bool userInputPending = false;
-        std::deque< std::vector<void*> > ctlCall;
+
         //inv inventory;
 
         prompt prom;
