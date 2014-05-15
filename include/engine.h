@@ -28,9 +28,10 @@ class Engine
         int getStat() { return stat; };
     protected:
     private:
+        render rdr;
+
         std::deque< std::vector<void*> > ctlCall;
 
-        render rdr;
         mapController mapCtl;
         eventController evtCtl;
 

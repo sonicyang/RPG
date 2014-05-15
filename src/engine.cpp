@@ -12,7 +12,7 @@
 #include "render.h"
 #include "engine.h"
 
-Engine::Engine() : rdr(), mapCtl("data/maps/maplist.lst", ctlCall), evtCtl("data/events/eventlist.lst", ctlCall)
+Engine::Engine() : rdr(), ctlCall(), mapCtl("data/maps/maplist.lst", ctlCall), evtCtl("data/events/eventlist.lst", ctlCall)
 {
 }
 
