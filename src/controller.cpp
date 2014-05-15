@@ -64,8 +64,6 @@ bool Controller::processCtlCall(){
 				mapCtl.setCurrentMap((char*)(currCall[1]));
 				mapCtl.setPlayerPosition(Point(*(int*)(currCall[2]), *(int*)(currCall[3])));
 				break;
-            case svc::waitUserInput:
-                userInputPending = *(int*)(currCall[1]);
 			case svc::endGame:
 				recycleMem(ctlCall);
 				return 0;
