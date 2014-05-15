@@ -15,8 +15,8 @@ char* stringToAllocChar(std::string a){
 }
 
 void recycleMem(std::deque< std::vector<void*> > a){
-    for(int i = 0; i < a.size(); i++){
-        for(int j = 0; j < a[i].size(); j++)
+    for(unsigned int i = 0; i < a.size(); i++){
+        for(unsigned int j = 0; j < a[i].size(); j++)
             delete [] a[i][j];
     }
 }
@@ -27,7 +27,7 @@ std::vector<void*> loadStack(unsigned int n, ... ){
 
     std::vector<void*> stk;
 
-    for (int i = 0; i < n; i++){
+    for (unsigned int i = 0; i < n; i++){
         stk.push_back(va_arg(arguments, void*));
     }
 

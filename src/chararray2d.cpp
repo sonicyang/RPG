@@ -81,9 +81,9 @@ int Array2D<T>::operator=(const std::string& rhs)
 }
 
 template<class T>
-T* Array2D<T>::operator[](int subscript)
+T* Array2D<T>::operator[](unsigned int subscript)
 {
-    if(subscript >= m_size.m_y || subscript < 0)
+    if(subscript >= m_size.m_y)
         return 0;
     else
         return m_data[subscript];

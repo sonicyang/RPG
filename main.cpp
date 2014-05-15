@@ -40,13 +40,13 @@ void startMenu(){
     mOption[1] = "Help/KeyMap";
     mOption[2] = "Exit";
 
-    int cursorPos = 0;
+    unsigned int cursorPos = 0;
 
     for(;;){
         clear();
 
         //Print All Options
-        for(int i = 0; i < mOption.size(); i++)
+        for(unsigned int i = 0; i < mOption.size(); i++)
         	mvaddstr(16 + 2*i, 40 - mOption[i].size()/2, mOption[i].c_str());
 
         //Print Selected Options
@@ -89,7 +89,7 @@ int main()
     cbreak();
     noecho();
     keypad(stdscr, TRUE);
-    
+
     startMenu();
 
     nodelay(stdscr, true);

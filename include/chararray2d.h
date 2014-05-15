@@ -15,7 +15,7 @@ class Array2D
         Array2D(const Array2D& other);
         Array2D& operator=(const Array2D& other);
         int operator=(const std::string&);
-        T* operator[](int subscript);
+        T* operator[](unsigned int subscript);
 
         Point size();
     protected:

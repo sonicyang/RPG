@@ -30,7 +30,7 @@ void Controller::getParseUserInput(){
             if(userInputPending){
                 evtCtl.processInput(c);
             }else{
-                evtCtl.execCurrentEvent();
+                evtCtl.execTopEvent();
             }
             break;
         case menu:
@@ -48,7 +48,7 @@ bool Controller::processCtlCall(){
 		int commd = *(int*)(currCall[0]);
 		switch(commd){
 			case -1:
-				evtCtl.execEvent(*(std::string*)(currCall[1]));
+				evtCtl.pushEvent(*(std::string*)(currCall[1]));
 				userInputPending = 0;
 				break;
 			case 0:
@@ -80,7 +80,7 @@ bool Controller::processCtlCall(){
 				break;
 		}
 
-		for(int i = 0; i < currCall.size(); i++)
+		for(unsigned int i = 0; i < currCall.size(); i++)
 			delete [] currCall[i];
 
 		ctlCall.pop_front();
@@ -108,7 +108,7 @@ void Controller::menuRution(){
     mOption[1] = "Inventory";
     mOption[2] = "Exit";
 
-    int cursorPos = 0;
+    unsigned int cursorPos = 0;
 
     for(;;){
         clear();
@@ -124,7 +124,7 @@ void Controller::menuRution(){
         mvaddstr(1, 38, "MENU");
 
         //Print All Options
-        for(int i = 0; i < mOption.size(); i++)
+        for(unsigned int i = 0; i < mOption.size(); i++)
             mvaddstr(4 + 2*i, 2, mOption[i].c_str());
 
         //Print Selected Options

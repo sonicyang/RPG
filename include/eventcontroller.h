@@ -15,11 +15,10 @@ class eventController
 
         int processInput(int c);
 
-        void reversePushEventStack(event trig);
         void popEventStack();
-        int execCurrentEvent();
+        int execTopEvent();
 
-        int execEvent(std::string);
+        int pushEvent(std::string);
 
     protected:
     private:

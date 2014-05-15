@@ -23,8 +23,8 @@ void render::render_map(gmap toRender){
     offset.m_x = screen_max.m_x / 2 - toRender.Getsize().m_x;
     offset.m_y = (screen_max.m_y - toRender.Getsize().m_y)/2;
 
-    for(int i = 0; i < toRender.Getsize().m_y; i++){
-        for(int j = 0; j < toRender.Getsize().m_x; j++){
+    for(unsigned int i = 0; i < toRender.Getsize().m_y; i++){
+        for(unsigned int j = 0; j < toRender.Getsize().m_x; j++){
             mvaddch(i + offset.m_y,j*2 + offset.m_x, toRender.Getdata()[i][j]);
         }
     }

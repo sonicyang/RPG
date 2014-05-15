@@ -40,11 +40,11 @@ gmap::gmap(const char * filename)
         m_data = Array2D<char>(m_size, root["Floor"].asString());
         m_data_state = Array2D<char>(m_size, root["State"].asString());
 
-        for(int i = 0; i < root["Blocks"].size(); i++){
+        for(unsigned int i = 0; i < root["Blocks"].size(); i++){
             blocks.insert(root["Blocks"][i].asString()[0]);
         }
 
-        for(int i = 0; i < root["Objects"].size(); i++){
+        for(unsigned int i = 0; i < root["Objects"].size(); i++){
             Point cord(root["Objects"][i]["x"].asInt(), root["Objects"][i]["y"].asInt());
             mapObject toAdd(root["Objects"][i]["Name"].asString(), i, root["Objects"][i]["Type"].asInt(), cord.m_x, cord.m_y, root["Objects"][i]["Icon"].asString()[0], root["Objects"][i]["Trigger"].asString(), root["Objects"][i]["canStep"].asInt(), root["Objects"][i]["trigType"].asInt());
             objects.insert(objects.begin(),std::pair<Point,mapObject>(cord, toAdd));

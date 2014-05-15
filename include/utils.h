@@ -33,12 +33,12 @@ enum faceing{
 };
 
 enum svc{
-    execEvent = -1,     // EventName
+    loadEvent = -1,     // EventName
     restoreStat,        //
     setStat,            // stat Number
     loadPrompt,         // data, whom
     clearPrompt,        //
-    changeMap,          // mapName
+    changeMap,          // mapName, x, y
     endGame = 255       //
 };
 

@@ -18,7 +18,7 @@ mapController::mapController(std::string maplist, std::deque< std::vector<void*>
     bool stat = reader.parse( in, root );
     if (stat){
         map_count = root.get("Count", 0 ).asInt();
-        for(int i = 0; i < map_count; i++){
+        for(unsigned int i = 0; i < map_count; i++){
             gmap tmp(root["Path"][i].asString().c_str());
             map_list.insert (map_list.begin(), std::pair<std::string,gmap>(tmp.Getname(),tmp));
         }
@@ -60,16 +60,16 @@ int mapController::processInput(int c){
         case 'z':
             if(isPlayerFacingObject()){
                 if(getPlayerFacingObject().getTriggerType() == buttonTrig){
-                    ctlCallStack.push_back(loadStack(2, new int(svc.setStat), new int(inEvent)));
-                    ctlCallStack.push_back(loadStack(2, new int(svc.execEvent), new std::string(getPlayerFacingObject().getTrigger())));
+                    ctlCallStack.push_back(loadStack(2, new int(svc::setStat), new int(inEvent)));
+                    ctlCallStack.push_back(loadStack(2, new int(svc::loadEvent), new std::string(getPlayerFacingObject().getTrigger())));
                 }
             }
             break;
         case KEY_END:
-            ctlCallStack.push_back(loadStack(1, new int(svc.endGame)));
+            ctlCallStack.push_back(loadStack(1, new int(svc::endGame)));
             break;
         case 'q':
-        	ctlCallStack.push_back(loadStack(2, new int(svc.setStat), new int(menu)));
+        	ctlCallStack.push_back(loadStack(2, new int(svc::setStat), new int(menu)));
             break;
     }
     return 0;
@@ -88,8 +88,8 @@ int mapController::setPlayerPosition(Point a){
 
     if(isPlayerOnObject()){
         if(getPlayerOnObject().getTriggerType() == stepOnTrig){
-            ctlCallStack.push_back(loadStack(2, new int(svc.setStat), new int(inEvent)));
-            ctlCallStack.push_back(loadStack(2, new int(svc.execEvent)), new std::string(getPlayerOnObject().getTrigger())));
+            ctlCallStack.push_back(loadStack(2, new int(svc::setStat), new int(inEvent)));
+            ctlCallStack.push_back(loadStack(2, new int(svc::loadEvent), new std::string(getPlayerOnObject().getTrigger())));
         }
     }
 
