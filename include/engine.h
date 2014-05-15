@@ -35,8 +35,6 @@ class Engine
         mapController mapCtl;
         eventController evtCtl;
 
-        bool userInputPending = false;
-
         //inv inventory;
 
         prompt prom;
