@@ -61,7 +61,7 @@ int mapController::processInput(int c){
             if(isPlayerFacingObject()){
                 if(getPlayerFacingObject().getTriggerType() == buttonTrig){
                     ctlCallStack.push_back(loadStack(2, new int(svc::setStat), new int(inEvent)));
-                    ctlCallStack.push_back(loadStack(2, new int(svc::loadEvent), stringToAllocChar(getPlayerFacingObject().getTrigger().c_str())));
+                    ctlCallStack.push_back(loadStack(2, new int(svc::loadEvent), stringToAllocChar(getPlayerFacingObject().getTrigger())));
                 }
             }
             break;
@@ -89,7 +89,7 @@ int mapController::setPlayerPosition(Point a){
     if(isPlayerOnObject()){
         if(getPlayerOnObject().getTriggerType() == stepOnTrig){
             ctlCallStack.push_back(loadStack(2, new int(svc::setStat), new int(inEvent)));
-            ctlCallStack.push_back(loadStack(2, new int(svc::loadEvent), stringToAllocChar(getPlayerOnObject().getTrigger().c_str())));
+            ctlCallStack.push_back(loadStack(2, new int(svc::loadEvent), stringToAllocChar(getPlayerOnObject().getTrigger())));
         }
     }
 

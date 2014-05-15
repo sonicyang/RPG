@@ -47,34 +47,36 @@ bool Controller::processCtlCall(){
 		std::vector<void*>currCall = ctlCall.front();
 		int commd = *(int*)(currCall[0]);
 		switch(commd){
-			case -1:
+			case svc::loadEvent:
 				evtCtl.pushEvent((char*)(currCall[1]));
 				userInputPending = 0;
 				break;
-			case 0:
+			case svc::restoreStat:
 				evtCtl.popEventStack();
 				prom.discardMessage();
 				this->restoreStat();
 				userInputPending = 0;
 				break;
-			case 1:
+			case svc::setStat:
 				this->setStat(*(int*)(currCall[1]));
 				userInputPending = 0;
 				break;
-			case 2:
+			case svc::loadPrompt:
 				prom.loadMessaage((char*)(currCall[1]), (char*)(currCall[2]));
 				userInputPending = 1;
 				break;
-			case 3:
+			case svc::clearPrompt:
 				prom.discardMessage();
 				userInputPending = 0;
 				break;
-			case 4:
+			case svc::changeMap:
 				mapCtl.setCurrentMap((char*)(currCall[1]));
 				mapCtl.setPlayerPosition(Point(*(int*)(currCall[2]), *(int*)(currCall[3])));
 				userInputPending = 0;
 				break;
-			case 255:
+            case svc::waitUserInput:
+                userInputPending = *(int*)(currCall[1]);
+			case svc::endGame:
 				recycleMem(ctlCall);
 				return 0;
 				break;

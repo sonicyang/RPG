@@ -91,12 +91,11 @@ void eventController::popEventStack(){
 
 int eventController::execTopEvent(){
     if(eventStack.back().stk.size() == 0){
-        ctlCallStack.push_back(loadStack(1, new int(0)));
+        ctlCallStack.push_back(loadStack(1, new int(svc::restoreStat)));
         return -1;
     }
 
     std::vector<std::string> ss = split(eventStack.back().stk.back(), '|');
-    eventStack.back().stk.pop_back();
 
     int commd = atoi(ss[0].c_str());
     switch(commd){
@@ -104,18 +103,19 @@ int eventController::execTopEvent(){
             /*currBattle = battle(ss[1]);
             currBattle.exec();
             return 0;*/
-        case 1:
+        case eventCode::showPrompt:
             ctlCallStack.push_back(loadStack(3, new int(svc::loadPrompt), stringToAllocChar(ss[2]), stringToAllocChar(ss[1])));
-            return 1;
-        case 2:
+            break;
+        case eventCode::endEvent:
             ctlCallStack.push_back(loadStack(1, new int(svc::clearPrompt)));
-            return 2;
-        case 3:
-            vector<void*> parmeters;
+            ctlCallStack.push_back(loadStack(1, new int(svc::restoreStat)));
+            break;
+        case eventCode::transferMap:
             ctlCallStack.push_back(loadStack(4, new int(svc::changeMap), stringToAllocChar(ss[1]), new int(atoi(ss[2].c_str())), new int(atoi(ss[3].c_str()))));
-            return 3;
+            break;
     }
 
+    eventStack.back().stk.pop_back();
     return 1;
 }
 

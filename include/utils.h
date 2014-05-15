@@ -39,7 +39,14 @@ enum svc{
     loadPrompt,         // data, whom
     clearPrompt,        //
     changeMap,          // mapName, x, y
+    waitUserInput,      // Enable?
     endGame = 255       //
+};
+
+enum eventCode{
+    showPrompt = 1, // whom, data
+    endEvent,
+    transferMap //  mapName, x, y
 };
 
 char* stringToAllocChar(std::string);
