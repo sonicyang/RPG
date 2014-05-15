@@ -16,7 +16,7 @@ LIB += -lcurses
 
 OBJDIR = $(PWD)/obj/
 
-OBJ = main.o chararray2d.o controller.o eventcontroller.o gmap.o mapcontroller.o mapobject.o objplayer.o point.o prompt.o render.o utils.o
+OBJ = main.o array2d.o controller.o eventcontroller.o gmap.o mapcontroller.o mapobject.o objplayer.o point.o prompt.o render.o utils.o
 OBJ += json_reader.o json_value.o json_writer.o
 
 
@@ -30,7 +30,7 @@ $(OUT_EXE): $(addprefix $(OBJDIR),$(OBJ))
 debug:  $(OBJ)
 	@echo " LD-DEBUG  "$@
 	@$(CXX) $(OBJDIR)/$(OBJ) $(CXXFLAG) $(LIB) -o $@
-	
+
 $(OBJDIR)%.o: $(GAMESRC)/%.cpp
 	@echo "    CC    "$@
 	@$(CXX) $< $(CXXFLAG) $(INCLUDE) -c -o $@
