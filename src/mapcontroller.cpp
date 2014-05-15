@@ -57,20 +57,20 @@ int mapController::processInput(int c){
         case KEY_DOWN:
             movePlayer(Point(0,1));
             break;
-        case 'z':{
+        case 'z':
             if(isPlayerFacingObject()){
                 if(getPlayerFacingObject().getTriggerType() == buttonTrig){
                     ctlCallStack.push_back(loadStack(2, new int(1), new int(inEvent)));
                     ctlCallStack.push_back(loadStack(2, new int(-1), new std::string(getPlayerFacingObject().getTrigger())));
                 }
             }
-            break;}
-        case KEY_END:{
+            break;
+        case KEY_END:
             ctlCallStack.push_back(loadStack(1, new int(255)));
-            break;}
-        case 'q':{
+            break;
+        case 'q':
         	ctlCallStack.push_back(loadStack(2, new int(1), new int(menu)));
-            break;}
+            break;
     }
     return 0;
 }

@@ -109,14 +109,14 @@ int eventController::execCurrentEvent(){
             currBattle.exec();
             return 0;*/
         case 1:
-            ctlCallStack.push_back(loadStack(3, new int(1), stringToAllocChar(ss[2]), stringToAllocChar(ss[1])));
+            ctlCallStack.push_back(loadStack(3, new int(2), stringToAllocChar(ss[2]), stringToAllocChar(ss[1])));
             return 1;
         case 2:
-            ctlCallStack.push_back(loadStack(1, new int(2)));
+            ctlCallStack.push_back(loadStack(1, new int(3)));
             return 2;
         case 3:
             vector<void*> parmeters;
-            ctlCallStack.push_back(loadStack(4, new int(3), stringToAllocChar(ss[1]), new int(atoi(ss[2].c_str())), new int(atoi(ss[3].c_str()))));
+            ctlCallStack.push_back(loadStack(4, new int(4), stringToAllocChar(ss[1]), new int(atoi(ss[2].c_str())), new int(atoi(ss[3].c_str()))));
             return 3;
     }
 

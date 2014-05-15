@@ -20,7 +20,7 @@
 					"x"		:	8,
 					"y"		:	4,
 					"Icon"	:	"O",
-					"Trigger" : "TrapTrigger.evt",
+					"Trigger" : "TrapTrigger",
 					"trigType" : 2
 					
 				},{
