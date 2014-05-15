@@ -60,16 +60,16 @@ int mapController::processInput(int c){
         case 'z':
             if(isPlayerFacingObject()){
                 if(getPlayerFacingObject().getTriggerType() == buttonTrig){
-                    ctlCallStack.push_back(loadStack(2, new int(1), new int(inEvent)));
-                    ctlCallStack.push_back(loadStack(2, new int(-1), new std::string(getPlayerFacingObject().getTrigger())));
+                    ctlCallStack.push_back(loadStack(2, new int(svc.setStat), new int(inEvent)));
+                    ctlCallStack.push_back(loadStack(2, new int(svc.execEvent), new std::string(getPlayerFacingObject().getTrigger())));
                 }
             }
             break;
         case KEY_END:
-            ctlCallStack.push_back(loadStack(1, new int(255)));
+            ctlCallStack.push_back(loadStack(1, new int(svc.endGame)));
             break;
         case 'q':
-        	ctlCallStack.push_back(loadStack(2, new int(1), new int(menu)));
+        	ctlCallStack.push_back(loadStack(2, new int(svc.setStat), new int(menu)));
             break;
     }
     return 0;
@@ -88,8 +88,8 @@ int mapController::setPlayerPosition(Point a){
 
     if(isPlayerOnObject()){
         if(getPlayerOnObject().getTriggerType() == stepOnTrig){
-            ctlCallStack.push_back(loadStack(2, new int(1), new int(inEvent)));
-            ctlCallStack.push_back(loadStack(2, new int(-1), new std::string(getPlayerOnObject().getTrigger())));
+            ctlCallStack.push_back(loadStack(2, new int(svc.setStat), new int(inEvent)));
+            ctlCallStack.push_back(loadStack(2, new int(svc.execEvent)), new std::string(getPlayerOnObject().getTrigger())));
         }
     }
 

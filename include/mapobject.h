@@ -2,16 +2,10 @@
 #include "point.h"
 #include "eventcontroller.h"
 #include <vector>
+#include "utils.h"
 
 #ifndef MAPOBJECT_H
 #define MAPOBJECT_H
-
-enum faceing{
-    NORTH = 0,
-    EAST,
-    SOUTH,
-    WEST
-};
 
 class mapObject
 {

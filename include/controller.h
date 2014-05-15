@@ -8,18 +8,12 @@
 #include "mapobject.h"
 #include "objPlayer.h"
 #include <deque>
+#include "utils.h"
 
 using namespace std;
 
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
-
-enum Stats{
-    pending = 0,
-    onMap,
-    inEvent,
-    menu
-};
 
 class Controller
 {

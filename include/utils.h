@@ -7,6 +7,41 @@
 #ifndef UTILS_H_INCLUDED
 #define UTILS_H_INCLUDED
 
+enum Stats{
+    pending = 0,
+    onMap,
+    inEvent,
+    menu
+};
+
+struct event{
+    std::vector<std::string> stk;
+    std::string trigBy;
+    int triggerType;
+};
+
+enum trigType{
+    buttonTrig = 1,
+    stepOnTrig
+};
+
+enum faceing{
+    NORTH = 0,
+    EAST,
+    SOUTH,
+    WEST
+};
+
+enum svc{
+    execEvent = -1,     // EventName
+    restoreStat,        //
+    setStat,            // stat Number
+    loadPrompt,         // data, whom
+    clearPrompt,        //
+    changeMap,          // mapName
+    endGame = 255       //
+};
+
 char* stringToAllocChar(std::string);
 void recycleMem(std::deque< std::vector<void*> >);
 std::vector<void*> loadStack(unsigned int n, ... );

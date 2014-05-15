@@ -2,20 +2,10 @@
 #include <deque>
 #include <map>
 #include "prompt.h"
+#include "utils.h"
 
 #ifndef EVENTCONTROLLER_H
 #define EVENTCONTROLLER_H
-
-struct event{
-    std::vector<std::string> stk;
-    std::string trigBy;
-    int triggerType;
-};
-
-enum trigType{
-    buttonTrig = 1,
-    stepOnTrig
-};
 
 class eventController
 {
