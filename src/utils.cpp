@@ -21,7 +21,7 @@ void recycleMem(std::deque< std::vector<void*> > a){
     }
 }
 
-std::vector<void*> loadStack(int n, ... ){
+std::vector<void*> loadStack(unsigned int n, ... ){
     va_list arguments;
     va_start (arguments, n);
 

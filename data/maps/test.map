@@ -11,7 +11,8 @@
 					"x"		:	4,
 					"y"		:	4,
 					"Icon"	:	"X",
-					"Trigger" : "data/events/DavidTrigger.evt"
+					"Trigger" : "DavidTrigger",
+					"trigType" : 1
 				},{
 					"Name" 	: 	"Trap",
 					"Type" 	: 	1,
@@ -19,7 +20,9 @@
 					"x"		:	8,
 					"y"		:	4,
 					"Icon"	:	"O",
-					"Trigger" : "data/events/TrapTrigger.evt"
+					"Trigger" : "TrapTrigger.evt",
+					"trigType" : 2
+					
 				},{
 					"Name" 	: 	"test2",
 					"Type" 	: 	1,
@@ -27,6 +30,7 @@
 					"x"		:	11,
 					"y"		:	3,
 					"Icon"	:	" ",
-					"Trigger" : "data/events/test_test2Trigger.evt"
+					"Trigger" : "test_test2Trigger",
+					"trigType" : 2
 				}]
 }

@@ -12,7 +12,7 @@
 #include "render.h"
 #include <algorithm>
 
-Controller::Controller() : rdr(), mapCtl("data/maps/maplist.lst", ctlCall), evtCtl(ctlCall)
+Controller::Controller() : rdr(), mapCtl("data/maps/maplist.lst", ctlCall), evtCtl("data/events/eventlist.lst", ctlCall)
 {
 }
 
@@ -42,50 +42,50 @@ void Controller::getParseUserInput(){
 }
 
 bool Controller::processCtlCall(){
-    if(ctlCall.size() == 0)
-        return 1;
+    while(ctlCall.size() > 0){
 
-    std::vector<void*>currCall = ctlCall.front();
-    int commd = *(int*)(currCall[0]);
-    switch(commd){
-        case -2:
-            this->setStat(menu);
-            userInputPending = 0;
-            break;
-        case -1:
-            evtCtl.reversePushEventStack(*(event*)(currCall[1]));
-            this->setStat(inEvent);
-            userInputPending = 0;
-            break;
-        case 0:
-            evtCtl.popEventStack();
-            prom.discardMessage();
-            this->restoreStat();
-            userInputPending = 0;
-            break;
-        case 1:
-            prom.loadMessaage((char*)(currCall[1]), (char*)(currCall[2]));
-            userInputPending = 1;
-            break;
-        case 2:
-            prom.discardMessage();
-            userInputPending = 0;
-            break;
-        case 3:
-            mapCtl.setCurrentMap((char*)(currCall[1]));
-            mapCtl.setPlayerPosition(Point(*(int*)(currCall[2]), *(int*)(currCall[3])));
-            userInputPending = 0;
-            break;
-        case 255:
-            recycleMem(ctlCall);
-            exit(1);
-            break;
+		std::vector<void*>currCall = ctlCall.front();
+		int commd = *(int*)(currCall[0]);
+		switch(commd){
+			case -1:
+				evtCtl.execEvent(*(std::string*)(currCall[1]));
+				userInputPending = 0;
+				break;
+			case 0:
+				evtCtl.popEventStack();
+				prom.discardMessage();
+				this->restoreStat();
+				userInputPending = 0;
+				break;
+			case 1:
+				this->setStat(*(int*)(currCall[1]));
+				userInputPending = 0;
+				break;
+			case 2:
+				prom.loadMessaage((char*)(currCall[1]), (char*)(currCall[2]));
+				userInputPending = 1;
+				break;
+			case 3:
+				prom.discardMessage();
+				userInputPending = 0;
+				break;
+			case 4:
+				mapCtl.setCurrentMap((char*)(currCall[1]));
+				mapCtl.setPlayerPosition(Point(*(int*)(currCall[2]), *(int*)(currCall[3])));
+				userInputPending = 0;
+				break;
+			case 255:
+				recycleMem(ctlCall);
+				return 0;
+				break;
+		}
+
+		for(int i = 0; i < currCall.size(); i++)
+			delete [] currCall[i];
+
+		ctlCall.pop_front();
     }
 
-    for(int i = 0; i < currCall.size(); i++)
-        delete [] currCall[i];
-
-    ctlCall.pop_front();
     return 1;
 }
 
@@ -150,7 +150,7 @@ void Controller::menuRution(){
                             prom.loadMessaage("Bye", "System");
                             rdr.render_prompt(prom);
                             getch();
-                            ctlCall.push_back(loadStack(-1, new int(255)));
+                            ctlCall.push_back(loadStack(1, new int(255)));
                             ctlCall.push_back(loadStack(1, new int(255)));
                             prom.discardMessage();
                             return;

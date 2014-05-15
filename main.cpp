@@ -97,7 +97,8 @@ int main()
 
     for(;;){
         gCtl.getParseUserInput();
-        gCtl.processCtlCall();
+        if(!gCtl.processCtlCall())
+        	break;
         gCtl.updateScreen();
         usleep(33333);
     }

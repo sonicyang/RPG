@@ -10,7 +10,7 @@
 class mapController
 {
     public:
-        mapController(char* maplist, std::deque< std::vector<void*> >&);
+        mapController(std::string maplist, std::deque< std::vector<void*> >&);
         ~mapController();
 
         int processInput(int c);
@@ -35,7 +35,7 @@ class mapController
         std::string currentMap;
         std::string defaultMap;
         std::map<std::string, gmap> map_list;
-        int map_count;
+        unsigned int map_count;
 
         objPlayer player;
 

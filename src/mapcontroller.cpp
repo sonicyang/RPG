@@ -5,12 +5,13 @@
 #include <cstdlib>
 #include <curses.h>
 #include <deque>
+#include "controller.h"
 
 using namespace std;
 
-mapController::mapController(char* maplist, std::deque< std::vector<void*> >& s) : ctlCallStack(s)
+mapController::mapController(std::string maplist, std::deque< std::vector<void*> >& s) : ctlCallStack(s)
 {
-    std::string in = get_file_contents(maplist);
+    std::string in = get_file_contents(maplist.c_str());
 
     Json::Value root;
     Json::Reader reader;
@@ -58,8 +59,9 @@ int mapController::processInput(int c){
             break;
         case 'z':{
             if(isPlayerFacingObject()){
-                if(getPlayerFacingObject().getTrigger().triggerType == buttonTrig){
-                    ctlCallStack.push_back(loadStack(2, new int(-1), new event(getPlayerFacingObject().getTrigger())));
+                if(getPlayerFacingObject().getTriggerType() == buttonTrig){
+                    ctlCallStack.push_back(loadStack(2, new int(1), new int(2)));
+                    ctlCallStack.push_back(loadStack(2, new int(-1), new std::string(getPlayerFacingObject().getTrigger())));
                 }
             }
             break;}
@@ -67,7 +69,7 @@ int mapController::processInput(int c){
             ctlCallStack.push_back(loadStack(1, new int(255)));
             break;}
         case 'q':{
-            ctlCallStack.push_back(loadStack(1, new int(-2)));
+        	ctlCallStack.push_back(loadStack(2, new int(1), new int(3)));
             break;}
     }
     return 0;
@@ -85,8 +87,9 @@ int mapController::setPlayerPosition(Point a){
     player.SetCord(a);
 
     if(isPlayerOnObject()){
-        if(getPlayerOnObject().getTrigger().triggerType == stepOnTrig){
-            ctlCallStack.push_back(loadStack(2, new int(-1), new event(getPlayerOnObject().getTrigger())));
+        if(getPlayerOnObject().getTriggerType() == stepOnTrig){
+            ctlCallStack.push_back(loadStack(2, new int(1), new int(2)));
+            ctlCallStack.push_back(loadStack(2, new int(-1), new std::string(getPlayerFacingObject().getTrigger())));
         }
     }
 

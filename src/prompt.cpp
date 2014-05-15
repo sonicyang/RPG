@@ -12,7 +12,7 @@ prompt::~prompt()
 
 void prompt::discardMessage(){
     m_message = "";
-    m_whom == "";
+    m_whom = "";
 }
 void prompt::loadMessaage(char* m, char* w){
     m_message = m;

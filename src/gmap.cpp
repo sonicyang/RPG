@@ -46,7 +46,7 @@ gmap::gmap(const char * filename)
 
         for(int i = 0; i < root["Objects"].size(); i++){
             Point cord(root["Objects"][i]["x"].asInt(), root["Objects"][i]["y"].asInt());
-            mapObject toAdd(root["Objects"][i]["Name"].asString(), i, root["Objects"][i]["Type"].asInt(), cord.m_x, cord.m_y, root["Objects"][i]["Icon"].asString()[0], root["Objects"][i]["Trigger"].asString(), root["Objects"][i]["canStep"].asInt());
+            mapObject toAdd(root["Objects"][i]["Name"].asString(), i, root["Objects"][i]["Type"].asInt(), cord.m_x, cord.m_y, root["Objects"][i]["Icon"].asString()[0], root["Objects"][i]["Trigger"].asString(), root["Objects"][i]["canStep"].asInt(), root["Objects"][i]["trigType"].asInt());
             objects.insert(objects.begin(),std::pair<Point,mapObject>(cord, toAdd));
         }
 
@@ -97,7 +97,7 @@ bool gmap::isObstacle(Point a){
 }
 
 bool gmap::isOutOfBound(Point a){
-    if(a.m_x >= m_size.m_x || a.m_y >= m_size.m_y || a.m_y < 0 || a.m_x < 0)
+    if(a.m_x >= m_size.m_x || a.m_y >= m_size.m_y)
         return true;
     return false;
 }

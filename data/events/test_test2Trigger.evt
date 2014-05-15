@@ -1,5 +1,5 @@
 {
-	"Name" : "TrapTrigger",
+	"Name" : "test_test2Trigger",
 	"triggerType" : 2,
 	"Command" : [
 				"03|Test2|2|2"

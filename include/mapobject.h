@@ -20,8 +20,8 @@ class mapObject
         friend class mapController;
 
         mapObject();
-        mapObject(std::string, int, int, int, int, char, std::string, bool);
-        ~mapObject();
+        mapObject(std::string, int, int, int, int, char, std::string, bool, int);
+        virtual ~mapObject();
         mapObject(const mapObject& other);
         mapObject& operator=(const mapObject& other);
 
@@ -33,20 +33,20 @@ class mapObject
 
         virtual char Geticon() const { return icon; }
 
-        const event& getTrigger() const { return trigger; };
+        int getTriggerType() { return triggerType; };
+        std::string getTrigger() { return trigger; };
     protected:
         Point Cord;
         void SetCord(Point val) { Cord = val; }
     private:
-        int ID;
+
         std::string name;
+        int ID;
         int type;
         char icon;
         bool _canStep;
-
-
-        event trigger;
-
+        std::string trigger;
+        int triggerType;
 };
 
 #endif // MAPOBJECT_H

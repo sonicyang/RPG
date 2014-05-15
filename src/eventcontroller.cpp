@@ -4,11 +4,48 @@
 #include <cstring>
 #include "eventcontroller.h"
 #include <curses.h>
+#include "json/reader.h"
+#include "json/value.h"
+
 
 using namespace std;
 
-eventController::eventController(std::deque< std::vector<void*> >& s) : ctlCallStack(s)
+eventController::eventController(std::string eventlist, std::deque< std::vector<void*> >& s) : ctlCallStack(s)
 {
+	std::string in = get_file_contents(eventlist.c_str());
+
+	Json::Value root;
+	Json::Reader reader;
+	if (reader.parse( in, root )){
+	    event_count = root.get("Count", 0 ).asInt();
+	    for(int i = 0; i < event_count; i++){
+	            std::string in2 = get_file_contents(root["Path"][i].asCString());
+
+	            Json::Value root2;
+	            Json::Reader reader2;
+	            if (reader.parse( in2, root2 )){
+	            	event trigger;
+
+	                trigger.stk.resize(root2["Command"].size());
+	                for(int i = 0; i < root2["Command"].size(); i++){
+	                    trigger.stk[i] = root2["Command"][i].asString();
+	                }
+
+	                trigger.trigBy = root2["Name"].asString();
+
+	                trigger.triggerType = root2["triggerType"].asInt();
+
+	                event_list.insert (event_list.begin(), std::pair<std::string, event>(trigger.trigBy, trigger));
+	            }else{
+	                std::cout << "Failed to parse configuration\n"  << reader.getFormatedErrorMessages();
+	                exit(128);
+	            }
+	    }
+
+	}else{
+	    std::cout << "Failed to parse configuration\n"  << reader.getFormatedErrorMessages();
+	    exit(128);
+	}
 }
 
 eventController::~eventController()
@@ -84,4 +121,10 @@ int eventController::execCurrentEvent(){
     }
 
     return 1;
+}
+
+int eventController::execEvent(std::string name){
+	reversePushEventStack(event_list[name]);
+	//execCurrentEvent();
+	return 0;
 }
