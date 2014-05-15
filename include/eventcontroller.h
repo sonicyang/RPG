@@ -28,6 +28,8 @@ class eventController
          std::map<std::string, event> event_list;
          unsigned event_count;
 
+         int userInputRequired;
+
 };
 
 #endif // EVENTCONTROLLER_H

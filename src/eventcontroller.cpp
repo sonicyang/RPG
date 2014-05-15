@@ -10,7 +10,7 @@
 
 using namespace std;
 
-eventController::eventController(std::string eventlist, std::deque< std::vector<void*> >& s) : ctlCallStack(s)
+eventController::eventController(std::string eventlist, std::deque< std::vector<void*> >& s) : ctlCallStack(s), userInputRequired(0)
 {
 	std::string in = get_file_contents(eventlist.c_str());
 
@@ -56,28 +56,32 @@ eventController::~eventController()
 }
 
 int eventController::processInput(int c){
-    switch (c) {
-        case KEY_LEFT:
+    if(userInputRequired){
+        switch (c) {
+            case KEY_LEFT:
 
-            break;
-        case KEY_RIGHT:
+                break;
+            case KEY_RIGHT:
 
-            break;
-        case KEY_UP:
+                break;
+            case KEY_UP:
 
-            break;
-        case KEY_DOWN:
+                break;
+            case KEY_DOWN:
 
-            break;
-        case 'z':
-            execTopEvent();
-            break;
-        case 'x':
-            ctlCallStack.push_back(loadStack(0, new int(0)));
-            break;
-        case KEY_END:
-            ctlCallStack.push_back(loadStack(255, new int(0)));
-            break;
+                break;
+            case 'z':
+                execTopEvent();
+                break;
+            case 'x':
+                ctlCallStack.push_back(loadStack(1, new int(svc::restoreStat)));
+                break;
+            case KEY_END:
+                ctlCallStack.push_back(loadStack(1, new int(svc::endGame)));
+                break;
+        }
+    }else{
+        execTopEvent();
     }
     return 1;
 }
@@ -105,6 +109,7 @@ int eventController::execTopEvent(){
             return 0;*/
         case eventCode::showPrompt:
             ctlCallStack.push_back(loadStack(3, new int(svc::loadPrompt), stringToAllocChar(ss[2]), stringToAllocChar(ss[1])));
+            userInputRequired = 1;
             break;
         case eventCode::endEvent:
             ctlCallStack.push_back(loadStack(1, new int(svc::clearPrompt)));
@@ -112,6 +117,7 @@ int eventController::execTopEvent(){
             break;
         case eventCode::transferMap:
             ctlCallStack.push_back(loadStack(4, new int(svc::changeMap), stringToAllocChar(ss[1]), new int(atoi(ss[2].c_str())), new int(atoi(ss[3].c_str()))));
+            userInputRequired = 0;
             break;
     }
 
@@ -121,5 +127,6 @@ int eventController::execTopEvent(){
 
 int eventController::pushEvent(std::string name){
 	eventStack.push_back(event_list[name]);
+	userInputRequired = 0;
 	return 0;
 }

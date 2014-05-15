@@ -27,11 +27,7 @@ void Controller::getParseUserInput(){
             mapCtl.processInput(c);
             break;
         case inEvent:
-            if(userInputPending){
-                evtCtl.processInput(c);
-            }else{
-                evtCtl.execTopEvent();
-            }
+            evtCtl.processInput(c);
             break;
         case menu:
             menuRution();
@@ -49,30 +45,24 @@ bool Controller::processCtlCall(){
 		switch(commd){
 			case svc::loadEvent:
 				evtCtl.pushEvent((char*)(currCall[1]));
-				userInputPending = 0;
 				break;
 			case svc::restoreStat:
 				evtCtl.popEventStack();
 				prom.discardMessage();
 				this->restoreStat();
-				userInputPending = 0;
 				break;
 			case svc::setStat:
 				this->setStat(*(int*)(currCall[1]));
-				userInputPending = 0;
 				break;
 			case svc::loadPrompt:
 				prom.loadMessaage((char*)(currCall[1]), (char*)(currCall[2]));
-				userInputPending = 1;
 				break;
 			case svc::clearPrompt:
 				prom.discardMessage();
-				userInputPending = 0;
 				break;
 			case svc::changeMap:
 				mapCtl.setCurrentMap((char*)(currCall[1]));
 				mapCtl.setPlayerPosition(Point(*(int*)(currCall[2]), *(int*)(currCall[3])));
-				userInputPending = 0;
 				break;
             case svc::waitUserInput:
                 userInputPending = *(int*)(currCall[1]);

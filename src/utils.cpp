@@ -7,6 +7,7 @@
 #include <cstring>
 #include <cstdarg>
 #include <deque>
+#include <cstdlib>
 
 char* stringToAllocChar(std::string a){
     char* s = new char[a.size()];
@@ -17,7 +18,7 @@ char* stringToAllocChar(std::string a){
 void recycleMem(std::deque< std::vector<void*> > a){
     for(unsigned int i = 0; i < a.size(); i++){
         for(unsigned int j = 0; j < a[i].size(); j++)
-            delete [] a[i][j];
+            free(a[i][j]);
     }
 }
 

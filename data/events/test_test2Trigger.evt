@@ -2,6 +2,7 @@
 	"Name" : "test_test2Trigger",
 	"triggerType" : 2,
 	"Command" : [
-				"03|Test2|2|2"
+				"03|Test2|2|2",
+				"02"
 				]
 }
