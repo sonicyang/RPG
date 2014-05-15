@@ -1,10 +1,9 @@
-#include "mapobject.h"
 #include <string>
 #include <cstdlib>
-#include "utils.h"
 #include "json/value.h"
 #include "json/reader.h"
-
+#include "utils.h"
+#include "mapobject.h"
 
 mapObject::mapObject() : name("NULL"), ID(0), type(0), icon('M'), _canStep(false), triggerType(0)
 {

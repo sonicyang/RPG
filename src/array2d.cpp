@@ -1,8 +1,7 @@
-#include "Point.h"
 #include <string>
 #include <cstring>
-
-#include "chararray2d.h"
+#include "Point.h"
+#include "array2d.h"
 
 template<class T>
 Array2D<T>::Array2D()

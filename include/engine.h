@@ -1,25 +1,25 @@
+#ifndef CONTROLLER_H
+#define CONTROLLER_H
+
 #include <map>
-#include "gmap.h"
 #include <string>
 #include <curses.h>
+#include <deque>
+#include "gmap.h"
 #include "render.h"
 #include "mapcontroller.h"
 #include "eventcontroller.h"
 #include "mapobject.h"
 #include "objPlayer.h"
-#include <deque>
 #include "utils.h"
 
 using namespace std;
 
-#ifndef CONTROLLER_H
-#define CONTROLLER_H
-
-class Controller
+class Engine
 {
     public:
-        Controller();
-        ~Controller();
+        Engine();
+        ~Engine();
 
         void getParseUserInput();
         bool processCtlCall();

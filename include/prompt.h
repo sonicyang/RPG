@@ -1,8 +1,7 @@
-#include <string>
-
 #ifndef PROMPT_H
 #define PROMPT_H
 
+#include <string>
 
 class prompt
 {
@@ -11,7 +10,7 @@ class prompt
         ~prompt();
 
         void discardMessage();
-        void loadMessaage(char*, char*);
+        void loadMessaage(const char*, const char*);
         void loadMessaage(std::string, std::string);
 
         bool hasMessage(){ return !(m_message.size() == 0); }

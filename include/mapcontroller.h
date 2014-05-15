@@ -1,11 +1,10 @@
+#ifndef MAPCONTROLLER_H
+#define MAPCONTROLLER_H
+
 #include "gmap.h"
 #include "mapObject.h"
 #include "objPLayer.h"
 #include "point.h"
-
-#ifndef MAPCONTROLLER_H
-#define MAPCONTROLLER_H
-
 
 class mapController
 {

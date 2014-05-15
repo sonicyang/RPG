@@ -6,7 +6,7 @@
 #include <cerrno>
 
 #include "point.h"
-#include "Controller.h"
+#include "engine.h"
 #include <unistd.h>
 
 using namespace std;
@@ -85,7 +85,7 @@ int startMenu(){
 
 int main()
 {
-    Controller gCtl;
+    Engine gCtl;
     cbreak();
     noecho();
     keypad(stdscr, TRUE);

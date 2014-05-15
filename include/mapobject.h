@@ -1,11 +1,11 @@
-#include <string>
-#include "point.h"
-#include "eventcontroller.h"
-#include <vector>
-#include "utils.h"
-
 #ifndef MAPOBJECT_H
 #define MAPOBJECT_H
+
+#include <string>
+#include <vector>
+#include "eventcontroller.h"
+#include "utils.h"
+#include "point.h"
 
 class mapObject
 {

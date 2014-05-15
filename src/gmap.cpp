@@ -1,14 +1,14 @@
 #include <cstdlib>
 #include <cstring>
 #include <string>
+#include <string>
+#include <curses.h>
+#include "json/reader.h"
+#include "json/value.h"
 #include "gmap.h"
 #include "point.h"
 #include "utils.h"
-#include "json/reader.h"
-#include "json/value.h"
-#include <string>
-#include <curses.h>
-#include "chararray2d.h"
+#include "array2d.h"
 #include "mapobject.h"
 
 gmap::gmap()

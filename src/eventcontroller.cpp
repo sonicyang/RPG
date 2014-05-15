@@ -1,9 +1,9 @@
-#include "prompt.h"
 #include <algorithm>
-#include "utils.h"
 #include <cstring>
-#include "eventcontroller.h"
 #include <curses.h>
+#include "prompt.h"
+#include "utils.h"
+#include "eventcontroller.h"
 #include "json/reader.h"
 #include "json/value.h"
 

@@ -1,26 +1,26 @@
-#include "controller.h"
+#include <curses.h>
 #include <cstdlib>
+#include <string>
 #include <cstring>
 #include <string>
+#include <algorithm>
 #include "gmap.h"
 #include "point.h"
 #include "utils.h"
 #include "json/reader.h"
 #include "json/value.h"
-#include <string>
-#include <curses.h>
 #include "render.h"
-#include <algorithm>
+#include "engine.h"
 
-Controller::Controller() : rdr(), mapCtl("data/maps/maplist.lst", ctlCall), evtCtl("data/events/eventlist.lst", ctlCall)
+Engine::Engine() : rdr(), mapCtl("data/maps/maplist.lst", ctlCall), evtCtl("data/events/eventlist.lst", ctlCall)
 {
 }
 
-Controller::~Controller()
+Engine::~Engine()
 {
 }
 
-void Controller::getParseUserInput(){
+void Engine::getParseUserInput(){
     int c = getch();
     switch(stat){
         case onMap:
@@ -37,7 +37,7 @@ void Controller::getParseUserInput(){
     }
 }
 
-bool Controller::processCtlCall(){
+bool Engine::processCtlCall(){
     while(ctlCall.size() > 0){
 
 		std::vector<void*>currCall = ctlCall.front();
@@ -79,7 +79,7 @@ bool Controller::processCtlCall(){
     return 1;
 }
 
-void Controller::updateScreen(){
+void Engine::updateScreen(){
     rdr.render_map(mapCtl.getCurrentMap());
     rdr.render_Player(mapCtl.getPlayer());
     if(prom.hasMessage()){
@@ -90,7 +90,7 @@ void Controller::updateScreen(){
     return;
 }
 
-void Controller::menuRution(){
+void Engine::menuRution(){
     nodelay(stdscr, false); //Nasty Hack
 
     std::vector<std::string> mOption(3);
@@ -159,13 +159,13 @@ void Controller::menuRution(){
 
 
 
-void Controller::setStat(int s){
+void Engine::setStat(int s){
     _stat.push_back(stat);
     stat = s;
     return;
 }
 
-void Controller::restoreStat(){
+void Engine::restoreStat(){
     if(_stat.size() > 0){
         stat = _stat.back();
         _stat.pop_back();

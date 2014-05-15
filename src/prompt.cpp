@@ -14,7 +14,7 @@ void prompt::discardMessage(){
     m_message = "";
     m_whom = "";
 }
-void prompt::loadMessaage(char* m, char* w){
+void prompt::loadMessaage(const char* m, const char* w){
     m_message = m;
     m_whom = w;
 }

@@ -1,13 +1,12 @@
-#include "point.h"
+#ifndef GMAP_H
+#define GMAP_H
+
 #include <string>
 #include <set>
 #include <map>
 #include "mapobject.h"
-#include "chararray2d.h"
-
-#ifndef GMAP_H
-#define GMAP_H
-
+#include "array2d.h"
+#include "point.h"
 
 class gmap
 {

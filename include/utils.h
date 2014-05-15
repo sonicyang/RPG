@@ -1,11 +1,11 @@
+#ifndef UTILS_H_INCLUDED
+#define UTILS_H_INCLUDED
+
 #include <fstream>
 #include <string>
 #include <cerrno>
 #include <vector>
 #include <deque>
-
-#ifndef UTILS_H_INCLUDED
-#define UTILS_H_INCLUDED
 
 enum Stats{
     pending = 0,

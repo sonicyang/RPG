@@ -1,8 +1,8 @@
-#include "point.h"
-#include <string>
-
 #ifndef ARRAY2D_H
 #define ARRAY2D_H
+
+#include "point.h"
+#include <string>
 
 template<class T>
 class Array2D

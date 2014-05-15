@@ -1,4 +1,3 @@
-#include "utils.h"
 #include <fstream>
 #include <string>
 #include <cerrno>
@@ -8,6 +7,7 @@
 #include <cstdarg>
 #include <deque>
 #include <cstdlib>
+#include "utils.h"
 
 char* stringToAllocChar(std::string a){
     char* s = new char[a.size()];

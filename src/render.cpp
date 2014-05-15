@@ -1,8 +1,7 @@
+#include <curses.h>
 #include "render.h"
 #include "gmap.h"
 #include "point.h"
-#include <curses.h>
-#include <locale>
 
 render::render() : offset(0,0)
 {

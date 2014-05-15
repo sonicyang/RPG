@@ -1,9 +1,8 @@
 #ifndef OBJPLAYER_H
 #define OBJPLAYER_H
 
-#include <mapObject.h>
 #include <string>
-
+#include "mapObject.h"
 
 class objPlayer : public mapObject
 {

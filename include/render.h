@@ -1,13 +1,12 @@
+#ifndef RENDER_H
+#define RENDER_H
+
+#include <curses.h>
 #include "point.h"
 #include "gmap.h"
 #include "mapobject.h"
 #include "objPlayer.h"
 #include "prompt.h"
-#include <curses.h>
-
-#ifndef RENDER_H
-#define RENDER_H
-
 
 class render
 {
