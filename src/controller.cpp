@@ -48,7 +48,7 @@ bool Controller::processCtlCall(){
 		int commd = *(int*)(currCall[0]);
 		switch(commd){
 			case -1:
-				evtCtl.pushEvent(*(std::string*)(currCall[1]));
+				evtCtl.pushEvent((char*)(currCall[1]));
 				userInputPending = 0;
 				break;
 			case 0:
@@ -81,7 +81,7 @@ bool Controller::processCtlCall(){
 		}
 
 		for(unsigned int i = 0; i < currCall.size(); i++)
-			delete [] currCall[i];
+			free(currCall[i]);
 
 		ctlCall.pop_front();
     }

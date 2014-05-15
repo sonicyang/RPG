@@ -11,6 +11,7 @@
 					"x"		:	4,
 					"y"		:	4,
 					"Icon"	:	"K",
-					"Trigger" : "data/events/DavidTrigger.evt"
+					"Trigger" : "DavidTrigger",
+					"trigType" : 1
 				}]
 }

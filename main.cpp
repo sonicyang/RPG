@@ -34,7 +34,7 @@ void help(){
     getch();
 }
 
-void startMenu(){
+int startMenu(){
     std::vector<std::string> mOption(3);
     mOption[0] = "Start";
     mOption[1] = "Help/KeyMap";
@@ -67,19 +67,19 @@ void startMenu(){
             case KEY_ENTER:
                 switch(cursorPos){
                     case 0:
-                        return;
+                        return 0;
                         break;
                     case 1:
                         help();
                         break;
                     case 2:
-                        exit(1);
+                        return 1;
                         break;
                 }
                 break;
         }
     }
-    return;
+    return 0;
 }
 
 
@@ -90,7 +90,8 @@ int main()
     noecho();
     keypad(stdscr, TRUE);
 
-    startMenu();
+    if(startMenu())
+        return 0;
 
     nodelay(stdscr, true);
     gCtl.updateScreen();
