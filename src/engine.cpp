@@ -55,7 +55,7 @@ bool Engine::processCtlCall(){
 				this->setStat(*(int*)(currCall[1]));
 				break;
 			case svc::loadPrompt:
-				prom.loadMessaage((char*)(currCall[1]), (char*)(currCall[2]));
+				prom.loadMessaage((wchar_t*)(currCall[1]), (wchar_t*)(currCall[2]));
 				break;
 			case svc::clearPrompt:
 				prom.discardMessage();
@@ -134,10 +134,10 @@ void Engine::menuRution(){
             case 'z':
                 switch(cursorPos){
                     case 2:
-                        prom.loadMessaage("Are You Sure?", "System");
+                        prom.loadMessaage(L"Are You Sure?", L"System");
                         rdr.render_prompt(prom);
                         if(getch() == 'z'){
-                            prom.loadMessaage("Bye", "System");
+                            prom.loadMessaage(L"Bye", L"System");
                             rdr.render_prompt(prom);
                             getch();
                             ctlCall.push_back(loadStack(1, new int(svc::endGame)));

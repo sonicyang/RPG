@@ -6,7 +6,7 @@
 #include "eventcontroller.h"
 #include "json/reader.h"
 #include "json/value.h"
-
+#include "utf8.h"
 
 using namespace std;
 
@@ -108,7 +108,7 @@ int eventController::execTopEvent(){
             currBattle.exec();
             return 0;*/
         case eventCode::showPrompt:
-            ctlCallStack.push_back(loadStack(3, new int(svc::loadPrompt), stringToAllocChar(ss[2]), stringToAllocChar(ss[1])));
+            ctlCallStack.push_back(loadStack(3, new int(svc::loadPrompt), UTF8_to_WChar(ss[2].c_str()), UTF8_to_WChar(ss[1].c_str())));
             userInputRequired = 1;
             break;
         case eventCode::endEvent:

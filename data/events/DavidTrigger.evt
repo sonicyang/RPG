@@ -2,7 +2,7 @@
 	"Name" : "DavidTrigger",
 	"triggerType" : 1,
 	"Command" : [
-				"01|David|Hello",
+				"01|David|你好",
 				"01|David|I'm David",
 				"01|David|How are you?",
 				"01|???|.....",

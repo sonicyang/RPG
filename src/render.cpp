@@ -48,7 +48,7 @@ void render::render_map(gmap toRender){
 }
 
 void render::render_Player(objPlayer mo){
-    if(offset.m_x, mo.Geticon() < 128){
+    if(mo.Geticon() < 128){
         mvaddch(mo.GetCord().Get_y() + offset.m_y, mo.GetCord().Get_x() + offset.m_x, mo.Geticon());
         insch(' ');
     }else{
@@ -70,8 +70,8 @@ void render::render_prompt(prompt P){
     mvaddstr(24, 0, "================================================================================");
     attroff(A_BOLD);
 
-    mvaddstr(19, 1, P.getWhom().c_str());
-    mvaddstr(21, 1, P.getMessage().c_str());
+    mvaddwstr(19, 1, P.getWhom().c_str());
+    mvaddwstr(21, 1, P.getMessage().c_str());
     return;
 }
 

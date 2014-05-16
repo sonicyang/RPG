@@ -11,14 +11,14 @@ prompt::~prompt()
 }
 
 void prompt::discardMessage(){
-    m_message = "";
-    m_whom = "";
+    m_message = L"";
+    m_whom = L"";
 }
-void prompt::loadMessaage(const char* m, const char* w){
+void prompt::loadMessaage(const wchar_t* m, const wchar_t* w){
     m_message = m;
     m_whom = w;
 }
-void prompt::loadMessaage(std::string m, std::string w){
+void prompt::loadMessaage(std::wstring m, std::wstring w){
     m_message = m;
     m_whom = w;
 }
