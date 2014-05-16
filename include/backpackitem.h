@@ -1,6 +1,8 @@
 #ifndef BACKPACKITEM_H
 #define BACKPACKITEM_H
 
+#include <string>
+
 
 class backPackItem
 {
@@ -25,6 +27,8 @@ class backPackItem
 
         bool _iscomsumable;
         int _price;
+
+        std::string _description;
 };
 
 #endif // BACKPACKITEM_H

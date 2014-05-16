@@ -425,7 +425,7 @@
 	"objPLayer.h"
 	"point.h"
 
-1400157449 source:c:\users\sonicyang\github\rpg\src\mapcontroller.cpp
+1400233862 source:c:\users\sonicyang\github\rpg\src\mapcontroller.cpp
 	<cstdlib>
 	<curses.h>
 	<deque>
@@ -737,4 +737,10 @@
 	"mapobject.h"
 	"objPlayer.h"
 	"utils.h"
+
+1400158365 source:c:\users\sonicyang\github\rpg\src\backpackitem.cpp
+	"backpackitem.h"
+
+1400233623 c:\users\sonicyang\github\rpg\include\backpackitem.h
+	<string>
 

@@ -18,6 +18,7 @@ mapController::mapController(std::string maplist, std::deque< std::vector<void*>
     bool stat = reader.parse( in, root );
     if (stat){
         map_count = root.get("Count", 0 ).asInt();
+
         for(unsigned int i = 0; i < map_count; i++){
             gmap tmp(root["Path"][i].asString().c_str());
             map_list.insert (map_list.begin(), std::pair<std::string,gmap>(tmp.Getname(),tmp));
