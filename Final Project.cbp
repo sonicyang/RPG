@@ -43,8 +43,10 @@
 			<Add option="-g" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="include/chararray2d.h" />
-		<Unit filename="include/controller.h" />
+		<Unit filename="Makefile" />
+		<Unit filename="include/array2d.h" />
+		<Unit filename="include/backpackitem.h" />
+		<Unit filename="include/engine.h" />
 		<Unit filename="include/eventcontroller.h" />
 		<Unit filename="include/gmap.h" />
 		<Unit filename="include/json/autolink.h" />
@@ -61,12 +63,16 @@
 		<Unit filename="include/point.h" />
 		<Unit filename="include/prompt.h" />
 		<Unit filename="include/render.h" />
+		<Unit filename="include/utf8.h" />
 		<Unit filename="include/utils.h" />
 		<Unit filename="main.cpp" />
-		<Unit filename="src/chararray2d.cpp">
+		<Unit filename="src/array2d.cpp">
 			<Option virtualFolder="src/tools/" />
 		</Unit>
-		<Unit filename="src/controller.cpp">
+		<Unit filename="src/backpackitem.cpp">
+			<Option virtualFolder="src/model/" />
+		</Unit>
+		<Unit filename="src/engine.cpp">
 			<Option virtualFolder="src/controller/" />
 		</Unit>
 		<Unit filename="src/eventcontroller.cpp">
@@ -99,6 +105,9 @@
 			<Option virtualFolder="src/model/" />
 		</Unit>
 		<Unit filename="src/render.cpp" />
+		<Unit filename="src/utf8.cpp">
+			<Option virtualFolder="src/tools/" />
+		</Unit>
 		<Unit filename="src/utils.cpp">
 			<Option virtualFolder="src/tools/" />
 		</Unit>

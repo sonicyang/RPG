@@ -10,7 +10,7 @@ class Array2D
     public:
         Array2D();
         Array2D(Point);
-        Array2D(Point,std::string);
+        Array2D(Point, void*);
         ~Array2D();
         Array2D(const Array2D& other);
         Array2D& operator=(const Array2D& other);

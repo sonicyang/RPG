@@ -1,16 +1,16 @@
 {
 	"Name" : "Test",
 	"Size" : { "x" : 12, "y" : 12},
-	"Floor" : "#############          ##          ##           #          ##          ##          ##          ##          ##          ##          #############",
-	"State" : "#############          ##          ##          ##          ##          ##          ##          ##          ##          ##          #############",
-	"Blocks" : ["1", "#"],
+	"Floor" : "ΞΞΞΞΞΞΞΞΞΞΞΞΞ　　　　　　　　　　ΞΞ　　　　　　　　　　ΞΞ　　　　　　　　　　 Ξ　　　　　　　　　　ΞΞ　　　　　　　　　　ΞΞ　　　　　　　　　　ΞΞ　　　　　　　　　　ΞΞ　　　　　　　　　　ΞΞ　　　　　　　　　　ΞΞ　　　　　　　　　　ΞΞΞΞΞΞΞΞΞΞΞΞΞ",
+	"State" : "ΞΞΞΞΞΞΞΞΞΞΞΞΞ　　　　　　　　　　ΞΞ　　　　　　　　　　ΞΞ　　　　　　　　　　ΞΞ　　　　　　　　　　ΞΞ　　　　　　　　　　ΞΞ　　　　　　　　　　ΞΞ　　　　　　　　　　ΞΞ　　　　　　　　　　ΞΞ　　　　　　　　　　ΞΞ　　　　　　　　　　ΞΞΞΞΞΞΞΞΞΞΞΞΞ",
+	"Blocks" : ["1", "Ξ"],
 	"Objects" : [{
 					"Name" 	: 	"David",
 					"Type" 	: 	1,
 					"canStep" : 0,
 					"x"		:	4,
 					"y"		:	4,
-					"Icon"	:	"X",
+					"Icon"	:	"Ｘ",
 					"Trigger" : "DavidTrigger",
 					"trigType" : 1
 				},{
@@ -19,7 +19,7 @@
 					"canStep" : 1,
 					"x"		:	8,
 					"y"		:	4,
-					"Icon"	:	"O",
+					"Icon"	:	"Ｏ",
 					"Trigger" : "TrapTrigger",
 					"trigType" : 2
 					
@@ -29,7 +29,7 @@
 					"canStep" : 1,
 					"x"		:	11,
 					"y"		:	3,
-					"Icon"	:	" ",
+					"Icon"	:	"　",
 					"Trigger" : "test_test2Trigger",
 					"trigType" : 2
 				}]

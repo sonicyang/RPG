@@ -2,11 +2,11 @@
 
 objPlayer::objPlayer() : mapObject("NULL", 0, 0 , 0, 0, '@', "", false, 0)
 {
-    icon_list = "^>v<";
+    icon_list = L"^>v<";
     facing = 0;
 }
 
-objPlayer::objPlayer(std::string n, int i, int t, int x, int y, std::string ic, int f) : mapObject(n, i, t, x, y, '@', "", false, 0)
+objPlayer::objPlayer(std::string n, int i, int t, int x, int y, std::wstring ic, int f) : mapObject(n, i, t, x, y, '@', "", false, 0)
 {
     icon_list = ic;
     facing = f;

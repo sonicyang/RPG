@@ -150,6 +150,7 @@ void Engine::menuRution(){
                 break;
             case 'x':
             case 'q':
+                ctlCall.push_back(loadStack(1, new int(svc::clearPrompt)));
                 return;
                 break;
         }

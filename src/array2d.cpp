@@ -24,14 +24,14 @@ Array2D<T>::Array2D(Point s)
 }
 
 template<class T>
-Array2D<T>::Array2D(Point s, std::string loading)
+Array2D<T>::Array2D(Point s, void* loading)
 {
     m_size = s;
     m_data = new T*[m_size.m_y];
     m_data[0] = new T[m_size.m_x * m_size.m_y];
     for(unsigned int i = 1; i < m_size.m_y; i++)
         m_data[i] = m_data[0] + i * m_size.m_x;
-    memcpy(m_data[0],loading.c_str(),sizeof(T) * (m_size.m_x) * (m_size.m_y));
+    memcpy(m_data[0], loading, sizeof(T) * (m_size.m_x) * (m_size.m_y));
 }
 
 template<class T>
@@ -96,3 +96,5 @@ Point Array2D<T>::size()
 
 template class Array2D<char>;
 template class Array2D<int>;
+template class Array2D<wchar_t>;
+

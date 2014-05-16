@@ -10,6 +10,7 @@
 #include "utils.h"
 #include "array2d.h"
 #include "mapobject.h"
+#include "utf8.h"
 
 gmap::gmap()
 {
@@ -18,8 +19,8 @@ gmap::gmap()
     m_size.Set_x(1);
     m_size.Set_y(1);
 
-    m_data = Array2D<char>(m_size);
-    m_data_state = Array2D<char>(m_size);
+    m_data = Array2D<wchar_t>(m_size);
+    m_data_state = Array2D<wchar_t>(m_size);
 }
 
 
@@ -37,16 +38,16 @@ gmap::gmap(const char * filename)
         m_size.Set_x(root["Size"]["x"].asInt());
         m_size.Set_y(root["Size"]["y"].asInt());
 
-        m_data = Array2D<char>(m_size, root["Floor"].asString());
-        m_data_state = Array2D<char>(m_size, root["State"].asString());
+        m_data = Array2D<wchar_t>(m_size, UTF8_to_WChar(root["Floor"].asCString()));
+        m_data_state = Array2D<wchar_t>(m_size, UTF8_to_WChar(root["State"].asCString()));
 
         for(unsigned int i = 0; i < root["Blocks"].size(); i++){
-            blocks.insert(root["Blocks"][i].asString()[0]);
+            blocks.insert(UTF8_to_WChar(root["Blocks"][i].asCString())[0]);
         }
 
         for(unsigned int i = 0; i < root["Objects"].size(); i++){
             Point cord(root["Objects"][i]["x"].asInt(), root["Objects"][i]["y"].asInt());
-            mapObject toAdd(root["Objects"][i]["Name"].asString(), i, root["Objects"][i]["Type"].asInt(), cord.m_x, cord.m_y, root["Objects"][i]["Icon"].asString()[0], root["Objects"][i]["Trigger"].asString(), root["Objects"][i]["canStep"].asInt(), root["Objects"][i]["trigType"].asInt());
+            mapObject toAdd(root["Objects"][i]["Name"].asString(), i, root["Objects"][i]["Type"].asInt(), cord.m_x, cord.m_y, UTF8_to_WChar(root["Objects"][i]["Icon"].asCString())[0], root["Objects"][i]["Trigger"].asString(), root["Objects"][i]["canStep"].asInt(), root["Objects"][i]["trigType"].asInt());
             objects.insert(objects.begin(),std::pair<Point,mapObject>(cord, toAdd));
         }
 

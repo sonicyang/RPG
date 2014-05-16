@@ -8,19 +8,19 @@ class objPlayer : public mapObject
 {
     public:
         objPlayer();
-        objPlayer(std::string n, int i, int t, int x, int y, std::string ic, int f);
+        objPlayer(std::string n, int i, int t, int x, int y, std::wstring ic, int f);
         ~objPlayer();
 
         objPlayer(const objPlayer& other);
         objPlayer& operator=(const objPlayer& other);
 
-        virtual char Geticon() const { return icon_list[facing]; };
+        virtual wchar_t Geticon() const { return icon_list[facing]; };
 
         int getFacing() { return facing; }
         void setFacing(int);
     protected:
     private:
-        std::string icon_list;
+        std::wstring icon_list;
         int facing;
 };
 

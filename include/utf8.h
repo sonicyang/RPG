@@ -66,7 +66,7 @@ changed to '?'.
 
 Assumptions: sizeof(wchar_t)>=2
 */
-char *WChar_to_UTF8(const wchar_t*);;;;
+char *WChar_to_UTF8(const wchar_t*);
 
 //my helper function
 void loadContent(const string& a, wstring& b);

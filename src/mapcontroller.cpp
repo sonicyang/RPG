@@ -6,6 +6,7 @@
 #include "json/reader.h"
 #include "json/value.h"
 #include "engine.h"
+#include "utf8.h"
 
 using namespace std;
 
@@ -25,12 +26,14 @@ mapController::mapController(std::string maplist, std::deque< std::vector<void*>
         }
         defaultMap = currentMap = root["Default"].asString();
 
+        std::cout << currentMap;
     }else{
         std::cout << "Failed to parse configuration\n"  << reader.getFormatedErrorMessages();
         exit(128);
     }
 
-    player = objPlayer("Player", 0, 0, 1, 1, "^>v<", EAST);
+    std::wstring icons( L"\uFE3F\uFF1E\uFF36\uFF1C" ); //UTF8 code for  ^>V< in full-width
+    player = objPlayer("Player", 0, 0, 1, 1, icons, EAST);
 }
 
 mapController::~mapController()

@@ -11,7 +11,7 @@ mapObject::mapObject() : name("NULL"), ID(0), type(0), icon('M'), _canStep(false
     Cord.m_y = 0;
 }
 
-mapObject::mapObject(std::string n, int i, int t, int x, int y, char ic, std::string trig, bool cs, int trigType) : name(n), ID(i), type(t), icon(ic), _canStep(cs), trigger(trig), triggerType(trigType)
+mapObject::mapObject(std::string n, int i, int t, int x, int y, wchar_t ic, std::string trig, bool cs, int trigType) : name(n), ID(i), type(t), icon(ic), _canStep(cs), trigger(trig), triggerType(trigType)
 {
     Cord.m_x = x;
     Cord.m_y = y;

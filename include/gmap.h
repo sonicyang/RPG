@@ -22,7 +22,7 @@ class gmap
         std::string Getname() { return m_name; }
         void Setname(std::string val) { m_name = val; }
 
-        Array2D<char> Getdata() { return m_data; }
+        Array2D<wchar_t> Getdata() { return m_data; }
 
         bool isObstacle(Point);
         bool isOutOfBound(Point);
@@ -36,11 +36,11 @@ class gmap
     private:
         Point m_size;
         std::string m_name;
-        Array2D<char> m_data;
-        Array2D<char> m_data_state;
-        std::set<char> blocks;
+        Array2D<wchar_t> m_data;
+        Array2D<wchar_t> m_data_state;
+        std::set<wchar_t> blocks;
 
-        std::map<Point,mapObject> objects;
+        std::map<Point, mapObject> objects;
 };
 
 #endif // GMAP_H
