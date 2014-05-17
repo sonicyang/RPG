@@ -311,7 +311,7 @@
 	"render.h"
 	"controller.h"
 
-1400302112 c:\users\sonicyang\github\rpg\include\utils.h
+1400339585 c:\users\sonicyang\github\rpg\include\utils.h
 	<fstream>
 	<string>
 	<cerrno>
@@ -427,7 +427,7 @@
 	"objPLayer.h"
 	"point.h"
 
-1400262681 source:c:\users\sonicyang\github\rpg\src\mapcontroller.cpp
+1400338651 source:c:\users\sonicyang\github\rpg\src\mapcontroller.cpp
 	<cstdlib>
 	<curses.h>
 	<deque>
@@ -448,7 +448,7 @@
 1400262936 c:\users\sonicyang\github\rpg\include\prompt.h
 	<string>
 
-1400263206 source:c:\users\sonicyang\github\rpg\src\eventcontroller.cpp
+1400339670 source:c:\users\sonicyang\github\rpg\src\eventcontroller.cpp
 	<algorithm>
 	<cstring>
 	<curses.h>
@@ -714,7 +714,7 @@
 	"point.h"
 	<string>
 
-1400262970 source:c:\users\sonicyang\github\rpg\src\engine.cpp
+1400337383 source:c:\users\sonicyang\github\rpg\src\engine.cpp
 	<curses.h>
 	<cstdlib>
 	<string>
@@ -758,13 +758,17 @@
 1400234680 source:c:\users\sonicyang\github\rpg\src\utf8.cpp
 	"utf8.h"
 
-1400336292 source:c:\users\sonicyang\github\rpg\src\item.cpp
+1400338696 source:c:\users\sonicyang\github\rpg\src\item.cpp
 	"item.h"
+	<cstdlib>
+	"utils.h"
+	"json/value.h"
+	"json/reader.h"
 
 1400336233 c:\users\sonicyang\github\rpg\include\item.h
 	<string>
 
-1400336728 source:c:\users\sonicyang\github\rpg\src\inventory.cpp
+1400336967 source:c:\users\sonicyang\github\rpg\src\inventory.cpp
 	"inventory.h"
 
 1400336572 c:\users\sonicyang\github\rpg\include\inventory.h

@@ -119,6 +119,10 @@ int eventController::execTopEvent(){
             ctlCallStack.push_back(loadStack(4, new int(svc::changeMap), stringToAllocChar(ss[1]), new int(atoi(ss[2].c_str())), new int(atoi(ss[3].c_str()))));
             userInputRequired = 0;
             break;
+        case eventCode::grantItem:
+            ctlCallStack.push_back(loadStack(3, new int(svc::addItem), new int(atoi(ss[1].c_str())), new int(atoi(ss[2].c_str()))));
+            userInputRequired = 0;
+            break;
     }
 
     eventStack.back().stk.pop_back();

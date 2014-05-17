@@ -1,4 +1,8 @@
 #include "item.h"
+#include <cstdlib>
+#include "utils.h"
+#include "json/value.h"
+#include "json/reader.h"
 
 Item::Item() : _id(0xffffffff), _name("NULL"), _description("NULL Item"), _price(0), _iscomsumable(0)
 {
@@ -7,7 +11,22 @@ Item::Item() : _id(0xffffffff), _name("NULL"), _description("NULL Item"), _price
 
 Item::Item(unsigned int id) : _id(id)
 {
-    //ctor
+    char filename[256];
+    sprintf(filename, "data/items/%d", id);
+    std::string in = get_file_contents(filename);
+
+    Json::Value root;
+    Json::Reader reader;
+    bool stat = reader.parse( in, root );
+    if (stat){
+        _name = root["Name"].asString();
+        _description = root["Description"].asString();
+        _price = root["Price"].asUInt();
+        _iscomsumable = root["Comsumable"].asInt();
+    }else{
+        std::cout << "Failed to parse configuration\n"  << reader.getFormatedErrorMessages();
+        exit(128);
+    }
 }
 
 Item::~Item()

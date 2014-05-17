@@ -45,17 +45,18 @@ enum svc{
     loadPrompt,         // data, whom
     clearPrompt,        //
     changeMap,          // mapName, x, y
-    addItem,
-    removeItem,
-    incItem,
-    decItem,
+    addItem,            // id, amount
+    removeItem,         //id, amount
+    incItem,            //id
+    decItem,            //id
     endGame = 255       //
 };
 
 enum eventCode{
     showPrompt = 1, // whom, data
     endEvent,
-    transferMap //  mapName, x, y
+    transferMap, //  mapName, x, y
+    grantItem
 };
 
 char* stringToAllocChar(std::string);

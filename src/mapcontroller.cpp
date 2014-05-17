@@ -25,8 +25,6 @@ mapController::mapController(std::string maplist, std::deque< std::vector<void*>
             map_list.insert (map_list.begin(), std::pair<std::string,gmap>(tmp.Getname(),tmp));
         }
         defaultMap = currentMap = root["Default"].asString();
-
-        std::cout << currentMap;
     }else{
         std::cout << "Failed to parse configuration\n"  << reader.getFormatedErrorMessages();
         exit(128);

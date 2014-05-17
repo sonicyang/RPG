@@ -64,6 +64,18 @@ bool Engine::processCtlCall(){
 				mapCtl.setCurrentMap((char*)(currCall[1]));
 				mapCtl.setPlayerPosition(Point(*(int*)(currCall[2]), *(int*)(currCall[3])));
 				break;
+            case svc::addItem:
+                inv.addItem(*(unsigned int*)(currCall[1]), *(unsigned int*)(currCall[2]));
+                break;
+            case svc::removeItem:
+                inv.removeItem(*(unsigned int*)(currCall[1]), *(unsigned int*)(currCall[2]));
+                break;
+            case svc::incItem:
+                inv.incItem(*(unsigned int*)(currCall[1]));
+                break;
+            case svc::decItem:
+                inv.decItem(*(unsigned int*)(currCall[1]));
+                break;
 			case svc::endGame:
 				recycleMem(ctlCall);
 				return 0;

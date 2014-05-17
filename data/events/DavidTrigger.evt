@@ -4,7 +4,8 @@
 	"Command" : [
 				"01|David|你好",
 				"01|David|I'm David",
-				"01|David|How are you?",
+				"01|David|How are you? Here is a TestItem",
+				"04|00|01",
 				"01|???|.....",
 				"02"
 				]
