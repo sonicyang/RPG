@@ -30,7 +30,7 @@ void Engine::getParseUserInput(){
             evtCtl.processInput(c);
             break;
         case menu:
-            menuRution();
+            menuRutin();
             nodelay(stdscr, true);
             this->restoreStat();
             break;
@@ -102,7 +102,7 @@ void Engine::updateScreen(){
     return;
 }
 
-void Engine::menuRution(){
+void Engine::menuRutin(){
     nodelay(stdscr, false); //Nasty Hack
 
     std::vector<std::string> mOption(3);
@@ -145,6 +145,11 @@ void Engine::menuRution(){
                 break;
             case 'z':
                 switch(cursorPos){
+                    case 0:
+                        break;
+                    case 1:
+                        invMenuRoutin();
+                        break;
                     case 2:
                         prom.loadMessaage(L"Are You Sure?", L"System");
                         rdr.render_prompt(prom);
@@ -170,6 +175,17 @@ void Engine::menuRution(){
     return;
 }
 
+void Engine::invMenuRoutin(){
+    clear();
+    mvaddstr(0, 0, "================================================================================");
+    for(int i = 1; i < 24; i++)mvaddch(i, 0, '|'),mvaddch(i, 79, '|');
+    mvaddstr(24, 0, "===============================================================================");
+    mvaddstr(2, 0, "================================================================================");
+    mvaddstr(1, 35, "INVENTORY");
+
+    getch();
+    return;
+}
 
 
 void Engine::setStat(int s){

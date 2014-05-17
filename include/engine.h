@@ -42,7 +42,8 @@ class Engine
         //battle currBattle;
         //vector<GeneralPlayer> members;
 
-        void menuRution();
+        void menuRutin();
+        void invMenuRoutin();
 
         void setStat(int s);
         void restoreStat();
