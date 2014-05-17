@@ -7,7 +7,7 @@
 class Item
 {
     public:
-        Item(std::string, std::string, int, bool);
+        Item(unsigned int, std::string, std::string, int, bool);
         virtual ~Item();
         Item(const Item& other);
         Item& operator=(const Item& other);
@@ -15,6 +15,7 @@ class Item
         int useInBattle();
         int useOnMap();
 
+        unsigned int getID() { return _id; };
         std::string getName() { return _name; };
         std::string getDescription() { return _description; };
         int getSalePrice() { return _price * 0.7; };
@@ -22,10 +23,18 @@ class Item
 
         bool isComsumable() { return _iscomsumable; };
 
+        bool operator<(const Item&) const;
+        bool operator<=(const Item&) const;
+        bool operator>(const Item&) const;
+        bool operator>=(const Item&) const;
+        bool operator==(const Item&) const;
+        bool operator!=(const Item&) const;
+
     protected:
     private:
         int use();
 
+        unsigned int _id;
         std::string _name;
         std::string _description;
         int _price;
