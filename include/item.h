@@ -4,17 +4,18 @@
 #include <string>
 
 
-class backPackItem
+class Item
 {
     public:
-        backPackItem();
-        virtual ~backPackItem();
-        backPackItem(const backPackItem& other);
-        backPackItem& operator=(const backPackItem& other);
+        Item(std::string, std::string, int, bool);
+        virtual ~Item();
+        Item(const Item& other);
+        Item& operator=(const Item& other);
 
         int useInBattle();
         int useOnMap();
 
+        std::string getName() { return _name; };
         std::string getDescription() { return _description; };
         int getSalePrice() { return _price * 0.7; };
         int gerBuyPrice() { return _price; };
@@ -25,10 +26,10 @@ class backPackItem
     private:
         int use();
 
-        bool _iscomsumable;
-        int _price;
-
+        std::string _name;
         std::string _description;
+        int _price;
+        bool _iscomsumable;
 };
 
 #endif // BACKPACKITEM_H

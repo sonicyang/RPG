@@ -6,6 +6,12 @@
 #include <cerrno>
 #include <vector>
 #include <deque>
+#include "item.h"
+
+struct inventorySlot{
+    Item item;
+    unsigned int count;
+};
 
 enum Stats{
     pending = 0,

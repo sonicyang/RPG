@@ -10,7 +10,7 @@
 					"canStep" : 0,
 					"x"		:	4,
 					"y"		:	4,
-					"Icon"	:	"Ｘ",
+					"Icon"	:	"☹",
 					"Trigger" : "DavidTrigger",
 					"trigType" : 1
 				},{

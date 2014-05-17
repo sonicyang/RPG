@@ -45,10 +45,10 @@
 		</Compiler>
 		<Unit filename="Makefile" />
 		<Unit filename="include/array2d.h" />
-		<Unit filename="include/backpackitem.h" />
 		<Unit filename="include/engine.h" />
 		<Unit filename="include/eventcontroller.h" />
 		<Unit filename="include/gmap.h" />
+		<Unit filename="include/item.h" />
 		<Unit filename="include/json/autolink.h" />
 		<Unit filename="include/json/config.h" />
 		<Unit filename="include/json/features.h" />
@@ -69,9 +69,6 @@
 		<Unit filename="src/array2d.cpp">
 			<Option virtualFolder="src/tools/" />
 		</Unit>
-		<Unit filename="src/backpackitem.cpp">
-			<Option virtualFolder="src/model/" />
-		</Unit>
 		<Unit filename="src/engine.cpp">
 			<Option virtualFolder="src/controller/" />
 		</Unit>
@@ -79,6 +76,9 @@
 			<Option virtualFolder="src/controller/" />
 		</Unit>
 		<Unit filename="src/gmap.cpp">
+			<Option virtualFolder="src/model/" />
+		</Unit>
+		<Unit filename="src/item.cpp">
 			<Option virtualFolder="src/model/" />
 		</Unit>
 		<Unit filename="src/lib_json/json_batchallocator.h" />
