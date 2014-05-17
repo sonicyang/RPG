@@ -11,6 +11,7 @@
 #include "eventcontroller.h"
 #include "mapobject.h"
 #include "objPlayer.h"
+#include "inventory.h"
 #include "utils.h"
 
 using namespace std;
@@ -34,8 +35,7 @@ class Engine
 
         mapController mapCtl;
         eventController evtCtl;
-
-        //inv inventory;
+        inventory inv;
 
         prompt prom;
 

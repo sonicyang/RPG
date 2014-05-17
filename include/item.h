@@ -7,7 +7,8 @@
 class Item
 {
     public:
-        Item(unsigned int, std::string, std::string, int, bool);
+        Item();
+        Item(unsigned int);
         virtual ~Item();
         Item(const Item& other);
         Item& operator=(const Item& other);

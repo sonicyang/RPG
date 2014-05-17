@@ -1,6 +1,11 @@
 #include "item.h"
 
-Item::Item(unsigned int id, std::string name, std::string des, int pri, bool com) : _id(id), _name(name), _description(des), _price(pri), _iscomsumable(com)
+Item::Item() : _id(0xffffffff), _name("NULL"), _description("NULL Item"), _price(0), _iscomsumable(0)
+{
+    //ctor
+}
+
+Item::Item(unsigned int id) : _id(id)
 {
     //ctor
 }

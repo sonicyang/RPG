@@ -45,6 +45,10 @@ enum svc{
     loadPrompt,         // data, whom
     clearPrompt,        //
     changeMap,          // mapName, x, y
+    addItem,
+    removeItem,
+    incItem,
+    decItem,
     endGame = 255       //
 };
 
