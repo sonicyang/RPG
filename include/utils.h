@@ -10,7 +10,7 @@
 
 struct inventorySlot{
     Item item;
-    unsigned int count;
+    int count = -1;
 };
 
 enum Stats{

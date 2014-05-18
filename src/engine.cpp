@@ -176,14 +176,55 @@ void Engine::menuRutin(){
 }
 
 void Engine::invMenuRoutin(){
-    clear();
-    mvaddstr(0, 0, "================================================================================");
-    for(int i = 1; i < 24; i++)mvaddch(i, 0, '|'),mvaddch(i, 79, '|');
-    mvaddstr(24, 0, "===============================================================================");
-    mvaddstr(2, 0, "================================================================================");
-    mvaddstr(1, 35, "INVENTORY");
+    unsigned int currentPos = 0;
 
-    getch();
+    for(;;){
+        clear();
+        mvaddstr(0, 0, "================================================================================");
+        for(int i = 1; i < 24; i++)mvaddch(i, 0, '|'),mvaddch(i, 79, '|');
+        mvaddstr(24, 0, "===============================================================================");
+        mvaddstr(2, 0, "================================================================================");
+        for(int i = 3; i < 24; i++)mvaddch(i, 25, '|');
+        mvaddstr(1, 35, "INVENTORY");
+
+        std::vector<inventorySlot>currInv = inv.getInventory();
+
+        if(inv.getNumOfItems() < 5){
+            for(unsigned int i = currentPos; i < inv.getNumOfItems(); i++){
+                if()
+                mvaddstr((i - currentPos)*2 + 4, 2, currInv[i].item.getName().c_str());
+            }
+        }
+
+        for(unsigned int i = currentPos; i < currentPos + 5; i++){
+            if()
+            mvaddstr((i - currentPos)*2 + 4, 2, currInv[i].item.getName().c_str());
+        }
+
+        //Print Selected Options
+        attron(A_BOLD);
+        mvaddstr(4, 2, currInv[currentPos].item.getName().c_str());
+        attroff(A_BOLD);
+
+        int c = getch();
+        switch (c) {
+            case KEY_UP:
+                currentPos = (currentPos==0)? 0 : currentPos - 1;
+                break;
+            case KEY_DOWN:
+                currentPos = (currentPos == 65535)? 65535 : currentPos + 1;
+                break;
+            case 'z':
+
+                break;
+            case 'x':
+            case 'q':
+                return;
+                break;
+        }
+
+    }
+
     return;
 }
 

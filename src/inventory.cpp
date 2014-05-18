@@ -1,6 +1,6 @@
 #include "inventory.h"
 
-inventory::inventory() : _inventorySlots()
+inventory::inventory() : _inventorySlots(65536)
 {
     //ctor
 }
@@ -32,17 +32,22 @@ int inventory::removeItem(unsigned int id, unsigned int a){
 }
 
 void inventory::setItemAmount(unsigned int id, unsigned int c){
-    if(c == 0){
-        _inventorySlots.erase(id);
-        return;
-    }
-    if( _inventorySlots.find(id) == _inventorySlots.end())
+    if(_inventorySlots[id].count == -1)
         _inventorySlots[id].item = Item(id);
     _inventorySlots[id].count = c;
     return;
 }
 unsigned int inventory::getItemAmount(unsigned int id){
-    if( _inventorySlots.find(id) == _inventorySlots.end())
+    if(_inventorySlots[id].count == -1)
         return 0;
     return _inventorySlots[id].count;
+}
+
+unsigned int inventory::getNumOfItems(){
+    int cc = 0;
+    for(unsigned int i = 0; i < _inventorySlots.size(); i++){
+        if(_inventorySlots[i].count != 0 && _inventorySlots[i].count != -1)
+            cc++;
+    }
+    return cc;
 }

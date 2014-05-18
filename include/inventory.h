@@ -1,7 +1,7 @@
 #ifndef INVENTORY_H
 #define INVENTORY_H
 
-#include <map>
+#include <vector>
 #include <string>
 #include "item.h"
 #include "utils.h"
@@ -20,12 +20,12 @@ class inventory
         void setItemAmount(unsigned int, unsigned int);
         unsigned int getItemAmount(unsigned int);
 
-        unsigned int getNumOfItems() { return _inventorySlots.size(); };
+        unsigned int getNumOfItems();
 
+        const std::vector<inventorySlot>& getInventory() const { return _inventorySlots; };
     protected:
     private:
-
-        std::map<unsigned int, inventorySlot> _inventorySlots;
+        std::vector<inventorySlot> _inventorySlots;
 };
 
 #endif // INVENTORY_H
