@@ -77,7 +77,18 @@ void render::render_prompt(prompt P){
     attroff(A_BOLD);
 
     mvaddwstr(screen_max.m_y - 6, 1, P.getWhom().c_str());
-    mvaddwstr(screen_max.m_y - 4, 1, P.getMessage().c_str());
+
+    const wchar_t* inner = P.getMessage().c_str();
+    unsigned int cur = 1;
+    unsigned int line = 0;
+    while((*inner) != 0){
+        mvaddch(screen_max.m_y - 4 + line, cur, *inner);
+        cur++;inner++;
+        if(cur > screen_max.m_x - 2){
+            cur = 1;
+            line++;
+        }
+    }
     return;
 }
 

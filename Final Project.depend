@@ -388,7 +388,7 @@
 1399780742 source:c:\users\sonicyang\github\rpg\src\point.cpp
 	"point.h"
 
-1400520847 source:c:\users\sonicyang\github\rpg\src\render.cpp
+1400521333 source:c:\users\sonicyang\github\rpg\src\render.cpp
 	<curses.h>
 	"render.h"
 	"gmap.h"
