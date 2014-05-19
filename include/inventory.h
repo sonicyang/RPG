@@ -23,7 +23,7 @@ class inventory
 
         unsigned int getNumOfItems();
 
-        std::vector<std::string> getNameList();
+        std::vector<std::string> getNameList(unsigned int);
 
         const std::map<std::string, inventorySlot>& getInventory() const { return _inventorySlots; };
 

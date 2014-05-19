@@ -187,18 +187,26 @@ void Engine::invMenuRoutin(){
         for(int i = 3; i < 24; i++)mvaddch(i, 25, '|');
         mvaddstr(1, 35, "INVENTORY");
 
-        std::vector<std::string> nameList = inv.getNameList();
+        std::vector<std::string> nameList = inv.getNameList(currentPos);
 
         for (unsigned int i = 0; i < nameList.size(); i++){
             mvaddstr(i*2 + 4, 2, nameList[i].c_str());
         }
 
-
-
         //Print Selected Options
-        /*attron(A_BOLD);
-        mvaddstr(4, 2, currInv[currentPos].item.getName().c_str());
-        attroff(A_BOLD);*/
+        attron(A_BOLD);
+        mvaddstr(4, 2, nameList[0].c_str());
+        attroff(A_BOLD);
+
+        //Print Informations
+        mvaddstr(4, 27, "Name:");
+        mvaddstr(4, 33, inv[nameList[0]].item.getName().c_str());
+        mvaddstr(6, 27, "Currently Have:");
+        char tmp[10];
+        sprintf(tmp, "%d", inv[nameList[0]].count);
+        mvaddstr(6, 43, tmp);
+        mvaddstr(8, 27, "Name:");
+        mvaddstr(9, 33, inv[nameList[0]].item.getDescription().c_str());
 
         int c = getch();
         switch (c) {
@@ -206,7 +214,7 @@ void Engine::invMenuRoutin(){
                 currentPos = (currentPos==0)? 0 : currentPos - 1;
                 break;
             case KEY_DOWN:
-                currentPos = (currentPos == 65535)? 65535 : currentPos + 1;
+                currentPos = (currentPos == nameList.size() - 1 )? nameList.size() - 1 : currentPos + 1;
                 break;
             case 'z':
 

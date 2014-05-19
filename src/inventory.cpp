@@ -52,13 +52,14 @@ unsigned int inventory::getNumOfItems(){
     return _inventorySlots.size();
 }
 
-std::vector<std::string> inventory::getNameList(){
+std::vector<std::string> inventory::getNameList(unsigned int start){
     std::vector<std::string> tmp;
 
-    int i = 0;
-    for (auto it = _inventorySlots.cbegin(); it != _inventorySlots.cend() && i < 10; it++){
+    auto it = _inventorySlots.cbegin();
+    for(unsigned int i = 0; i < start; i++, it++);
+
+    for (int i = 0; it != _inventorySlots.cend() && i < 10; it++, i++){
         tmp.push_back((*it).first);
-        i++;
     }
 
     return tmp;
