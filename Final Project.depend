@@ -311,7 +311,7 @@
 	"render.h"
 	"controller.h"
 
-1400432210 c:\users\sonicyang\github\rpg\include\utils.h
+1400522622 c:\users\sonicyang\github\rpg\include\utils.h
 	<fstream>
 	<string>
 	<cerrno>
@@ -388,7 +388,7 @@
 1399780742 source:c:\users\sonicyang\github\rpg\src\point.cpp
 	"point.h"
 
-1400521333 source:c:\users\sonicyang\github\rpg\src\render.cpp
+1400521414 source:c:\users\sonicyang\github\rpg\src\render.cpp
 	<curses.h>
 	"render.h"
 	"gmap.h"

@@ -8,6 +8,14 @@
 #include <deque>
 #include "item.h"
 
+union parament{
+    int i;
+    unsigned int ui;
+    wchar_t* wcp;
+    char* cp;
+    std::string str;
+};
+
 struct inventorySlot{
     Item item;
     int count = -1;
