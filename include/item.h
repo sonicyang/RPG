@@ -8,7 +8,7 @@ class Item
 {
     public:
         Item();
-        Item(unsigned int);
+        Item(std::string);
         virtual ~Item();
         Item(const Item& other);
         Item& operator=(const Item& other);
@@ -16,11 +16,11 @@ class Item
         int useInBattle();
         int useOnMap();
 
-        unsigned int getID() { return _id; };
-        std::string getName() { return _name; };
-        std::string getDescription() { return _description; };
-        int getSalePrice() { return _price * 0.7; };
-        int gerBuyPrice() { return _price; };
+        unsigned int getID() const { return _id; };
+        std::string getName() const { return _name; };
+        std::string getDescription() const { return _description; };
+        int getSalePrice() const { return _price * 0.7; };
+        int gerBuyPrice() const { return _price; };
 
         bool isComsumable() { return _iscomsumable; };
 

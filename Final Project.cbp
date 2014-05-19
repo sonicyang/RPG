@@ -48,6 +48,7 @@
 		<Unit filename="include/engine.h" />
 		<Unit filename="include/eventcontroller.h" />
 		<Unit filename="include/gmap.h" />
+		<Unit filename="include/inventory.h" />
 		<Unit filename="include/item.h" />
 		<Unit filename="include/json/autolink.h" />
 		<Unit filename="include/json/config.h" />
@@ -77,6 +78,9 @@
 		</Unit>
 		<Unit filename="src/gmap.cpp">
 			<Option virtualFolder="src/model/" />
+		</Unit>
+		<Unit filename="src/inventory.cpp">
+			<Option virtualFolder="src/controller/" />
 		</Unit>
 		<Unit filename="src/item.cpp">
 			<Option virtualFolder="src/model/" />

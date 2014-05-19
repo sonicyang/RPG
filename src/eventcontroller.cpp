@@ -120,7 +120,7 @@ int eventController::execTopEvent(){
             userInputRequired = 0;
             break;
         case eventCode::grantItem:
-            ctlCallStack.push_back(loadStack(3, new int(svc::addItem), new int(atoi(ss[1].c_str())), new int(atoi(ss[2].c_str()))));
+            ctlCallStack.push_back(loadStack(3, new int(svc::addItem), stringToAllocChar(ss[1]), new int(atoi(ss[2].c_str()))));
             userInputRequired = 0;
             break;
     }

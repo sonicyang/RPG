@@ -1,5 +1,6 @@
-#include "item.h"
 #include <cstdlib>
+#include <string>
+#include "item.h"
 #include "utils.h"
 #include "json/value.h"
 #include "json/reader.h"
@@ -9,10 +10,10 @@ Item::Item() : _id(0xffffffff), _name("NULL"), _description("NULL Item"), _price
     //ctor
 }
 
-Item::Item(unsigned int id) : _id(id)
+Item::Item(std::string name)
 {
     char filename[256];
-    sprintf(filename, "data/items/%d", id);
+    sprintf(filename, "data/items/%s.item", name.c_str());
     std::string in = get_file_contents(filename);
 
     Json::Value root;
@@ -21,6 +22,7 @@ Item::Item(unsigned int id) : _id(id)
     if (stat){
         _name = root["Name"].asString();
         _description = root["Description"].asString();
+        _id = root["ID"].asInt();
         _price = root["Price"].asUInt();
         _iscomsumable = root["Comsumable"].asInt();
     }else{

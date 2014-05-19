@@ -12,7 +12,7 @@
 #include "render.h"
 #include "engine.h"
 
-Engine::Engine() : rdr(), ctlCall(), mapCtl("data/maps/maplist.lst", ctlCall), evtCtl("data/events/eventlist.lst", ctlCall)
+Engine::Engine() : rdr(), ctlCall(), mapCtl("data/maps/maplist.lst", ctlCall), evtCtl("data/events/eventlist.lst", ctlCall), inv()
 {
 }
 
@@ -65,16 +65,16 @@ bool Engine::processCtlCall(){
 				mapCtl.setPlayerPosition(Point(*(int*)(currCall[2]), *(int*)(currCall[3])));
 				break;
             case svc::addItem:
-                inv.addItem(*(unsigned int*)(currCall[1]), *(unsigned int*)(currCall[2]));
+                inv.addItem((char*)(currCall[1]), *(unsigned int*)(currCall[2]));
                 break;
             case svc::removeItem:
-                inv.removeItem(*(unsigned int*)(currCall[1]), *(unsigned int*)(currCall[2]));
+                inv.removeItem((char*)(currCall[1]), *(unsigned int*)(currCall[2]));
                 break;
             case svc::incItem:
-                inv.incItem(*(unsigned int*)(currCall[1]));
+                inv.incItem((char*)(currCall[1]));
                 break;
             case svc::decItem:
-                inv.decItem(*(unsigned int*)(currCall[1]));
+                inv.decItem((char*)(currCall[1]));
                 break;
 			case svc::endGame:
 				recycleMem(ctlCall);
@@ -187,24 +187,18 @@ void Engine::invMenuRoutin(){
         for(int i = 3; i < 24; i++)mvaddch(i, 25, '|');
         mvaddstr(1, 35, "INVENTORY");
 
-        std::vector<inventorySlot>currInv = inv.getInventory();
+        std::vector<std::string> nameList = inv.getNameList();
 
-        if(inv.getNumOfItems() < 5){
-            for(unsigned int i = currentPos; i < inv.getNumOfItems(); i++){
-                if()
-                mvaddstr((i - currentPos)*2 + 4, 2, currInv[i].item.getName().c_str());
-            }
+        for (unsigned int i = 0; i < nameList.size(); i++){
+            mvaddstr(i*2 + 4, 2, nameList[i].c_str());
         }
 
-        for(unsigned int i = currentPos; i < currentPos + 5; i++){
-            if()
-            mvaddstr((i - currentPos)*2 + 4, 2, currInv[i].item.getName().c_str());
-        }
+
 
         //Print Selected Options
-        attron(A_BOLD);
+        /*attron(A_BOLD);
         mvaddstr(4, 2, currInv[currentPos].item.getName().c_str());
-        attroff(A_BOLD);
+        attroff(A_BOLD);*/
 
         int c = getch();
         switch (c) {
