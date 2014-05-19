@@ -61,17 +61,23 @@ void render::render_Player(objPlayer mo){
 
 void render::render_prompt(prompt P){
     attron(A_BOLD);
-    mvaddstr(18, 0, "=========");
-    mvaddstr(19, 0, "|       |");
-    mvaddstr(20, 0, "================================================================================");
-    mvaddstr(21, 0, "|                                                                              |");
-    mvaddstr(22, 0, "|                                                                              |");
-    mvaddstr(23, 0, "|                                                                              |");
-    mvaddstr(24, 0, "================================================================================");
+    mvaddstr(screen_max.m_y - 7, 0, "=========");
+    mvaddstr(screen_max.m_y - 6, 0, "|       |");
+    for(unsigned int i = 0; i < screen_max.m_x ; i++)
+        mvaddch(screen_max.m_y - 5, i, '=');
+
+    for(int j = 4; j > 1; j--){
+        mvaddch(screen_max.m_y - j, 0, '|');
+        for(unsigned int i = 1; i < screen_max.m_x - 1; i++)mvaddch(screen_max.m_y - j, i, ' ');
+        mvaddch(screen_max.m_y - j, screen_max.m_x - 1, '|');
+    }
+
+    for(unsigned int i = 0; i < screen_max.m_x ; i++)
+        mvaddch(screen_max.m_y - 1, i, '=');
     attroff(A_BOLD);
 
-    mvaddwstr(19, 1, P.getWhom().c_str());
-    mvaddwstr(21, 1, P.getMessage().c_str());
+    mvaddwstr(screen_max.m_y - 6, 1, P.getWhom().c_str());
+    mvaddwstr(screen_max.m_y - 4, 1, P.getMessage().c_str());
     return;
 }
 
