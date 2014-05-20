@@ -11,6 +11,7 @@
 #include "json/value.h"
 #include "render.h"
 #include "engine.h"
+#include "variant.h"
 
 Engine::Engine() : rdr(), ctlCall(), mapCtl("data/maps/maplist.lst", ctlCall), evtCtl("data/events/eventlist.lst", ctlCall), inv()
 {
