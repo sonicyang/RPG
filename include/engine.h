@@ -13,6 +13,7 @@
 #include "objPlayer.h"
 #include "inventory.h"
 #include "utils.h"
+#include "variant.h"
 
 using namespace std;
 
@@ -31,7 +32,7 @@ class Engine
     private:
         render rdr;
 
-        std::deque< std::vector<void*> > ctlCall;
+        std::deque< std::vector< variant<int, unsigned int, char*, std::string> > > ctlCall;
 
         mapController mapCtl;
         eventController evtCtl;

@@ -41,8 +41,8 @@ void Engine::getParseUserInput(){
 bool Engine::processCtlCall(){
     while(ctlCall.size() > 0){
 
-		std::vector<void*>currCall = ctlCall.front();
-		int commd = *(int*)(currCall[0]);
+		std::vector< variant<int, unsigned int, char*, std::string> >currCall = ctlCall.front();
+		int commd = currCall[0].get<int>();
 		switch(commd){
 			case svc::loadEvent:
 				evtCtl.pushEvent((char*)(currCall[1]));

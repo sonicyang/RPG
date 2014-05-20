@@ -10,7 +10,7 @@
 
 using namespace std;
 
-mapController::mapController(std::string maplist, std::deque< std::vector<void*> >& s) : ctlCallStack(s)
+mapController::mapController(std::string maplist, std::deque< std::vector< variant<int, unsigned int, char*, std::string> > >& s) : ctlCallStack(s)
 {
     std::string in = get_file_contents(maplist.c_str());
 

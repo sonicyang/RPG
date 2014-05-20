@@ -4,12 +4,13 @@
 #include "gmap.h"
 #include "mapObject.h"
 #include "objPLayer.h"
+#include "variant.h"
 #include "point.h"
 
 class mapController
 {
     public:
-        mapController(std::string maplist, std::deque< std::vector<void*> >&);
+        mapController(std::string maplist, std::deque< std::vector< variant<int, unsigned int, char*, std::string> > >&);
         ~mapController();
 
         int processInput(int c);
@@ -40,7 +41,7 @@ class mapController
 
         Point getPlayerFacing();
 
-        std::deque< std::vector<void*> >& ctlCallStack;
+        std::deque< std::vector< variant<int, unsigned int, char*, std::string> > >& ctlCallStack;
 };
 
 #endif // MAPCONTROLLER_H

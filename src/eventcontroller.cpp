@@ -10,7 +10,7 @@
 
 using namespace std;
 
-eventController::eventController(std::string eventlist, std::deque< std::vector<void*> >& s) : ctlCallStack(s), userInputRequired(0)
+eventController::eventController(std::string eventlist, std::deque< std::vector< variant<int, unsigned int, char*, std::string> > >& s) : ctlCallStack(s), userInputRequired(0)
 {
 	std::string in = get_file_contents(eventlist.c_str());
 
