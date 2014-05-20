@@ -10,7 +10,7 @@
 
 using namespace std;
 
-eventController::eventController(std::string eventlist, std::deque< std::vector< variant<int, unsigned int, char*, std::string> > >& s) : ctlCallStack(s), userInputRequired(0)
+eventController::eventController(std::string eventlist, std::deque< std::vector< variant<int, unsigned int, std::wstring, std::string> > >& s) : ctlCallStack(s), userInputRequired(0)
 {
 	std::string in = get_file_contents(eventlist.c_str());
 
@@ -108,19 +108,19 @@ int eventController::execTopEvent(){
             currBattle.exec();
             return 0;*/
         case eventCode::showPrompt:
-            ctlCallStack.push_back(loadStack(3, new int(svc::loadPrompt), UTF8_to_WChar(ss[2].c_str()), UTF8_to_WChar(ss[1].c_str())));
+            ctlCallStack.push_back(loadStack(svc::loadPrompt, std::wstring(UTF8_to_WChar(ss[2].c_str())), std::wstring(UTF8_to_WChar(ss[1].c_str()))));
             userInputRequired = 1;
             break;
         case eventCode::endEvent:
-            ctlCallStack.push_back(loadStack(1, new int(svc::clearPrompt)));
-            ctlCallStack.push_back(loadStack(1, new int(svc::restoreStat)));
+            ctlCallStack.push_back(loadStack(svc::clearPrompt));
+            ctlCallStack.push_back(loadStack(svc::restoreStat));
             break;
         case eventCode::transferMap:
-            ctlCallStack.push_back(loadStack(4, new int(svc::changeMap), stringToAllocChar(ss[1]), new int(atoi(ss[2].c_str())), new int(atoi(ss[3].c_str()))));
+            ctlCallStack.push_back(loadStack(svc::changeMap, ss[1], atoi(ss[2].c_str()), atoi(ss[3].c_str())));
             userInputRequired = 0;
             break;
         case eventCode::grantItem:
-            ctlCallStack.push_back(loadStack(3, new int(svc::addItem), stringToAllocChar(ss[1]), new int(atoi(ss[2].c_str()))));
+            ctlCallStack.push_back(loadStack(svc::addItem, ss[1], atoi(ss[2].c_str())));
             userInputRequired = 0;
             break;
     }

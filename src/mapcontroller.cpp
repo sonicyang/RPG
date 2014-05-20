@@ -10,7 +10,7 @@
 
 using namespace std;
 
-mapController::mapController(std::string maplist, std::deque< std::vector< variant<int, unsigned int, char*, std::string> > >& s) : ctlCallStack(s)
+mapController::mapController(std::string maplist, std::deque< std::vector< variant<int, unsigned int, std::wstring, std::string> > >& s) : ctlCallStack(s)
 {
     std::string in = get_file_contents(maplist.c_str());
 
@@ -39,8 +39,7 @@ mapController::~mapController()
     //dtor
 }
 
-void mapController::setCurrentMap(char * a){
-    std::string nn(a);
+void mapController::setCurrentMap(std::string a){
     if(map_list.find(a) != map_list.end())
         currentMap = a;
 }

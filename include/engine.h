@@ -32,7 +32,7 @@ class Engine
     private:
         render rdr;
 
-        std::deque< std::vector< variant<int, unsigned int, char*, std::string> > > ctlCall;
+        std::deque< std::vector< variant<int, unsigned int, std::wstring, std::string> > > ctlCall;
 
         mapController mapCtl;
         eventController evtCtl;

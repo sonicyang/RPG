@@ -10,13 +10,13 @@
 class mapController
 {
     public:
-        mapController(std::string maplist, std::deque< std::vector< variant<int, unsigned int, char*, std::string> > >&);
+        mapController(std::string maplist, std::deque< std::vector< variant<int, unsigned int, std::wstring, std::string> > >&);
         ~mapController();
 
         int processInput(int c);
 
         const gmap& getCurrentMap();
-        void setCurrentMap(char *);
+        void setCurrentMap(std::string);
 
         int setPlayerPosition(Point a);
         Point getPlayerPosition();
@@ -41,7 +41,7 @@ class mapController
 
         Point getPlayerFacing();
 
-        std::deque< std::vector< variant<int, unsigned int, char*, std::string> > >& ctlCallStack;
+        std::deque< std::vector< variant<int, unsigned int, std::wstring, std::string> > >& ctlCallStack;
 };
 
 #endif // MAPCONTROLLER_H

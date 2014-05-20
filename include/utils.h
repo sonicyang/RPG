@@ -7,6 +7,7 @@
 #include <vector>
 #include <deque>
 #include "item.h"
+#include "variant.h"
 
 union parament{
     int i;
@@ -67,9 +68,50 @@ enum eventCode{
     grantItem
 };
 
-char* stringToAllocChar(std::string);
-void recycleMem(std::deque< std::vector<void*> >);
-std::vector<void*> loadStack(unsigned int n, ... );
+char* stringToAllocChar(std::string);  //deceprated
+void recycleMem(std::deque< std::vector<void*> >); //deceprated
+
+template<typename... Args>
+std::vector< variant<int, unsigned int, std::wstring, std::string> > loadStack(int n, Args... args){
+    std::vector< variant<int, unsigned int, std::wstring, std::string> > stk;
+
+    variant<int, unsigned int, std::wstring, std::string> tmp;
+    tmp.set<int>(n);
+    stk.push_back(tmp);
+
+    if(sizeof...(Args) > 0)
+        loadStackR(stk, args...);
+
+    return stk;
+}
+
+template<typename T, typename... Args>
+void loadStackR(std::vector< variant<int, unsigned int, std::wstring, std::string> >& stk, T a, Args... args){
+
+    variant<int, unsigned int, std::wstring, std::string> tmp;
+    tmp.set<T>(a);
+    stk.push_back(tmp);
+
+    loadStackR(stk, args...);
+
+    return;
+}
+
+template<typename T>
+void loadStackR(std::vector< variant<int, unsigned int, std::wstring, std::string> >& stk, T a){
+
+    variant<int, unsigned int, std::wstring, std::string> tmp;
+    tmp.set<T>(a);
+    stk.push_back(tmp);
+
+    return;
+}
+
+inline void loadStackR(std::vector< variant<int, unsigned int, std::wstring, std::string> >& stk){
+
+    return;
+}
+
 
 std::string get_file_contents(const char*);
 std::vector<std::string> &split(const std::string &s, char delim, std::vector<std::string> &elems);

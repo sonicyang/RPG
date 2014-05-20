@@ -41,11 +41,12 @@ void Engine::getParseUserInput(){
 bool Engine::processCtlCall(){
     while(ctlCall.size() > 0){
 
-		std::vector< variant<int, unsigned int, char*, std::string> >currCall = ctlCall.front();
+		std::vector< variant<int, unsigned int, std::wstring, std::string> >currCall = ctlCall.front();
+
 		int commd = currCall[0].get<int>();
 		switch(commd){
 			case svc::loadEvent:
-				evtCtl.pushEvent((char*)(currCall[1]));
+				evtCtl.pushEvent(currCall[1].get<std::string>());
 				break;
 			case svc::restoreStat:
 				evtCtl.popEventStack();
@@ -53,38 +54,38 @@ bool Engine::processCtlCall(){
 				this->restoreStat();
 				break;
 			case svc::setStat:
-				this->setStat(*(int*)(currCall[1]));
+				this->setStat(currCall[1].get<int>());
 				break;
 			case svc::loadPrompt:
-				prom.loadMessaage((wchar_t*)(currCall[1]), (wchar_t*)(currCall[2]));
+				prom.loadMessaage(currCall[1].get<std::wstring>(), currCall[2].get<std::wstring>());
 				break;
 			case svc::clearPrompt:
 				prom.discardMessage();
 				break;
 			case svc::changeMap:
-				mapCtl.setCurrentMap((char*)(currCall[1]));
-				mapCtl.setPlayerPosition(Point(*(int*)(currCall[2]), *(int*)(currCall[3])));
+				mapCtl.setCurrentMap(currCall[1].get<std::string>());
+				mapCtl.setPlayerPosition(Point(currCall[2].get<int>(), currCall[3].get<int>()));
 				break;
             case svc::addItem:
-                inv.addItem((char*)(currCall[1]), *(unsigned int*)(currCall[2]));
+                inv.addItem(currCall[1].get<std::string>(), currCall[2].get<unsigned int>());
                 break;
             case svc::removeItem:
-                inv.removeItem((char*)(currCall[1]), *(unsigned int*)(currCall[2]));
+                inv.removeItem(currCall[1].get<std::string>(), currCall[2].get<unsigned int>());
                 break;
             case svc::incItem:
-                inv.incItem((char*)(currCall[1]));
+                inv.incItem(currCall[1].get<std::string>());
                 break;
             case svc::decItem:
-                inv.decItem((char*)(currCall[1]));
+                inv.decItem(currCall[1].get<std::string>());
                 break;
 			case svc::endGame:
-				recycleMem(ctlCall);
+				//recycleMem(ctlCall);
 				return 0;
 				break;
 		}
 
-		for(unsigned int i = 0; i < currCall.size(); i++)
-			free(currCall[i]);
+		//for(unsigned int i = 0; i < currCall.size(); i++)
+			//free(currCall[i]);
 
 		ctlCall.pop_front();
     }
