@@ -41,9 +41,9 @@ void Engine::getParseUserInput(){
 bool Engine::processCtlCall(){
     while(ctlCall.size() > 0){
 
-		std::vector< variant<int, unsigned int, std::wstring, std::string> >currCall = ctlCall.front();
+		std::vector< variant<paraVarType> >currCall = ctlCall.front();
 
-		int commd = currCall[0].get<int>();
+		int commd = currCall[0].get<svc>();
 		switch(commd){
 			case svc::loadEvent:
 				evtCtl.pushEvent(currCall[1].get<std::string>());
@@ -54,10 +54,10 @@ bool Engine::processCtlCall(){
 				this->restoreStat();
 				break;
 			case svc::setStat:
-				this->setStat(currCall[1].get<int>());
+				this->setStat(currCall[1].get<Stats>());
 				break;
 			case svc::loadPrompt:
-				prom.loadMessaage(currCall[1].get<std::wstring>(), currCall[2].get<std::wstring>());
+				prom.loadMessaage(currCall[1].get<wchar_t*>(), currCall[2].get<wchar_t*>());
 				break;
 			case svc::clearPrompt:
 				prom.discardMessage();
@@ -67,10 +67,10 @@ bool Engine::processCtlCall(){
 				mapCtl.setPlayerPosition(Point(currCall[2].get<int>(), currCall[3].get<int>()));
 				break;
             case svc::addItem:
-                inv.addItem(currCall[1].get<std::string>(), currCall[2].get<unsigned int>());
+                inv.addItem(currCall[1].get<std::string>(), currCall[2].get<int>());
                 break;
             case svc::removeItem:
-                inv.removeItem(currCall[1].get<std::string>(), currCall[2].get<unsigned int>());
+                inv.removeItem(currCall[1].get<std::string>(), currCall[2].get<int>());
                 break;
             case svc::incItem:
                 inv.incItem(currCall[1].get<std::string>());
@@ -159,7 +159,7 @@ void Engine::menuRutin(){
                             prom.loadMessaage(L"Bye", L"System");
                             rdr.render_prompt(prom);
                             getch();
-                            ctlCall.push_back(loadStack(1, new int(svc::endGame)));
+                            ctlCall.push_back(loadStack(svc::endGame));
                             prom.discardMessage();
                             return;
                         }
@@ -169,7 +169,7 @@ void Engine::menuRutin(){
                 break;
             case 'x':
             case 'q':
-                ctlCall.push_back(loadStack(1, new int(svc::clearPrompt)));
+                ctlCall.push_back(loadStack(svc::clearPrompt));
                 return;
                 break;
         }

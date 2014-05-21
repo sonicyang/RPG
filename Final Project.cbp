@@ -66,6 +66,7 @@
 		<Unit filename="include/render.h" />
 		<Unit filename="include/utf8.h" />
 		<Unit filename="include/utils.h" />
+		<Unit filename="include/variant.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/array2d.cpp">
 			<Option virtualFolder="src/tools/" />

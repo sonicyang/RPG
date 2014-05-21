@@ -11,7 +11,7 @@
 class eventController
 {
     public:
-        eventController(std::string event_list, std::deque< std::vector< variant<int, unsigned int, std::wstring, std::string> > >&);
+        eventController(std::string event_list, std::deque< std::vector< variant<paraVarType> > >&);
         ~eventController();
 
         int processInput(int c);
@@ -24,7 +24,7 @@ class eventController
     protected:
     private:
          std::vector<event> eventStack;
-         std::deque< std::vector< variant<int, unsigned int, std::wstring, std::string> > >& ctlCallStack;
+         std::deque< std::vector< variant<paraVarType> > >& ctlCallStack;
 
          std::map<std::string, event> event_list;
          unsigned event_count;

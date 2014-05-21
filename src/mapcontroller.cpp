@@ -10,7 +10,7 @@
 
 using namespace std;
 
-mapController::mapController(std::string maplist, std::deque< std::vector< variant<int, unsigned int, std::wstring, std::string> > >& s) : ctlCallStack(s)
+mapController::mapController(std::string maplist, std::deque< std::vector< variant<paraVarType> > >& s) : ctlCallStack(s)
 {
     std::string in = get_file_contents(maplist.c_str());
 
@@ -61,16 +61,16 @@ int mapController::processInput(int c){
         case 'z':
             if(isPlayerFacingObject()){
                 if(getPlayerFacingObject().getTriggerType() == buttonTrig){
-                    ctlCallStack.push_back(loadStack(2, new int(svc::setStat), new int(inEvent)));
-                    ctlCallStack.push_back(loadStack(2, new int(svc::loadEvent), stringToAllocChar(getPlayerFacingObject().getTrigger())));
+                    ctlCallStack.push_back(loadStack(svc::setStat, Stats::inEvent));
+                    ctlCallStack.push_back(loadStack(svc::loadEvent, getPlayerFacingObject().getTrigger()));
                 }
             }
             break;
         case KEY_END:
-            ctlCallStack.push_back(loadStack(1, new int(svc::endGame)));
+            ctlCallStack.push_back(loadStack(svc::endGame));
             break;
         case 'q':
-        	ctlCallStack.push_back(loadStack(2, new int(svc::setStat), new int(menu)));
+        	ctlCallStack.push_back(loadStack(svc::setStat, Stats::menu));
             break;
     }
     return 0;
@@ -89,8 +89,8 @@ int mapController::setPlayerPosition(Point a){
 
     if(isPlayerOnObject()){
         if(getPlayerOnObject().getTriggerType() == stepOnTrig){
-            ctlCallStack.push_back(loadStack(2, new int(svc::setStat), new int(inEvent)));
-            ctlCallStack.push_back(loadStack(2, new int(svc::loadEvent), stringToAllocChar(getPlayerOnObject().getTrigger())));
+            ctlCallStack.push_back(loadStack(svc::setStat, Stats::inEvent));
+            ctlCallStack.push_back(loadStack(svc::loadEvent, getPlayerOnObject().getTrigger()));
         }
     }
 

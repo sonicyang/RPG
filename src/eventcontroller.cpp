@@ -10,7 +10,7 @@
 
 using namespace std;
 
-eventController::eventController(std::string eventlist, std::deque< std::vector< variant<int, unsigned int, std::wstring, std::string> > >& s) : ctlCallStack(s), userInputRequired(0)
+eventController::eventController(std::string eventlist, std::deque< std::vector< variant<paraVarType> > >& s) : ctlCallStack(s), userInputRequired(0)
 {
 	std::string in = get_file_contents(eventlist.c_str());
 
@@ -74,10 +74,10 @@ int eventController::processInput(int c){
                 execTopEvent();
                 break;
             case 'x':
-                ctlCallStack.push_back(loadStack(1, new int(svc::restoreStat)));
+                ctlCallStack.push_back(loadStack(svc::restoreStat));
                 break;
             case KEY_END:
-                ctlCallStack.push_back(loadStack(1, new int(svc::endGame)));
+                ctlCallStack.push_back(loadStack(svc::endGame));
                 break;
         }
     }else{
@@ -95,7 +95,7 @@ void eventController::popEventStack(){
 
 int eventController::execTopEvent(){
     if(eventStack.back().stk.size() == 0){
-        ctlCallStack.push_back(loadStack(1, new int(svc::restoreStat)));
+        ctlCallStack.push_back(loadStack(svc::restoreStat));
         return -1;
     }
 
@@ -108,7 +108,7 @@ int eventController::execTopEvent(){
             currBattle.exec();
             return 0;*/
         case eventCode::showPrompt:
-            ctlCallStack.push_back(loadStack(svc::loadPrompt, std::wstring(UTF8_to_WChar(ss[2].c_str())), std::wstring(UTF8_to_WChar(ss[1].c_str()))));
+            ctlCallStack.push_back(loadStack(svc::loadPrompt, UTF8_to_WChar(ss[2].c_str()), UTF8_to_WChar(ss[1].c_str())));
             userInputRequired = 1;
             break;
         case eventCode::endEvent:

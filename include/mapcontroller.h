@@ -10,7 +10,7 @@
 class mapController
 {
     public:
-        mapController(std::string maplist, std::deque< std::vector< variant<int, unsigned int, std::wstring, std::string> > >&);
+        mapController(std::string maplist, std::deque< std::vector< variant<paraVarType> > >&);
         ~mapController();
 
         int processInput(int c);
@@ -41,7 +41,7 @@ class mapController
 
         Point getPlayerFacing();
 
-        std::deque< std::vector< variant<int, unsigned int, std::wstring, std::string> > >& ctlCallStack;
+        std::deque< std::vector< variant<paraVarType> > >& ctlCallStack;
 };
 
 #endif // MAPCONTROLLER_H
