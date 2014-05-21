@@ -191,8 +191,10 @@ void Engine::invMenuRoutin(){
 
         std::vector<std::string> nameList = inv.getNameList(currentPos);
 
-        if(nameList.empty())
+        if(nameList.empty()){
+            while(getch()!='x');
             return;
+        }
 
         for (unsigned int i = 0; i < nameList.size(); i++){
             mvaddstr(i*2 + 4, 2, nameList[i].c_str());
