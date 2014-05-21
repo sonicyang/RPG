@@ -32,7 +32,7 @@ void render::render_map(gmap toRender){
                 mvaddch(i + offset.m_y, j*2 + offset.m_x, toRender.Getdata()[i][j]);
                 insch(' ');
             }else{
-                mvaddutf8(i + offset.m_y, j + offset.m_x, toRender.Getdata()[i][j]);
+                mvaddch(i + offset.m_y, j + offset.m_x, toRender.Getdata()[i][j]);
              }
          }
      }
@@ -43,20 +43,20 @@ void render::render_map(gmap toRender){
             mvaddch(it->first.m_y + offset.m_y, it->first.m_x + offset.m_x, it->second.Geticon());
             insch(' ');
         }else{
-            mvaddutf8(it->first.m_y + offset.m_y, it->first.m_x + offset.m_x, it->second.Geticon());
+            mvaddch(it->first.m_y + offset.m_y, it->first.m_x + offset.m_x, it->second.Geticon());
         }
 
     }
 
     return;
-} 
+}
 
  void render::render_Player(objPlayer mo){
     if(mo.Geticon() < 128){
         mvaddch(mo.GetCord().Get_y() + offset.m_y, mo.GetCord().Get_x() + offset.m_x, mo.Geticon());
         insch(' ');
     }else{
-        mvaddutf8(mo.GetCord().Get_y() + offset.m_y, mo.GetCord().Get_x() + offset.m_x, mo.Geticon());
+        mvaddch(mo.GetCord().Get_y() + offset.m_y, mo.GetCord().Get_x() + offset.m_x, mo.Geticon());
     }
 
     move(24,50);
@@ -102,11 +102,11 @@ void render::update(){
 }
 
 void render::mvaddutf8(int y, int x, wchar_t wc){
-    cchar_t c;
+    /*cchar_t c;
     c.attr = 0;
     c.chars[0] = wc;
     c.chars[1] = L'\0';
 
-    mvadd_wch(y, x, &c);
+    mvadd_wch(y, x, &c);*/
 }
 

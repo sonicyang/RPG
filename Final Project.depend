@@ -212,7 +212,7 @@
 	<cstring>
 	"chararray2d.h"
 
-1400157545 source:c:\users\sonicyang\github\rpg\main.cpp
+1400686478 source:c:\users\sonicyang\github\rpg\main.cpp
 	<iostream>
 	<curses.h>
 	<cstdlib>
@@ -222,6 +222,7 @@
 	"point.h"
 	"engine.h"
 	<unistd.h>
+	<locale.h>
 
 1268379096 c:\users\sonicyang\github\rpg\include\json\reader.h
 	"features.h"
@@ -282,7 +283,7 @@
 	"objPlayer.h"
 	"utils.h"
 
-1400156660 c:\users\sonicyang\github\rpg\include\render.h
+1400686478 c:\users\sonicyang\github\rpg\include\render.h
 	<curses.h>
 	"point.h"
 	"gmap.h"
@@ -390,11 +391,12 @@
 1399780742 source:c:\users\sonicyang\github\rpg\src\point.cpp
 	"point.h"
 
-1400521414 source:c:\users\sonicyang\github\rpg\src\render.cpp
+1400687719 source:c:\users\sonicyang\github\rpg\src\render.cpp
 	<curses.h>
 	"render.h"
 	"gmap.h"
 	"point.h"
+	<locale.h>
 
 1400609442 source:c:\users\sonicyang\github\rpg\src\utils.cpp
 	<fstream>
@@ -718,7 +720,7 @@
 	"point.h"
 	<string>
 
-1400655497 source:c:\users\sonicyang\github\rpg\src\engine.cpp
+1400692706 source:c:\users\sonicyang\github\rpg\src\engine.cpp
 	<curses.h>
 	<cstdlib>
 	<string>
@@ -795,4 +797,9 @@
 1400655110 c:\users\sonicyang\github\rpg\include\enum.h
 	<string>
 	<vector>
+
+1400666376 source:c:\users\sonicyang\github\rpg\src\menu.cpp
+	"menu.h"
+
+1400666376 c:\users\sonicyang\github\rpg\include\menu.h
 

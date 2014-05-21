@@ -70,13 +70,25 @@ bool Engine::processCtlCall(){
                 inv.addItem(currCall[1].get<std::string>(), currCall[2].get<int>());
                 break;
             case svc::removeItem:
-                inv.removeItem(currCall[1].get<std::string>(), currCall[2].get<int>());
+                if(inv.removeItem(currCall[1].get<std::string>(), currCall[2].get<int>()) == -1){
+                    ctlCall.push_back(loadStack(svc::restoreStat));
+
+                    std::string s("notEnoughItemHook");
+                    ctlCall.push_back(loadStack(svc::loadEvent, s));
+                    ctlCall.push_back(loadStack(svc::setStat, Stats::inEvent));
+                }
                 break;
             case svc::incItem:
                 inv.incItem(currCall[1].get<std::string>());
                 break;
             case svc::decItem:
-                inv.decItem(currCall[1].get<std::string>());
+                if(inv.decItem(currCall[1].get<std::string>()) == -1){
+                    ctlCall.push_back(loadStack(svc::restoreStat));
+
+                    std::string s("notEnoughItemHook");
+                    ctlCall.push_back(loadStack(svc::loadEvent, s));
+                    ctlCall.push_back(loadStack(svc::setStat, Stats::inEvent));
+                }
                 break;
 			case svc::endGame:
 				//recycleMem(ctlCall);

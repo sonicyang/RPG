@@ -1,0 +1,8 @@
+{
+	"Name" : "notEnoughItemHook",
+	"triggerType" : 1,
+	"Command" : [
+				"01|System|You Don't Have enough Items...",
+				"02"
+				]
+}
