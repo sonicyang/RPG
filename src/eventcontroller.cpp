@@ -119,8 +119,12 @@ int eventController::execTopEvent(){
             ctlCallStack.push_back(loadStack(svc::changeMap, ss[1], atoi(ss[2].c_str()), atoi(ss[3].c_str())));
             userInputRequired = 0;
             break;
-        case eventCode::grantItem:
+        case eventCode::addItem:
             ctlCallStack.push_back(loadStack(svc::addItem, ss[1], atoi(ss[2].c_str())));
+            userInputRequired = 0;
+            break;
+        case eventCode::removeItem:
+            ctlCallStack.push_back(loadStack(svc::removeItem, ss[1], atoi(ss[2].c_str())));
             userInputRequired = 0;
             break;
     }

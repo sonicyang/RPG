@@ -48,11 +48,4 @@ enum svc{
     endGame = 255       //
 };
 
-enum eventCode{
-    showPrompt = 1, // whom, data
-    endEvent,
-    transferMap, //  mapName, x, y
-    grantItem
-};
-
 #endif // ENUM_H_INCLUDED

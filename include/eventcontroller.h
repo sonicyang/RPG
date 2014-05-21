@@ -23,13 +23,23 @@ class eventController
 
     protected:
     private:
-         std::vector<event> eventStack;
-         std::deque< std::vector< variant<paraVarType> > >& ctlCallStack;
+        std::vector<event> eventStack;
+        std::deque< std::vector< variant<paraVarType> > >& ctlCallStack;
 
-         std::map<std::string, event> event_list;
-         unsigned event_count;
+        std::map<std::string, event> event_list;
+        unsigned event_count;
 
-         int userInputRequired;
+        int userInputRequired;
+
+
+        //sspreate form the rest to avoid naming collison
+        enum eventCode{
+            showPrompt = 1, // whom, data
+            endEvent,
+            transferMap, //  mapName, x, y
+            addItem,
+            removeItem
+        };
 
 };
 
