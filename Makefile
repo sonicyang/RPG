@@ -8,15 +8,15 @@ JSONSRC = $(PWD)/src/lib_json
 
 # Include flags
 INCLUDE = -I $(PWD)/include
-INCLUDE += $(shell pkg-config --cflags ncurses)
+INCLUDE += $(shell pkg-config --cflags ncursesw)
 
 # Libs flags
-LIB += $(shell pkg-config --libs ncurses)
+LIB += $(shell pkg-config --libs ncursesw)
 LIB += -lcurses
 
 OBJDIR = $(PWD)/obj/
 
-OBJ = main.o array2d.o engine.o eventcontroller.o gmap.o mapcontroller.o mapobject.o objplayer.o point.o prompt.o render.o utils.o
+OBJ = main.o array2d.o engine.o inventory.o item.o eventcontroller.o gmap.o mapcontroller.o mapobject.o objplayer.o point.o prompt.o render.o utils.o utf8.o
 OBJ += json_reader.o json_value.o json_writer.o
 
 

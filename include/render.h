@@ -26,6 +26,8 @@ class render
         WINDOW* scr;
         Point screen_max;
         Point offset;
+
+        void mvaddutf8(int y, int x, wchar_t);
 };
 
 #endif // RENDER_H

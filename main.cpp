@@ -8,6 +8,10 @@
 #include "point.h"
 #include "engine.h"
 #include <unistd.h>
+#include <locale.h>
+
+//For the sake of NcursesW
+#define _XOPEN_SOURCE_EXTENDED
 
 using namespace std;
 
@@ -84,7 +88,8 @@ int startMenu(){
 
 
 int main()
-{
+{ 
+    setlocale(LC_ALL, "");
     Engine gCtl;
     cbreak();
     noecho();

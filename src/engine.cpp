@@ -221,7 +221,7 @@ void Engine::invMenuRoutin(){
         char tmp[10];
         sprintf(tmp, "%d", inv[nameList[0]].count);
         mvaddstr(6, 43, tmp);
-        mvaddstr(8, 27, "Name:");
+        mvaddstr(8, 27, "Description:");
         mvaddstr(9, 33, inv[nameList[0]].item.getDescription().c_str());
 
         int c = getch();

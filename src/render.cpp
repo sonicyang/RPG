@@ -1,10 +1,14 @@
+#define _XOPEN_SOURCE_EXTENDED
+
 #include <curses.h>
 #include "render.h"
 #include "gmap.h"
 #include "point.h"
+#include <locale.h>
 
 render::render() : offset(0,0)
 {
+    setlocale(LC_ALL, "");
     scr = initscr();
     getmaxyx(scr, screen_max.m_y, screen_max.m_x);
 }
@@ -28,10 +32,10 @@ void render::render_map(gmap toRender){
                 mvaddch(i + offset.m_y, j*2 + offset.m_x, toRender.Getdata()[i][j]);
                 insch(' ');
             }else{
-                mvaddch(i + offset.m_y, j + offset.m_x, toRender.Getdata()[i][j]);
-            }
-        }
-    }
+                mvaddutf8(i + offset.m_y, j + offset.m_x, toRender.Getdata()[i][j]);
+             }
+         }
+     }
 
     std::map<Point,mapObject>::const_iterator it = toRender.getObjects().begin();
     for(; it != toRender.getObjects().end(); it++){
@@ -39,20 +43,20 @@ void render::render_map(gmap toRender){
             mvaddch(it->first.m_y + offset.m_y, it->first.m_x + offset.m_x, it->second.Geticon());
             insch(' ');
         }else{
-            mvaddch(it->first.m_y + offset.m_y, it->first.m_x + offset.m_x, it->second.Geticon());
+            mvaddutf8(it->first.m_y + offset.m_y, it->first.m_x + offset.m_x, it->second.Geticon());
         }
 
     }
 
     return;
-}
+} 
 
-void render::render_Player(objPlayer mo){
+ void render::render_Player(objPlayer mo){
     if(mo.Geticon() < 128){
         mvaddch(mo.GetCord().Get_y() + offset.m_y, mo.GetCord().Get_x() + offset.m_x, mo.Geticon());
         insch(' ');
     }else{
-        mvaddch(mo.GetCord().Get_y() + offset.m_y, mo.GetCord().Get_x() + offset.m_x, mo.Geticon());
+        mvaddutf8(mo.GetCord().Get_y() + offset.m_y, mo.GetCord().Get_x() + offset.m_x, mo.Geticon());
     }
 
     move(24,50);
@@ -96,3 +100,13 @@ void render::update(){
     refresh();
     return;
 }
+
+void render::mvaddutf8(int y, int x, wchar_t wc){
+    cchar_t c;
+    c.attr = 0;
+    c.chars[0] = wc;
+    c.chars[1] = L'\0';
+
+    mvadd_wch(y, x, &c);
+}
+
