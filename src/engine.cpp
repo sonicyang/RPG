@@ -94,8 +94,17 @@ bool Engine::processCtlCall(){
 }
 
 void Engine::updateScreen(){
-    rdr.render_map(mapCtl.getCurrentMap());
-    rdr.render_Player(mapCtl.getPlayer());
+    switch(stat){
+        case Stats::onMap:
+        case Stats::inEvent:
+            rdr.render_map(mapCtl.getCurrentMap());
+            rdr.render_Player(mapCtl.getPlayer());
+            break;
+        case Stats::menu:
+
+            break;
+    }
+
     if(prom.hasMessage()){
         rdr.render_prompt(prom);
     }
