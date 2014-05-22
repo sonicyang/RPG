@@ -15,16 +15,20 @@ class Team
 
         std::vector<std::string> getNameList();
 
-        const Character operator[](std::string subscript) { return _team[subscript]; };
+        const Character operator[](std::string subscript);
+
+        void addCharToTeam(std::string);
+        void removeCharFromTeam(std::string);
     protected:
     private:
-
         RoleFactory roleCache;
 
         std::map<std::string, Character> _team;
 
         unsigned int _cacheCount;
         std::map<std::string, Character> _cache;
+
+        Character null;
 };
 
 #endif // TEAM_H

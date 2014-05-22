@@ -173,6 +173,18 @@ int eventController::execTopEvent(){
             varMap[ss[1]].set<int>(varMap[ss[2]].get<int>());
             userInputRequired = 0;
             break;
+        case eventCode::set:
+            varMap[ss[1]].set<int>(atoi(ss[2].c_str()));
+            userInputRequired = 0;
+            break;
+        case eventCode::addCharToTeam:
+            ctlCallStack.push_back(loadStack(svc::addCharToTeam, ss[1]));
+            userInputRequired = 0;
+            break;
+        case eventCode::removeCharFromTeam:
+            ctlCallStack.push_back(loadStack(svc::removeCharFromTeam, ss[1]));
+            userInputRequired = 0;
+            break;
     }
 
     currentEvent.pc++;

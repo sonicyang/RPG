@@ -4,5 +4,5 @@
 			 {"Name" : "George", "Role" : "GeneralPlayer", "Level" : 1}
 	
 			],
-	"Default" : ["Alex", "George"]
+	"Default" : ["Alex"]
 }

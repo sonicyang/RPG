@@ -13,7 +13,12 @@
 #include "engine.h"
 #include "variant.h"
 
-Engine::Engine() : rdr(), ctlCall(), mapCtl("data/maps/maplist.lst", ctlCall), evtCtl("data/events/eventlist.lst", ctlCall, varMap), inv(), team("data/team/team_list.lst")
+Engine::Engine() :
+    rdr(), ctlCall(),
+    mapCtl("data/maps/maplist.lst", ctlCall),
+    evtCtl("data/events/eventlist.lst", ctlCall, varMap),
+    inv(),
+    team("data/team/team_list.lst")
 {
 }
 
@@ -80,25 +85,27 @@ bool Engine::processCtlCall(){
                 break;
             case svc::removeItem:
                 ret = inv.removeItem(currCall[1].get<std::string>(), currCall[2].get<int>());
-                /*
-                    ctlCall.push_back(loadStack(svc::restoreStat));
-
-                    std::string s("notEnoughItemHook");
-                    ctlCall.push_back(loadStack(svc::loadEvent, s));
-                    ctlCall.push_back(loadStack(svc::setStat, Stats::inEvent));
-                */
                 break;
             case svc::incItem:
                 inv.incItem(currCall[1].get<std::string>());
+                ret = 1;
                 break;
             case svc::decItem:
                 ret = inv.decItem(currCall[1].get<std::string>());
                 break;
             case svc::setMoney:
                 inv.setMoney(currCall[1].get<int>());
+                ret = 1;
                 break;
             case svc::addMoney:
                 inv.addMoney(currCall[1].get<int>());
+                ret = 1;
+                break;
+            case svc::addCharToTeam:
+                team.addCharToTeam(currCall[1].get<std::string>());
+                break;
+            case svc::removeCharFromTeam:
+                team.removeCharFromTeam(currCall[1].get<std::string>());
                 break;
 			case svc::endGame:
 				return 0;
@@ -258,7 +265,7 @@ void Engine::invMenuRoutin(){
                 currentPos = (currentPos == nameList.size() - 1 )? nameList.size() - 1 : currentPos + 1;
                 break;
             case 'z':
-
+                //inv[nameList[0]].item
                 break;
             case 'x':
             case 'q':
@@ -272,9 +279,6 @@ void Engine::invMenuRoutin(){
 }
 
 void Engine::teamMenuRoutin(){
-    unsigned int currentPos = 0;
-
-    for(;;){
         clear();
         mvaddstr(0, 0, "================================================================================");
         for(int i = 1; i < 24; i++)mvaddch(i, 0, '|'),mvaddch(i, 79, '|');
@@ -284,10 +288,7 @@ void Engine::teamMenuRoutin(){
 
         std::vector<std::string> memberList = team.getNameList();
 
-        if(memberList.empty()){
-            while(getch()!='x');
-            return;
-        }
+
 
         for (unsigned int i = 0; i < memberList.size(); i++){
             mvaddstr(3 + i * 5, 1, "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
@@ -298,9 +299,11 @@ void Engine::teamMenuRoutin(){
             //Print Informations
             mvaddstr(3 + i * 5 + 1, 2, "Name:");
             mvaddstr(3 + i * 5 + 1, 8, team[memberList[i]].getName().c_str());
+
             mvaddstr(3 + i * 5 + 1, 25, "Level:");
             sprintf(tmp, "%d", team[memberList[i]].getLevel());
             mvaddstr(3 + i * 5 + 1, 32, tmp);
+
             mvaddstr(3 + i * 5 + 1, 40, "Role:");
             mvaddstr(3 + i * 5 + 1, 46, team[memberList[i]].getRole().getName().c_str());
 
@@ -323,30 +326,7 @@ void Engine::teamMenuRoutin(){
             addstr(tmp);
         }
 
-        /*//Print Selected Options
-        attron(A_BOLD);
-        mvaddstr(4, 2, nameList[0].c_str());
-        attroff(A_BOLD);*/
-
-        int c = getch();
-        switch (c) {
-            case KEY_UP:
-                //currentPos = (currentPos==0)? 0 : currentPos - 1;
-                break;
-            case KEY_DOWN:
-                //currentPos = (currentPos == nameList.size() - 1 )? nameList.size() - 1 : currentPos + 1;
-                break;
-            case 'z':
-
-                break;
-            case 'x':
-            case 'q':
-                return;
-                break;
-        }
-
-    }
-
+    while(getch()!='x');
     return;
 }
 

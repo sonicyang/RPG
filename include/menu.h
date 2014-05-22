@@ -5,8 +5,9 @@
 class menu
 {
     public:
-        menu();
-        virtual ~menu();
+        void showMainMenu();
+        void showInvMenu();
+        void showTeamMenu();
     protected:
     private:
 };

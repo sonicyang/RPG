@@ -35,18 +35,21 @@ class eventController
 
         //sspreate form the rest to avoid naming collison
         enum eventCode{
-            showPrompt = 1, // whom, data
+            showPrompt = 1, // whom, data       1
             endEvent,
-            transferMap, //  mapName, x, y
-            addItem,     //name val
-            removeItem, //name val
+            transferMap,//  mapName, x, y
+            addItem,    //name val
+            removeItem, //name val              5
             setMoney,   // val
             addMoney,   // val
-            jner,        //name, val, addressR
-            jer,         //name, val, addressR
-            jne,        //name, val, address
+            jner,       //name, val, addressR
+            jer,        //name, val, addressR
+            jne,        //name, val, address    10
             je,         //name, val, address
-            mov         //namedest, namesrc
+            mov,        //namedest, namesrc
+            set,
+            addCharToTeam,      //Name
+            removeCharFromTeam  //Name          15
         };
 
 };

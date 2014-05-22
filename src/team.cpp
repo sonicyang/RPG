@@ -4,7 +4,7 @@
 #include "json/reader.h"
 #include "utils.h"
 
-Team::Team(std::string teamList) : roleCache("data/roles/role_list.lst")
+Team::Team(std::string teamList) : roleCache("data/roles/role_list.lst"), null()
 {
     std::string in = get_file_contents(teamList.c_str());
 
@@ -39,6 +39,25 @@ std::vector<std::string> Team::getNameList(){
     for (auto it = _team.cbegin(); it != _team.cend(); it++){
         tmp.push_back((*it).first);
     }
-
     return tmp;
+}
+
+const Character Team::operator[](std::string subscript){
+    if(_team.find(subscript) != _team.end())
+        return _team[subscript];
+    return null;
+}
+
+void Team::addCharToTeam(std::string name){
+    if(_cache.find(name) == _cache.end())
+        return;
+    _team.insert(_team.begin(), std::pair<std::string, Character>(name, _cache[name]));
+    return;
+}
+
+void Team::removeCharFromTeam(std::string name){
+    if(_team.find(name) == _team.end())
+        return;
+    _team.erase(name);
+    return;
 }
