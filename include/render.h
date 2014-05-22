@@ -20,6 +20,10 @@ class render
         void render_Player(objPlayer);
         void render_prompt(prompt P);
 
+        void render_MainMenu(int curPos, std::vector<std::string> options);
+        void render_TeamMenu();
+        void render_InvMenu();
+
         void update();
     protected:
     private:

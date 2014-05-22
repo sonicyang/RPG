@@ -150,26 +150,7 @@ void Engine::menuRutin(){
     unsigned int cursorPos = 0;
 
     for(;;){
-        clear();
-
-        //Make Frame and Print Title
-        mvaddstr(0, 0, "================================================================================");
-        for(int i = 1; i < 24; i++)mvaddch(i, 0, '|'),mvaddch(i, 79, '|');
-        mvaddstr(24, 0, "===============================================================================");
-        mvaddstr(2, 0, "================================================================================");
-        for(int i = 3; i < 24; i++)mvaddch(i, 25, '|');
-
-        //Print Useful Data
-        mvaddstr(1, 38, "MENU");
-
-        //Print All Options
-        for(unsigned int i = 0; i < mOption.size(); i++)
-            mvaddstr(4 + 2*i, 2, mOption[i].c_str());
-
-        //Print Selected Options
-        attron(A_BOLD);
-        mvaddstr(4 + 2*cursorPos, 2, mOption[cursorPos].c_str());
-        attroff(A_BOLD);
+        rdr.render_MainMenu(cursorPos, mOption);
 
         //Wait User input
         int c = getch();

@@ -2,7 +2,7 @@
 #define MENU_H
 
 
-class menu
+class Menu
 {
     public:
         void showMainMenu();
@@ -10,6 +10,7 @@ class menu
         void showTeamMenu();
     protected:
     private:
+        unsigned int cursorPos = 0;
 };
 
 #endif // MENU_H
