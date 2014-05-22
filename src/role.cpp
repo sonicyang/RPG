@@ -7,12 +7,12 @@ Role::Role()
 }
 
 
-Role::Role(int hb, int hm, int mb, int mm, int ab, int am, int db, int dm) : _hp_base(hb), _hp_mpx(hm), _mp_base(mb), _mp_mpx(mm), _attack_base(ab), _attack_mpx(am), _defense_base(db), _defense_mpx(dm)
+Role::Role(std::string name, int hb, int hm, int mb, int mm, int ab, int am, int db, int dm) : _name(name), _hp_base(hb), _hp_mpx(hm), _mp_base(mb), _mp_mpx(mm), _attack_base(ab), _attack_mpx(am), _defense_base(db), _defense_mpx(dm)
 {
     setLevel(1);
 }
 
-Role::Role(int hb, int hm, int mb, int mm, int ab, int am, int db, int dm, int val) : _hp_base(hb), _hp_mpx(hm), _mp_base(mb), _mp_mpx(mm), _attack_base(ab), _attack_mpx(am), _defense_base(db), _defense_mpx(dm)
+Role::Role(std::string name, int hb, int hm, int mb, int mm, int ab, int am, int db, int dm, int val) : _name(name), _hp_base(hb), _hp_mpx(hm), _mp_base(mb), _mp_mpx(mm), _attack_base(ab), _attack_mpx(am), _defense_base(db), _defense_mpx(dm)
 {
     setLevel(val);
 }

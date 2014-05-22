@@ -13,7 +13,7 @@ Team::Team(std::string teamList) : roleCache("data/roles/role_list.lst")
 	if (reader.parse( in, root )){
 	    _cacheCount = root.get("Count", 0 ).asInt();
 	    for(unsigned int i = 0; i < _cacheCount; i++){
-            Character chara(root["All"][i]["Level"].asInt(), roleCache[root["All"][i]["Role"].asString()]);
+            Character chara(root["All"][i]["Name"].asString(), root["All"][i]["Level"].asInt(), roleCache[root["All"][i]["Role"].asString()]);
             _cache.insert(_cache.begin(), std::pair<std::string, Character>(root["All"][i]["Name"].asString(), chara));
 	    }
 
@@ -31,4 +31,14 @@ Team::Team(std::string teamList) : roleCache("data/roles/role_list.lst")
 Team::~Team()
 {
     //dtor
+}
+
+std::vector<std::string> Team::getNameList(){
+    std::vector<std::string> tmp;
+
+    for (auto it = _team.cbegin(); it != _team.cend(); it++){
+        tmp.push_back((*it).first);
+    }
+
+    return tmp;
 }

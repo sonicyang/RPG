@@ -5,11 +5,12 @@ Character::Character ()
 
 }
 
-Character::Character (int lvl, Role role) : _role(role)
+Character::Character (std::string n, int lvl, Role role) : _name(n), _exp(0), _role(role)
 {
     _role.setLevel(lvl);
     _level = lvl;
-
+    recoverHP();
+    recoverMP();
 }
 
 Character::~Character ()
@@ -55,4 +56,14 @@ void Character::setExp(const int a){
 
 int Character::getExp(void) const {
     return this->_exp;
+}
+
+void Character::recoverHP(void){
+    setHP(_role.getMaxHP());
+    return;
+}
+
+void Character::recoverMP(void){
+    setMP(_role.getMaxMP());
+    return;
 }

@@ -7,8 +7,8 @@ class Role
 {
     public:
         Role();
-        Role(int, int, int, int, int, int, int, int);
-        Role(int, int, int, int, int, int, int, int, int);
+        Role(std::string, int, int, int, int, int, int, int, int);
+        Role(std::string, int, int, int, int, int, int, int, int, int);
         virtual ~Role();
 
         int getMaxHP(void) const { return max_hp; };
@@ -18,8 +18,12 @@ class Role
         int getDefence(void) const { return defense; };
 
         void setLevel(int);
+
+        std::string getName() { return _name; };
     protected:
     private:
+        std::string _name;
+
         int max_hp; // stores max. HP of the player
         int max_mp;  // stores max. MP of the player
         int lvup_exp; // stores needed experience to level-up

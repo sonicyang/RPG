@@ -720,7 +720,7 @@
 	"point.h"
 	<string>
 
-1400739765 source:c:\users\sonicyang\github\rpg\src\engine.cpp
+1400743039 source:c:\users\sonicyang\github\rpg\src\engine.cpp
 	<curses.h>
 	<cstdlib>
 	<string>
@@ -736,7 +736,7 @@
 	"engine.h"
 	"variant.h"
 
-1400739806 c:\users\sonicyang\github\rpg\include\engine.h
+1400741358 c:\users\sonicyang\github\rpg\include\engine.h
 	<map>
 	<string>
 	<curses.h>
@@ -806,21 +806,21 @@
 
 1400666376 c:\users\sonicyang\github\rpg\include\menu.h
 
-1400739399 source:c:\users\sonicyang\github\rpg\src\character.cpp
+1400744022 source:c:\users\sonicyang\github\rpg\src\character.cpp
 	"character.h"
 
-1400739220 c:\users\sonicyang\github\rpg\include\character.h
+1400744014 c:\users\sonicyang\github\rpg\include\character.h
 	<string>
 	"role.h"
 
-1400739252 c:\users\sonicyang\github\rpg\include\role.h
+1400743128 c:\users\sonicyang\github\rpg\include\role.h
 	<string>
 
-1400737354 source:c:\users\sonicyang\github\rpg\src\role.cpp
+1400743304 source:c:\users\sonicyang\github\rpg\src\role.cpp
 	"role.h"
 	<cmath>
 
-1400737852 source:c:\users\sonicyang\github\rpg\src\rolefactory.cpp
+1400743314 source:c:\users\sonicyang\github\rpg\src\rolefactory.cpp
 	<cstdlib>
 	<iostream>
 	"rolefactory.h"
@@ -833,16 +833,17 @@
 	<map>
 	"role.h"
 
-1400740484 source:c:\users\sonicyang\github\rpg\src\team.cpp
+1400742736 source:c:\users\sonicyang\github\rpg\src\team.cpp
 	<cstdlib>
 	"team.h"
 	"json/value.h"
 	"json/reader.h"
 	"utils.h"
 
-1400739800 c:\users\sonicyang\github\rpg\include\team.h
+1400744162 c:\users\sonicyang\github\rpg\include\team.h
 	<map>
 	<string>
+	<vector>
 	"character.h"
 	"RoleFactory.h"
 

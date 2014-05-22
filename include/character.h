@@ -8,12 +8,12 @@ class Character
 {
     public:
         Character();
-        Character(int, Role);
+        Character(std::string, int, Role);
         virtual ~Character();
 
         /* setters and getters */
         void setName(const std::string& val) { _name = val; };
-        std::string getName(void) const {return _name; };
+        std::string getName(void) const { return _name; };
 
         void setHP(const int);
         int getHP(void) const;
@@ -22,8 +22,13 @@ class Character
         void setExp(const int);
         int getExp(void) const;
 
+        void recoverHP(void);
+        void recoverMP(void);
+
+        Role getRole(void) const { return _role; };
+
         void setLevel(const int); // call setAttr(int) to set attributes
-        int getLevel(void) const;
+        int getLevel(void) const { return _level; };
 
     protected:
     private:

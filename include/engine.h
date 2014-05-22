@@ -50,6 +50,7 @@ class Engine
 
         void menuRutin();
         void invMenuRoutin();
+        void teamMenuRoutin();
 
         void setStat(int s);
         void restoreStat();

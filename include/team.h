@@ -3,6 +3,7 @@
 
 #include <map>
 #include <string>
+#include <vector>
 #include "character.h"
 #include "RoleFactory.h"
 
@@ -12,7 +13,9 @@ class Team
         Team(std::string);
         virtual ~Team();
 
-        Character& operator[](std::string subscript) { return _team[subscript]; };
+        std::vector<std::string> getNameList();
+
+        const Character operator[](std::string subscript) { return _team[subscript]; };
     protected:
     private:
 

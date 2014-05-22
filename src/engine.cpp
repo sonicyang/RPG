@@ -176,6 +176,7 @@ void Engine::menuRutin(){
             case 'z':
                 switch(cursorPos){
                     case 0:
+                        teamMenuRoutin();
                         break;
                     case 1:
                         invMenuRoutin();
@@ -255,6 +256,85 @@ void Engine::invMenuRoutin(){
                 break;
             case KEY_DOWN:
                 currentPos = (currentPos == nameList.size() - 1 )? nameList.size() - 1 : currentPos + 1;
+                break;
+            case 'z':
+
+                break;
+            case 'x':
+            case 'q':
+                return;
+                break;
+        }
+
+    }
+
+    return;
+}
+
+void Engine::teamMenuRoutin(){
+    unsigned int currentPos = 0;
+
+    for(;;){
+        clear();
+        mvaddstr(0, 0, "================================================================================");
+        for(int i = 1; i < 24; i++)mvaddch(i, 0, '|'),mvaddch(i, 79, '|');
+        mvaddstr(24, 0, "===============================================================================");
+        mvaddstr(2, 0, "================================================================================");
+        mvaddstr(1, 38, "TEAM");
+
+        std::vector<std::string> memberList = team.getNameList();
+
+        if(memberList.empty()){
+            while(getch()!='x');
+            return;
+        }
+
+        for (unsigned int i = 0; i < memberList.size(); i++){
+            mvaddstr(3 + i * 5, 1, "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            mvaddstr(3 + i * 5 + 5, 1, "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+
+            char tmp[10];
+
+            //Print Informations
+            mvaddstr(3 + i * 5 + 1, 2, "Name:");
+            mvaddstr(3 + i * 5 + 1, 8, team[memberList[i]].getName().c_str());
+            mvaddstr(3 + i * 5 + 1, 25, "Level:");
+            sprintf(tmp, "%d", team[memberList[i]].getLevel());
+            mvaddstr(3 + i * 5 + 1, 32, tmp);
+            mvaddstr(3 + i * 5 + 1, 40, "Role:");
+            mvaddstr(3 + i * 5 + 1, 46, team[memberList[i]].getRole().getName().c_str());
+
+            mvaddstr(3 + i * 5 + 2, 2, "HP:");
+            sprintf(tmp, "%d", team[memberList[i]].getHP());
+            mvaddstr(3 + i * 5 + 2, 6, tmp);
+            sprintf(tmp, "/%d", team[memberList[i]].getRole().getMaxHP());
+            addstr(tmp);
+
+            mvaddstr(3 + i * 5 + 3, 2, "MP:");
+            sprintf(tmp, "%d", team[memberList[i]].getHP());
+            mvaddstr(3 + i * 5 + 3, 6, tmp);
+            sprintf(tmp, "/%d", team[memberList[i]].getRole().getMaxHP());
+            addstr(tmp);
+
+            mvaddstr(3 + i * 5 + 2, 20, "EXP:");
+            sprintf(tmp, "%d", team[memberList[i]].getExp());
+            mvaddstr(3 + i * 5 + 2, 25, tmp);
+            sprintf(tmp, "/%d", team[memberList[i]].getRole().getLevelUpExp());
+            addstr(tmp);
+        }
+
+        /*//Print Selected Options
+        attron(A_BOLD);
+        mvaddstr(4, 2, nameList[0].c_str());
+        attroff(A_BOLD);*/
+
+        int c = getch();
+        switch (c) {
+            case KEY_UP:
+                //currentPos = (currentPos==0)? 0 : currentPos - 1;
+                break;
+            case KEY_DOWN:
+                //currentPos = (currentPos == nameList.size() - 1 )? nameList.size() - 1 : currentPos + 1;
                 break;
             case 'z':
 
