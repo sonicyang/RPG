@@ -214,8 +214,13 @@ void Engine::invMenuRoutin(){
         for(int i = 1; i < 24; i++)mvaddch(i, 0, '|'),mvaddch(i, 79, '|');
         mvaddstr(24, 0, "===============================================================================");
         mvaddstr(2, 0, "================================================================================");
+        mvaddstr(22, 26, "=====================================================");
         for(int i = 3; i < 24; i++)mvaddch(i, 25, '|');
         mvaddstr(1, 35, "INVENTORY");
+
+        char mString[40];
+        sprintf(mString, "Money: $%d", inv.getMoney());
+        mvaddstr(23, 26, mString);
 
         std::vector<std::string> nameList = inv.getNameList(currentPos);
 

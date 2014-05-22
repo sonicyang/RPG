@@ -38,7 +38,7 @@ class inventory
         std::map<std::string, inventorySlot> _inventorySlots;
         inventorySlot null;
 
-        int _money;
+        int _money = 0;
 };
 
 #endif // INVENTORY_H
