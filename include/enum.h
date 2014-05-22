@@ -45,6 +45,8 @@ enum svc{
     removeItem,         //id, amount
     incItem,            //id
     decItem,            //id
+    setMoney,           //Amount
+    addMoney,           //Amount
     endGame = 255       //
 };
 

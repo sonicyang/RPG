@@ -38,7 +38,9 @@ class eventController
             endEvent,
             transferMap, //  mapName, x, y
             addItem,
-            removeItem
+            removeItem,
+            setMoney,
+            addMoney,
         };
 
 };

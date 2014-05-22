@@ -28,10 +28,17 @@ class inventory
         const std::map<std::string, inventorySlot>& getInventory() const { return _inventorySlots; };
 
         const inventorySlot& operator[](std::string);
+
+        int getMoney() const { return _money; };
+        void setMoney(int val) { _money = val; };
+
+        void addMoney(int val) { _money += val};
     protected:
     private:
         std::map<std::string, inventorySlot> _inventorySlots;
         inventorySlot null;
+
+        int _money;
 };
 
 #endif // INVENTORY_H

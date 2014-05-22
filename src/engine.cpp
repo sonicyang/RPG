@@ -39,7 +39,7 @@ void Engine::getParseUserInput(){
 }
 
 bool Engine::processCtlCall(){
-    while(ctlCall.size() > 0){
+    while(ctlCall.size() > 1){ //Preserve One for Return Value
 
 		std::vector< variant<paraVarType> >currCall = ctlCall.front();
 
@@ -90,14 +90,16 @@ bool Engine::processCtlCall(){
                     ctlCall.push_back(loadStack(svc::setStat, Stats::inEvent));
                 }
                 break;
+            case svc::setMoney:
+                inventory.setMoney(currCall[1].get<int>());
+                break;
+            case svc::addMoney:
+                inventory.addMoney(currCall[1].get<int>());
+                break;
 			case svc::endGame:
-				//recycleMem(ctlCall);
 				return 0;
 				break;
 		}
-
-		//for(unsigned int i = 0; i < currCall.size(); i++)
-			//free(currCall[i]);
 
 		ctlCall.pop_front();
     }

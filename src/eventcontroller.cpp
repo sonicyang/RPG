@@ -127,6 +127,14 @@ int eventController::execTopEvent(){
             ctlCallStack.push_back(loadStack(svc::removeItem, ss[1], atoi(ss[2].c_str())));
             userInputRequired = 0;
             break;
+        case eventCode::setMoney:
+            ctlCallStack.push_back(loadStack(svc::setMoney, atoi(ss[1].c_str())));
+            userInputRequired = 0;
+            break;
+        case eventCode::addMoney:
+            ctlCallStack.push_back(loadStack(svc::addMoney, atoi(ss[1].c_str())));
+            userInputRequired = 0;
+            break;
     }
 
     eventStack.back().stk.pop_back();
