@@ -283,13 +283,14 @@
 	"objPlayer.h"
 	"utils.h"
 
-1400777098 c:\users\sonicyang\github\rpg\include\render.h
+1400778744 c:\users\sonicyang\github\rpg\include\render.h
 	<curses.h>
 	"point.h"
 	"gmap.h"
 	"mapobject.h"
 	"objPlayer.h"
 	"prompt.h"
+	"inventory.h"
 
 1400156748 source:c:\users\sonicyang\github\rpg\src\chararray2d.cpp
 	<string>
@@ -391,7 +392,7 @@
 1399780742 source:c:\users\sonicyang\github\rpg\src\point.cpp
 	"point.h"
 
-1400687719 source:c:\users\sonicyang\github\rpg\src\render.cpp
+1400777485 source:c:\users\sonicyang\github\rpg\src\render.cpp
 	<curses.h>
 	"render.h"
 	"gmap.h"
@@ -720,7 +721,7 @@
 	"point.h"
 	<string>
 
-1400777361 source:c:\users\sonicyang\github\rpg\src\engine.cpp
+1400778594 source:c:\users\sonicyang\github\rpg\src\engine.cpp
 	<curses.h>
 	<cstdlib>
 	<string>
@@ -736,7 +737,7 @@
 	"engine.h"
 	"variant.h"
 
-1400741358 c:\users\sonicyang\github\rpg\include\engine.h
+1400777661 c:\users\sonicyang\github\rpg\include\engine.h
 	<map>
 	<string>
 	<curses.h>
@@ -780,10 +781,10 @@
 1400518118 c:\users\sonicyang\github\rpg\include\item.h
 	<string>
 
-1400519617 source:c:\users\sonicyang\github\rpg\src\inventory.cpp
+1400778696 source:c:\users\sonicyang\github\rpg\src\inventory.cpp
 	"inventory.h"
 
-1400729658 c:\users\sonicyang\github\rpg\include\inventory.h
+1400778701 c:\users\sonicyang\github\rpg\include\inventory.h
 	<map>
 	<string>
 	<vector>

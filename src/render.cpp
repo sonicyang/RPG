@@ -122,7 +122,51 @@ void render::render_MainMenu(int curPos, std::vector<std::string> options){
 }
 
 void render_TeamMenu();
-void render_InvMenu();
+void render::render_InvMenu(inventory& inv, int curPos){
+    std::vector<std::string> nameList = inv.getNameList(curPos);
+
+    clear();
+
+    //Make Frame and Print Title
+    for(unsigned int i = 0; i < screen_max.m_x; i++)
+        mvaddch(0, i, '=');
+    for(unsigned int i = 1; i < screen_max.m_y; i++)mvaddch(i, 0, '|'),mvaddch(i, screen_max.m_x - 1, '|');
+    for(unsigned int i = 0; i < screen_max.m_x; i++)
+        mvaddch(screen_max.m_y - 1, i, '=');
+    for(unsigned int i = 0; i < screen_max.m_x; i++)
+        mvaddch(2, i, '=');
+    for(unsigned int i = 3; i < screen_max.m_y; i++)
+        mvaddch(i, 25, '|');
+    for(unsigned int i = 26; i < screen_max.m_x; i++)
+        mvaddch(screen_max.m_y - 3, i, '=');
+
+    mvaddstr(1, screen_max.m_x/2 - 5, "INVENTORY");
+
+    char mString[40];
+    sprintf(mString, "Money: $%d", inv.getMoney());
+    mvaddstr(screen_max.m_y - 2, 28, mString);
+
+    for (unsigned int i = 0; i < nameList.size(); i++){
+        mvaddstr(i*2 + 4, 2, nameList[i].c_str());
+    }
+
+    if(!nameList.empty()){
+        //Print Selected Options
+        attron(A_BOLD);
+        mvaddstr(4, 2, nameList[0].c_str());
+        attroff(A_BOLD);
+
+        //Print Informations
+        mvaddstr(4, 27, "Name:");
+        mvaddstr(4, 33, inv[nameList[0]].item.getName().c_str());
+        mvaddstr(6, 27, "Currently Have:");
+        char tmp[10];
+        sprintf(tmp, "%d", inv[nameList[0]].count);
+        mvaddstr(6, 43, tmp);
+        mvaddstr(8, 27, "Description:");
+        mvaddstr(9, 33, inv[nameList[0]].item.getDescription().c_str());
+    }
+}
 
 void render::update(){
     refresh();

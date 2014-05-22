@@ -52,7 +52,7 @@ unsigned int inventory::getNumOfItems(){
     return _inventorySlots.size();
 }
 
-std::vector<std::string> inventory::getNameList(unsigned int start){
+std::vector<std::string> inventory::getNameList(unsigned int start) const{
     std::vector<std::string> tmp;
 
     auto it = _inventorySlots.cbegin();

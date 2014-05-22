@@ -18,8 +18,12 @@ Engine::Engine() :
     mapCtl("data/maps/maplist.lst", ctlCall),
     evtCtl("data/events/eventlist.lst", ctlCall, varMap),
     inv(),
-    team("data/team/team_list.lst")
+    team("data/team/team_list.lst"),
+    mOption(3)
 {
+        mOption[0] = "Team";
+        mOption[1] = "Inventory";
+        mOption[2] = "Exit";
 }
 
 Engine::~Engine()
@@ -36,6 +40,7 @@ void Engine::getParseUserInput(){
             evtCtl.processInput(c);
             break;
         case menu:
+            nodelay(stdscr, false); //Nasty Hack
             menuRutin();
             nodelay(stdscr, true);
             this->restoreStat();
@@ -140,13 +145,6 @@ void Engine::updateScreen(){
 }
 
 void Engine::menuRutin(){
-    nodelay(stdscr, false); //Nasty Hack
-
-    std::vector<std::string> mOption(3);
-    mOption[0] = "Team";
-    mOption[1] = "Inventory";
-    mOption[2] = "Exit";
-
     unsigned int cursorPos = 0;
 
     for(;;){
@@ -198,18 +196,7 @@ void Engine::invMenuRoutin(){
     unsigned int currentPos = 0;
 
     for(;;){
-        clear();
-        mvaddstr(0, 0, "================================================================================");
-        for(int i = 1; i < 24; i++)mvaddch(i, 0, '|'),mvaddch(i, 79, '|');
-        mvaddstr(24, 0, "===============================================================================");
-        mvaddstr(2, 0, "================================================================================");
-        mvaddstr(22, 26, "=====================================================");
-        for(int i = 3; i < 24; i++)mvaddch(i, 25, '|');
-        mvaddstr(1, 35, "INVENTORY");
-
-        char mString[40];
-        sprintf(mString, "Money: $%d", inv.getMoney());
-        mvaddstr(23, 26, mString);
+        rdr.render_InvMenu(inv, currentPos);
 
         std::vector<std::string> nameList = inv.getNameList(currentPos);
 
@@ -217,25 +204,6 @@ void Engine::invMenuRoutin(){
             while(getch()!='x');
             return;
         }
-
-        for (unsigned int i = 0; i < nameList.size(); i++){
-            mvaddstr(i*2 + 4, 2, nameList[i].c_str());
-        }
-
-        //Print Selected Options
-        attron(A_BOLD);
-        mvaddstr(4, 2, nameList[0].c_str());
-        attroff(A_BOLD);
-
-        //Print Informations
-        mvaddstr(4, 27, "Name:");
-        mvaddstr(4, 33, inv[nameList[0]].item.getName().c_str());
-        mvaddstr(6, 27, "Currently Have:");
-        char tmp[10];
-        sprintf(tmp, "%d", inv[nameList[0]].count);
-        mvaddstr(6, 43, tmp);
-        mvaddstr(8, 27, "Description:");
-        mvaddstr(9, 33, inv[nameList[0]].item.getDescription().c_str());
 
         int c = getch();
         switch (c) {

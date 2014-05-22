@@ -56,6 +56,8 @@ class Engine
         void restoreStat();
         int stat = 1;
         vector<int> _stat;
+
+        std::vector<std::string> mOption;
 };
 
 #endif // CONTROLLER_H
