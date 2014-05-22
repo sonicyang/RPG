@@ -32,7 +32,7 @@ class inventory
         int getMoney() const { return _money; };
         void setMoney(int val) { _money = val; };
 
-        void addMoney(int val) { _money += val};
+        void addMoney(int val) { _money += val; };
     protected:
     private:
         std::map<std::string, inventorySlot> _inventorySlots;

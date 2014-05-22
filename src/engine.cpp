@@ -13,7 +13,7 @@
 #include "engine.h"
 #include "variant.h"
 
-Engine::Engine() : rdr(), ctlCall(), mapCtl("data/maps/maplist.lst", ctlCall), evtCtl("data/events/eventlist.lst", ctlCall), inv()
+Engine::Engine() : rdr(), ctlCall(), mapCtl("data/maps/maplist.lst", ctlCall), evtCtl("data/events/eventlist.lst", ctlCall, varMap), inv()
 {
 }
 
@@ -39,62 +39,66 @@ void Engine::getParseUserInput(){
 }
 
 bool Engine::processCtlCall(){
-    while(ctlCall.size() > 1){ //Preserve One for Return Value
+    while(ctlCall.size() > 0){
 
 		std::vector< variant<paraVarType> >currCall = ctlCall.front();
+
+        int ret;
 
 		int commd = currCall[0].get<svc>();
 		switch(commd){
 			case svc::loadEvent:
 				evtCtl.pushEvent(currCall[1].get<std::string>());
+				ret = 1;
 				break;
 			case svc::restoreStat:
 				evtCtl.popEventStack();
 				prom.discardMessage();
 				this->restoreStat();
+				ret = 1;
 				break;
 			case svc::setStat:
 				this->setStat(currCall[1].get<Stats>());
+				ret = 1;
 				break;
 			case svc::loadPrompt:
 				prom.loadMessaage(currCall[1].get<wchar_t*>(), currCall[2].get<wchar_t*>());
+				ret = 1;
 				break;
 			case svc::clearPrompt:
 				prom.discardMessage();
+				ret = 1;
 				break;
 			case svc::changeMap:
 				mapCtl.setCurrentMap(currCall[1].get<std::string>());
 				mapCtl.setPlayerPosition(Point(currCall[2].get<int>(), currCall[3].get<int>()));
+				ret = 1;
 				break;
             case svc::addItem:
                 inv.addItem(currCall[1].get<std::string>(), currCall[2].get<int>());
+                ret = 1;
                 break;
             case svc::removeItem:
-                if(inv.removeItem(currCall[1].get<std::string>(), currCall[2].get<int>()) == -1){
+                ret = inv.removeItem(currCall[1].get<std::string>(), currCall[2].get<int>());
+                /*
                     ctlCall.push_back(loadStack(svc::restoreStat));
 
                     std::string s("notEnoughItemHook");
                     ctlCall.push_back(loadStack(svc::loadEvent, s));
                     ctlCall.push_back(loadStack(svc::setStat, Stats::inEvent));
-                }
+                */
                 break;
             case svc::incItem:
                 inv.incItem(currCall[1].get<std::string>());
                 break;
             case svc::decItem:
-                if(inv.decItem(currCall[1].get<std::string>()) == -1){
-                    ctlCall.push_back(loadStack(svc::restoreStat));
-
-                    std::string s("notEnoughItemHook");
-                    ctlCall.push_back(loadStack(svc::loadEvent, s));
-                    ctlCall.push_back(loadStack(svc::setStat, Stats::inEvent));
-                }
+                ret = inv.decItem(currCall[1].get<std::string>());
                 break;
             case svc::setMoney:
-                inventory.setMoney(currCall[1].get<int>());
+                inv.setMoney(currCall[1].get<int>());
                 break;
             case svc::addMoney:
-                inventory.addMoney(currCall[1].get<int>());
+                inv.addMoney(currCall[1].get<int>());
                 break;
 			case svc::endGame:
 				return 0;
@@ -102,8 +106,9 @@ bool Engine::processCtlCall(){
 		}
 
 		ctlCall.pop_front();
-    }
 
+        varMap["ret"].set<int>(ret); //Save return value to Varible Map
+    }
     return 1;
 }
 

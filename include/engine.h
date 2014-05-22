@@ -33,6 +33,7 @@ class Engine
         render rdr;
 
         std::deque< std::vector< variant<paraVarType> > > ctlCall;
+        std::map< std::string, variant<paraVarType> > varMap;
 
         mapController mapCtl;
         eventController evtCtl;
