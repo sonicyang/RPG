@@ -94,7 +94,7 @@ void eventController::popEventStack(){
 }
 
 int eventController::execTopEvent(){
-    struct event currentEvent = eventStack.back();
+    struct event& currentEvent = eventStack.back();
 
     if(currentEvent.stk.size() == 0){
         ctlCallStack.push_back(loadStack(svc::restoreStat));
@@ -153,9 +153,25 @@ int eventController::execTopEvent(){
             }
             userInputRequired = 0;
             break;
+        case eventCode::jne:
+            if(varMap[ss[1]].get<int>() != atoi(ss[2].c_str())){
+                currentEvent.pc = atoi(ss[3].c_str());
+                if(eventStack.back().pc >= currentEvent.stk.size())
+                    throw(64);
+            }
+            userInputRequired = 0;
+            break;
+        case eventCode::je:
+            if(varMap[ss[1]].get<int>() == atoi(ss[2].c_str())){
+                currentEvent.pc = atoi(ss[3].c_str());
+                if(currentEvent.pc >= currentEvent.stk.size())
+                    throw(64);
+            }
+            userInputRequired = 0;
+            break;
     }
 
-    eventStack.back().pc++;
+    currentEvent.pc++;
     return 1;
 }
 

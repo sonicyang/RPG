@@ -42,8 +42,10 @@ class eventController
             removeItem, //name val
             setMoney,   // val
             addMoney,   // val
-            jner,        //name, val, address
-            jer,         //name, val, address
+            jner,        //name, val, addressR
+            jer,         //name, val, addressR
+            jne,        //name, val, address
+            je,         //name, val, address
         };
 
 };

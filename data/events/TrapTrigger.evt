@@ -4,6 +4,8 @@
 	"Command" : [
 				"01|System|You fall in a trap...",
 				"05|TestItem|01",
+				"08|ret|-1|1",
+				"01|System|Don't Have engouh Items",
 				"02"
 				]
 }
