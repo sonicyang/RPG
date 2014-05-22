@@ -38,10 +38,12 @@ class eventController
             showPrompt = 1, // whom, data
             endEvent,
             transferMap, //  mapName, x, y
-            addItem,
-            removeItem,
-            setMoney,
-            addMoney,
+            addItem,     //name val
+            removeItem, //name val
+            setMoney,   // val
+            addMoney,   // val
+            jner,        //name, val, address
+            jer,         //name, val, address
         };
 
 };

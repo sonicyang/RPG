@@ -31,11 +31,11 @@ eventController::eventController(std::string eventlist, std::deque< std::vector<
 	                    trigger.stk[i] = root2["Command"][i].asString();
 	                }
 
-                    std::reverse(trigger.stk.begin(), trigger.stk.end());
-
 	                trigger.trigBy = root2["Name"].asString();
 
 	                trigger.triggerType = root2["triggerType"].asInt();
+
+	                trigger.pc = 0;
 
 	                event_list.insert (event_list.begin(), std::pair<std::string, event>(trigger.trigBy, trigger));
 	            }else{
@@ -94,12 +94,14 @@ void eventController::popEventStack(){
 }
 
 int eventController::execTopEvent(){
-    if(eventStack.back().stk.size() == 0){
+    struct event currentEvent = eventStack.back();
+
+    if(currentEvent.stk.size() == 0){
         ctlCallStack.push_back(loadStack(svc::restoreStat));
         return -1;
     }
 
-    std::vector<std::string> ss = split(eventStack.back().stk.back(), '|');
+    std::vector<std::string> ss = split(currentEvent.stk[currentEvent.pc], '|');
 
     int commd = atoi(ss[0].c_str());
     switch(commd){
@@ -135,14 +137,31 @@ int eventController::execTopEvent(){
             ctlCallStack.push_back(loadStack(svc::addMoney, atoi(ss[1].c_str())));
             userInputRequired = 0;
             break;
+        case eventCode::jner:
+            if(varMap[ss[1]].get<int>() != atoi(ss[2].c_str())){
+                currentEvent.pc += atoi(ss[3].c_str());
+                if(eventStack.back().pc >= currentEvent.stk.size())
+                    throw(64);
+            }
+            userInputRequired = 0;
+            break;
+        case eventCode::jer:
+            if(varMap[ss[1]].get<int>() == atoi(ss[2].c_str())){
+                currentEvent.pc += atoi(ss[3].c_str());
+                if(currentEvent.pc >= currentEvent.stk.size())
+                    throw(64);
+            }
+            userInputRequired = 0;
+            break;
     }
 
-    eventStack.back().stk.pop_back();
+    eventStack.back().pc++;
     return 1;
 }
 
 int eventController::pushEvent(std::string name){
 	eventStack.push_back(event_list[name]);
+	eventStack.back().pc = 0;
 	userInputRequired = 0;
 	return 0;
 }

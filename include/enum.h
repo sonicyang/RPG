@@ -20,6 +20,7 @@ struct event{
     std::vector<std::string> stk;
     std::string trigBy;
     int triggerType;
+    unsigned int pc;
 };
 
 enum trigType{
