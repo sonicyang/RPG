@@ -1,0 +1,7 @@
+{
+	"Name" : "GeneralPlayer",
+	"HP" : [100, 10],
+	"MP" : [40, 5],
+	"Attack" : [20, 5],
+	"Defense" :  [20, 5]
+}

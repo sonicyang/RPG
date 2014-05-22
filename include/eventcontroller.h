@@ -46,6 +46,7 @@ class eventController
             jer,         //name, val, addressR
             jne,        //name, val, address
             je,         //name, val, address
+            mov         //namedest, namesrc
         };
 
 };

@@ -169,6 +169,10 @@ int eventController::execTopEvent(){
             }
             userInputRequired = 0;
             break;
+        case eventCode::mov:
+            varMap[ss[1]].set<int>(varMap[ss[2]].get<int>());
+            userInputRequired = 0;
+            break;
     }
 
     currentEvent.pc++;

@@ -14,6 +14,9 @@
 #include "inventory.h"
 #include "utils.h"
 #include "variant.h"
+#include "team.h"
+#include "rolefactory.h"
+#include "role.h"
 
 using namespace std;
 
@@ -38,6 +41,7 @@ class Engine
         mapController mapCtl;
         eventController evtCtl;
         inventory inv;
+        Team team;
 
         prompt prom;
 
