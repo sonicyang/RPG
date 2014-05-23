@@ -8,6 +8,7 @@
 #include "objPlayer.h"
 #include "prompt.h"
 #include "inventory.h"
+#include "team.h"
 
 class render
 {
@@ -22,7 +23,7 @@ class render
         void render_prompt(prompt P);
 
         void render_MainMenu(int curPos, std::vector<std::string> options);
-        void render_TeamMenu();
+        void render_TeamMenu(Team&, unsigned int curPos);
         void render_InvMenu(inventory& inv, int curPos);
 
         void update();

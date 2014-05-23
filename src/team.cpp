@@ -33,7 +33,7 @@ Team::~Team()
     //dtor
 }
 
-std::vector<std::string> Team::getNameList(){
+std::vector<std::string> Team::getNameList() const{
     std::vector<std::string> tmp;
 
     for (auto it = _team.cbegin(); it != _team.cend(); it++){
@@ -42,7 +42,7 @@ std::vector<std::string> Team::getNameList(){
     return tmp;
 }
 
-const Character Team::operator[](std::string subscript){
+Character& Team::operator[](std::string subscript){
     if(_team.find(subscript) != _team.end())
         return _team[subscript];
     return null;

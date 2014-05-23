@@ -13,9 +13,9 @@ class Team
         Team(std::string);
         virtual ~Team();
 
-        std::vector<std::string> getNameList();
+        std::vector<std::string> getNameList() const;
 
-        const Character operator[](std::string subscript);
+        Character& operator[](std::string subscript);
 
         void addCharToTeam(std::string);
         void removeCharFromTeam(std::string);

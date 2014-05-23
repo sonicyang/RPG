@@ -283,7 +283,7 @@
 	"objPlayer.h"
 	"utils.h"
 
-1400778744 c:\users\sonicyang\github\rpg\include\render.h
+1400817749 c:\users\sonicyang\github\rpg\include\render.h
 	<curses.h>
 	"point.h"
 	"gmap.h"
@@ -291,6 +291,7 @@
 	"objPlayer.h"
 	"prompt.h"
 	"inventory.h"
+	"team.h"
 
 1400156748 source:c:\users\sonicyang\github\rpg\src\chararray2d.cpp
 	<string>
@@ -392,7 +393,7 @@
 1399780742 source:c:\users\sonicyang\github\rpg\src\point.cpp
 	"point.h"
 
-1400777485 source:c:\users\sonicyang\github\rpg\src\render.cpp
+1400817751 source:c:\users\sonicyang\github\rpg\src\render.cpp
 	<curses.h>
 	"render.h"
 	"gmap.h"
@@ -721,7 +722,7 @@
 	"point.h"
 	<string>
 
-1400778594 source:c:\users\sonicyang\github\rpg\src\engine.cpp
+1400817732 source:c:\users\sonicyang\github\rpg\src\engine.cpp
 	<curses.h>
 	<cstdlib>
 	<string>
@@ -837,14 +838,14 @@
 	<map>
 	"role.h"
 
-1400747767 source:c:\users\sonicyang\github\rpg\src\team.cpp
+1400816008 source:c:\users\sonicyang\github\rpg\src\team.cpp
 	<cstdlib>
 	"team.h"
 	"json/value.h"
 	"json/reader.h"
 	"utils.h"
 
-1400747614 c:\users\sonicyang\github\rpg\include\team.h
+1400815986 c:\users\sonicyang\github\rpg\include\team.h
 	<map>
 	<string>
 	<vector>

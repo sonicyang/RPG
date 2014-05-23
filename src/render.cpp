@@ -121,7 +121,67 @@ void render::render_MainMenu(int curPos, std::vector<std::string> options){
     attroff(A_BOLD);
 }
 
-void render_TeamMenu();
+void render::render_TeamMenu(Team& team, unsigned int curPos){
+    clear();
+
+    //Make Frame and Print Title
+    for(unsigned int i = 0; i < screen_max.m_x; i++)
+        mvaddch(0, i, '=');
+    for(unsigned int i = 1; i < screen_max.m_y; i++)mvaddch(i, 0, '|'),mvaddch(i, screen_max.m_x - 1, '|');
+    for(unsigned int i = 0; i < screen_max.m_x; i++)
+        mvaddch(screen_max.m_y - 1, i, '=');
+    for(unsigned int i = 0; i < screen_max.m_x; i++)
+        mvaddch(2, i, '=');
+
+    mvaddstr(1, screen_max.m_x/2 - 2, "TEAM");
+
+    std::vector<std::string> memberList = team.getNameList();
+
+    for (unsigned int i = 0; i < memberList.size(); i++){
+        if(i == curPos)
+            attron(A_BOLD);
+
+        //draw per frame
+        for(unsigned int j = 1; j < screen_max.m_x - 1; j++){
+            mvaddch(3 + i * 6, j, '~');
+            mvaddch(3 + i * 6 + 5, j, '~');
+        }
+
+        char tmp[10];
+
+        //Print Informations
+        mvaddstr(3 + i * 6 + 1, 2, "Name:");
+        mvaddstr(3 + i * 6 + 1, 8, team[memberList[i]].getName().c_str());
+
+        mvaddstr(3 + i * 6 + 1, 25, "Level:");
+        sprintf(tmp, "%d", team[memberList[i]].getLevel());
+        mvaddstr(3 + i * 6 + 1, 32, tmp);
+
+        mvaddstr(3 + i * 6 + 1, 40, "Role:");
+        mvaddstr(3 + i * 6 + 1, 46, team[memberList[i]].getRole().getName().c_str());
+
+        mvaddstr(3 + i * 6 + 2, 2, "HP:");
+        sprintf(tmp, "%d", team[memberList[i]].getHP());
+        mvaddstr(3 + i * 6 + 2, 6, tmp);
+        sprintf(tmp, "/%d", team[memberList[i]].getRole().getMaxHP());
+        addstr(tmp);
+
+        mvaddstr(3 + i * 6 + 3, 2, "MP:");
+        sprintf(tmp, "%d", team[memberList[i]].getHP());
+        mvaddstr(3 + i * 6 + 3, 6, tmp);
+        sprintf(tmp, "/%d", team[memberList[i]].getRole().getMaxHP());
+        addstr(tmp);
+
+        mvaddstr(3 + i * 6 + 2, 20, "EXP:");
+        sprintf(tmp, "%d", team[memberList[i]].getExp());
+        mvaddstr(3 + i * 6 + 2, 25, tmp);
+        sprintf(tmp, "/%d", team[memberList[i]].getRole().getLevelUpExp());
+        addstr(tmp);
+
+        attroff(A_BOLD);
+    }
+
+}
 void render::render_InvMenu(inventory& inv, int curPos){
     std::vector<std::string> nameList = inv.getNameList(curPos);
 
