@@ -311,6 +311,8 @@ int Engine::charMenuRoutin(const int val, std::string cname){
             case 'z':
                 switch(val){
                     case 0:{
+                        inv.enableNull();
+
                         int p = invMenuRoutin(1);
                         if(p == -1)
                             break;
@@ -350,10 +352,11 @@ int Engine::charMenuRoutin(const int val, std::string cname){
                             while(getch()!='z');
                         }else{
                             inv.decItem(inv.getNameList(p)[0]);
-                            if(currItemName.getName() != "")
+                            if(currItemName.getName() != "Empty")
                                 inv.incItem(currItemName.getName());
                         }
 
+                        inv.disableNull();
                         break;
                     }
                     case 1:

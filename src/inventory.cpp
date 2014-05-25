@@ -48,6 +48,17 @@ unsigned int inventory::getItemAmount(std::string id){
     return _inventorySlots[id].count;
 }
 
+void inventory::enableNull(void){
+    inventorySlot tmp;
+    tmp.count = 1;
+    tmp.item = Item();
+    _inventorySlots.insert(_inventorySlots.begin(), std::pair<std::string, inventorySlot>("empty", tmp));
+}
+
+void inventory::disableNull(void){
+    _inventorySlots.erase("empty");
+}
+
 unsigned int inventory::getNumOfItems(){
     return _inventorySlots.size();
 }

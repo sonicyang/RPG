@@ -133,28 +133,28 @@ int Character::setWeapon(Item item){
     return 1;
 }
 int Character::setHead(Item item){
-    if(item.getType() != itemTypes::head)
+    if((item.getType() != itemTypes::head) && (item.getType() != itemTypes::null))
         return -1;
     _head = item;
     return 1;
 }
 
 int Character::setArmor(Item item){
-    if(item.getType() != itemTypes::armor)
+    if((item.getType() != itemTypes::armor) && (item.getType() != itemTypes::null))
         return -1;
     _armor = item;
     return 1;
 }
 
 int Character::setLegs(Item item){
-    if(item.getType() != itemTypes::legs)
+    if((item.getType() != itemTypes::legs) && (item.getType() != itemTypes::null))
         return -1;
     _legs = item;
     return 1;
 }
 
 int Character::setShoes(Item item){
-    if(item.getType() != itemTypes::shoes)
+    if((item.getType() != itemTypes::shoes) && (item.getType() != itemTypes::null))
         return -1;
     _shoes = item;
     return 1;

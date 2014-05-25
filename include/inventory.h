@@ -18,20 +18,20 @@ class inventory
         int decItem(std::string);
         int removeItem(std::string, unsigned int);
 
+        void enableNull(void);
+        void disableNull(void);
+
         void setItemAmount(std::string, unsigned int);
         unsigned int getItemAmount(std::string);
 
         unsigned int getNumOfItems();
 
         std::vector<std::string> getNameList(unsigned int) const;
-
         const std::map<std::string, inventorySlot>& getInventory() const { return _inventorySlots; };
-
         const inventorySlot& operator[](std::string);
 
         int getMoney() const { return _money; };
         void setMoney(int val) { _money = val; };
-
         void addMoney(int val) { _money += val; };
     protected:
     private:
