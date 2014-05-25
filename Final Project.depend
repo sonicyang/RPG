@@ -723,7 +723,7 @@
 	"point.h"
 	<string>
 
-1401031547 source:c:\users\sonicyang\github\rpg\src\engine.cpp
+1401033285 source:c:\users\sonicyang\github\rpg\src\engine.cpp
 	<curses.h>
 	<cstdlib>
 	<string>
@@ -812,11 +812,11 @@
 
 1400776643 c:\users\sonicyang\github\rpg\include\menu.h
 
-1401030509 source:c:\users\sonicyang\github\rpg\src\character.cpp
+1401032141 source:c:\users\sonicyang\github\rpg\src\character.cpp
 	"character.h"
 	"enum.h"
 
-1401030252 c:\users\sonicyang\github\rpg\include\character.h
+1401032121 c:\users\sonicyang\github\rpg\include\character.h
 	<string>
 	"role.h"
 	"rolefactory.h"

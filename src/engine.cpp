@@ -317,23 +317,43 @@ int Engine::charMenuRoutin(const int val, std::string cname){
 
                         Item selectedItem = inv[inv.getNameList(p)[0]].item;
 
+                        Item currItemName;
+                        int ret;
+
                         switch(currentPos){
                             case 0:
-                                team[cname].setHead(selectedItem);
+                                currItemName = team[cname].getHead();
+                                ret = team[cname].setHead(selectedItem);
                                 break;
                             case 1:
-                                team[cname].setArmor(selectedItem);
+                                currItemName = team[cname].getArmor();
+                                ret = team[cname].setArmor(selectedItem);
                                 break;
                             case 2:
-                                team[cname].setLegs(selectedItem);
+                                currItemName = team[cname].getLegs();
+                                ret = team[cname].setLegs(selectedItem);
                                 break;
                             case 3:
-                                team[cname].setShoes(selectedItem);
+                                currItemName = team[cname].getShoes();
+                                ret = team[cname].setShoes(selectedItem);
                                 break;
                             case 4:
-                                team[cname].setWeapon(selectedItem);
+                                currItemName = team[cname].getWeapon();
+                                ret = team[cname].setWeapon(selectedItem);
                                 break;
                         }
+
+                        if(ret == -1){
+                            prom.loadMessaage(L"You can't wear a shoe on your Head", L"System");
+                            rdr.render_prompt(prom);
+                            prom.discardMessage();
+                            while(getch()!='z');
+                        }else{
+                            inv.decItem(inv.getNameList(p)[0]);
+                            if(currItemName.getName() != "")
+                                inv.incItem(currItemName.getName());
+                        }
+
                         break;
                     }
                     case 1:

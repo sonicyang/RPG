@@ -126,33 +126,38 @@ int Character::getAdditionalDefense(void){
 }
 
 
-void Character::setWeapon(Item item){
+int Character::setWeapon(Item item){
     if(item.getType() != itemTypes::weapon)
-        return;
+        return -1;
     _weapon = item;
+    return 1;
 }
-void Character::setHead(Item item){
+int Character::setHead(Item item){
     if(item.getType() != itemTypes::head)
-        return;
+        return -1;
     _head = item;
+    return 1;
 }
 
-void Character::setArmor(Item item){
+int Character::setArmor(Item item){
     if(item.getType() != itemTypes::armor)
-        return;
+        return -1;
     _armor = item;
+    return 1;
 }
 
-void Character::setLegs(Item item){
+int Character::setLegs(Item item){
     if(item.getType() != itemTypes::legs)
-        return;
+        return -1;
     _legs = item;
+    return 1;
 }
 
-void Character::setShoes(Item item){
+int Character::setShoes(Item item){
     if(item.getType() != itemTypes::shoes)
-        return;
+        return -1;
     _shoes = item;
+    return 1;
 }
 
 std::string Character::getRoleName(void) {
