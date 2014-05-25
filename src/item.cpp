@@ -42,7 +42,11 @@ Item::~Item()
     //dtor
 }
 
-Item::Item(const Item& other)
+bool Item::isUsable() const{
+    return _type == 0 || _type == 1;
+}
+
+/*Item::Item(const Item& other)
 {
     _name = other._name;
     _description = other._description;
@@ -58,7 +62,7 @@ Item& Item::operator=(const Item& rhs)
         _price = rhs._price;
         _iscomsumable = rhs._iscomsumable;
     return *this;
-}
+}*/
 
 bool Item::operator<(const Item& a) const{
     return _id < a._id;

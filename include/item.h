@@ -10,11 +10,8 @@ class Item
         Item();
         Item(std::string);
         virtual ~Item();
-        Item(const Item& other);
-        Item& operator=(const Item& other);
-
-        int useInBattle();
-        int useOnMap();
+        //Item(const Item& other);
+        //Item& operator=(const Item& other);
 
         unsigned int getID() const { return _id; };
         std::string getName() const { return _name; };
@@ -22,13 +19,15 @@ class Item
         int getSalePrice() const { return _price * 0.7; };
         int gerBuyPrice() const { return _price; };
 
-        bool isComsumable() { return _iscomsumable; };
+        bool isComsumable() const { return _iscomsumable; };
+        bool isUsable() const;
 
-        int getHPVarient() { return _HPv; };
-        int getMPVarient() { return _MPv; };
-        int getATKVarient() { return _ATKv; };
-        int getDEFVarient() { return _DEFv; };
+        int getHPVarient() const { return _HPv; };
+        int getMPVarient() const { return _MPv; };
+        int getATKVarient() const { return _ATKv; };
+        int getDEFVarient() const { return _DEFv; };
 
+        int getType() const { return _type; };
 
         bool operator<(const Item&) const;
         bool operator<=(const Item&) const;
@@ -39,7 +38,6 @@ class Item
 
     protected:
     private:
-        int use();
 
         unsigned int _id = 0xffffffff;
         std::string _name = "NULL";
