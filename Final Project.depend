@@ -393,7 +393,7 @@
 1399780742 source:c:\users\sonicyang\github\rpg\src\point.cpp
 	"point.h"
 
-1400817751 source:c:\users\sonicyang\github\rpg\src\render.cpp
+1401002082 source:c:\users\sonicyang\github\rpg\src\render.cpp
 	<curses.h>
 	"render.h"
 	"gmap.h"
@@ -456,7 +456,7 @@
 1400262936 c:\users\sonicyang\github\rpg\include\prompt.h
 	<string>
 
-1400775231 source:c:\users\sonicyang\github\rpg\src\eventcontroller.cpp
+1400855338 source:c:\users\sonicyang\github\rpg\src\eventcontroller.cpp
 	<algorithm>
 	<cstring>
 	<curses.h>
@@ -779,7 +779,7 @@
 	"json/value.h"
 	"json/reader.h"
 
-1400518118 c:\users\sonicyang\github\rpg\include\item.h
+1401002264 c:\users\sonicyang\github\rpg\include\item.h
 	<string>
 
 1400778696 source:c:\users\sonicyang\github\rpg\src\inventory.cpp
@@ -811,12 +811,14 @@
 
 1400776643 c:\users\sonicyang\github\rpg\include\menu.h
 
-1400744022 source:c:\users\sonicyang\github\rpg\src\character.cpp
+1401002047 source:c:\users\sonicyang\github\rpg\src\character.cpp
 	"character.h"
 
-1400744014 c:\users\sonicyang\github\rpg\include\character.h
+1401002218 c:\users\sonicyang\github\rpg\include\character.h
 	<string>
 	"role.h"
+	"rolefactory.h"
+	"item.h"
 
 1400743128 c:\users\sonicyang\github\rpg\include\role.h
 	<string>
@@ -838,7 +840,7 @@
 	<map>
 	"role.h"
 
-1400816008 source:c:\users\sonicyang\github\rpg\src\team.cpp
+1401001878 source:c:\users\sonicyang\github\rpg\src\team.cpp
 	<cstdlib>
 	"team.h"
 	"json/value.h"

@@ -1,11 +1,6 @@
 #include "character.h"
 
-Character::Character ()
-{
-
-}
-
-Character::Character (std::string n, int lvl, Role role) : _name(n), _exp(0), _role(role)
+Character::Character (RoleFactory* rf, std::string n, int lvl, Role role) : _roleCache(rf), _name(n), _exp(0), _role(role)
 {
     _role.setLevel(lvl);
     _level = lvl;
@@ -13,16 +8,21 @@ Character::Character (std::string n, int lvl, Role role) : _name(n), _exp(0), _r
     recoverMP();
 }
 
-Character::~Character ()
+Character::Character ()
 {
     //dtor
 }
 
+
+Character::~Character (){
+    //dtor
+}
+
 void Character::setHP(const int a){
-    if(a >= 0 && a <= _role.getMaxHP()){
+    if(a >= 0 && a <= getMaxHP()){
         this->_hp = a;
     }else{
-        this->_hp = _role.getMaxHP();
+        this->_hp = getMaxHP();
     }
     return;
 }
@@ -32,10 +32,10 @@ int Character::getHP() const{
 }
 
 void Character::setMP(int a){
-    if(a >= 0 && a <= _role.getMaxMP()){
+    if(a >= 0 && a <= getMaxMP()){
         this->_mp = a;
     }else{
-        this->_mp = _role.getMaxMP();
+        this->_mp = getMaxMP();
     }
     return;
 }
@@ -45,10 +45,10 @@ int Character::getMP() const{
 }
 
 void Character::setExp(const int a){
-    if(a >= 0 && a < _role.getLevelUpExp()){
+    if(a >= 0 && a < getLevelUpExp()){
         this->_exp = a;
-    }else if(a >= 0 && a >= _role.getLevelUpExp()){
-        setExp(a - _role.getLevelUpExp());
+    }else if(a >= 0 && a >= getLevelUpExp()){
+        setExp(a - getLevelUpExp());
         //levelUp();
     }
     return;
@@ -56,6 +56,30 @@ void Character::setExp(const int a){
 
 int Character::getExp(void) const {
     return this->_exp;
+}
+
+int Character::getMaxHP(void) const {
+    return _role.getMaxHP();
+}
+
+int Character::getMaxMP(void) const {
+    return _role.getMaxMP();
+}
+
+int Character::getLevelUpExp(void) const {
+    return _role.getLevelUpExp();
+}
+
+int Character::getAttack(void) const {
+    return _role.getAttack();
+}
+
+int Character::getDefence(void) const {
+    return _role.getDefence();
+}
+
+std::string Character::getRoleName(void) {
+    return _role.getName();
 }
 
 void Character::recoverHP(void){

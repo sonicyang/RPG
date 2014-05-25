@@ -158,24 +158,24 @@ void render::render_TeamMenu(Team& team, unsigned int curPos){
         mvaddstr(3 + i * 6 + 1, 32, tmp);
 
         mvaddstr(3 + i * 6 + 1, 40, "Role:");
-        mvaddstr(3 + i * 6 + 1, 46, team[memberList[i]].getRole().getName().c_str());
+        mvaddstr(3 + i * 6 + 1, 46, team[memberList[i]].getRoleName().c_str());
 
         mvaddstr(3 + i * 6 + 2, 2, "HP:");
         sprintf(tmp, "%d", team[memberList[i]].getHP());
         mvaddstr(3 + i * 6 + 2, 6, tmp);
-        sprintf(tmp, "/%d", team[memberList[i]].getRole().getMaxHP());
+        sprintf(tmp, "/%d", team[memberList[i]].getMaxHP());
         addstr(tmp);
 
         mvaddstr(3 + i * 6 + 3, 2, "MP:");
         sprintf(tmp, "%d", team[memberList[i]].getHP());
         mvaddstr(3 + i * 6 + 3, 6, tmp);
-        sprintf(tmp, "/%d", team[memberList[i]].getRole().getMaxHP());
+        sprintf(tmp, "/%d", team[memberList[i]].getMaxHP());
         addstr(tmp);
 
         mvaddstr(3 + i * 6 + 2, 20, "EXP:");
         sprintf(tmp, "%d", team[memberList[i]].getExp());
         mvaddstr(3 + i * 6 + 2, 25, tmp);
-        sprintf(tmp, "/%d", team[memberList[i]].getRole().getLevelUpExp());
+        sprintf(tmp, "/%d", team[memberList[i]].getLevelUpExp());
         addstr(tmp);
 
         attroff(A_BOLD);

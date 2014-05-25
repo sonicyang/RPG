@@ -40,6 +40,8 @@ class Item
         std::string _description;
         int _price;
         bool _iscomsumable;
+
+        int _type;
 };
 
 #endif // BACKPACKITEM_H

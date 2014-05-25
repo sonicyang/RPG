@@ -3,12 +3,14 @@
 
 #include <string>
 #include "role.h"
+#include "rolefactory.h"
+#include "item.h"
 
 class Character
 {
     public:
         Character();
-        Character(std::string, int, Role);
+        Character(RoleFactory*, std::string, int, Role);
         virtual ~Character();
 
         /* setters and getters */
@@ -25,13 +27,21 @@ class Character
         void recoverHP(void);
         void recoverMP(void);
 
-        Role getRole(void) const { return _role; };
+        int getMaxHP(void) const;
+        int getMaxMP(void) const;
+        int getLevelUpExp(void) const;
+        int getAttack(void) const;
+        int getDefence(void) const;
+
+        std::string getRoleName(void);
+        //Role getRole(void) const { return _role; };
 
         void setLevel(const int); // call setAttr(int) to set attributes
         int getLevel(void) const { return _level; };
 
     protected:
     private:
+        RoleFactory* _roleCache;
 
         std::string _name; // Stores the name of the player
         int _hp; // Stores the HP of the player, >= 0
@@ -40,6 +50,12 @@ class Character
         int _level; // Stores the level of the player, >= 1
 
         Role _role;
+
+        Item weapon;
+        Item head;
+        Item armor;
+        Item legs;
+        Item shoes;
 };
 
 #endif // CHARACTER _H
