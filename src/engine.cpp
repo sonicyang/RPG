@@ -192,7 +192,7 @@ void Engine::menuRutin(){
     return;
 }
 
-unsigned int Engine::invMenuRoutin(const int val){
+int Engine::invMenuRoutin(const int val){
     unsigned int currentPos = 0;
 
     std::vector<std::string> nameList = inv.getNameList(currentPos);
@@ -218,7 +218,9 @@ unsigned int Engine::invMenuRoutin(const int val){
                     case 0:
                         if(inv[nameList[0]].item.isUsable()){
                             if(inv[nameList[0]].item.getType() == itemTypes::potion){
-                                unsigned int p = teamMenuRoutin(1);
+                                int p = teamMenuRoutin(1);
+                                if( p == -1)
+                                    break;
                                 team[team.getNameList()[p]].varHP(inv[nameList[0]].item.getHPVarient());
                                 team[team.getNameList()[p]].varMP(inv[nameList[0]].item.getMPVarient());
                             }else if(inv[nameList[0]].item.getType() == itemTypes::allPotion){
@@ -245,16 +247,16 @@ unsigned int Engine::invMenuRoutin(const int val){
                 break;
             case 'x':
             case 'q':
-                return 0;
+                return -1;
                 break;
         }
 
     }
 
-    return 0;
+    return -1;
 }
 
-unsigned int Engine::teamMenuRoutin(const int val){
+int Engine::teamMenuRoutin(const int val){
     unsigned int currentPos = 0;
 
     std::vector<std::string> memberList = team.getNameList();
@@ -273,20 +275,57 @@ unsigned int Engine::teamMenuRoutin(const int val){
             case 'z':
                 switch(val){
                     case 0:
+                        charMenuRoutin(0, memberList[currentPos]);
                         break;
                     case 1:
+                        return currentPos;
                         break;
                 }
             case 'x':
             case 'q':
-                return 0;
+                return -1;
                 break;
         }
 
     }
-    return 0;
+    return -1;
 }
 
+int Engine::charMenuRoutin(const int val, std::string cname){
+    unsigned int currentPos = 0;
+
+    for(;;){
+        rdr.render_CharMenu(team[cname], currentPos);
+
+        int c = getch();
+        switch (c) {
+            case KEY_UP:
+            case KEY_LEFT:
+                currentPos = (currentPos==0)? 0 : currentPos - 1;
+                break;
+            case KEY_DOWN:
+            case KEY_RIGHT:
+                currentPos = (currentPos == 4 )? 4 : currentPos + 1;
+                break;
+            case 'z':
+                switch(val){
+                    case 0:
+
+                        break;
+                    case 1:
+                        return currentPos;
+                        break;
+                }
+            case 'x':
+            case 'q':
+                return -1;
+                break;
+        }
+
+    }
+
+    return -1;
+}
 
 void Engine::setStat(int s){
     _stat.push_back(stat);

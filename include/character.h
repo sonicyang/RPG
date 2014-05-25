@@ -34,7 +34,23 @@ class Character
         int getMaxMP(void);
         int getLevelUpExp(void);
         int getAttack(void);
-        int getDefence(void);
+        int getDefense(void);
+
+        int getBaseHP(void);
+        int getBaseMP(void);
+        int getBaseAttack(void);
+        int getBaseDefense(void);
+
+        int getAdditionalHP(void);
+        int getAdditionalMP(void);
+        int getAdditionalAttack(void);
+        int getAdditionalDefense(void);
+
+        Item getWeapon(void) { return _weapon; };
+        Item getHead(void) { return _head; };
+        Item getArmor(void) { return _armor; };
+        Item getLegs(void) { return _legs; };
+        Item getShoes(void) { return _shoes; };
 
         std::string getRoleName(void);
         void setRole(std::string);

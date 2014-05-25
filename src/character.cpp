@@ -74,11 +74,11 @@ void Character::varExp(const int val){
 }
 
 int Character::getMaxHP(void) {
-    return _role.getMaxHP() + _weapon.getHPVarient() + _armor.getHPVarient() + _head.getHPVarient() + _legs.getHPVarient() + _shoes.getHPVarient();
+    return getBaseHP() + getAdditionalHP();
 }
 
 int Character::getMaxMP(void) {
-    return _role.getMaxMP() + _weapon.getMPVarient() + _armor.getMPVarient() + _head.getMPVarient() + _legs.getMPVarient() + _shoes.getMPVarient();
+    return getBaseMP() + getAdditionalMP();
 }
 
 int Character::getLevelUpExp(void) {
@@ -86,11 +86,42 @@ int Character::getLevelUpExp(void) {
 }
 
 int Character::getAttack(void) {
-    return _role.getAttack() + _weapon.getATKVarient() + _armor.getATKVarient() + _head.getATKVarient() + _legs.getATKVarient() + _shoes.getATKVarient();
+    return getBaseAttack() + getAdditionalAttack();
 }
 
-int Character::getDefence(void) {
-    return _role.getDefence() + _weapon.getDEFVarient() + _armor.getDEFVarient() + _head.getDEFVarient() + _legs.getDEFVarient() + _shoes.getDEFVarient();
+int Character::getDefense(void) {
+    return getBaseDefense() + getAdditionalDefense();
+}
+
+int Character::getBaseHP(void){
+    return _role.getMaxHP();
+}
+
+int Character::getBaseMP(void){
+    return _role.getMaxMP();
+}
+
+int Character::getBaseAttack(void){
+    return _role.getAttack();
+}
+
+int Character::getBaseDefense(void){
+    return _role.getDefense();
+}
+
+int Character::getAdditionalHP(void){
+    return _weapon.getHPVarient() + _armor.getHPVarient() + _head.getHPVarient() + _legs.getHPVarient() + _shoes.getHPVarient();
+}
+
+int Character::getAdditionalMP(void){
+    return  + _weapon.getMPVarient() + _armor.getMPVarient() + _head.getMPVarient() + _legs.getMPVarient() + _shoes.getMPVarient();
+}
+int Character::getAdditionalAttack(void){
+    return  _weapon.getATKVarient() + _armor.getATKVarient() + _head.getATKVarient() + _legs.getATKVarient() + _shoes.getATKVarient();
+}
+
+int Character::getAdditionalDefense(void){
+    return  _weapon.getDEFVarient() + _armor.getDEFVarient() + _head.getDEFVarient() + _legs.getDEFVarient() + _shoes.getDEFVarient();
 }
 
 std::string Character::getRoleName(void) {

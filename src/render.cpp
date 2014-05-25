@@ -182,6 +182,7 @@ void render::render_TeamMenu(Team& team, unsigned int curPos){
     }
 
 }
+
 void render::render_InvMenu(inventory& inv, int curPos){
     std::vector<std::string> nameList = inv.getNameList(curPos);
 
@@ -226,6 +227,86 @@ void render::render_InvMenu(inventory& inv, int curPos){
         mvaddstr(8, 27, "Description:");
         mvaddstr(9, 33, inv[nameList[0]].item.getDescription().c_str());
     }
+}
+
+void render::render_CharMenu(Character& chara, int curPos){
+    clear();
+
+    //Make Frame and Print Title
+    for(unsigned int i = 0; i < screen_max.m_x; i++)
+        mvaddch(0, i, '=');
+    for(unsigned int i = 1; i < screen_max.m_y; i++)mvaddch(i, 0, '|'),mvaddch(i, screen_max.m_x - 1, '|');
+    for(unsigned int i = 0; i < screen_max.m_x; i++)
+        mvaddch(screen_max.m_y - 1, i, '=');
+    for(unsigned int i = 0; i < screen_max.m_x; i++)
+        mvaddch(2, i, '=');
+    for(unsigned int i = 3; i < screen_max.m_y; i++)
+        mvaddch(i, 25, '|');
+
+    mvaddstr(1, (screen_max.m_x - chara.getName().size())/2, chara.getName().c_str());
+
+
+    char tmp[10];
+
+    //Print Informations
+    mvaddstr(4, 2, "Name:");
+    mvaddstr(5, 4, chara.getName().c_str());
+
+    mvaddstr(7, 2, "Level:");
+    sprintf(tmp, "%d", chara.getLevel());
+    mvaddstr(8, 4, tmp);
+
+    mvaddstr(10, 2, "Role:");
+    mvaddstr(11, 4, chara.getRoleName().c_str());
+
+    mvaddstr(13, 2, "HP:");
+    sprintf(tmp, "%d + ", chara.getBaseHP());
+    mvaddstr(14, 4, tmp);
+    sprintf(tmp, "%d", chara.getAdditionalHP());
+    addstr(tmp);
+
+    mvaddstr(16, 2, "MP:");
+    sprintf(tmp, "%d + ", chara.getBaseMP());
+    mvaddstr(17, 4, tmp);
+    sprintf(tmp, "%d", chara.getAdditionalMP());
+    addstr(tmp);
+
+    mvaddstr(19, 2, "Attack:");
+    sprintf(tmp, "%d + ", chara.getBaseAttack());
+    mvaddstr(20, 4, tmp);
+    sprintf(tmp, "%d", chara.getAdditionalAttack());
+    addstr(tmp);
+
+    mvaddstr(22, 2, "Defense:");
+    sprintf(tmp, "%d + ", chara.getBaseDefense());
+    mvaddstr(24, 4, tmp);
+    sprintf(tmp, "%d", chara.getAdditionalDefense());
+    addstr(tmp);
+
+    if(curPos == 0)attron(A_BOLD);{
+        mvaddstr(4, 27, "Head   : ");
+        addstr(chara.getHead().getName().c_str());
+    }attroff(A_BOLD);
+
+    if(curPos == 1)attron(A_BOLD);{
+        mvaddstr(5, 27, "Armor  : ");
+        addstr(chara.getArmor().getName().c_str());
+    }attroff(A_BOLD);
+
+    if(curPos == 2)attron(A_BOLD);{
+        mvaddstr(6, 27, "Legs   : ");
+        addstr(chara.getLegs().getName().c_str());
+    }attroff(A_BOLD);
+
+    if(curPos == 3)attron(A_BOLD);{
+        mvaddstr(7, 27, "Shoes  : ");
+        addstr(chara.getShoes().getName().c_str());
+    }attroff(A_BOLD);
+
+    if(curPos == 4)attron(A_BOLD);{
+        mvaddstr(9, 27, "Weapon : ");
+        addstr(chara.getWeapon().getName().c_str());
+    }attroff(A_BOLD);
 }
 
 void render::update(){

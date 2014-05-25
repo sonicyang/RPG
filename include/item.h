@@ -40,8 +40,8 @@ class Item
     private:
 
         unsigned int _id = 0xffffffff;
-        std::string _name = "NULL";
-        std::string _description = "NULL ITEM";
+        std::string _name = "";
+        std::string _description = "";
         int _price = 0;
         bool _iscomsumable = 0;
 

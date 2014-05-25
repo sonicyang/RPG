@@ -15,7 +15,7 @@ class Role
         int getMaxMP(void) const { return max_mp; };
         int getLevelUpExp(void) const { return lvup_exp; };
         int getAttack(void) const { return attack; };
-        int getDefence(void) const { return defense; };
+        int getDefense(void) const { return defense; };
 
         void setLevel(int);
 

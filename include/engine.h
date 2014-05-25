@@ -49,8 +49,9 @@ class Engine
         //vector<GeneralPlayer> members;
 
         void menuRutin();
-        unsigned int invMenuRoutin(const int val = 0);
-        unsigned int teamMenuRoutin(const int val = 0);
+        int invMenuRoutin(const int val = 0);
+        int teamMenuRoutin(const int val = 0);
+        int charMenuRoutin(const int val = 0, std::string cname = "");
 
         void setStat(int s);
         void restoreStat();

@@ -9,6 +9,7 @@
 #include "prompt.h"
 #include "inventory.h"
 #include "team.h"
+#include "character.h"
 
 class render
 {
@@ -25,6 +26,7 @@ class render
         void render_MainMenu(int curPos, std::vector<std::string> options);
         void render_TeamMenu(Team&, unsigned int curPos);
         void render_InvMenu(inventory& inv, int curPos);
+        void render_CharMenu(Character& chara, int curPos);
 
         void update();
     protected:
