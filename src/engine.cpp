@@ -202,7 +202,7 @@ int Engine::invMenuRoutin(const int val){
 
         if(nameList.empty()){
             while(getch()!='x');
-            return 0;
+            return -1;
         }
 
         int c = getch();
@@ -281,6 +281,7 @@ int Engine::teamMenuRoutin(const int val){
                         return currentPos;
                         break;
                 }
+                break;
             case 'x':
             case 'q':
                 return -1;
@@ -309,13 +310,37 @@ int Engine::charMenuRoutin(const int val, std::string cname){
                 break;
             case 'z':
                 switch(val){
-                    case 0:
+                    case 0:{
+                        int p = invMenuRoutin(1);
+                        if(p == -1)
+                            break;
 
+                        Item selectedItem = inv[inv.getNameList(p)[0]].item;
+
+                        switch(currentPos){
+                            case 0:
+                                team[cname].setHead(selectedItem);
+                                break;
+                            case 1:
+                                team[cname].setArmor(selectedItem);
+                                break;
+                            case 2:
+                                team[cname].setLegs(selectedItem);
+                                break;
+                            case 3:
+                                team[cname].setShoes(selectedItem);
+                                break;
+                            case 4:
+                                team[cname].setWeapon(selectedItem);
+                                break;
+                        }
                         break;
+                    }
                     case 1:
                         return currentPos;
                         break;
                 }
+                break;
             case 'x':
             case 'q':
                 return -1;

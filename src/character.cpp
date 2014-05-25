@@ -1,4 +1,5 @@
 #include "character.h"
+#include "enum.h"
 
 Character::Character (RoleFactory* rf, std::string n, int lvl, Role role) : _roleCache(rf), _name(n), _exp(0), _role(role)
 {
@@ -122,6 +123,36 @@ int Character::getAdditionalAttack(void){
 
 int Character::getAdditionalDefense(void){
     return  _weapon.getDEFVarient() + _armor.getDEFVarient() + _head.getDEFVarient() + _legs.getDEFVarient() + _shoes.getDEFVarient();
+}
+
+
+void Character::setWeapon(Item item){
+    if(item.getType() != itemTypes::weapon)
+        return;
+    _weapon = item;
+}
+void Character::setHead(Item item){
+    if(item.getType() != itemTypes::head)
+        return;
+    _head = item;
+}
+
+void Character::setArmor(Item item){
+    if(item.getType() != itemTypes::armor)
+        return;
+    _armor = item;
+}
+
+void Character::setLegs(Item item){
+    if(item.getType() != itemTypes::legs)
+        return;
+    _legs = item;
+}
+
+void Character::setShoes(Item item){
+    if(item.getType() != itemTypes::shoes)
+        return;
+    _shoes = item;
 }
 
 std::string Character::getRoleName(void) {

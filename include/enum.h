@@ -12,7 +12,10 @@ struct inventorySlot{
 enum itemTypes{
     potion = 0,
     allPotion,
+    head,
     armor,
+    legs,
+    shoes,
     weapon,
     null = -1
 };

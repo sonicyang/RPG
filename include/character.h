@@ -46,6 +46,12 @@ class Character
         int getAdditionalAttack(void);
         int getAdditionalDefense(void);
 
+        void setWeapon(Item);
+        void setHead(Item);
+        void setArmor(Item);
+        void setLegs(Item);
+        void setShoes(Item);
+
         Item getWeapon(void) { return _weapon; };
         Item getHead(void) { return _head; };
         Item getArmor(void) { return _armor; };

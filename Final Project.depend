@@ -394,7 +394,7 @@
 1399780742 source:c:\users\sonicyang\github\rpg\src\point.cpp
 	"point.h"
 
-1401027962 source:c:\users\sonicyang\github\rpg\src\render.cpp
+1401028523 source:c:\users\sonicyang\github\rpg\src\render.cpp
 	<curses.h>
 	"render.h"
 	"gmap.h"
@@ -723,7 +723,7 @@
 	"point.h"
 	<string>
 
-1401024148 source:c:\users\sonicyang\github\rpg\src\engine.cpp
+1401031547 source:c:\users\sonicyang\github\rpg\src\engine.cpp
 	<curses.h>
 	<cstdlib>
 	<string>
@@ -800,7 +800,7 @@
 	<type_traits>
 	<string>
 
-1401013232 c:\users\sonicyang\github\rpg\include\enum.h
+1401030363 c:\users\sonicyang\github\rpg\include\enum.h
 	<string>
 	<vector>
 
@@ -812,10 +812,11 @@
 
 1400776643 c:\users\sonicyang\github\rpg\include\menu.h
 
-1401022965 source:c:\users\sonicyang\github\rpg\src\character.cpp
+1401030509 source:c:\users\sonicyang\github\rpg\src\character.cpp
 	"character.h"
+	"enum.h"
 
-1401025859 c:\users\sonicyang\github\rpg\include\character.h
+1401030252 c:\users\sonicyang\github\rpg\include\character.h
 	<string>
 	"role.h"
 	"rolefactory.h"
