@@ -5,7 +5,7 @@
 #include "json/value.h"
 #include "json/reader.h"
 
-Item::Item() : _id(0xffffffff), _name("NULL"), _description("NULL Item"), _price(0), _iscomsumable(0), _type(-1)
+Item::Item()
 {
     //ctor
 }
@@ -26,6 +26,11 @@ Item::Item(std::string name)
         _price = root["Price"].asUInt();
         _iscomsumable = root["Comsumable"].asInt();
         _type = root["Type"].asInt();
+
+        _HPv = root.get("HPv", 0).asInt();
+        _MPv = root.get("MPv", 0).asInt();
+        _ATKv = root.get("ATKv", 0).asInt();
+        _DEFv = root.get("DEFv", 0).asInt();
     }else{
         std::cout << "Failed to parse configuration\n"  << reader.getFormatedErrorMessages();
         exit(128);

@@ -27,11 +27,11 @@ class Character
         void recoverHP(void);
         void recoverMP(void);
 
-        int getMaxHP(void) const;
-        int getMaxMP(void) const;
-        int getLevelUpExp(void) const;
-        int getAttack(void) const;
-        int getDefence(void) const;
+        int getMaxHP(void);
+        int getMaxMP(void);
+        int getLevelUpExp(void);
+        int getAttack(void);
+        int getDefence(void);
 
         std::string getRoleName(void);
         //Role getRole(void) const { return _role; };
@@ -51,11 +51,11 @@ class Character
 
         Role _role;
 
-        Item weapon;
-        Item head;
-        Item armor;
-        Item legs;
-        Item shoes;
+        Item _weapon;
+        Item _head;
+        Item _armor;
+        Item _legs;
+        Item _shoes;
 };
 
 #endif // CHARACTER _H

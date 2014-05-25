@@ -24,6 +24,12 @@ class Item
 
         bool isComsumable() { return _iscomsumable; };
 
+        int getHPVarient() { return _HPv; };
+        int getMPVarient() { return _MPv; };
+        int getATKVarient() { return _ATKv; };
+        int getDEFVarient() { return _DEFv; };
+
+
         bool operator<(const Item&) const;
         bool operator<=(const Item&) const;
         bool operator>(const Item&) const;
@@ -35,13 +41,18 @@ class Item
     private:
         int use();
 
-        unsigned int _id;
-        std::string _name;
-        std::string _description;
-        int _price;
-        bool _iscomsumable;
+        unsigned int _id = 0xffffffff;
+        std::string _name = "NULL";
+        std::string _description = "NULL ITEM";
+        int _price = 0;
+        bool _iscomsumable = 0;
 
-        int _type;
+        int _type = -1;
+
+        int _HPv = 0;
+        int _MPv = 0;
+        int _ATKv = 0;
+        int _DEFv = 0;
 };
 
 #endif // BACKPACKITEM_H

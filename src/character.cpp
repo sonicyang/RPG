@@ -58,24 +58,24 @@ int Character::getExp(void) const {
     return this->_exp;
 }
 
-int Character::getMaxHP(void) const {
-    return _role.getMaxHP();
+int Character::getMaxHP(void) {
+    return _role.getMaxHP() + _weapon.getHPVarient() + _armor.getHPVarient() + _head.getHPVarient() + _legs.getHPVarient() + _shoes.getHPVarient();
 }
 
-int Character::getMaxMP(void) const {
-    return _role.getMaxMP();
+int Character::getMaxMP(void) {
+    return _role.getMaxMP() + _weapon.getMPVarient() + _armor.getMPVarient() + _head.getMPVarient() + _legs.getMPVarient() + _shoes.getMPVarient();
 }
 
-int Character::getLevelUpExp(void) const {
+int Character::getLevelUpExp(void) {
     return _role.getLevelUpExp();
 }
 
-int Character::getAttack(void) const {
-    return _role.getAttack();
+int Character::getAttack(void) {
+    return _role.getAttack() + _weapon.getATKVarient() + _armor.getATKVarient() + _head.getATKVarient() + _legs.getATKVarient() + _shoes.getATKVarient();
 }
 
-int Character::getDefence(void) const {
-    return _role.getDefence();
+int Character::getDefence(void) {
+    return _role.getDefence() + _weapon.getDEFVarient() + _armor.getDEFVarient() + _head.getDEFVarient() + _legs.getDEFVarient() + _shoes.getDEFVarient();
 }
 
 std::string Character::getRoleName(void) {
