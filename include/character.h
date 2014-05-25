@@ -34,6 +34,7 @@ class Character
         int getDefence(void);
 
         std::string getRoleName(void);
+        void setRole(std::string);
         //Role getRole(void) const { return _role; };
 
         void setLevel(const int); // call setAttr(int) to set attributes

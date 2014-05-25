@@ -82,6 +82,13 @@ std::string Character::getRoleName(void) {
     return _role.getName();
 }
 
+void Character::setRole(std::string val){
+    Role tmpRole = (*_roleCache)[val];
+    if(tmpRole.getName() != "NULL")
+        _role = tmpRole;
+    return;
+}
+
 void Character::recoverHP(void){
     setHP(_role.getMaxHP());
     return;

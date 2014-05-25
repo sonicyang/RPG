@@ -39,3 +39,9 @@ RoleFactory::~RoleFactory()
 {
     //dtor
 }
+
+Role RoleFactory::operator[](std::string val){
+    if(_roleCache.find(val) != _roleCache.end())
+        return _roleCache[val];
+    return _null;
+}

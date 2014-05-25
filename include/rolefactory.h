@@ -11,12 +11,14 @@ class RoleFactory
         RoleFactory(std::string roleList);
         virtual ~RoleFactory();
 
-        Role operator[](std::string val) { return _roleCache[val]; };
+        Role operator[](std::string val);
     protected:
     private:
 
         unsigned int _roleCount;
         std::map<std::string, Role> _roleCache;
+
+        Role _null;
 };
 
 #endif // ROLEFACTORY_H
