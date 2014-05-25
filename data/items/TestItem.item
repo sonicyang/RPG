@@ -4,5 +4,6 @@
 	"Description" : "TESTTTTTTT",
 	"Price" : 100,
 	"Comsumable" : 0,
-	"Type" : 0
+	"Type" : 0,
+	"HPv" : -20
 }

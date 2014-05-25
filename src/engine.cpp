@@ -192,7 +192,7 @@ void Engine::menuRutin(){
     return;
 }
 
-void Engine::invMenuRoutin(){
+unsigned int Engine::invMenuRoutin(const int val){
     unsigned int currentPos = 0;
 
     std::vector<std::string> nameList = inv.getNameList(currentPos);
@@ -202,7 +202,7 @@ void Engine::invMenuRoutin(){
 
         if(nameList.empty()){
             while(getch()!='x');
-            return;
+            return 0;
         }
 
         int c = getch();
@@ -214,20 +214,47 @@ void Engine::invMenuRoutin(){
                 currentPos = (currentPos == nameList.size() - 1 )? nameList.size() - 1 : currentPos + 1;
                 break;
             case 'z':
-                //inv[nameList[0]].item
+                switch(val){
+                    case 0:
+                        if(inv[nameList[0]].item.isUsable()){
+                            if(inv[nameList[0]].item.getType() == itemTypes::potion){
+                                unsigned int p = teamMenuRoutin(1);
+                                team[team.getNameList()[p]].varHP(inv[nameList[0]].item.getHPVarient());
+                                team[team.getNameList()[p]].varMP(inv[nameList[0]].item.getMPVarient());
+                            }else if(inv[nameList[0]].item.getType() == itemTypes::allPotion){
+                                std::vector<std::string> memberList = team.getNameList();
+                                for(unsigned int i = 0; i < memberList.size(); i++){
+                                    team[team.getNameList()[i]].varHP(inv[nameList[0]].item.getHPVarient());
+                                    team[team.getNameList()[i]].varMP(inv[nameList[0]].item.getMPVarient());
+                                }
+                            }
+                            if(inv[nameList[0]].item.isComsumable())
+                                inv.decItem(nameList[0]);
+                        }else{
+                            prom.loadMessaage(L"This Item is not Comsumable", L"System");
+                            rdr.render_prompt(prom);
+                            prom.discardMessage();
+                            while(getch()!='z');
+                        }
+
+                        break;
+                    case 1:
+                        return currentPos;
+                        break;
+                }
                 break;
             case 'x':
             case 'q':
-                return;
+                return 0;
                 break;
         }
 
     }
 
-    return;
+    return 0;
 }
 
-void Engine::teamMenuRoutin(){
+unsigned int Engine::teamMenuRoutin(const int val){
     unsigned int currentPos = 0;
 
     std::vector<std::string> memberList = team.getNameList();
@@ -243,14 +270,21 @@ void Engine::teamMenuRoutin(){
             case KEY_DOWN:
                 currentPos = (currentPos == memberList.size() - 1 )? memberList.size() - 1 : currentPos + 1;
                 break;
+            case 'z':
+                switch(val){
+                    case 0:
+                        break;
+                    case 1:
+                        break;
+                }
             case 'x':
             case 'q':
-                return;
+                return 0;
                 break;
         }
 
     }
-    return;
+    return 0;
 }
 
 

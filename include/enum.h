@@ -9,6 +9,14 @@ struct inventorySlot{
     int count = -1;
 };
 
+enum itemTypes{
+    potion = 0,
+    allPotion,
+    armor,
+    weapon,
+    null = -1
+};
+
 enum Stats{
     pending = 0,
     onMap,

@@ -19,10 +19,13 @@ class Character
 
         void setHP(const int);
         int getHP(void) const;
+        void varHP(const int);
         void setMP(const int);
         int getMP(void) const;
+        void varMP(const int);
         void setExp(const int);
         int getExp(void) const;
+        void varExp(const int);
 
         void recoverHP(void);
         void recoverMP(void);

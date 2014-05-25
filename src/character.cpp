@@ -31,6 +31,11 @@ int Character::getHP() const{
     return this->_hp;
 }
 
+void Character::varHP(const int val){
+    setHP(getHP() + val);
+    return;
+}
+
 void Character::setMP(int a){
     if(a >= 0 && a <= getMaxMP()){
         this->_mp = a;
@@ -42,6 +47,11 @@ void Character::setMP(int a){
 
 int Character::getMP() const{
     return this->_mp;
+}
+
+void Character::varMP(const int val){
+    setMP(getMP() + val);
+    return;
 }
 
 void Character::setExp(const int a){
@@ -56,6 +66,11 @@ void Character::setExp(const int a){
 
 int Character::getExp(void) const {
     return this->_exp;
+}
+
+void Character::varExp(const int val){
+    setExp(getExp() + val);
+    return;
 }
 
 int Character::getMaxHP(void) {

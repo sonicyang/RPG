@@ -167,9 +167,9 @@ void render::render_TeamMenu(Team& team, unsigned int curPos){
         addstr(tmp);
 
         mvaddstr(3 + i * 6 + 3, 2, "MP:");
-        sprintf(tmp, "%d", team[memberList[i]].getHP());
+        sprintf(tmp, "%d", team[memberList[i]].getMP());
         mvaddstr(3 + i * 6 + 3, 6, tmp);
-        sprintf(tmp, "/%d", team[memberList[i]].getMaxHP());
+        sprintf(tmp, "/%d", team[memberList[i]].getMaxMP());
         addstr(tmp);
 
         mvaddstr(3 + i * 6 + 2, 20, "EXP:");

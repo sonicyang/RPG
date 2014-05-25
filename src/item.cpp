@@ -43,7 +43,7 @@ Item::~Item()
 }
 
 bool Item::isUsable() const{
-    return _type == 0 || _type == 1;
+    return (_type == itemTypes::potion) || (_type == itemTypes::allPotion);
 }
 
 /*Item::Item(const Item& other)
