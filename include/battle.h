@@ -30,6 +30,8 @@ class Battle
         int monsterMenu();
 
         bool isMonsterWipeOut();
+
+        void calculateExp();
 };
 
 #endif // BATTLE_H

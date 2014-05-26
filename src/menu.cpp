@@ -8,12 +8,12 @@
 #include "render.h"
 
 int Menu::enterMenu(Team& team, inventory& inv, render& rdr){
-    int p;
+    int t;
 
-    for(p = showMainMenu(rdr); p!= -1; p = showMainMenu(rdr)){
-        switch(p){
+    for(t = showMainMenu(rdr); t!= -1; t = showMainMenu(rdr, t)){
+        switch(t){
             case 0:
-                for(p = showTeamMenu(team, rdr); p != -1; p = showTeamMenu(team, rdr, p)){
+                for(int p = showTeamMenu(team, rdr); p != -1; p = showTeamMenu(team, rdr, p)){
                     for(int s = showCharMenu(team, p, rdr); s != -1; s = showCharMenu(team, p, rdr, s)){
                         inv.enableNull();
                         for(int k = showInvMenu(inv, rdr); k != -1; k = -1){
@@ -24,7 +24,7 @@ int Menu::enterMenu(Team& team, inventory& inv, render& rdr){
                 }
                 break;
             case 1:
-                for(p = showInvMenu(inv, rdr); p != -1; p = showInvMenu(inv, rdr, p)){
+                for(int p = showInvMenu(inv, rdr); p != -1; p = showInvMenu(inv, rdr, p)){
                     if(inv[inv.getNameList(p)[0]].item.isUsable()){
                         for(int s = showTeamMenu(team, rdr); s != -1; s = -1){
                             ItemExec::Exec(inv, p, team, s, rdr);

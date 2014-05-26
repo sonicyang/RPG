@@ -86,8 +86,11 @@ int Battle::battleStart(std::vector<std::string>& monsters){
                 break;
         }
 
-        if(isMonsterWipeOut())
+        if(isMonsterWipeOut()){
+            calculateExp();
             break;
+        }
+
 
         //Monster Movement
         for(unsigned int i = 0; i < _monsters.size(); i++){
@@ -101,6 +104,7 @@ int Battle::battleStart(std::vector<std::string>& monsters){
             _team[memberList[target]].varHP((-1) * _monsters[i].getAttack());
 
             usleep(1000000);
+
             rdr.render_BattleTeam(_team, i);
             if(_team.isWipeOut())
                 break;
@@ -178,4 +182,13 @@ bool Battle::isMonsterWipeOut(){
         flag &= _monsters[i].isDead();
     }
     return flag;
+}
+
+void Battle::calculateExp(){
+    for(unsigned int i = 0; i < _monsters.size(); i++){
+        std::vector<std::string> memberList = _team.getNameList();
+        for(unsigned int j = 0; j < memberList.size(); j++){
+            _team[memberList[j]].varExp(_monsters[i].getExp());
+        }
+    }
 }

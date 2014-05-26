@@ -23,9 +23,9 @@ class Character
         void setMP(const int);
         int getMP(void) const;
         void varMP(const int);
-        void setExp(const int);
+        int setExp(const int);
         int getExp(void) const;
-        void varExp(const int);
+        int varExp(const int);
 
         void recoverHP(void);
         void recoverMP(void);
@@ -84,6 +84,8 @@ class Character
         Item _armor;
         Item _legs;
         Item _shoes;
+
+        int LevelUP();
 };
 
 #endif // CHARACTER _H

@@ -59,23 +59,30 @@ void Character::varMP(const int val){
     return;
 }
 
-void Character::setExp(const int a){
+int Character::LevelUP(){
+    _level += 1;
+    _role.setLevel(_level);
+    return 0;
+}
+
+int Character::setExp(const int a){
     if(a >= 0 && a < getLevelUpExp()){
         this->_exp = a;
     }else if(a >= 0 && a >= getLevelUpExp()){
-        setExp(a - getLevelUpExp());
-        //levelUp();
+        this->setExp(a - getLevelUpExp());
+        LevelUP();
+        return 1;
     }
-    return;
+    return 0;
 }
 
 int Character::getExp(void) const {
     return this->_exp;
 }
 
-void Character::varExp(const int val){
+int Character::varExp(const int val){
     setExp(getExp() + val);
-    return;
+    return 0;
 }
 
 int Character::getMaxHP(void) {
