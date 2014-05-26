@@ -6,11 +6,13 @@
 class Skill
 {
     public:
+        Skill();
         Skill(std::string path);
         virtual ~Skill();
     protected:
     private:
         std::string _name = "Null";
+        std::string _description = "Null";
         int _MPC = 0;
         int _eTarget = -1;
         int _eHPv = 0;

@@ -2,6 +2,9 @@
 #define ROLE_H
 
 #include <string>
+#include <map>
+#include <vector>
+#include "skill.h"
 
 class Role
 {
@@ -34,6 +37,9 @@ class Role
         int _mp_base, _mp_mpx;
         int _attack_base, _attack_mpx;
         int _defense_base, _defense_mpx;
+
+        std::vector<Skill> _skills;
+        std::map<int, Skill> _skillsCache;
 };
 
 #endif // ROLE_H

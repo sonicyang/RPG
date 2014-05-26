@@ -822,20 +822,23 @@
 	"inventory.h"
 	"render.h"
 
-1401112030 source:c:\users\sonicyang\github\rpg\src\character.cpp
+1401119611 source:c:\users\sonicyang\github\rpg\src\character.cpp
 	"character.h"
 	"enum.h"
 
-1401111994 c:\users\sonicyang\github\rpg\include\character.h
+1401119487 c:\users\sonicyang\github\rpg\include\character.h
 	<string>
 	"role.h"
 	"rolefactory.h"
 	"item.h"
 
-1401022983 c:\users\sonicyang\github\rpg\include\role.h
+1401118885 c:\users\sonicyang\github\rpg\include\role.h
 	<string>
+	<map>
+	<vector>
+	"skill.h"
 
-1401003758 source:c:\users\sonicyang\github\rpg\src\role.cpp
+1401118942 source:c:\users\sonicyang\github\rpg\src\role.cpp
 	"role.h"
 	<cmath>
 
@@ -879,14 +882,14 @@
 	"team.h"
 	"render.h"
 
-1401115402 source:c:\users\sonicyang\github\rpg\src\battle.cpp
+1401119458 source:c:\users\sonicyang\github\rpg\src\battle.cpp
 	"battle.h"
 	<unistd.h>
 	<cstdlib>
 	"menu.h"
 	"itemexec.h"
 
-1401112442 c:\users\sonicyang\github\rpg\include\battle.h
+1401119028 c:\users\sonicyang\github\rpg\include\battle.h
 	<curses.h>
 	<string>
 	<vector>
@@ -913,8 +916,13 @@
 	"json/value.h"
 	"utils.h"
 
-1401115940 source:c:\users\sonicyang\github\rpg\src\skill.cpp
+1401118687 source:c:\users\sonicyang\github\rpg\src\skill.cpp
 	"skill.h"
+	<cstdlib>
+	"json/reader.h"
+	"json/value.h"
+	"utils.h"
 
-1401115940 c:\users\sonicyang\github\rpg\include\skill.h
+1401117764 c:\users\sonicyang\github\rpg\include\skill.h
+	<string>
 
