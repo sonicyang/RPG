@@ -49,12 +49,43 @@ int Battle::battleStart(std::vector<std::string>& monsters){
                         for(int p = monsterMenu(); p != -1; p = -1){
                             _monsters[p].varHP((-1)* _team[memberList[i]].getAttack());
                             flag = 1;
-                            break;
                         }
                         break;
                     }
                     case 1:{
+                        for(int l = Menu::showSkillMenu(_team, i, rdr); l != -1; l = Menu::showSkillMenu(_team, i, rdr)){
+                            Skill tmp = _team[memberList[i]].getSkillList()[l];
+                            if(tmp.geteTarget() == 0){
+                                for(int p = monsterMenu(); p != -1; p = -1){
+                                    _monsters[p].varHP(tmp.geteHPv());
+                                    _monsters[p].varMP(tmp.geteMPv());
+                                    flag = 1;
+                                }
+                            }else if(tmp.geteTarget() == 1){
+                                for(unsigned int m = 0; m < _monsters.size(); m++){
+                                    _monsters[m].varHP(tmp.geteHPv());
+                                    _monsters[m].varMP(tmp.geteMPv());
+                                }
+                                flag =1;
+                            }
 
+                            if(tmp.getfTarget() == 0){
+                                for(int p = monsterMenu(); p != -1; p = -1){
+                                    _team[memberList[i]].varHP(tmp.getfHPv());
+                                    _team[memberList[i]].varMP(tmp.getfMPv());
+                                    flag = 1;
+                                }
+                            }else if(tmp.getfTarget() == 1){
+                                for(unsigned int m = 0; m < memberList.size(); m++){
+                                    _team[memberList[m]].varHP(tmp.getfHPv());
+                                    _team[memberList[m]].varMP(tmp.getfMPv());
+                                }
+                                flag =1;
+                            }
+
+                            if(flag)
+                                break;
+                        }
                         break;
                     }
                     case 2:{

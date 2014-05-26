@@ -30,6 +30,8 @@ class Monster
         int getMaxMP(void);
         int getAttack(void);
         int getDefense(void);
+        void varAttack(const int val);
+        void varDefense(const int val);
 
         bool isDead();
     protected:

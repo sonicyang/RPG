@@ -344,9 +344,9 @@ void render::render_SkillMenu(Character& chara, int curPos){
 
         //Print Informations
         mvaddstr(4, 27, "Name:");
-        mvaddstr(4, 33, skills[0].getName().c_str());
+        mvaddstr(5, 30, skills[0].getName().c_str());
         mvaddstr(8, 27, "Description:");
-        mvaddstr(9, 33, skills[0].getDescription().c_str());
+        mvaddstr(9, 30, skills[0].getDescription().c_str());
     }
 
 }

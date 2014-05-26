@@ -92,3 +92,11 @@ void Monster::recoverMP(void){
 bool Monster::isDead(){
     return _hp == 0;
 }
+
+void varAttack(const int val){
+
+}
+
+void varDefense(const int val){
+
+}
