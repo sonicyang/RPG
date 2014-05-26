@@ -12,18 +12,16 @@
 #include "render.h"
 #include "engine.h"
 #include "variant.h"
+#include "menu.h"
 
 Engine::Engine() :
     rdr(), ctlCall(),
     mapCtl("data/maps/maplist.lst", ctlCall),
     evtCtl("data/events/eventlist.lst", ctlCall, varMap),
     inv(),
-    team("data/team/team_list.lst"),
-    mOption(3)
+    team("data/team/team_list.lst")
 {
-        mOption[0] = "Team";
-        mOption[1] = "Inventory";
-        mOption[2] = "Exit";
+
 }
 
 Engine::~Engine()
@@ -41,7 +39,8 @@ void Engine::getParseUserInput(){
             break;
         case menu:
             nodelay(stdscr, false); //Nasty Hack
-            menuRutin();
+            if(Menu::enterMenu(team, inv, rdr) == 0)
+                ctlCall.push_back(loadStack(svc::endGame));
             nodelay(stdscr, true);
             this->restoreStat();
             break;
@@ -144,6 +143,7 @@ void Engine::updateScreen(){
     return;
 }
 
+/*
 void Engine::menuRutin(){
     unsigned int cursorPos = 0;
 
@@ -178,7 +178,6 @@ void Engine::menuRutin(){
                             prom.discardMessage();
                             return;
                         }
-
                         break;
                 }
                 break;
@@ -217,19 +216,23 @@ int Engine::invMenuRoutin(const int val){
                 switch(val){
                     case 0:
                         if(inv[nameList[0]].item.isUsable()){
-                            if(inv[nameList[0]].item.getType() == itemTypes::potion){
-                                int p = teamMenuRoutin(1);
-                                if( p == -1)
+                            switch(inv[nameList[0]].item.getType()){
+                                case itemTypes::potion:
+                                    int p = teamMenuRoutin(1);
+                                    if( p == -1)
+                                        break;
+                                    team[team.getNameList()[p]].varHP(inv[nameList[0]].item.getHPVarient());
+                                    team[team.getNameList()[p]].varMP(inv[nameList[0]].item.getMPVarient());
                                     break;
-                                team[team.getNameList()[p]].varHP(inv[nameList[0]].item.getHPVarient());
-                                team[team.getNameList()[p]].varMP(inv[nameList[0]].item.getMPVarient());
-                            }else if(inv[nameList[0]].item.getType() == itemTypes::allPotion){
-                                std::vector<std::string> memberList = team.getNameList();
-                                for(unsigned int i = 0; i < memberList.size(); i++){
-                                    team[team.getNameList()[i]].varHP(inv[nameList[0]].item.getHPVarient());
-                                    team[team.getNameList()[i]].varMP(inv[nameList[0]].item.getMPVarient());
-                                }
+                                case itemTypes::allPotion:
+                                    std::vector<std::string> memberList = team.getNameList();
+                                    for(unsigned int i = 0; i < memberList.size(); i++){
+                                        team[team.getNameList()[i]].varHP(inv[nameList[0]].item.getHPVarient());
+                                        team[team.getNameList()[i]].varMP(inv[nameList[0]].item.getMPVarient());
+                                    }
+                                    break;
                             }
+
                             if(inv[nameList[0]].item.isComsumable())
                                 inv.decItem(nameList[0]);
                         }else{
@@ -374,6 +377,7 @@ int Engine::charMenuRoutin(const int val, std::string cname){
 
     return -1;
 }
+*/
 
 void Engine::setStat(int s){
     _stat.push_back(stat);

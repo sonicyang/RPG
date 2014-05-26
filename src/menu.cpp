@@ -1,137 +1,160 @@
 #include <curses.h>
 #include <vector>
 #include <string>
+#include <curses.h>
 #include "menu.h"
+#include "enum.h"
+#include "itemexec.h"
+#include "render.h"
 
+int Menu::enterMenu(Team& team, inventory& inv, render& rdr){
+    int p;
 
-/*void Menu::showMainMenu(){
-    nodelay(stdscr, false); //Nasty Hack
+    for(p = showMainMenu(rdr); p!= -1; p = showMainMenu(rdr)){
+        switch(p){
+            case 0:
+                for(p = showTeamMenu(team, rdr); p != -1; p = showTeamMenu(team, rdr, p)){
+                    for(int s = showCharMenu(team, p, rdr); s != -1; s = showCharMenu(team, p, rdr, s)){
+                        inv.enableNull();
+                        for(int k = showInvMenu(inv, rdr); k != -1; k = -1){
+                            ItemExec::changeItem(inv, k, team, s, rdr);
+                        }
+                        inv.disableNull();
+                    }
+                }
+                break;
+            case 1:
+                for(p = showInvMenu(inv, rdr); p != -1; p = showInvMenu(inv, rdr, p)){
+                    if(inv[inv.getNameList(p)[0]].item.isUsable()){
+                        for(int s = showTeamMenu(team, rdr); s != -1; s = -1){
+                            ItemExec::Exec(inv, p, team, s, rdr);
+                        }
+                    }else{
+                        rdr.render_prompt(prompt(L"This Item is not Comsumable", L"System"));
+                        getch();
+                    }
 
-    std::vector<std::string> mOption(3);
-    mOption[0] = "Team";
-    mOption[1] = "Inventory";
-    mOption[2] = "Exit";
+                }
+                break;
+            case 2:
+                rdr.render_prompt(prompt(L"Are You Sure?", L"System"));
+                if(getch() == 'z'){
+                    rdr.render_prompt(prompt(L"Bye", L"System"));
+                    getch();
+                    return 0;
+                }
+                break;
+        }
+    }
+    return -1;
+}
 
+int Menu::showMainMenu(render& rdr, int curPos){
+    unsigned int currentPos = curPos;
 
+    std::vector<std::string> mOption;
+    mOption.push_back("Team");
+    mOption.push_back("Inventory");
+    mOption.push_back("Exit");
 
     for(;;){
-        clear();
-
-        //Make Frame and Print Title
-        mvaddstr(0, 0, "================================================================================");
-        for(int i = 1; i < 24; i++)mvaddch(i, 0, '|'),mvaddch(i, 79, '|');
-        mvaddstr(24, 0, "===============================================================================");
-        mvaddstr(2, 0, "================================================================================");
-        for(int i = 3; i < 24; i++)mvaddch(i, 25, '|');
-
-        //Print Useful Data
-        mvaddstr(1, 38, "MENU");
-
-        //Print All Options
-        for(unsigned int i = 0; i < mOption.size(); i++)
-            mvaddstr(4 + 2*i, 2, mOption[i].c_str());
-
-        //Print Selected Options
-        attron(A_BOLD);
-        mvaddstr(4 + 2*cursorPos, 2, mOption[cursorPos].c_str());
-        attroff(A_BOLD);
+        rdr.render_MainMenu(currentPos, mOption);
 
         //Wait User input
         int c = getch();
         switch (c) {
             case KEY_UP:
-                cursorPos = (cursorPos==0)? mOption.size()-1 : cursorPos - 1;
+                currentPos = (currentPos==0)? mOption.size()-1 : currentPos - 1;
                 break;
             case KEY_DOWN:
-                cursorPos = (cursorPos == mOption.size()-1)? 0 : cursorPos + 1;
+                currentPos = (currentPos == mOption.size()-1)? 0 : currentPos + 1;
                 break;
             case 'z':
-                switch(cursorPos){
-                    case 0:
-                        //teamMenuRoutin();
-                        break;
-                    case 1:
-                        //invMenuRoutin();
-                        break;
-                    case 2:
-                        prom.loadMessaage(L"Are You Sure?", L"System");
-                        rdr.render_prompt(prom);
-                        if(getch() == 'z'){
-                            prom.loadMessaage(L"Bye", L"System");
-                            rdr.render_prompt(prom);
-                            getch();
-                            ctlCall.push_back(loadStack(svc::endGame));
-                            prom.discardMessage();
-                            return;
-                        }
-
-                        break;
-                }
+                return currentPos;
                 break;
             case 'x':
             case 'q':
-                ctlCall.push_back(loadStack(svc::clearPrompt));
-                return;
+                return -1;
                 break;
         }
     }
-    return;
+    return -1;
 }
 
-void Menu::showInvMenu(){
+int Menu::showTeamMenu(Team& team, render& rdr, int curPos){
+    unsigned int currentPos = curPos;
 
-}
-
-void Menu::showTeamMenu(){
-
-}
-
-void Engine::menuRutin(){
-
-}
-
-void Engine::invMenuRoutin(){
-    unsigned int currentPos = 0;
+    std::vector<std::string> memberList = team.getNameList();
 
     for(;;){
-        clear();
-        mvaddstr(0, 0, "================================================================================");
-        for(int i = 1; i < 24; i++)mvaddch(i, 0, '|'),mvaddch(i, 79, '|');
-        mvaddstr(24, 0, "===============================================================================");
-        mvaddstr(2, 0, "================================================================================");
-        mvaddstr(22, 26, "=====================================================");
-        for(int i = 3; i < 24; i++)mvaddch(i, 25, '|');
-        mvaddstr(1, 35, "INVENTORY");
+        rdr.render_TeamMenu(team, currentPos);
 
-        char mString[40];
-        sprintf(mString, "Money: $%d", inv.getMoney());
-        mvaddstr(23, 26, mString);
+        int c = getch();
+        switch (c) {
+            case KEY_UP:
+                currentPos = (currentPos==0)? 0 : currentPos - 1;
+                break;
+            case KEY_DOWN:
+                currentPos = (currentPos == memberList.size() - 1 )? memberList.size() - 1 : currentPos + 1;
+                break;
+            case 'z':
+                return currentPos;
+                break;
+            case 'x':
+            case 'q':
+                return -1;
+                break;
+        }
 
-        std::vector<std::string> nameList = inv.getNameList(currentPos);
+    }
+    return -1;
+}
+
+int Menu::showCharMenu(Team& team, int index, render& rdr, int curPos){
+    unsigned int currentPos = curPos;
+
+    std::string cname = team.getNameList()[index];
+
+    for(;;){
+        rdr.render_CharMenu(team[cname], currentPos);
+
+        int c = getch();
+        switch (c) {
+            case KEY_UP:
+            case KEY_LEFT:
+                currentPos = (currentPos==0)? 0 : currentPos - 1;
+                break;
+            case KEY_DOWN:
+            case KEY_RIGHT:
+                currentPos = (currentPos == 4 )? 4 : currentPos + 1;
+                break;
+            case 'z':
+                return currentPos;
+                break;
+            case 'x':
+            case 'q':
+                return -1;
+                break;
+        }
+
+    }
+
+    return -1;
+}
+
+
+int Menu::showInvMenu(inventory& inv, render& rdr, int curPos){
+    unsigned int currentPos = curPos;
+
+    std::vector<std::string> nameList = inv.getNameList(currentPos);
+
+    for(;;){
+        rdr.render_InvMenu(inv, currentPos);
 
         if(nameList.empty()){
             while(getch()!='x');
-            return;
+            return -1;
         }
-
-        for (unsigned int i = 0; i < nameList.size(); i++){
-            mvaddstr(i*2 + 4, 2, nameList[i].c_str());
-        }
-
-        //Print Selected Options
-        attron(A_BOLD);
-        mvaddstr(4, 2, nameList[0].c_str());
-        attroff(A_BOLD);
-
-        //Print Informations
-        mvaddstr(4, 27, "Name:");
-        mvaddstr(4, 33, inv[nameList[0]].item.getName().c_str());
-        mvaddstr(6, 27, "Currently Have:");
-        char tmp[10];
-        sprintf(tmp, "%d", inv[nameList[0]].count);
-        mvaddstr(6, 43, tmp);
-        mvaddstr(8, 27, "Description:");
-        mvaddstr(9, 33, inv[nameList[0]].item.getDescription().c_str());
 
         int c = getch();
         switch (c) {
@@ -142,68 +165,15 @@ void Engine::invMenuRoutin(){
                 currentPos = (currentPos == nameList.size() - 1 )? nameList.size() - 1 : currentPos + 1;
                 break;
             case 'z':
-                //inv[nameList[0]].item
+                return currentPos;
                 break;
             case 'x':
             case 'q':
-                return;
+                return -1;
                 break;
         }
 
     }
-
-    return;
+    return -1;
 }
 
-void Engine::teamMenuRoutin(){
-        clear();
-        mvaddstr(0, 0, "================================================================================");
-        for(int i = 1; i < 24; i++)mvaddch(i, 0, '|'),mvaddch(i, 79, '|');
-        mvaddstr(24, 0, "===============================================================================");
-        mvaddstr(2, 0, "================================================================================");
-        mvaddstr(1, 38, "TEAM");
-
-        std::vector<std::string> memberList = team.getNameList();
-
-
-
-        for (unsigned int i = 0; i < memberList.size(); i++){
-            mvaddstr(3 + i * 5, 1, "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-            mvaddstr(3 + i * 5 + 5, 1, "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-
-            char tmp[10];
-
-            //Print Informations
-            mvaddstr(3 + i * 5 + 1, 2, "Name:");
-            mvaddstr(3 + i * 5 + 1, 8, team[memberList[i]].getName().c_str());
-
-            mvaddstr(3 + i * 5 + 1, 25, "Level:");
-            sprintf(tmp, "%d", team[memberList[i]].getLevel());
-            mvaddstr(3 + i * 5 + 1, 32, tmp);
-
-            mvaddstr(3 + i * 5 + 1, 40, "Role:");
-            mvaddstr(3 + i * 5 + 1, 46, team[memberList[i]].getRole().getName().c_str());
-
-            mvaddstr(3 + i * 5 + 2, 2, "HP:");
-            sprintf(tmp, "%d", team[memberList[i]].getHP());
-            mvaddstr(3 + i * 5 + 2, 6, tmp);
-            sprintf(tmp, "/%d", team[memberList[i]].getRole().getMaxHP());
-            addstr(tmp);
-
-            mvaddstr(3 + i * 5 + 3, 2, "MP:");
-            sprintf(tmp, "%d", team[memberList[i]].getHP());
-            mvaddstr(3 + i * 5 + 3, 6, tmp);
-            sprintf(tmp, "/%d", team[memberList[i]].getRole().getMaxHP());
-            addstr(tmp);
-
-            mvaddstr(3 + i * 5 + 2, 20, "EXP:");
-            sprintf(tmp, "%d", team[memberList[i]].getExp());
-            mvaddstr(3 + i * 5 + 2, 25, tmp);
-            sprintf(tmp, "/%d", team[memberList[i]].getRole().getLevelUpExp());
-            addstr(tmp);
-        }
-
-    while(getch()!='x');
-    return;
-}
-*/

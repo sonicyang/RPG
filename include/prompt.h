@@ -7,6 +7,7 @@ class prompt
 {
     public:
         prompt();
+        prompt(const wchar_t*, const wchar_t*);
         ~prompt();
 
         void discardMessage();

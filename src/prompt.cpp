@@ -5,6 +5,13 @@ prompt::prompt()
     //ctor
 }
 
+prompt::prompt(const wchar_t* m, const wchar_t* w) :
+    m_message(m),
+    m_whom(w)
+{
+
+}
+
 prompt::~prompt()
 {
     //dtor
