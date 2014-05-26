@@ -12,7 +12,7 @@ class ItemExec
 {
     public:
         static int Exec(inventory& inv, int item, Team& team, int chara, render& rdr);
-        static int changeItem(inventory& inv, int item, Team& team, int chara, render& rdr);
+        static int changeItem(inventory& inv, int item, Team& team, int chara, int slot, render& rdr);
     protected:
     private:
 };

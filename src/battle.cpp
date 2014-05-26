@@ -31,10 +31,9 @@ int Battle::battleStart(std::vector<std::string>& monsters){
     std::vector<std::string> memberList = _team.getNameList();
 
     for(;;){
-        rdr.render_BattleScene(_monsters);
-
         //player Movement
         for(unsigned int i = 0; i < memberList.size(); i++){
+            rdr.render_BattleScene(_monsters);
             rdr.render_BattleTeam(_team, i);
 
             if(_team[memberList[i]].isDead())
@@ -42,6 +41,9 @@ int Battle::battleStart(std::vector<std::string>& monsters){
 
             int flag = 0;
             for(int k = battleMenu(); flag == 0; k = battleMenu()){
+                rdr.render_BattleScene(_monsters);
+                rdr.render_BattleTeam(_team, i);
+
                 switch(k){
                     case 0:{
                         for(int p = monsterMenu(); p != -1; p = -1){

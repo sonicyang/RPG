@@ -17,7 +17,7 @@ int Menu::enterMenu(Team& team, inventory& inv, render& rdr){
                     for(int s = showCharMenu(team, p, rdr); s != -1; s = showCharMenu(team, p, rdr, s)){
                         inv.enableNull();
                         for(int k = showInvMenu(inv, rdr); k != -1; k = -1){
-                            ItemExec::changeItem(inv, k, team, s, rdr);
+                            ItemExec::changeItem(inv, k, team, p, s, rdr);
                         }
                         inv.disableNull();
                     }

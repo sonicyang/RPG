@@ -807,7 +807,7 @@
 	<string>
 	<vector>
 
-1401080104 source:c:\users\sonicyang\github\rpg\src\menu.cpp
+1401116658 source:c:\users\sonicyang\github\rpg\src\menu.cpp
 	<curses.h>
 	<vector>
 	<string>
@@ -866,20 +866,20 @@
 	"character.h"
 	"RoleFactory.h"
 
-1401080133 source:c:\users\sonicyang\github\rpg\src\itemexec.cpp
+1401116724 source:c:\users\sonicyang\github\rpg\src\itemexec.cpp
 	"itemexec.h"
 	"menu.h"
 	"render.h"
 	"prompt.h"
 
-1401079302 c:\users\sonicyang\github\rpg\include\itemexec.h
+1401116634 c:\users\sonicyang\github\rpg\include\itemexec.h
 	<string>
 	"item.h"
 	"inventory.h"
 	"team.h"
 	"render.h"
 
-1401113097 source:c:\users\sonicyang\github\rpg\src\battle.cpp
+1401115402 source:c:\users\sonicyang\github\rpg\src\battle.cpp
 	"battle.h"
 	<unistd.h>
 	<cstdlib>
@@ -912,4 +912,9 @@
 	"json/reader.h"
 	"json/value.h"
 	"utils.h"
+
+1401115940 source:c:\users\sonicyang\github\rpg\src\skill.cpp
+	"skill.h"
+
+1401115940 c:\users\sonicyang\github\rpg\include\skill.h
 

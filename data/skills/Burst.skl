@@ -1,0 +1,14 @@
+{
+	"Name" : "Burst",
+	"MPC" : 10,
+	"eTarget" : 0,
+	"eHPv" : -100,
+	"eMPv" : 0,
+	"eATKv" : 0,
+	"eDEFv" : 0,
+	"fTarget" : -1,
+	"fHPv" : 0,
+	"fMPv" : 0,
+	"fATKv" : 0,
+	"fDEFv" : 0
+}

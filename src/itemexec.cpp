@@ -30,14 +30,14 @@ int ItemExec::Exec(inventory& inv, int item, Team& team, int chara, render& rdr)
     return 0;
 }
 
-int ItemExec::changeItem(inventory& inv, int item, Team& team, int chara, render& rdr){
+int ItemExec::changeItem(inventory& inv, int item, Team& team, int chara, int slot, render& rdr){
     Item selectedItem = inv[inv.getNameList(item)[0]].item;
     Item currItemName;
 
     int ret;
     std::string cname = team.getNameList()[chara];
 
-    switch(chara){
+    switch(slot){
         case 0:
             currItemName = team[cname].getHead();
             ret = team[cname].setHead(selectedItem);
