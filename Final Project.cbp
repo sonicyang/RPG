@@ -5,7 +5,7 @@
 		<Option title="Final Project" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="include\;src\model\;src\controller\;src\tools\;include\\include\controller\;include\controller\;include\model\;include\tools\;" />
+		<Option virtualFolders="include\;src\controller\;src\tools\;include\controller\;include\tools\;include\event\;include\map\;include\include\;include\team\;include\inventory\;src\map\;src\inventory\;src\team\;src\event\;src\;" />
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/Debug/Final Project" prefix_auto="1" extension_auto="1" />
@@ -48,7 +48,7 @@
 			<Option virtualFolder="include/tools/" />
 		</Unit>
 		<Unit filename="include/character.h">
-			<Option virtualFolder="include/model/" />
+			<Option virtualFolder="include/team/" />
 		</Unit>
 		<Unit filename="include/engine.h">
 			<Option virtualFolder="include/controller/" />
@@ -57,16 +57,16 @@
 			<Option virtualFolder="include/tools/" />
 		</Unit>
 		<Unit filename="include/eventcontroller.h">
-			<Option virtualFolder="include/controller/" />
+			<Option virtualFolder="include/event/" />
 		</Unit>
 		<Unit filename="include/gmap.h">
-			<Option virtualFolder="include/model/" />
+			<Option virtualFolder="include/map/" />
 		</Unit>
 		<Unit filename="include/inventory.h">
-			<Option virtualFolder="include/controller/" />
+			<Option virtualFolder="include/inventory/" />
 		</Unit>
 		<Unit filename="include/item.h">
-			<Option virtualFolder="include/model/" />
+			<Option virtualFolder="include/inventory/" />
 		</Unit>
 		<Unit filename="include/itemexec.h">
 			<Option virtualFolder="include/controller/" />
@@ -80,32 +80,32 @@
 		<Unit filename="include/json/value.h" />
 		<Unit filename="include/json/writer.h" />
 		<Unit filename="include/mapcontroller.h">
-			<Option virtualFolder="include/controller/" />
+			<Option virtualFolder="include/map/" />
 		</Unit>
 		<Unit filename="include/mapobject.h">
-			<Option virtualFolder="include/model/" />
+			<Option virtualFolder="include/map/" />
 		</Unit>
 		<Unit filename="include/menu.h">
 			<Option virtualFolder="include/controller/" />
 		</Unit>
 		<Unit filename="include/objplayer.h">
-			<Option virtualFolder="include/model/" />
+			<Option virtualFolder="include/map/" />
 		</Unit>
 		<Unit filename="include/point.h">
-			<Option virtualFolder="include/tools/" />
+			<Option virtualFolder="include/map/" />
 		</Unit>
 		<Unit filename="include/prompt.h">
-			<Option virtualFolder="include/model/" />
+			<Option virtualFolder="include/event/" />
 		</Unit>
 		<Unit filename="include/render.h" />
 		<Unit filename="include/role.h">
-			<Option virtualFolder="include/model/" />
+			<Option virtualFolder="include/team/" />
 		</Unit>
 		<Unit filename="include/rolefactory.h">
-			<Option virtualFolder="include/tools/" />
+			<Option virtualFolder="include/team/" />
 		</Unit>
 		<Unit filename="include/team.h">
-			<Option virtualFolder="include/controller/" />
+			<Option virtualFolder="include/team/" />
 		</Unit>
 		<Unit filename="include/utf8.h">
 			<Option virtualFolder="include/tools/" />
@@ -114,29 +114,29 @@
 			<Option virtualFolder="include/tools/" />
 		</Unit>
 		<Unit filename="include/variant.h">
-			<Option virtualFolder="include/" />
+			<Option virtualFolder="include/tools/" />
 		</Unit>
 		<Unit filename="main.cpp" />
 		<Unit filename="src/array2d.cpp">
 			<Option virtualFolder="src/tools/" />
 		</Unit>
 		<Unit filename="src/character.cpp">
-			<Option virtualFolder="src/model/" />
+			<Option virtualFolder="src/team/" />
 		</Unit>
 		<Unit filename="src/engine.cpp">
 			<Option virtualFolder="src/controller/" />
 		</Unit>
 		<Unit filename="src/eventcontroller.cpp">
-			<Option virtualFolder="src/controller/" />
+			<Option virtualFolder="src/event/" />
 		</Unit>
 		<Unit filename="src/gmap.cpp">
-			<Option virtualFolder="src/model/" />
+			<Option virtualFolder="src/map/" />
 		</Unit>
 		<Unit filename="src/inventory.cpp">
-			<Option virtualFolder="src/controller/" />
+			<Option virtualFolder="src/inventory/" />
 		</Unit>
 		<Unit filename="src/item.cpp">
-			<Option virtualFolder="src/model/" />
+			<Option virtualFolder="src/inventory/" />
 		</Unit>
 		<Unit filename="src/itemexec.cpp">
 			<Option virtualFolder="src/controller/" />
@@ -150,32 +150,32 @@
 		<Unit filename="src/lib_json/json_writer.cpp" />
 		<Unit filename="src/lib_json/sconscript" />
 		<Unit filename="src/mapcontroller.cpp">
-			<Option virtualFolder="src/controller/" />
+			<Option virtualFolder="src/map/" />
 		</Unit>
 		<Unit filename="src/mapobject.cpp">
-			<Option virtualFolder="src/model/" />
+			<Option virtualFolder="src/map/" />
 		</Unit>
 		<Unit filename="src/menu.cpp">
 			<Option virtualFolder="src/controller/" />
 		</Unit>
 		<Unit filename="src/objplayer.cpp">
-			<Option virtualFolder="src/model/" />
+			<Option virtualFolder="src/map/" />
 		</Unit>
 		<Unit filename="src/point.cpp">
-			<Option virtualFolder="src/tools/" />
+			<Option virtualFolder="src/map/" />
 		</Unit>
 		<Unit filename="src/prompt.cpp">
-			<Option virtualFolder="src/model/" />
+			<Option virtualFolder="src/event/" />
 		</Unit>
 		<Unit filename="src/render.cpp" />
 		<Unit filename="src/role.cpp">
-			<Option virtualFolder="src/model/" />
+			<Option virtualFolder="src/team/" />
 		</Unit>
 		<Unit filename="src/rolefactory.cpp">
-			<Option virtualFolder="src/tools/" />
+			<Option virtualFolder="src/team/" />
 		</Unit>
 		<Unit filename="src/team.cpp">
-			<Option virtualFolder="src/controller/" />
+			<Option virtualFolder="src/team/" />
 		</Unit>
 		<Unit filename="src/utf8.cpp">
 			<Option virtualFolder="src/tools/" />
