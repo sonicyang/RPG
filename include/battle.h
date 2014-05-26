@@ -6,12 +6,14 @@
 #include <vector>
 #include "inventory.h"
 #include "team.h"
+#include "monsterfactory.h"
+#include "render.h"
 
 
 class Battle
 {
     public:
-        Battle(inventory& inv, Team& team);
+        Battle(std::string monsterList, inventory& inv, Team& team, render& rdrk);
         ~Battle();
 
         int battleStart(std::vector<std::string>& monsters);
@@ -19,11 +21,10 @@ class Battle
     private:
         inventory& _inv;
         Team& _team;
-        std::vector<std::string> _monsters;
+        render& rdr;
 
+        std::vector<Monster> _monsters;
         MonsterFactory _monsterCache;
-
-
 };
 
 #endif // BATTLE_H

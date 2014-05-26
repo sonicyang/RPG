@@ -10,6 +10,7 @@
 #include "inventory.h"
 #include "team.h"
 #include "character.h"
+#include "monster.h"
 
 class render
 {
@@ -27,6 +28,8 @@ class render
         void render_TeamMenu(Team&, unsigned int curPos);
         void render_InvMenu(inventory& inv, int curPos);
         void render_CharMenu(Character& chara, int curPos);
+
+        void render_BattleScene(std::vector<Monster> m);
 
         void update();
     protected:

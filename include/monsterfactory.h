@@ -2,6 +2,7 @@
 #define MONSTERFACTORY_H
 
 #include <string>
+#include <map>
 #include "monster.h"
 
 class MonsterFactory

@@ -309,6 +309,25 @@ void render::render_CharMenu(Character& chara, int curPos){
     }attroff(A_BOLD);
 }
 
+void render::render_BattleScene(std::vector<Monster> m){
+    clear();
+
+    //Make Frame and Print Title
+    for(unsigned int i = 0; i < screen_max.m_x; i++)
+        mvaddch(0, i, '=');
+    for(unsigned int i = 1; i < screen_max.m_y; i++)mvaddch(i, 0, '|'),mvaddch(i, screen_max.m_x - 1, '|');
+    for(unsigned int i = 0; i < screen_max.m_x; i++)
+        mvaddch(screen_max.m_y - 1, i, '=');
+
+    int segment = screen_max.m_x / (m.size() + 1);
+    for(unsigned int i = 0; i < m.size(); i++){
+        mvaddstr(screen_max.m_y - 8, i * segment - m[i].getName().size()/2, m[i].getName().c_str());
+    }
+
+
+
+}
+
 void render::update(){
     refresh();
     return;

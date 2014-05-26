@@ -11,9 +11,9 @@ Monster::Monster(std::string name, int hp, int mp, int atk, int def, int exp) :
     max_mp(mp),
     attack(atk),
     defense(def),
-    _exp(exp),
     _hp(max_hp),
-    _mp(max_mp)
+    _mp(max_mp),
+    _exp(exp)
 {
     //ctor
 }
@@ -57,10 +57,6 @@ int Monster::getMP() const{
 void Monster::varMP(const int val){
     setMP(getMP() + val);
     return;
-}
-
-int Monster::getExp(void) const {
-    return this->_exp;
 }
 
 int Monster::getMaxHP(void) {

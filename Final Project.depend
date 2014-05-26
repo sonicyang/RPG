@@ -283,7 +283,7 @@
 	"objPlayer.h"
 	"utils.h"
 
-1401079240 c:\users\sonicyang\github\rpg\include\render.h
+1401087059 c:\users\sonicyang\github\rpg\include\render.h
 	<curses.h>
 	"point.h"
 	"gmap.h"
@@ -293,6 +293,7 @@
 	"inventory.h"
 	"team.h"
 	"character.h"
+	"monster.h"
 
 1400156748 source:c:\users\sonicyang\github\rpg\src\chararray2d.cpp
 	<string>
@@ -805,7 +806,7 @@
 	<string>
 	<vector>
 
-1401079916 source:c:\users\sonicyang\github\rpg\src\menu.cpp
+1401080104 source:c:\users\sonicyang\github\rpg\src\menu.cpp
 	<curses.h>
 	<vector>
 	<string>
@@ -864,7 +865,7 @@
 	"character.h"
 	"RoleFactory.h"
 
-1401079743 source:c:\users\sonicyang\github\rpg\src\itemexec.cpp
+1401080133 source:c:\users\sonicyang\github\rpg\src\itemexec.cpp
 	"itemexec.h"
 	"menu.h"
 	"render.h"
@@ -876,4 +877,34 @@
 	"inventory.h"
 	"team.h"
 	"render.h"
+
+1401087077 source:c:\users\sonicyang\github\rpg\src\battle.cpp
+	"battle.h"
+
+1401086332 c:\users\sonicyang\github\rpg\include\battle.h
+	<curses.h>
+	<string>
+	<vector>
+	"inventory.h"
+	"team.h"
+	"monsterfactory.h"
+	"render.h"
+
+1401085021 c:\users\sonicyang\github\rpg\include\monsterfactory.h
+	<string>
+	<map>
+	"monster.h"
+
+1401084995 c:\users\sonicyang\github\rpg\include\monster.h
+	<string>
+
+1401085142 source:c:\users\sonicyang\github\rpg\src\monster.cpp
+	"monster.h"
+
+1401085780 source:c:\users\sonicyang\github\rpg\src\monsterfactory.cpp
+	"monsterfactory.h"
+	<cstdlib>
+	"json/reader.h"
+	"json/value.h"
+	"utils.h"
 
