@@ -395,7 +395,7 @@
 1399780742 source:c:\users\sonicyang\github\rpg\src\point.cpp
 	"point.h"
 
-1401123907 source:c:\users\sonicyang\github\rpg\src\render.cpp
+1401124040 source:c:\users\sonicyang\github\rpg\src\render.cpp
 	<curses.h>
 	"render.h"
 	"gmap.h"
@@ -833,17 +833,17 @@
 	"rolefactory.h"
 	"item.h"
 
-1401123363 c:\users\sonicyang\github\rpg\include\role.h
+1401124312 c:\users\sonicyang\github\rpg\include\role.h
 	<string>
 	<map>
 	<vector>
 	"skill.h"
 
-1401118942 source:c:\users\sonicyang\github\rpg\src\role.cpp
+1401124576 source:c:\users\sonicyang\github\rpg\src\role.cpp
 	"role.h"
 	<cmath>
 
-1401003831 source:c:\users\sonicyang\github\rpg\src\rolefactory.cpp
+1401124540 source:c:\users\sonicyang\github\rpg\src\rolefactory.cpp
 	<cstdlib>
 	<iostream>
 	"rolefactory.h"

@@ -20,7 +20,17 @@ RoleFactory::RoleFactory(std::string roleList)
 	            Json::Value root2;
 	            Json::Reader reader2;
 	            if (reader.parse( in2, root2 )){
-	            	Role role(root2["Name"].asString(), root2["HP"][(unsigned int)0].asInt(), root2["HP"][(unsigned int)1].asInt(), root2["MP"][(unsigned int)0].asInt(), root2["MP"][(unsigned int)1].asInt(), root2["Attack"][(unsigned int)0].asInt(), root2["Attack"][(unsigned int)1].asInt(), root2["Defense"][(unsigned int)0].asInt(), root2["Defense"][(unsigned int)1].asInt());
+                    std::map<int, Skill> skills;
+
+                    for(unsigned int k = 0; k < root2["Skills"].size(); k++){
+                        skills.insert(skills.begin(), std::pair<int, Skill>(root2["Skills"][k]["Level"].asInt(), root2["Skills"][k]["Name"].asString()));
+                    }
+
+	            	Role role(root2["Name"].asString(), root2["HP"][(unsigned int)0].asInt(), root2["HP"][(unsigned int)1].asInt(),
+                                                        root2["MP"][(unsigned int)0].asInt(), root2["MP"][(unsigned int)1].asInt(),
+                                                        root2["Attack"][(unsigned int)0].asInt(), root2["Attack"][(unsigned int)1].asInt(),
+                                                        root2["Defense"][(unsigned int)0].asInt(), root2["Defense"][(unsigned int)1].asInt(),
+                                                        skills);
 
 	                _roleCache.insert(_roleCache.begin(), std::pair<std::string, Role>(root2["Name"].asString(), role));
 	            }else{

@@ -17,7 +17,7 @@ Role::Role():
 }
 
 
-Role::Role(std::string name, int hb, int hm, int mb, int mm, int ab, int am, int db, int dm) :
+Role::Role(std::string name, int hb, int hm, int mb, int mm, int ab, int am, int db, int dm, std::map<int, Skill> skills) :
     _name(name),
     _hp_base(hb),
     _hp_mpx(hm),
@@ -27,12 +27,12 @@ Role::Role(std::string name, int hb, int hm, int mb, int mm, int ab, int am, int
     _attack_mpx(am),
     _defense_base(db),
     _defense_mpx(dm),
-    _skills()
+    _skillsCache(skills)
 {
     setLevel(1);
 }
 
-Role::Role(std::string name, int hb, int hm, int mb, int mm, int ab, int am, int db, int dm, int val) :
+Role::Role(std::string name, int hb, int hm, int mb, int mm, int ab, int am, int db, int dm, std::map<int, Skill> skills, int val) :
     _name(name),
     _hp_base(hb),
     _hp_mpx(hm),
@@ -42,7 +42,7 @@ Role::Role(std::string name, int hb, int hm, int mb, int mm, int ab, int am, int
     _attack_mpx(am),
     _defense_base(db),
     _defense_mpx(dm),
-    _skills()
+    _skillsCache(skills)
 {
     setLevel(val);
 }

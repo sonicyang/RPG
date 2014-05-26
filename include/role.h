@@ -10,8 +10,8 @@ class Role
 {
     public:
         Role();
-        Role(std::string, int, int, int, int, int, int, int, int);
-        Role(std::string, int, int, int, int, int, int, int, int, int);
+        Role(std::string, int, int, int, int, int, int, int, int, std::map<int, Skill>);
+        Role(std::string, int, int, int, int, int, int, int, int, std::map<int, Skill>, int);
         virtual ~Role();
 
         int getMaxHP(void) const { return max_hp; };
