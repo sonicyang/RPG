@@ -321,10 +321,40 @@ void render::render_BattleScene(std::vector<Monster> m){
 
     int segment = screen_max.m_x / (m.size() + 1);
     for(unsigned int i = 0; i < m.size(); i++){
-        mvaddstr(screen_max.m_y - 8, i * segment - m[i].getName().size()/2, m[i].getName().c_str());
+        mvaddstr((screen_max.m_y - 8) / 2, i * segment - m[i].getName().size()/2, m[i].getName().c_str());
     }
+}
 
+void render::render_BattleTeam(Team& team, unsigned int turn){
+    for(unsigned int i = 0; i < screen_max.m_x; i++)
+        mvaddch(screen_max.m_y - 8, i, '=');
+    for(unsigned int i = screen_max.m_y - 7; i < screen_max.m_y; i++)
+        mvaddch(i, 30, '|');
 
+    ::std::vector<std::string> nameList = team.getNameList();
+    for(unsigned int i = 0; i < nameList.size(); i++){
+
+        if(i == turn)attron(A_BOLD);{
+            //Print Informations
+            char tmp[10];
+
+            mvaddstr(screen_max.m_y - 6 + i, 2, team[nameList[i]].getName().c_str());
+
+            sprintf(tmp, "%d/", team[nameList[i]].getHP());
+            mvaddstr(screen_max.m_y - 6 + i, 13, tmp);
+            sprintf(tmp, "%d", team[nameList[i]].getMaxHP());
+            addstr(tmp);
+
+            sprintf(tmp, "%d/", team[nameList[i]].getMP());
+            mvaddstr(screen_max.m_y - 6 + i, 23, tmp);
+            sprintf(tmp, "%d", team[nameList[i]].getMaxMP());
+            addstr(tmp);
+
+        }attroff(A_BOLD);
+    }
+}
+
+void render::render_BattleMenu(unsigned int curPos){
 
 }
 

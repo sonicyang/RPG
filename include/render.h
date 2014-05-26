@@ -30,6 +30,8 @@ class render
         void render_CharMenu(Character& chara, int curPos);
 
         void render_BattleScene(std::vector<Monster> m);
+        void render_BattleTeam(Team& team, unsigned int turn);
+        void render_BattleMenu(unsigned int curPos);
 
         void update();
     protected:

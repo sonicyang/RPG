@@ -22,9 +22,9 @@ class Battle
         inventory& _inv;
         Team& _team;
         render& rdr;
-
-        std::vector<Monster> _monsters;
         MonsterFactory _monsterCache;
+
+
 };
 
 #endif // BATTLE_H
