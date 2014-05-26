@@ -15,11 +15,15 @@ int Menu::enterMenu(Team& team, inventory& inv, render& rdr){
             case 0:
                 for(int p = showTeamMenu(team, rdr); p != -1; p = showTeamMenu(team, rdr, p)){
                     for(int s = showCharMenu(team, p, rdr); s != -1; s = showCharMenu(team, p, rdr, s)){
-                        inv.enableNull();
-                        for(int k = showInvMenu(inv, rdr); k != -1; k = -1){
-                            ItemExec::changeItem(inv, k, team, p, s, rdr);
+                        if(s != 5){
+                            inv.enableNull();
+                            for(int k = showInvMenu(inv, rdr); k != -1; k = -1){
+                                ItemExec::changeItem(inv, k, team, p, s, rdr);
+                            }
+                            inv.disableNull();
+                        }else{
+                            for(int k = showSkillMenu(team, p, rdr); k != -1; k = -1);
                         }
-                        inv.disableNull();
                     }
                 }
                 break;
@@ -126,7 +130,7 @@ int Menu::showCharMenu(Team& team, int index, render& rdr, int curPos){
                 break;
             case KEY_DOWN:
             case KEY_RIGHT:
-                currentPos = (currentPos == 4 )? 4 : currentPos + 1;
+                currentPos = (currentPos == 5 )? 5 : currentPos + 1;
                 break;
             case 'z':
                 return currentPos;
@@ -177,3 +181,36 @@ int Menu::showInvMenu(inventory& inv, render& rdr, int curPos){
     return -1;
 }
 
+int Menu::showSkillMenu(Team& team, int index, render& rdr){
+    unsigned int currentPos = 0;
+
+    std::string cname = team.getNameList()[index];
+
+    for(;;){
+        rdr.render_SkillMenu(team[cname], currentPos);
+
+        if(team[cname].getSkillList().empty()){
+            while(getch()!='x');
+            return -1;
+        }
+
+        int c = getch();
+        switch (c) {
+            case KEY_UP:
+                currentPos = (currentPos==0)? 0 : currentPos - 1;
+                break;
+            case KEY_DOWN:
+                currentPos = (currentPos == team[cname].getSkillList().size() - 1 )? team[cname].getSkillList().size() - 1 : currentPos + 1;
+                break;
+            case 'z':
+                return currentPos;
+                break;
+            case 'x':
+            case 'q':
+                return -1;
+                break;
+        }
+    }
+
+    return -1;
+}

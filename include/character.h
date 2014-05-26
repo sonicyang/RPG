@@ -67,6 +67,7 @@ class Character
 
         bool isDead();
 
+        std::vector<Skill> getSkillList() { return _role.getSkillList(); };
     protected:
     private:
         RoleFactory* _roleCache;

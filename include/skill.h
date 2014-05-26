@@ -9,6 +9,9 @@ class Skill
         Skill();
         Skill(std::string path);
         virtual ~Skill();
+
+        std::string getName() { return _name; };
+        std::string getDescription() { return _description; };
     protected:
     private:
         std::string _name = "Null";

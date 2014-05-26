@@ -23,6 +23,8 @@ class Role
         void setLevel(int);
 
         std::string getName() { return _name; };
+
+        std::vector<Skill> getSkillList() { return _skills; };
     protected:
     private:
         std::string _name;

@@ -14,6 +14,7 @@ class Menu
         static int showTeamMenu(Team& team, render& rdr, int curPos = 0);
         static int showCharMenu(Team& team, int index, render& rdr, int curPos = 0);
         static int showInvMenu(inventory& inv, render& rdr, int curPos = 0);
+        static int showSkillMenu(Team& team, int index, render& rdr);
 
     protected:
     private:

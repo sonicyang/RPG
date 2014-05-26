@@ -283,7 +283,7 @@
 	"objPlayer.h"
 	"utils.h"
 
-1401107123 c:\users\sonicyang\github\rpg\include\render.h
+1401123284 c:\users\sonicyang\github\rpg\include\render.h
 	<curses.h>
 	"point.h"
 	"gmap.h"
@@ -395,12 +395,13 @@
 1399780742 source:c:\users\sonicyang\github\rpg\src\point.cpp
 	"point.h"
 
-1401109521 source:c:\users\sonicyang\github\rpg\src\render.cpp
+1401123907 source:c:\users\sonicyang\github\rpg\src\render.cpp
 	<curses.h>
 	"render.h"
 	"gmap.h"
 	"point.h"
 	<locale.h>
+	"Skill.h"
 
 1400609442 source:c:\users\sonicyang\github\rpg\src\utils.cpp
 	<fstream>
@@ -807,7 +808,7 @@
 	<string>
 	<vector>
 
-1401116658 source:c:\users\sonicyang\github\rpg\src\menu.cpp
+1401123991 source:c:\users\sonicyang\github\rpg\src\menu.cpp
 	<curses.h>
 	<vector>
 	<string>
@@ -817,7 +818,7 @@
 	"itemexec.h"
 	"render.h"
 
-1401079528 c:\users\sonicyang\github\rpg\include\menu.h
+1401123131 c:\users\sonicyang\github\rpg\include\menu.h
 	"team.h"
 	"inventory.h"
 	"render.h"
@@ -826,13 +827,13 @@
 	"character.h"
 	"enum.h"
 
-1401119487 c:\users\sonicyang\github\rpg\include\character.h
+1401123411 c:\users\sonicyang\github\rpg\include\character.h
 	<string>
 	"role.h"
 	"rolefactory.h"
 	"item.h"
 
-1401118885 c:\users\sonicyang\github\rpg\include\role.h
+1401123363 c:\users\sonicyang\github\rpg\include\role.h
 	<string>
 	<map>
 	<vector>
@@ -923,6 +924,6 @@
 	"json/value.h"
 	"utils.h"
 
-1401117764 c:\users\sonicyang\github\rpg\include\skill.h
+1401123883 c:\users\sonicyang\github\rpg\include\skill.h
 	<string>
 

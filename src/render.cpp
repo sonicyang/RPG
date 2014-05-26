@@ -5,6 +5,7 @@
 #include "gmap.h"
 #include "point.h"
 #include <locale.h>
+#include "Skill.h"
 
 render::render() : offset(0,0)
 {
@@ -307,6 +308,47 @@ void render::render_CharMenu(Character& chara, int curPos){
         mvaddstr(9, 27, "Weapon : ");
         addstr(chara.getWeapon().getName().c_str());
     }attroff(A_BOLD);
+
+    if(curPos == 5)attron(A_BOLD);{
+        mvaddstr(15, 27, "Show Skills");
+    }attroff(A_BOLD);
+}
+
+void render::render_SkillMenu(Character& chara, int curPos){
+    clear();
+
+    //Make Frame and Print Title
+    for(unsigned int i = 0; i < screen_max.m_x; i++)
+        mvaddch(0, i, '=');
+    for(unsigned int i = 1; i < screen_max.m_y; i++)mvaddch(i, 0, '|'),mvaddch(i, screen_max.m_x - 1, '|');
+    for(unsigned int i = 0; i < screen_max.m_x; i++)
+        mvaddch(screen_max.m_y - 1, i, '=');
+    for(unsigned int i = 0; i < screen_max.m_x; i++)
+        mvaddch(2, i, '=');
+    for(unsigned int i = 3; i < screen_max.m_y; i++)
+        mvaddch(i, 25, '|');
+
+    mvaddstr(1, screen_max.m_x/2 - 3, "Skills");
+
+    std::vector<Skill> skills = chara.getSkillList();
+
+    for(unsigned int i = 0; i < skills.size(); i++){
+        mvaddstr(i*2 + 4, 2, skills[i].getName().c_str());
+    }
+
+    if(!skills.empty()){
+        //Print Selected Options
+        attron(A_BOLD);
+        mvaddstr(4, 2, skills[0].getName().c_str());
+        attroff(A_BOLD);
+
+        //Print Informations
+        mvaddstr(4, 27, "Name:");
+        mvaddstr(4, 33, skills[0].getName().c_str());
+        mvaddstr(8, 27, "Description:");
+        mvaddstr(9, 33, skills[0].getDescription().c_str());
+    }
+
 }
 
 void render::render_BattleScene(std::vector<Monster> m, int tag){
