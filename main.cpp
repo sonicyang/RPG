@@ -62,10 +62,10 @@ int startMenu(){
         int c = getch();
         switch (c) {
             case KEY_UP:
-                (cursorPos==0)? 0 : cursorPos--;
+                cursorPos = (cursorPos==0)? mOption.size() - 1 : cursorPos - 1;
                 break;
             case KEY_DOWN:
-                (cursorPos == mOption.size()-1)? mOption.size()-1 : cursorPos++;
+                cursorPos = (cursorPos == mOption.size() - 1)? 0 : cursorPos + 1;
                 break;
             case 'z':
             case KEY_ENTER:
@@ -88,7 +88,7 @@ int startMenu(){
 
 
 int main()
-{ 
+{
     setlocale(LC_ALL, "");
     Engine gCtl;
     cbreak();

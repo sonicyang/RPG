@@ -17,6 +17,7 @@
 #include "team.h"
 #include "rolefactory.h"
 #include "role.h"
+#include "battle.h"
 
 using namespace std;
 
@@ -45,7 +46,7 @@ class Engine
 
         prompt prom;
 
-        //battle currBattle;
+        Battle battle;
         //vector<GeneralPlayer> members;
 
         void menuRutin();

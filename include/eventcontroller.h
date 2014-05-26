@@ -49,7 +49,8 @@ class eventController
             mov,        //namedest, namesrc
             set,
             addCharToTeam,      //Name
-            removeCharFromTeam  //Name          15
+            removeCharFromTeam,  //Name          15,
+            battle               //Name, Name, Name, Name
         };
 
 };

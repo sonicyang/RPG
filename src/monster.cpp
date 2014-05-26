@@ -26,8 +26,10 @@ Monster::~Monster()
 void Monster::setHP(const int a){
     if(a >= 0 && a <= getMaxHP()){
         this->_hp = a;
-    }else{
+    }else if(a > getMaxHP()){
         this->_hp = getMaxHP();
+    }else{
+        this->_hp = 0;
     }
     return;
 }
@@ -44,8 +46,10 @@ void Monster::varHP(const int val){
 void Monster::setMP(int a){
     if(a >= 0 && a <= getMaxMP()){
         this->_mp = a;
-    }else{
+    }else if(a > getMaxMP()){
         this->_mp = getMaxMP();
+    }else{
+        this->_mp = 0;
     }
     return;
 }
@@ -83,4 +87,8 @@ void Monster::recoverHP(void){
 void Monster::recoverMP(void){
     setMP(max_mp);
     return;
+}
+
+bool Monster::isDead(){
+    return _hp == 0;
 }

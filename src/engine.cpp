@@ -19,7 +19,8 @@ Engine::Engine() :
     mapCtl("data/maps/maplist.lst", ctlCall),
     evtCtl("data/events/eventlist.lst", ctlCall, varMap),
     inv(),
-    team("data/team/team_list.lst")
+    team("data/team/team_list.lst"),
+    battle("data/monsters/monster_list.lst", inv, team, rdr)
 {
 
 }
@@ -111,6 +112,10 @@ bool Engine::processCtlCall(){
             case svc::removeCharFromTeam:
                 team.removeCharFromTeam(currCall[1].get<std::string>());
                 break;
+            case svc::battle:{
+                battle.battleStart(currCall[1].get< std::vector< std::string> >());
+                break;
+            }
 			case svc::endGame:
 				return 0;
 				break;

@@ -61,3 +61,11 @@ void Team::removeCharFromTeam(std::string name){
     _team.erase(name);
     return;
 }
+
+bool Team::isWipeOut(){
+    bool flag = true;
+    for (auto it = _team.begin(); it != _team.end(); it++){
+        flag &= it->second.isDead();
+    }
+    return flag;
+}

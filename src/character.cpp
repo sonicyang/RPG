@@ -22,8 +22,10 @@ Character::~Character (){
 void Character::setHP(const int a){
     if(a >= 0 && a <= getMaxHP()){
         this->_hp = a;
-    }else{
+    }else if(a > getMaxHP()){
         this->_hp = getMaxHP();
+    }else{
+        this->_hp = 0;
     }
     return;
 }
@@ -40,8 +42,10 @@ void Character::varHP(const int val){
 void Character::setMP(int a){
     if(a >= 0 && a <= getMaxMP()){
         this->_mp = a;
-    }else{
+    }else if(a > getMaxMP()){
         this->_mp = getMaxMP();
+    }else{
+        this->_mp = 0;
     }
     return;
 }
@@ -179,4 +183,8 @@ void Character::recoverHP(void){
 void Character::recoverMP(void){
     setMP(_role.getMaxMP());
     return;
+}
+
+bool Character::isDead(){
+    return _hp == 0;
 }

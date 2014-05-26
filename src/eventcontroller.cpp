@@ -188,6 +188,14 @@ int eventController::execTopEvent(){
             ctlCallStack.push_back(loadStack(svc::removeCharFromTeam, ss[1]));
             userInputRequired = 0;
             break;
+        case eventCode::battle:{
+            std::vector<std::string> mons;
+            for(unsigned int i = 1; i < ss.size(); i++)
+                mons.push_back(ss[i]);
+            ctlCallStack.push_back(loadStack(svc::battle, mons));
+            userInputRequired = 0;
+            break;
+        }
     }
 
     currentEvent.pc++;

@@ -65,6 +65,8 @@ class Character
         void setLevel(const int); // call setAttr(int) to set attributes
         int getLevel(void) const { return _level; };
 
+        bool isDead();
+
     protected:
     private:
         RoleFactory* _roleCache;

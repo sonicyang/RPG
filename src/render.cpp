@@ -309,8 +309,9 @@ void render::render_CharMenu(Character& chara, int curPos){
     }attroff(A_BOLD);
 }
 
-void render::render_BattleScene(std::vector<Monster> m){
-    clear();
+void render::render_BattleScene(std::vector<Monster> m, int tag){
+    if(tag == -1)
+        clear();
 
     //Make Frame and Print Title
     for(unsigned int i = 0; i < screen_max.m_x; i++)
@@ -321,7 +322,16 @@ void render::render_BattleScene(std::vector<Monster> m){
 
     int segment = screen_max.m_x / (m.size() + 1);
     for(unsigned int i = 0; i < m.size(); i++){
-        mvaddstr((screen_max.m_y - 8) / 2, i * segment - m[i].getName().size()/2, m[i].getName().c_str());
+        if((int)i == tag) attron(A_BOLD);
+        mvaddstr((screen_max.m_y - 8) / 2, (i + 1) * segment - m[i].getName().size()/2, m[i].getName().c_str());
+
+        char tmp[10];
+        sprintf(tmp, "%d/", m[i].getHP());
+        mvaddstr((screen_max.m_y - 8) / 2 + 1, (i + 1) * segment - m[i].getName().size()/2, tmp);
+        sprintf(tmp, "%d", m[i].getMaxHP());
+        addstr(tmp);
+
+        attroff(A_BOLD);
     }
 }
 
@@ -355,7 +365,21 @@ void render::render_BattleTeam(Team& team, unsigned int turn){
 }
 
 void render::render_BattleMenu(unsigned int curPos){
+    if(curPos == 0)attron(A_BOLD);{
+        mvaddstr(screen_max.m_y - 6, 32, "Attack");
+    }attroff(A_BOLD);
 
+    if(curPos == 1)attron(A_BOLD);{
+        mvaddstr(screen_max.m_y - 6, 42, "Skills");
+    }attroff(A_BOLD);
+
+    if(curPos == 2)attron(A_BOLD);{
+        mvaddstr(screen_max.m_y - 4, 32, "Inventory");
+    }attroff(A_BOLD);
+
+    if(curPos == 3)attron(A_BOLD);{
+        mvaddstr(screen_max.m_y - 4, 42, "Escape");
+    }attroff(A_BOLD);
 }
 
 void render::update(){

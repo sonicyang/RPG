@@ -22,9 +22,14 @@ class Battle
         inventory& _inv;
         Team& _team;
         render& rdr;
+
         MonsterFactory _monsterCache;
+        std::vector<Monster> _monsters;
 
+        int battleMenu();
+        int monsterMenu();
 
+        bool isMonsterWipeOut();
 };
 
 #endif // BATTLE_H

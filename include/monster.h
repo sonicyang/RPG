@@ -31,6 +31,7 @@ class Monster
         int getAttack(void);
         int getDefense(void);
 
+        bool isDead();
     protected:
     private:
 

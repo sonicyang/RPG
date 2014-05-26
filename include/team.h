@@ -19,6 +19,8 @@ class Team
 
         void addCharToTeam(std::string);
         void removeCharFromTeam(std::string);
+
+        bool isWipeOut();
     protected:
     private:
         RoleFactory roleCache;

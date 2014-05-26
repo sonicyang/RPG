@@ -29,7 +29,7 @@ class render
         void render_InvMenu(inventory& inv, int curPos);
         void render_CharMenu(Character& chara, int curPos);
 
-        void render_BattleScene(std::vector<Monster> m);
+        void render_BattleScene(std::vector<Monster> m, int tag = -1);
         void render_BattleTeam(Team& team, unsigned int turn);
         void render_BattleMenu(unsigned int curPos);
 

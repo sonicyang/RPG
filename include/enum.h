@@ -61,6 +61,7 @@ enum svc{
     addMoney,           //Amount        10
     addCharToTeam,      //Name
     removeCharFromTeam, //Name
+    battle,
     endGame = 255       //
 };
 

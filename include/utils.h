@@ -10,7 +10,7 @@
 #include "variant.h"
 #include "enum.h"
 
-#define paraVarType int, unsigned int, wchar_t*, std::string, Stats, svc
+#define paraVarType int, unsigned int, wchar_t*, std::string, Stats, svc, std::vector<std::string>
 
 char* stringToAllocChar(std::string);  //deceprated
 void recycleMem(std::deque< std::vector<void*> >); //deceprated
