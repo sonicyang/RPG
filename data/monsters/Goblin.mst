@@ -4,5 +4,6 @@
 	"MP" : 20,
 	"ATK" : 5,
 	"DEF" : 5,
-	"EXP" : 50
+	"EXP" : 50,
+	"Skills" : ["Burst"]
 }

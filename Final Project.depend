@@ -883,14 +883,14 @@
 	"team.h"
 	"render.h"
 
-1401160977 source:c:\users\sonicyang\github\rpg\src\battle.cpp
+1401162750 source:c:\users\sonicyang\github\rpg\src\battle.cpp
 	"battle.h"
 	<unistd.h>
 	<cstdlib>
 	"menu.h"
 	"itemexec.h"
 
-1401160971 c:\users\sonicyang\github\rpg\include\battle.h
+1401162736 c:\users\sonicyang\github\rpg\include\battle.h
 	<curses.h>
 	<string>
 	<vector>
@@ -904,13 +904,15 @@
 	<map>
 	"monster.h"
 
-1401125536 c:\users\sonicyang\github\rpg\include\monster.h
+1401162403 c:\users\sonicyang\github\rpg\include\monster.h
 	<string>
+	<vector>
+	"skill.h"
 
-1401125559 source:c:\users\sonicyang\github\rpg\src\monster.cpp
+1401161752 source:c:\users\sonicyang\github\rpg\src\monster.cpp
 	"monster.h"
 
-1401085780 source:c:\users\sonicyang\github\rpg\src\monsterfactory.cpp
+1401162426 source:c:\users\sonicyang\github\rpg\src\monsterfactory.cpp
 	"monsterfactory.h"
 	<cstdlib>
 	"json/reader.h"

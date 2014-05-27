@@ -20,7 +20,13 @@ MonsterFactory::MonsterFactory(std::string monsterList)
 	            Json::Value root2;
 	            Json::Reader reader2;
 	            if (reader.parse( in2, root2 )){
-	            	Monster monster(root2["Name"].asString(), root2["HP"].asInt(), root2["MP"].asInt(), root2["ATK"].asInt(), root2["DEF"].asInt(), root2["EXP"].asInt());
+                    std::vector<Skill> skills;
+
+                    for(unsigned int k = 0; k < root2["Skills"].size(); k++){
+                        skills.push_back(Skill(root2["Skills"][k].asString()));
+                    }
+
+	            	Monster monster(root2["Name"].asString(), root2["HP"].asInt(), root2["MP"].asInt(), root2["ATK"].asInt(), root2["DEF"].asInt(), root2["EXP"].asInt(), skills);
 
 	                _monsterCache.insert(_monsterCache.begin(), std::pair<std::string, Monster>(root2["Name"].asString(), monster));
 	            }else{

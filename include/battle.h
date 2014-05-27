@@ -26,7 +26,7 @@ class Battle
         MonsterFactory _monsterCache;
         std::vector<Monster> _monsters;
 
-        int battleMenu();
+        int battleMenu(int i);
         int monsterMenu();
 
         int useSkill(int i);

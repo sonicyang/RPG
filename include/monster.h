@@ -2,12 +2,14 @@
 #define MONSTER_H
 
 #include <string>
+#include <vector>
+#include "skill.h"
 
 class Monster
 {
     public:
         Monster();
-        Monster(std::string, int, int, int, int, int);
+        Monster(std::string, int, int, int, int, int, std::vector<Skill>);
         virtual ~Monster();
 
         /* setters and getters */
@@ -34,6 +36,8 @@ class Monster
         void varDefense(const int val);
 
         bool isDead();
+
+        std::vector<Skill> getSkillList() { return _skills; };
     protected:
     private:
 
@@ -47,6 +51,7 @@ class Monster
         int _mp; // Stores the MP of the player, >= 0
         int _exp; // Stores the experience of the player, >= 0. Will not reset to zero after level-up
 
+        std::vector<Skill> _skills;
 
 };
 
