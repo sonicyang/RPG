@@ -20,7 +20,7 @@ Battle::~Battle()
     //dtor
 }
 
-int Battle::battleStart(std::vector<std::string>& monsters){
+int Battle::battleStart(std::vector<std::string>& monsters, int chance){
 
     for(unsigned int i = 0; i < monsters.size(); i++){
         _monsters.push_back(_monsterCache[monsters[i]]);
@@ -31,64 +31,37 @@ int Battle::battleStart(std::vector<std::string>& monsters){
     std::vector<std::string> memberList = _team.getNameList();
 
     for(;;){
+        int stop = 0;
+
         //player Movement
         for(unsigned int i = 0; i < memberList.size(); i++){
             rdr.render_BattleScene(_monsters);
             rdr.render_BattleTeam(_team, i);
 
+            //Dead Player can't attack
             if(_team[memberList[i]].isDead())
                 continue;
 
+            //Choose movement
             int flag = 0;
             for(int k = battleMenu(); flag == 0; k = battleMenu()){
                 rdr.render_BattleScene(_monsters);
                 rdr.render_BattleTeam(_team, i);
 
                 switch(k){
-                    case 0:{
+                    case 0:{//Attack
                         for(int p = monsterMenu(); p != -1; p = -1){
-                            _monsters[p].varHP((-1)* _team[memberList[i]].getAttack());
+                            float rng = (rand() % 6) / 10 + 0.75;
+                            _monsters[p].varHP((-1) * (rng) * _team[memberList[i]].getAttack() + _monsters[p].getDefense());
                             flag = 1;
                         }
                         break;
                     }
-                    case 1:{
-                        for(int l = Menu::showSkillMenu(_team, i, rdr); l != -1; l = Menu::showSkillMenu(_team, i, rdr)){
-                            Skill tmp = _team[memberList[i]].getSkillList()[l];
-                            if(tmp.geteTarget() == 0){
-                                for(int p = monsterMenu(); p != -1; p = -1){
-                                    _monsters[p].varHP(tmp.geteHPv());
-                                    _monsters[p].varMP(tmp.geteMPv());
-                                    flag = 1;
-                                }
-                            }else if(tmp.geteTarget() == 1){
-                                for(unsigned int m = 0; m < _monsters.size(); m++){
-                                    _monsters[m].varHP(tmp.geteHPv());
-                                    _monsters[m].varMP(tmp.geteMPv());
-                                }
-                                flag =1;
-                            }
-
-                            if(tmp.getfTarget() == 0){
-                                for(int p = monsterMenu(); p != -1; p = -1){
-                                    _team[memberList[i]].varHP(tmp.getfHPv());
-                                    _team[memberList[i]].varMP(tmp.getfMPv());
-                                    flag = 1;
-                                }
-                            }else if(tmp.getfTarget() == 1){
-                                for(unsigned int m = 0; m < memberList.size(); m++){
-                                    _team[memberList[m]].varHP(tmp.getfHPv());
-                                    _team[memberList[m]].varMP(tmp.getfMPv());
-                                }
-                                flag =1;
-                            }
-
-                            if(flag)
-                                break;
-                        }
+                    case 1:{//Skill
+                        useSkill(i);
                         break;
                     }
-                    case 2:{
+                    case 2:{//Inventory
                         for(int p = Menu::showInvMenu(_inv, rdr); p != -1; p = Menu::showInvMenu(_inv, rdr, p)){
                             if(_inv[_inv.getNameList(p)[0]].item.isUsable()){
                                 for(int s = Menu::showTeamMenu(_team, rdr); s != -1; s = -1){
@@ -103,7 +76,12 @@ int Battle::battleStart(std::vector<std::string>& monsters){
                         }
                         break;
                     }
-                    case 3:{
+                    case 3:{//Escape
+                        int p = rand() % 100;
+                        if(p - chance < 0){
+                            stop = 1;
+                        }
+                        flag = 1;
                         break;
                     }
                 }
@@ -112,15 +90,19 @@ int Battle::battleStart(std::vector<std::string>& monsters){
                     break;
             }
 
-            rdr.render_BattleScene(_monsters);
             if(isMonsterWipeOut())
                 break;
+
+            rdr.render_BattleScene(_monsters);
         }
 
         if(isMonsterWipeOut()){
             calculateExp();
             break;
         }
+
+        if(stop == 1)
+            break;
 
 
         //Monster Movement
@@ -132,9 +114,11 @@ int Battle::battleStart(std::vector<std::string>& monsters){
 
             int target = rand() % memberList.size();
 
-            _team[memberList[target]].varHP((-1) * _monsters[i].getAttack());
+            float rng = (rand() % 6) / 10 + 0.75;
 
-            usleep(1000000);
+            _team[memberList[target]].varHP((-1) * (rng) * _monsters[i].getAttack() - _team[memberList[target]].getDefense());
+
+            usleep(2000000);
 
             rdr.render_BattleTeam(_team, i);
             if(_team.isWipeOut())
@@ -152,6 +136,57 @@ int Battle::battleStart(std::vector<std::string>& monsters){
 
     _monsters.clear();
     return 0;
+}
+
+int Battle::useSkill(int i){
+    std::vector<std::string> memberList = _team.getNameList();
+    int flag = 0;
+
+    for(int l = Menu::showSkillMenu(_team, i, rdr); l != -1; l = Menu::showSkillMenu(_team, i, rdr)){
+        flag = 0;
+
+        Skill tmp = _team[memberList[i]].getSkillList()[l];
+
+        if(tmp.geteTarget() == 0){
+            for(int p = monsterMenu(); p != -1; p = -1){
+                _monsters[p].varHP(tmp.geteHPv());
+                _monsters[p].varMP(tmp.geteMPv());
+                flag = 1;
+            }
+        }else if(tmp.geteTarget() == 1){
+            for(unsigned int m = 0; m < _monsters.size(); m++){
+                _monsters[m].varHP(tmp.geteHPv());
+                _monsters[m].varMP(tmp.geteMPv());
+            }
+            flag = 1;
+        }else if(tmp.geteTarget() == -1){
+            flag = 1;
+        }
+
+        if(flag != 1)
+            continue;
+
+        if(tmp.getfTarget() == 0){
+            for(int p = Menu::showTeamMenu(_team, rdr); p != -1; p = -1){
+                _team[memberList[i]].varHP(tmp.getfHPv());
+                _team[memberList[i]].varMP(tmp.getfMPv());
+                flag = 2;
+            }
+        }else if(tmp.getfTarget() == 1){
+            for(unsigned int m = 0; m < memberList.size(); m++){
+                _team[memberList[m]].varHP(tmp.getfHPv());
+                _team[memberList[m]].varMP(tmp.getfMPv());
+            }
+            flag = 2;
+        }else if(tmp.getfTarget() == -1){
+            flag = 2;
+        }
+
+        if(flag == 2)
+            break;
+    }
+
+    return flag;
 }
 
 int Battle::battleMenu(){

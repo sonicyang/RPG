@@ -113,6 +113,9 @@
 		<Unit filename="include/rolefactory.h">
 			<Option virtualFolder="include/team/" />
 		</Unit>
+		<Unit filename="include/skill.h">
+			<Option virtualFolder="include/battle/" />
+		</Unit>
 		<Unit filename="include/team.h">
 			<Option virtualFolder="include/team/" />
 		</Unit>
@@ -191,6 +194,9 @@
 		</Unit>
 		<Unit filename="src/rolefactory.cpp">
 			<Option virtualFolder="src/team/" />
+		</Unit>
+		<Unit filename="src/skill.cpp">
+			<Option virtualFolder="src/battle/" />
 		</Unit>
 		<Unit filename="src/team.cpp">
 			<Option virtualFolder="src/team/" />

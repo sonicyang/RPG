@@ -16,7 +16,7 @@ class Battle
         Battle(std::string monsterList, inventory& inv, Team& team, render& rdrk);
         ~Battle();
 
-        int battleStart(std::vector<std::string>& monsters);
+        int battleStart(std::vector<std::string>& monsters, int chance = 0);
     protected:
     private:
         inventory& _inv;
@@ -28,6 +28,8 @@ class Battle
 
         int battleMenu();
         int monsterMenu();
+
+        int useSkill(int i);
 
         bool isMonsterWipeOut();
 
