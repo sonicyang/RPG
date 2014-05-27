@@ -164,6 +164,10 @@ int Battle::useSkill(int i){
     int flag = 0;
 
     for(int l = Menu::showSkillMenu(_team, i, rdr); l != -1; l = Menu::showSkillMenu(_team, i, rdr)){
+        rdr.render_BattleScene(_monsters);
+        rdr.render_BattleMenu(1);
+        rdr.render_BattleTeam(_team, i);
+
         flag = 0;
 
         Skill tmp = _team[memberList[i]].getSkillList()[l];
