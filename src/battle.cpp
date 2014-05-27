@@ -30,6 +30,9 @@ int Battle::battleStart(std::vector<std::string>& monsters, int chance){
 
     std::vector<std::string> memberList = _team.getNameList();
 
+    std::vector<int> charaAttackBuff(memberList.size());
+    std::vector<int> charaDefenseBuff(memberList.size());
+
     for(;;){
         int stop = 0;
 
@@ -50,7 +53,7 @@ int Battle::battleStart(std::vector<std::string>& monsters, int chance){
                     case 0:{//Attack
                         for(int p = monsterMenu(); p != -1; p = -1){
                             float rng = (rand() % 6) / 10 + 0.75;
-                            _monsters[p].varHP((-1) * (rng) * _team[memberList[i]].getAttack() + _monsters[p].getDefense());
+                            _monsters[p].varHP((-1) * (rng) * (_team[memberList[i]].getAttack() + charaAttackBuff[i]) + _monsters[p].getDefense());
                             flag = 1;
                         }
                         break;
@@ -115,7 +118,7 @@ int Battle::battleStart(std::vector<std::string>& monsters, int chance){
             if(us == 0){//Normal Attack
                 int target = rand() % memberList.size();
                 float rng = (rand() % 6) / 10 + 0.75;
-                _team[memberList[target]].varHP((-1) * (rng) * _monsters[i].getAttack() - _team[memberList[target]].getDefense());
+                _team[memberList[target]].varHP((-1) * (rng) * _monsters[i].getAttack() - _team[memberList[target]].getDefense() - charaDefenseBuff[target]);
             }else{//Skills
                 Skill tmp = _monsters[i].getSkillList()[us - 1];
 
