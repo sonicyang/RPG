@@ -21,7 +21,7 @@ Engine::Engine() :
     evtCtl("data/events/eventlist.lst", ctlCall, varMap),
     inv(),
     team("data/team/team_list.lst"),
-    battle("data/monsters/monster_list.lst", inv, team, rdr),
+    battle("data/monsters/monster_list.lst", ctlCall, varMap),
     mainmenu(ctlCall, varMap),
     teammenu(ctlCall, varMap),
     invmenu(ctlCall, varMap),
@@ -59,6 +59,9 @@ void Engine::getParseUserInput(){
         case inSkillMenu:
             skillmenu.processInput(c);
             break;
+        case inBattle:
+            battle.processInput(c);
+            break;
     }
 }
 
@@ -82,6 +85,7 @@ bool Engine::processCtlCall(){
 				ret = 1;
 				break;
 			case svc::setStat:
+			    prom.discardMessage();
 				this->setStat(currCall[1].get<Stats>());
 				ret = 1;
 				break;
@@ -129,7 +133,8 @@ bool Engine::processCtlCall(){
                 ret = 1;
                 break;
             case svc::battle:
-                //battle.battleStart(currCall[1].get< std::vector< std::string> >());
+                battle.loadBattle(team.getNameList().size(), currCall[1].get< std::vector< std::string> >());
+                ctlCall.push_back(loadStack(svc::setStat, Stats::inBattle));
                 break;
             case svc::loadMainMenu:
                 mainmenu.init();
@@ -173,6 +178,30 @@ bool Engine::processCtlCall(){
                 ItemExec::Exec(inv, currCall[1].get<unsigned int>(), team, currCall[2].get<unsigned int>(), rdr);
                 ret = 1;
                 break;
+            case svc::isCharDead:
+                ret = team[team.getNameList()[currCall[1].get<unsigned int>()]].isDead();
+                break;
+            case svc::queryAttack:
+                ret = team[team.getNameList()[currCall[1].get<unsigned int>()]].getAttack();
+                break;
+            case svc::queryDefense:
+                ret = team[team.getNameList()[currCall[1].get<unsigned int>()]].getDefense();
+                break;
+            case svc::varHP:
+                team[team.getNameList()[currCall[1].get<unsigned int>()]].varHP(currCall[2].get<int>());
+                ret = 1;
+                break;
+            case svc::varMP:
+                team[team.getNameList()[currCall[1].get<unsigned int>()]].varMP(currCall[2].get<int>());
+                ret = 1;
+                break;
+            case svc::varExp:
+                team[team.getNameList()[currCall[1].get<unsigned int>()]].varExp(currCall[2].get<int>());
+                ret = 1;
+                break;
+            case svc::moveVar:
+                varMap[currCall[1].get<std::string>()] = varMap[currCall[2].get<std::string>()];
+                break;
 			case svc::endGame:
 				return 0;
 				break;
@@ -206,6 +235,12 @@ void Engine::updateScreen(){
             break;
         case Stats::inSkillMenu:
             rdr.render_SkillMenu(team[team.getNameList()[varMap["TeamMenuCurPos"].get<unsigned int>()]], varMap["SkillMenuCurPos"].get<unsigned int>());
+            break;
+        case Stats::inBattle:
+            rdr.render_BattleScene(battle.getMonsters(), battle.getMonsterTag());
+            rdr.render_BattleTeam(team, battle.getCurrentChara());
+            rdr.render_BattleMenu(battle.getMenuPos());
+            break;
     }
 
     if(prom.hasMessage()){
@@ -215,242 +250,6 @@ void Engine::updateScreen(){
     rdr.update();
     return;
 }
-
-/*
-void Engine::menuRutin(){
-    unsigned int cursorPos = 0;
-
-    for(;;){
-        rdr.render_MainMenu(cursorPos, mOption);
-
-        //Wait User input
-        int c = getch();
-        switch (c) {
-            case KEY_UP:
-                cursorPos = (cursorPos==0)? mOption.size()-1 : cursorPos - 1;
-                break;
-            case KEY_DOWN:
-                cursorPos = (cursorPos == mOption.size()-1)? 0 : cursorPos + 1;
-                break;
-            case 'z':
-                switch(cursorPos){
-                    case 0:
-                        teamMenuRoutin();
-                        break;
-                    case 1:
-                        invMenuRoutin();
-                        break;
-                    case 2:
-                        prom.loadMessaage(L"Are You Sure?", L"System");
-                        rdr.render_prompt(prom);
-                        if(getch() == 'z'){
-                            prom.loadMessaage(L"Bye", L"System");
-                            rdr.render_prompt(prom);
-                            getch();
-                            ctlCall.push_back(loadStack(svc::endGame));
-                            prom.discardMessage();
-                            return;
-                        }
-                        break;
-                }
-                break;
-            case 'x':
-            case 'q':
-                ctlCall.push_back(loadStack(svc::clearPrompt));
-                return;
-                break;
-        }
-    }
-    return;
-}
-
-int Engine::invMenuRoutin(const int val){
-    unsigned int currentPos = 0;
-
-    std::vector<std::string> nameList = inv.getNameList(currentPos);
-
-    for(;;){
-        rdr.render_InvMenu(inv, currentPos);
-
-        if(nameList.empty()){
-            while(getch()!='x');
-            return -1;
-        }
-
-        int c = getch();
-        switch (c) {
-            case KEY_UP:
-                currentPos = (currentPos==0)? 0 : currentPos - 1;
-                break;
-            case KEY_DOWN:
-                currentPos = (currentPos == nameList.size() - 1 )? nameList.size() - 1 : currentPos + 1;
-                break;
-            case 'z':
-                switch(val){
-                    case 0:
-                        if(inv[nameList[0]].item.isUsable()){
-                            switch(inv[nameList[0]].item.getType()){
-                                case itemTypes::potion:
-                                    int p = teamMenuRoutin(1);
-                                    if( p == -1)
-                                        break;
-                                    team[team.getNameList()[p]].varHP(inv[nameList[0]].item.getHPVarient());
-                                    team[team.getNameList()[p]].varMP(inv[nameList[0]].item.getMPVarient());
-                                    break;
-                                case itemTypes::allPotion:
-                                    std::vector<std::string> memberList = team.getNameList();
-                                    for(unsigned int i = 0; i < memberList.size(); i++){
-                                        team[team.getNameList()[i]].varHP(inv[nameList[0]].item.getHPVarient());
-                                        team[team.getNameList()[i]].varMP(inv[nameList[0]].item.getMPVarient());
-                                    }
-                                    break;
-                            }
-
-                            if(inv[nameList[0]].item.isComsumable())
-                                inv.decItem(nameList[0]);
-                        }else{
-                            prom.loadMessaage(L"This Item is not Comsumable", L"System");
-                            rdr.render_prompt(prom);
-                            prom.discardMessage();
-                            while(getch()!='z');
-                        }
-
-                        break;
-                    case 1:
-                        return currentPos;
-                        break;
-                }
-                break;
-            case 'x':
-            case 'q':
-                return -1;
-                break;
-        }
-
-    }
-
-    return -1;
-}
-
-int Engine::teamMenuRoutin(const int val){
-    unsigned int currentPos = 0;
-
-    std::vector<std::string> memberList = team.getNameList();
-
-    for(;;){
-        rdr.render_TeamMenu(team, currentPos);
-
-        int c = getch();
-        switch (c) {
-            case KEY_UP:
-                currentPos = (currentPos==0)? 0 : currentPos - 1;
-                break;
-            case KEY_DOWN:
-                currentPos = (currentPos == memberList.size() - 1 )? memberList.size() - 1 : currentPos + 1;
-                break;
-            case 'z':
-                switch(val){
-                    case 0:
-                        charMenuRoutin(0, memberList[currentPos]);
-                        break;
-                    case 1:
-                        return currentPos;
-                        break;
-                }
-                break;
-            case 'x':
-            case 'q':
-                return -1;
-                break;
-        }
-
-    }
-    return -1;
-}
-
-int Engine::charMenuRoutin(const int val, std::string cname){
-    unsigned int currentPos = 0;
-
-    for(;;){
-        rdr.render_CharMenu(team[cname], currentPos);
-
-        int c = getch();
-        switch (c) {
-            case KEY_UP:
-            case KEY_LEFT:
-                currentPos = (currentPos==0)? 0 : currentPos - 1;
-                break;
-            case KEY_DOWN:
-            case KEY_RIGHT:
-                currentPos = (currentPos == 4 )? 4 : currentPos + 1;
-                break;
-            case 'z':
-                switch(val){
-                    case 0:{
-                        inv.enableNull();
-
-                        int p = invMenuRoutin(1);
-                        if(p == -1)
-                            break;
-
-                        Item selectedItem = inv[inv.getNameList(p)[0]].item;
-
-                        Item currItemName;
-                        int ret;
-
-                        switch(currentPos){
-                            case 0:
-                                currItemName = team[cname].getHead();
-                                ret = team[cname].setHead(selectedItem);
-                                break;
-                            case 1:
-                                currItemName = team[cname].getArmor();
-                                ret = team[cname].setArmor(selectedItem);
-                                break;
-                            case 2:
-                                currItemName = team[cname].getLegs();
-                                ret = team[cname].setLegs(selectedItem);
-                                break;
-                            case 3:
-                                currItemName = team[cname].getShoes();
-                                ret = team[cname].setShoes(selectedItem);
-                                break;
-                            case 4:
-                                currItemName = team[cname].getWeapon();
-                                ret = team[cname].setWeapon(selectedItem);
-                                break;
-                        }
-
-                        if(ret == -1){
-                            prom.loadMessaage(L"You can't wear a shoe on your Head", L"System");
-                            rdr.render_prompt(prom);
-                            prom.discardMessage();
-                            while(getch()!='z');
-                        }else{
-                            inv.decItem(inv.getNameList(p)[0]);
-                            if(currItemName.getName() != "Empty")
-                                inv.incItem(currItemName.getName());
-                        }
-
-                        inv.disableNull();
-                        break;
-                    }
-                    case 1:
-                        return currentPos;
-                        break;
-                }
-                break;
-            case 'x':
-            case 'q':
-                return -1;
-                break;
-        }
-
-    }
-
-    return -1;
-}
-*/
 
 void Engine::setStat(int s){
     _stat.push_back(stat);

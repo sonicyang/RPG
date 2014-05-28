@@ -28,7 +28,8 @@ enum Stats{
     inTeamMenu,
     inInvMenu,
     inCharMenu,
-    inSkillMenu
+    inSkillMenu,
+    inBattle
 };
 
 struct event{
@@ -67,16 +68,23 @@ enum svc{
     removeCharFromTeam, //Name
     battle,
     loadMainMenu,
-    loadTeamMenu,       //Mode
+    loadTeamMenu,       //Mode          15
     loadInvMenu,        //Mode
     loadCharMenu,       //Mode
     loadSkillMenu,      //Mode
     invEnableNull,
-    invDisableNull,
+    invDisableNull,     //              20
     changeEquip,        //itemIndex, memberIndex, slotIndex
     isItemUsable,       //itemIndex
     getItemType,        //itemIndex
     useItem,            //itemIndex, memberIndex
+    isCharDead,         //memberIndex
+    queryAttack,        //memberIndex   26
+    queryDefense,       //memberIndex
+    varHP,              //memberIndex, Amount
+    varMP,              //memberIndex, Amount
+    varExp,             //memberIndex, Amount
+    moveVar,            //dis, src      31
     endGame = 255       //
 };
 

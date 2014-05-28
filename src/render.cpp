@@ -352,8 +352,7 @@ void render::render_SkillMenu(Character& chara, int curPos){
 }
 
 void render::render_BattleScene(std::vector<Monster> m, int tag){
-    if(tag == -1)
-        clear();
+    clear();
 
     //Make Frame and Print Title
     for(unsigned int i = 0; i < screen_max.m_x; i++)
