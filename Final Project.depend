@@ -725,7 +725,7 @@
 	"point.h"
 	<string>
 
-1401285456 source:c:\users\sonicyang\github\rpg\src\engine.cpp
+1401287348 source:c:\users\sonicyang\github\rpg\src\engine.cpp
 	<curses.h>
 	<cstdlib>
 	<string>
@@ -743,7 +743,7 @@
 	"menu.h"
 	"itemexec.h"
 
-1401280186 c:\users\sonicyang\github\rpg\include\engine.h
+1401286770 c:\users\sonicyang\github\rpg\include\engine.h
 	<map>
 	<string>
 	<curses.h>
@@ -765,6 +765,7 @@
 	"teammenu.h"
 	"invmenu.h"
 	"charmenu.h"
+	"skillmenu.h"
 
 1400158365 source:c:\users\sonicyang\github\rpg\src\backpackitem.cpp
 	"backpackitem.h"
@@ -809,7 +810,7 @@
 	<type_traits>
 	<string>
 
-1401284886 c:\users\sonicyang\github\rpg\include\enum.h
+1401287198 c:\users\sonicyang\github\rpg\include\enum.h
 	<string>
 	<vector>
 
@@ -963,6 +964,15 @@
 1401285219 source:c:\users\sonicyang\github\rpg\src\charmenu.cpp
 	<curses.h>
 	"charmenu.h"
+	"utils.h"
+	"enum.h"
+
+1401286734 c:\users\sonicyang\github\rpg\include\skillmenu.h
+	<menu.h>
+
+1401286740 source:c:\users\sonicyang\github\rpg\src\skillmenu.cpp
+	<curses.h>
+	"skillmenu.h"
 	"utils.h"
 	"enum.h"
 

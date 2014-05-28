@@ -25,7 +25,8 @@ Engine::Engine() :
     mainmenu(ctlCall, varMap),
     teammenu(ctlCall, varMap),
     invmenu(ctlCall, varMap),
-    charmenu(ctlCall, varMap)
+    charmenu(ctlCall, varMap),
+    skillmenu(ctlCall, varMap)
 {
 
 }
@@ -54,6 +55,9 @@ void Engine::getParseUserInput(){
             break;
         case inCharMenu:
             charmenu.processInput(c);
+            break;
+        case inSkillMenu:
+            skillmenu.processInput(c);
             break;
     }
 }
@@ -143,6 +147,10 @@ bool Engine::processCtlCall(){
                 charmenu.init(currCall[1].get<int>());
                 ret = 1;
                 break;
+            case svc::loadSkillMenu:
+                skillmenu.init(team[team.getNameList()[varMap["TeamMenuCurPos"].get<unsigned int>()]].getSkillList().size(), currCall[1].get<int>());
+                ret = 1;
+                break;
             case svc::invEnableNull:
                 inv.enableNull();
                 ret = 1;
@@ -196,6 +204,8 @@ void Engine::updateScreen(){
         case Stats::inCharMenu:
             rdr.render_CharMenu(team[team.getNameList()[varMap["TeamMenuCurPos"].get<unsigned int>()]], varMap["CharMenuCurPos"].get<unsigned int>());
             break;
+        case Stats::inSkillMenu:
+            rdr.render_SkillMenu(team[team.getNameList()[varMap["TeamMenuCurPos"].get<unsigned int>()]], varMap["SkillMenuCurPos"].get<unsigned int>());
     }
 
     if(prom.hasMessage()){

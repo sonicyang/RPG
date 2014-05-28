@@ -67,10 +67,10 @@ enum svc{
     removeCharFromTeam, //Name
     battle,
     loadMainMenu,
-    loadTeamMenu,
-    loadInvMenu,
-    loadCharMenu,
-    loadSkillMenu,
+    loadTeamMenu,       //Mode
+    loadInvMenu,        //Mode
+    loadCharMenu,       //Mode
+    loadSkillMenu,      //Mode
     invEnableNull,
     invDisableNull,
     changeEquip,        //itemIndex, memberIndex, slotIndex
