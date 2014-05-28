@@ -68,6 +68,7 @@
 		<Unit filename="include/inventory.h">
 			<Option virtualFolder="include/inventory/" />
 		</Unit>
+		<Unit filename="include/invmenu.h" />
 		<Unit filename="include/item.h">
 			<Option virtualFolder="include/inventory/" />
 		</Unit>
@@ -82,6 +83,7 @@
 		<Unit filename="include/json/reader.h" />
 		<Unit filename="include/json/value.h" />
 		<Unit filename="include/json/writer.h" />
+		<Unit filename="include/mainmenu.h" />
 		<Unit filename="include/mapcontroller.h">
 			<Option virtualFolder="include/map/" />
 		</Unit>
@@ -119,6 +121,7 @@
 		<Unit filename="include/team.h">
 			<Option virtualFolder="include/team/" />
 		</Unit>
+		<Unit filename="include/teammenu.h" />
 		<Unit filename="include/utf8.h">
 			<Option virtualFolder="include/tools/" />
 		</Unit>
@@ -150,6 +153,7 @@
 		<Unit filename="src/inventory.cpp">
 			<Option virtualFolder="src/inventory/" />
 		</Unit>
+		<Unit filename="src/invmenu.cpp" />
 		<Unit filename="src/item.cpp">
 			<Option virtualFolder="src/inventory/" />
 		</Unit>
@@ -164,6 +168,7 @@
 		<Unit filename="src/lib_json/json_valueiterator.inl" />
 		<Unit filename="src/lib_json/json_writer.cpp" />
 		<Unit filename="src/lib_json/sconscript" />
+		<Unit filename="src/mainmenu.cpp" />
 		<Unit filename="src/mapcontroller.cpp">
 			<Option virtualFolder="src/map/" />
 		</Unit>
@@ -201,6 +206,7 @@
 		<Unit filename="src/team.cpp">
 			<Option virtualFolder="src/team/" />
 		</Unit>
+		<Unit filename="src/teammenu.cpp" />
 		<Unit filename="src/utf8.cpp">
 			<Option virtualFolder="src/tools/" />
 		</Unit>

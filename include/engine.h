@@ -18,6 +18,9 @@
 #include "rolefactory.h"
 #include "role.h"
 #include "battle.h"
+#include "mainmenu.h"
+#include "teammenu.h"
+#include "invmenu.h"
 
 using namespace std;
 
@@ -47,7 +50,10 @@ class Engine
         prompt prom;
 
         Battle battle;
-        //vector<GeneralPlayer> members;
+
+        MainMenu mainmenu;
+        TeamMenu teammenu;
+        InvMenu invmenu;
 
         void menuRutin();
         int invMenuRoutin(const int val = 0);
@@ -58,8 +64,6 @@ class Engine
         void restoreStat();
         int stat = 1;
         vector<int> _stat;
-
-        std::vector<std::string> mOption;
 };
 
 #endif // CONTROLLER_H

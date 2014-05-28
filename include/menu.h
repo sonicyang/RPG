@@ -1,23 +1,26 @@
 #ifndef MENU_H
 #define MENU_H
 
-#include "team.h"
-#include "inventory.h"
-#include "render.h"
+#include <map>
+#include <vector>
+#include <deque>
+#include "utils.h"
 
 class Menu
 {
     public:
-        static int enterMenu(Team& team, inventory& inv, render& rdr);
 
-        static int showMainMenu(render& rdr, int curPos = 0);
-        static int showTeamMenu(Team& team, render& rdr, int curPos = 0);
-        static int showCharMenu(Team& team, int index, render& rdr, int curPos = 0);
-        static int showInvMenu(inventory& inv, render& rdr, int curPos = 0);
-        static int showSkillMenu(Team& team, int index, render& rdr);
+        Menu(std::deque< std::vector< variant<paraVarType> > >&, std::map< std::string, variant<paraVarType> >&);
+        ~Menu();
+
+        virtual int processInput(int) = 0;
 
     protected:
+        std::deque< std::vector< variant<paraVarType> > >& ctlCallStack;
+        std::map< std::string, variant<paraVarType> >& varMap;
     private:
+
+
 };
 
 #endif // MENU_H

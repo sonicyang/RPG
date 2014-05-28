@@ -70,7 +70,8 @@ int mapController::processInput(int c){
             ctlCallStack.push_back(loadStack(svc::endGame));
             break;
         case 'q':
-        	ctlCallStack.push_back(loadStack(svc::setStat, Stats::menu));
+            ctlCallStack.push_back(loadStack(svc::loadMainMenu));
+        	ctlCallStack.push_back(loadStack(svc::setStat, Stats::inMainMenu));
             break;
     }
     return 0;

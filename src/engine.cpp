@@ -20,7 +20,10 @@ Engine::Engine() :
     evtCtl("data/events/eventlist.lst", ctlCall, varMap),
     inv(),
     team("data/team/team_list.lst"),
-    battle("data/monsters/monster_list.lst", inv, team, rdr)
+    battle("data/monsters/monster_list.lst", inv, team, rdr),
+    mainmenu(ctlCall, varMap),
+    teammenu(ctlCall, varMap),
+    invmenu(ctlCall, varMap)
 {
 
 }
@@ -38,12 +41,16 @@ void Engine::getParseUserInput(){
         case inEvent:
             evtCtl.processInput(c);
             break;
-        case menu:
-            nodelay(stdscr, false); //Nasty Hack
-            if(Menu::enterMenu(team, inv, rdr) == 0)
-                ctlCall.push_back(loadStack(svc::endGame));
-            nodelay(stdscr, true);
-            this->restoreStat();
+        case inMainMenu:
+            mainmenu.processInput(c);
+            break;
+        case inTeamMenu:
+            teammenu.processInput(c);
+            break;
+        case inInvMenu:
+            invmenu.processInput(c);
+            break;
+        case inCharMenu:
             break;
     }
 }
@@ -112,10 +119,18 @@ bool Engine::processCtlCall(){
             case svc::removeCharFromTeam:
                 team.removeCharFromTeam(currCall[1].get<std::string>());
                 break;
-            case svc::battle:{
-                battle.battleStart(currCall[1].get< std::vector< std::string> >());
+            case svc::battle:
+                //battle.battleStart(currCall[1].get< std::vector< std::string> >());
                 break;
-            }
+            case svc::loadMainMenu:
+                mainmenu.init();
+                break;
+            case svc::loadTeamMenu:
+                teammenu.init(team.getNameList().size());
+                break;
+            case svc::loadInvMenu:
+                invmenu.init(inv.getNumOfItems());
+                break;
 			case svc::endGame:
 				return 0;
 				break;
@@ -135,8 +150,14 @@ void Engine::updateScreen(){
             rdr.render_map(mapCtl.getCurrentMap());
             rdr.render_Player(mapCtl.getPlayer());
             break;
-        case Stats::menu:
-
+        case Stats::inMainMenu:
+            rdr.render_MainMenu(varMap["MainMenuCurPos"].get<unsigned int>(), mainmenu.getOptions());
+            break;
+        case Stats::inTeamMenu:
+            rdr.render_TeamMenu(team, varMap["TeamMenuCurPos"].get<unsigned int>());
+            break;
+        case Stats::inInvMenu:
+            rdr.render_InvMenu(inv, varMap["InvMenuCurPos"].get<unsigned int>());
             break;
     }
 

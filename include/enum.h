@@ -24,7 +24,11 @@ enum Stats{
     pending = 0,
     onMap,
     inEvent,
-    menu
+    inMainMenu,
+    inTeamMenu,
+    inInvMenu,
+    inCharMenu,
+    inSkillMenu
 };
 
 struct event{
@@ -62,6 +66,9 @@ enum svc{
     addCharToTeam,      //Name
     removeCharFromTeam, //Name
     battle,
+    loadMainMenu,
+    loadTeamMenu,
+    loadInvMenu,
     endGame = 255       //
 };
 

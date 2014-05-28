@@ -10,8 +10,8 @@
 
 using namespace std;
 
-eventController::eventController(std::string eventlist, std::deque< std::vector< variant<paraVarType> > >& s, std::map< std::string, variant<paraVarType> >& m)
-  : ctlCallStack(s),
+eventController::eventController(std::string eventlist, std::deque< std::vector< variant<paraVarType> > >& s, std::map< std::string, variant<paraVarType> >& m) :
+    ctlCallStack(s),
     varMap(m),
     userInputRequired(0)
 {

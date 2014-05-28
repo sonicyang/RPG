@@ -437,7 +437,7 @@
 	"variant.h"
 	"point.h"
 
-1400654255 source:c:\users\sonicyang\github\rpg\src\mapcontroller.cpp
+1401277221 source:c:\users\sonicyang\github\rpg\src\mapcontroller.cpp
 	<cstdlib>
 	<curses.h>
 	<deque>
@@ -459,7 +459,7 @@
 1401074182 c:\users\sonicyang\github\rpg\include\prompt.h
 	<string>
 
-1401108560 source:c:\users\sonicyang\github\rpg\src\eventcontroller.cpp
+1401209673 source:c:\users\sonicyang\github\rpg\src\eventcontroller.cpp
 	<algorithm>
 	<cstring>
 	<curses.h>
@@ -725,7 +725,7 @@
 	"point.h"
 	<string>
 
-1401108548 source:c:\users\sonicyang\github\rpg\src\engine.cpp
+1401279461 source:c:\users\sonicyang\github\rpg\src\engine.cpp
 	<curses.h>
 	<cstdlib>
 	<string>
@@ -742,7 +742,7 @@
 	"variant.h"
 	"menu.h"
 
-1401107962 c:\users\sonicyang\github\rpg\include\engine.h
+1401279230 c:\users\sonicyang\github\rpg\include\engine.h
 	<map>
 	<string>
 	<curses.h>
@@ -760,6 +760,9 @@
 	"rolefactory.h"
 	"role.h"
 	"battle.h"
+	"mainmenu.h"
+	"teammenu.h"
+	"invmenu.h"
 
 1400158365 source:c:\users\sonicyang\github\rpg\src\backpackitem.cpp
 	"backpackitem.h"
@@ -804,24 +807,18 @@
 	<type_traits>
 	<string>
 
-1401107778 c:\users\sonicyang\github\rpg\include\enum.h
+1401279170 c:\users\sonicyang\github\rpg\include\enum.h
 	<string>
 	<vector>
 
-1401123991 source:c:\users\sonicyang\github\rpg\src\menu.cpp
-	<curses.h>
-	<vector>
-	<string>
-	<curses.h>
+1401209806 source:c:\users\sonicyang\github\rpg\src\menu.cpp
 	"menu.h"
-	"enum.h"
-	"itemexec.h"
-	"render.h"
 
-1401123131 c:\users\sonicyang\github\rpg\include\menu.h
-	"team.h"
-	"inventory.h"
-	"render.h"
+1401276106 c:\users\sonicyang\github\rpg\include\menu.h
+	<map>
+	<vector>
+	<deque>
+	"utils.h"
 
 1401119754 source:c:\users\sonicyang\github\rpg\src\character.cpp
 	"character.h"
@@ -883,7 +880,7 @@
 	"team.h"
 	"render.h"
 
-1401162777 source:c:\users\sonicyang\github\rpg\src\battle.cpp
+1401210766 source:c:\users\sonicyang\github\rpg\src\battle.cpp
 	"battle.h"
 	<unistd.h>
 	<cstdlib>
@@ -928,4 +925,31 @@
 
 1401125413 c:\users\sonicyang\github\rpg\include\skill.h
 	<string>
+
+1401279312 source:c:\users\sonicyang\github\rpg\src\mainmenu.cpp
+	<curses.h>
+	"mainmenu.h"
+	"utils.h"
+	"enum.h"
+
+1401278349 c:\users\sonicyang\github\rpg\include\mainmenu.h
+	<menu.h>
+
+1401279482 source:c:\users\sonicyang\github\rpg\src\invmenu.cpp
+	<curses.h>
+	"invmenu.h"
+	"utils.h"
+	"enum.h"
+
+1401278877 c:\users\sonicyang\github\rpg\include\invmenu.h
+	<menu.h>
+
+1401278604 source:c:\users\sonicyang\github\rpg\src\teammenu.cpp
+	<curses.h>
+	"teammenu.h"
+	"utils.h"
+	"enum.h"
+
+1401278510 c:\users\sonicyang\github\rpg\include\teammenu.h
+	<menu.h>
 

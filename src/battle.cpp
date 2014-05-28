@@ -19,7 +19,7 @@ Battle::~Battle()
 {
     //dtor
 }
-
+/*
 int Battle::battleStart(std::vector<std::string>& monsters, int chance){
 
     for(unsigned int i = 0; i < monsters.size(); i++){
@@ -30,8 +30,8 @@ int Battle::battleStart(std::vector<std::string>& monsters, int chance){
 
     std::vector<std::string> memberList = _team.getNameList();
 
-    std::vector<int> charaAttackBuff(memberList.size());
-    std::vector<int> charaDefenseBuff(memberList.size());
+    std::vector<int> charaAttackBuff(memberList.size(), 0);
+    std::vector<int> charaDefenseBuff(memberList.size(), 0);
 
     for(;;){
         int stop = 0;
@@ -287,4 +287,4 @@ void Battle::calculateExp(){
             _team[memberList[j]].varExp(_monsters[i].getExp());
         }
     }
-}
+}*/
