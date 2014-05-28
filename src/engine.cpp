@@ -208,6 +208,9 @@ bool Engine::processCtlCall(){
             case svc::moveVar:
                 varMap[currCall[1].get<std::string>()].set<int>(varMap[currCall[2].get<std::string>()].get<int>());
                 break;
+            case svc::gameOver:
+
+                break;
 			case svc::endGame:
 				return 0;
 				break;

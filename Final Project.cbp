@@ -5,7 +5,7 @@
 		<Option title="Final Project" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="include\;src\controller\;src\tools\;include\controller\;include\tools\;include\event\;include\map\;include\team\;include\inventory\;src\map\;src\inventory\;src\team\;src\event\;src\;include\battle\;src\battle\;" />
+		<Option virtualFolders="include\;src\controller\;src\tools\;include\controller\;include\tools\;include\event\;include\map\;include\team\;include\inventory\;src\map\;src\inventory\;src\team\;src\event\;src\;include\battle\;src\battle\;include\menu\;src\menu\;" />
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/Debug/Final Project" prefix_auto="1" extension_auto="1" />
@@ -53,6 +53,9 @@
 		<Unit filename="include/character.h">
 			<Option virtualFolder="include/team/" />
 		</Unit>
+		<Unit filename="include/charmenu.h">
+			<Option virtualFolder="include/menu/" />
+		</Unit>
 		<Unit filename="include/engine.h">
 			<Option virtualFolder="include/controller/" />
 		</Unit>
@@ -68,12 +71,14 @@
 		<Unit filename="include/inventory.h">
 			<Option virtualFolder="include/inventory/" />
 		</Unit>
-		<Unit filename="include/invmenu.h" />
+		<Unit filename="include/invmenu.h">
+			<Option virtualFolder="include/menu/" />
+		</Unit>
 		<Unit filename="include/item.h">
 			<Option virtualFolder="include/inventory/" />
 		</Unit>
 		<Unit filename="include/itemexec.h">
-			<Option virtualFolder="include/controller/" />
+			<Option virtualFolder="include/menu/" />
 		</Unit>
 		<Unit filename="include/json/autolink.h" />
 		<Unit filename="include/json/config.h" />
@@ -83,7 +88,9 @@
 		<Unit filename="include/json/reader.h" />
 		<Unit filename="include/json/value.h" />
 		<Unit filename="include/json/writer.h" />
-		<Unit filename="include/mainmenu.h" />
+		<Unit filename="include/mainmenu.h">
+			<Option virtualFolder="include/menu/" />
+		</Unit>
 		<Unit filename="include/mapcontroller.h">
 			<Option virtualFolder="include/map/" />
 		</Unit>
@@ -91,7 +98,7 @@
 			<Option virtualFolder="include/map/" />
 		</Unit>
 		<Unit filename="include/menu.h">
-			<Option virtualFolder="include/controller/" />
+			<Option virtualFolder="include/menu/" />
 		</Unit>
 		<Unit filename="include/monster.h">
 			<Option virtualFolder="include/battle/" />
@@ -118,6 +125,9 @@
 		<Unit filename="include/skill.h">
 			<Option virtualFolder="include/battle/" />
 		</Unit>
+		<Unit filename="include/skillmenu.h">
+			<Option virtualFolder="include/menu/" />
+		</Unit>
 		<Unit filename="include/team.h">
 			<Option virtualFolder="include/team/" />
 		</Unit>
@@ -141,6 +151,9 @@
 		<Unit filename="src/character.cpp">
 			<Option virtualFolder="src/team/" />
 		</Unit>
+		<Unit filename="src/charmenu.cpp">
+			<Option virtualFolder="src/menu/" />
+		</Unit>
 		<Unit filename="src/engine.cpp">
 			<Option virtualFolder="src/controller/" />
 		</Unit>
@@ -153,12 +166,14 @@
 		<Unit filename="src/inventory.cpp">
 			<Option virtualFolder="src/inventory/" />
 		</Unit>
-		<Unit filename="src/invmenu.cpp" />
+		<Unit filename="src/invmenu.cpp">
+			<Option virtualFolder="src/menu/" />
+		</Unit>
 		<Unit filename="src/item.cpp">
 			<Option virtualFolder="src/inventory/" />
 		</Unit>
 		<Unit filename="src/itemexec.cpp">
-			<Option virtualFolder="src/controller/" />
+			<Option virtualFolder="src/" />
 		</Unit>
 		<Unit filename="src/lib_json/json_batchallocator.h" />
 		<Unit filename="src/lib_json/json_internalarray.inl" />
@@ -168,7 +183,9 @@
 		<Unit filename="src/lib_json/json_valueiterator.inl" />
 		<Unit filename="src/lib_json/json_writer.cpp" />
 		<Unit filename="src/lib_json/sconscript" />
-		<Unit filename="src/mainmenu.cpp" />
+		<Unit filename="src/mainmenu.cpp">
+			<Option virtualFolder="src/menu/" />
+		</Unit>
 		<Unit filename="src/mapcontroller.cpp">
 			<Option virtualFolder="src/map/" />
 		</Unit>
@@ -176,7 +193,7 @@
 			<Option virtualFolder="src/map/" />
 		</Unit>
 		<Unit filename="src/menu.cpp">
-			<Option virtualFolder="src/controller/" />
+			<Option virtualFolder="src/menu/" />
 		</Unit>
 		<Unit filename="src/monster.cpp">
 			<Option virtualFolder="src/battle/" />
@@ -203,10 +220,15 @@
 		<Unit filename="src/skill.cpp">
 			<Option virtualFolder="src/battle/" />
 		</Unit>
+		<Unit filename="src/skillmenu.cpp">
+			<Option virtualFolder="src/menu/" />
+		</Unit>
 		<Unit filename="src/team.cpp">
 			<Option virtualFolder="src/team/" />
 		</Unit>
-		<Unit filename="src/teammenu.cpp" />
+		<Unit filename="src/teammenu.cpp">
+			<Option virtualFolder="src/menu/" />
+		</Unit>
 		<Unit filename="src/utf8.cpp">
 			<Option virtualFolder="src/tools/" />
 		</Unit>

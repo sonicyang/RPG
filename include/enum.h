@@ -87,6 +87,7 @@ enum svc{
     varMP,              //memberIndex, Amount
     varExp,             //memberIndex, Amount
     moveVar,            //dis, src      31
+    gameOver,
     endGame = 255       //
 };
 

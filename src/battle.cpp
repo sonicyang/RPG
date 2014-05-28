@@ -181,7 +181,7 @@ int Battle::processInput(int c){
             _currentChara = 0;
             processPending = process::prePlayer;
         }else{
-
+            ctlCallStack.push_back(loadStack(svc::gameOver));
         }
     }else if(processPending == process::PostBattle){
         for(unsigned int i = 0; i < _monsters.size(); i++){
