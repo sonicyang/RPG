@@ -7,7 +7,8 @@
 TeamMenu::TeamMenu(std::deque< std::vector< variant<paraVarType> > >& a, std::map< std::string, variant<paraVarType> >& b) :
     Menu(a, b)
 {
-    //ctor
+    currentPos = 0;
+    varMap["TeamMenuCurPos"].set<unsigned int>(currentPos);
 }
 
 TeamMenu::~TeamMenu()
@@ -25,8 +26,12 @@ int TeamMenu::processInput(int c){
             currentPos = (currentPos == _limiter - 1 )? _limiter - 1 : currentPos + 1;
             break;
         case 'z':
-            ctlCallStack.push_back(loadStack(svc::loadCharMenu));
-            ctlCallStack.push_back(loadStack(svc::setStat, Stats::inCharMenu));
+            if(mode == 0){
+                ctlCallStack.push_back(loadStack(svc::loadCharMenu, 0));
+                ctlCallStack.push_back(loadStack(svc::setStat, Stats::inCharMenu));
+            }else{
+                ctlCallStack.push_back(loadStack(svc::restoreStat));
+            }
             break;
         case 'x':
         case 'q':
@@ -38,8 +43,9 @@ int TeamMenu::processInput(int c){
     return 0;
 }
 
-void TeamMenu::init(int val){
+void TeamMenu::init(int val, int m){
     currentPos = 0;
     varMap["TeamMenuCurPos"].set<unsigned int>(currentPos);
     _limiter = val;
+    mode = m;
 }

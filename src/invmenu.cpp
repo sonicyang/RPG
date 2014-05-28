@@ -1,13 +1,16 @@
 #include <curses.h>
+#include <string>
 
 #include "invmenu.h"
 #include "utils.h"
 #include "enum.h"
+#include "utf8.h"
 
 InvMenu::InvMenu(std::deque< std::vector< variant<paraVarType> > >& a, std::map< std::string, variant<paraVarType> >& b) :
     Menu(a, b)
 {
-    //ctor
+    currentPos = 0;
+    varMap["InvMenuCurPos"].set<unsigned int>(currentPos);   //ctor
 }
 
 InvMenu::~InvMenu()
@@ -16,32 +19,68 @@ InvMenu::~InvMenu()
 }
 
 int InvMenu::processInput(int c){
+    if(!processPending){
+        switch (c) {
+            case KEY_UP:
+                currentPos = (currentPos==0)? 0 : currentPos - 1;
+                break;
+            case KEY_DOWN:
+                currentPos = (currentPos == _limiter - 1 )? _limiter - 1 : currentPos + 1;
+                currentPos = (_limiter > 0 )? currentPos : 0; // Empty Menu OverFlow safety Check
+                break;
+            case 'z':
+                if(mode == 0){
+                    if(_limiter > 0){
+                        ctlCallStack.push_back(loadStack(svc::isItemUsable, currentPos));
+                        processPending = 1;
+                    }
+                }else{
+                    ctlCallStack.push_back(loadStack(svc::restoreStat));
+                }
+                break;
+            case 'x':
+            case 'q':
+                ctlCallStack.push_back(loadStack(svc::restoreStat));
+                break;
+        }
 
-    switch (c) {
-        case KEY_UP:
-            currentPos = (currentPos==0)? 0 : currentPos - 1;
-            break;
-        case KEY_DOWN:
-            currentPos = (currentPos == _limiter - 1 )? _limiter - 1 : currentPos + 1;
-            currentPos = (_limiter > 0 )? currentPos : 0; // Empty Menu OverFlow safety Check
-            break;
-        case 'z':
-            if(_limiter > 0){
+        varMap["InvMenuCurPos"].set<unsigned int>(currentPos);
 
-            }
-            break;
-        case 'x':
-        case 'q':
-            ctlCallStack.push_back(loadStack(svc::restoreStat));
-            break;
+    }else if(processPending == 1){
+
+        if(varMap["ret"].get<int>()){
+            ctlCallStack.push_back(loadStack(svc::getItemType, currentPos));
+            processPending = 2;
+        }else{
+            ctlCallStack.push_back(loadStack(svc::loadPrompt, UTF8_to_WChar("This Item is not Comsumable"), UTF8_to_WChar("System")));
+            processPending = 5;
+        }
+
+    }else if(processPending == 2){
+        processPending = varMap["ret"].get<int>() + 3;
+    }else if(processPending == 3){
+        ctlCallStack.push_back(loadStack(svc::loadTeamMenu, 1));
+        ctlCallStack.push_back(loadStack(svc::setStat, Stats::inTeamMenu));
+        processPending = 4;
+    }else if(processPending == 4){
+        ctlCallStack.push_back(loadStack(svc::useItem, currentPos, varMap["TeamMenuCurPos"].get<unsigned int>()));
+        processPending = 0;
+    }else if(processPending == 5){
+        switch(c){
+            case 'x':
+            case 'z':
+                ctlCallStack.push_back(loadStack(svc::clearPrompt));
+                processPending = 0;
+        }
     }
 
-    varMap["InvMenuCurPos"].set<unsigned int>(currentPos);
     return 0;
 }
 
-void InvMenu::init(int val){
+void InvMenu::init(int val, int m){
     currentPos = 0;
     varMap["InvMenuCurPos"].set<unsigned int>(currentPos);
     _limiter = val;
+    mode = m;
+    processPending = 0;
 }

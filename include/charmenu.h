@@ -12,10 +12,12 @@ class CharMenu : public Menu
 
         virtual int processInput(int);
 
-        void init();
+        void init(int m);
     protected:
     private:
         unsigned int currentPos;
+        unsigned int mode;
+        bool processPending = 0;
 };
 
 #endif // CHARMENU_H

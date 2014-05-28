@@ -11,6 +11,8 @@ MainMenu::MainMenu(std::deque< std::vector< variant<paraVarType> > >& a, std::ma
     mOption.push_back("Inventory");
     mOption.push_back("Exit");
 
+    currentPos = 0;
+    varMap["MainMenuCurPos"].set<unsigned int>(currentPos);
 }
 
 MainMenu::~MainMenu()
@@ -30,11 +32,11 @@ int MainMenu::processInput(int c){
         case 'z':
             switch(currentPos){
             case 0:
-                ctlCallStack.push_back(loadStack(svc::loadTeamMenu));
+                ctlCallStack.push_back(loadStack(svc::loadTeamMenu, 0));
                 ctlCallStack.push_back(loadStack(svc::setStat, Stats::inTeamMenu));
                 break;
             case 1:
-                ctlCallStack.push_back(loadStack(svc::loadInvMenu));
+                ctlCallStack.push_back(loadStack(svc::loadInvMenu, 0));
                 ctlCallStack.push_back(loadStack(svc::setStat, Stats::inInvMenu));
                 break;
             case 2:

@@ -71,6 +71,12 @@ enum svc{
     loadInvMenu,
     loadCharMenu,
     loadSkillMenu,
+    invEnableNull,
+    invDisableNull,
+    changeEquip,        //itemIndex, memberIndex, slotIndex
+    isItemUsable,       //itemIndex
+    getItemType,        //itemIndex
+    useItem,            //itemIndex, memberIndex
     endGame = 255       //
 };
 

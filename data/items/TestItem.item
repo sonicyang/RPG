@@ -3,7 +3,7 @@
 	"id" : 0,
 	"Description" : "TESTTTTTTT",
 	"Price" : 100,
-	"Comsumable" : 1,
-	"Type" : 0,
-	"HPv" : -20
+	"Comsumable" : 0,
+	"Type" : 3,
+	"HPv" : 20
 }

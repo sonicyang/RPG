@@ -13,6 +13,7 @@
 #include "engine.h"
 #include "variant.h"
 #include "menu.h"
+#include "itemexec.h"
 
 Engine::Engine() :
     rdr(), ctlCall(),
@@ -117,24 +118,52 @@ bool Engine::processCtlCall(){
                 break;
             case svc::addCharToTeam:
                 team.addCharToTeam(currCall[1].get<std::string>());
+                ret = 1;
                 break;
             case svc::removeCharFromTeam:
                 team.removeCharFromTeam(currCall[1].get<std::string>());
+                ret = 1;
                 break;
             case svc::battle:
                 //battle.battleStart(currCall[1].get< std::vector< std::string> >());
                 break;
             case svc::loadMainMenu:
                 mainmenu.init();
+                ret = 1;
                 break;
             case svc::loadTeamMenu:
-                teammenu.init(team.getNameList().size());
+                teammenu.init(team.getNameList().size(), currCall[1].get<int>());
+                ret = 1;
                 break;
             case svc::loadInvMenu:
-                invmenu.init(inv.getNumOfItems());
+                invmenu.init(inv.getNumOfItems(), currCall[1].get<int>());
+                ret = 1;
                 break;
             case svc::loadCharMenu:
-                charmenu.init();
+                charmenu.init(currCall[1].get<int>());
+                ret = 1;
+                break;
+            case svc::invEnableNull:
+                inv.enableNull();
+                ret = 1;
+                break;
+            case svc::invDisableNull:
+                inv.disableNull();
+                ret = 1;
+                break;
+            case svc::changeEquip:
+                ItemExec::changeItem(inv, currCall[1].get<unsigned int>(), team, currCall[2].get<unsigned int>(), currCall[3].get<unsigned int>(), rdr);
+                ret = 1;
+                break;
+            case svc::isItemUsable:
+                ret = inv[inv.getNameList(currCall[1].get<unsigned int>())[0]].item.isUsable();
+                break;
+            case svc::getItemType:
+                ret = inv[inv.getNameList(currCall[1].get<unsigned int>())[0]].item.getType();
+                break;
+            case svc::useItem:
+                ItemExec::Exec(inv, currCall[1].get<unsigned int>(), team, currCall[2].get<unsigned int>(), rdr);
+                ret = 1;
                 break;
 			case svc::endGame:
 				return 0;
