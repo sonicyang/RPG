@@ -21,6 +21,7 @@
 #include "mainmenu.h"
 #include "teammenu.h"
 #include "invmenu.h"
+#include "charmenu.h"
 
 using namespace std;
 
@@ -54,6 +55,7 @@ class Engine
         MainMenu mainmenu;
         TeamMenu teammenu;
         InvMenu invmenu;
+        CharMenu charmenu;
 
         void menuRutin();
         int invMenuRoutin(const int val = 0);

@@ -25,7 +25,8 @@ int TeamMenu::processInput(int c){
             currentPos = (currentPos == _limiter - 1 )? _limiter - 1 : currentPos + 1;
             break;
         case 'z':
-            return currentPos;
+            ctlCallStack.push_back(loadStack(svc::loadCharMenu));
+            ctlCallStack.push_back(loadStack(svc::setStat, Stats::inCharMenu));
             break;
         case 'x':
         case 'q':

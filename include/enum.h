@@ -69,6 +69,8 @@ enum svc{
     loadMainMenu,
     loadTeamMenu,
     loadInvMenu,
+    loadCharMenu,
+    loadSkillMenu,
     endGame = 255       //
 };
 

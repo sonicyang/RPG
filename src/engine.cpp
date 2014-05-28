@@ -23,7 +23,8 @@ Engine::Engine() :
     battle("data/monsters/monster_list.lst", inv, team, rdr),
     mainmenu(ctlCall, varMap),
     teammenu(ctlCall, varMap),
-    invmenu(ctlCall, varMap)
+    invmenu(ctlCall, varMap),
+    charmenu(ctlCall, varMap)
 {
 
 }
@@ -51,6 +52,7 @@ void Engine::getParseUserInput(){
             invmenu.processInput(c);
             break;
         case inCharMenu:
+            charmenu.processInput(c);
             break;
     }
 }
@@ -131,6 +133,9 @@ bool Engine::processCtlCall(){
             case svc::loadInvMenu:
                 invmenu.init(inv.getNumOfItems());
                 break;
+            case svc::loadCharMenu:
+                charmenu.init();
+                break;
 			case svc::endGame:
 				return 0;
 				break;
@@ -158,6 +163,9 @@ void Engine::updateScreen(){
             break;
         case Stats::inInvMenu:
             rdr.render_InvMenu(inv, varMap["InvMenuCurPos"].get<unsigned int>());
+            break;
+        case Stats::inCharMenu:
+            rdr.render_CharMenu(team[team.getNameList()[varMap["TeamMenuCurPos"].get<unsigned int>()]], varMap["CharMenuCurPos"].get<unsigned int>());
             break;
     }
 
