@@ -22,6 +22,7 @@ int Battle::loadBattle(int memberCount, std::vector<std::string>& monsters, int 
     _chance = chance;
     _memberCount = memberCount;
     _currentChara = 0;
+    _monsters.clear();
     for(unsigned int i = 0; i < monsters.size(); i++){
         _monsters.push_back(_monsterCache[monsters[i]]);
     }
@@ -183,6 +184,11 @@ int Battle::processInput(int c){
 
         }
     }else if(processPending == process::PostBattle){
+        for(unsigned int i = 0; i < _monsters.size(); i++){
+            for(unsigned int j = 0; j < _memberCount; j++){
+                ctlCallStack.push_back(loadStack(svc::varExp, j, _monsters[i].getExp()));
+            }
+        }
         ctlCallStack.push_back(loadStack(svc::restoreStat));
     }else if(processPending == process::Escaped){
         ctlCallStack.push_back(loadStack(svc::clearPrompt));
@@ -446,14 +452,9 @@ int Battle::monsterMenu(){
 
 
 
-void Battle::calculateExp(){
-    for(unsigned int i = 0; i < _monsters.size(); i++){
-        std::vector<std::string> memberList = _team.getNameList();
-        for(unsigned int j = 0; j < memberList.size(); j++){
-            _team[memberList[j]].varExp(_monsters[i].getExp());
-        }
-    }
+
 }*/
+
 
 bool Battle::isMonsterWipeOut(){
     bool flag = true;

@@ -78,8 +78,11 @@ bool Engine::processCtlCall(){
 				evtCtl.pushEvent(currCall[1].get<std::string>());
 				ret = 1;
 				break;
+            case svc::popEvent:
+                evtCtl.popEventStack();
+                ret = 1;
+                break;
 			case svc::restoreStat:
-				evtCtl.popEventStack();
 				prom.discardMessage();
 				this->restoreStat();
 				ret = 1;

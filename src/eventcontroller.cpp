@@ -77,6 +77,7 @@ int eventController::processInput(int c){
                 execTopEvent();
                 break;
             case 'x':
+                ctlCallStack.push_back(loadStack(svc::popEvent));
                 ctlCallStack.push_back(loadStack(svc::restoreStat));
                 break;
             case KEY_END:
@@ -100,6 +101,7 @@ int eventController::execTopEvent(){
     struct event& currentEvent = eventStack.back();
 
     if(currentEvent.stk.size() == 0){
+        ctlCallStack.push_back(loadStack(svc::popEvent));
         ctlCallStack.push_back(loadStack(svc::restoreStat));
         return -1;
     }
@@ -118,6 +120,7 @@ int eventController::execTopEvent(){
             break;
         case eventCode::endEvent:
             ctlCallStack.push_back(loadStack(svc::clearPrompt));
+            ctlCallStack.push_back(loadStack(svc::popEvent));
             ctlCallStack.push_back(loadStack(svc::restoreStat));
             break;
         case eventCode::transferMap:

@@ -52,7 +52,8 @@ enum faceing{
 };
 
 enum svc{
-    loadEvent = -1,     // EventName
+    popEvent = -2,
+    loadEvent,     // EventName
     restoreStat,        //              0
     setStat,            // stat Number
     loadPrompt,         // data, whom
