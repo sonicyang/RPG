@@ -69,12 +69,17 @@ int Battle::processInput(int c){
                     case 1:
                         break;
                     case 2:
+                        ctlCallStack.push_back(loadStack(svc::loadInvMenu, 0));
+                        ctlCallStack.push_back(loadStack(svc::setStat, Stats::inInvMenu));
+                        processPending = process::PostPlayer;
                         break;
                     case 3:
                         int p = rand() % 100;
                         if(p - _chance < 0){
-                            processPending = process::Escaped;
                             ctlCallStack.push_back(loadStack(svc::loadPrompt, UTF8_to_WChar("You Successfully Escaped!"), UTF8_to_WChar("System")));
+                            processPending = process::Escaped;
+                        }else{
+                            processPending = process::PostPlayer;
                         }
                         break;
                 }
@@ -120,7 +125,8 @@ int Battle::processInput(int c){
             char tmp[10];
             sprintf(tmp, "DEF%d", i);
             std::string ss(tmp);
-            ctlCallStack.push_back(loadStack(svc::moveVar, ss, "ret"));
+            std::string ss2("ret");
+            ctlCallStack.push_back(loadStack(svc::moveVar, ss, ss2));
         }
         processPending = process::MonsterTurn;
     }else if(processPending == process::MonsterTurn){
@@ -154,9 +160,9 @@ int Battle::processInput(int c){
                 }
 
                 if(tmp.geteTarget() == 0){
-                    int target = rand() %  _memberCount;
+                    unsigned int target = rand() %  _memberCount;
                     ctlCallStack.push_back(loadStack(svc::varHP, target, tmp.geteHPv()));
-                    ctlCallStack.push_back(loadStack(svc::varHP, target, tmp.geteMPv()));
+                    ctlCallStack.push_back(loadStack(svc::varMP, target, tmp.geteMPv()));
                 }else if(tmp.geteTarget() == 1){
                     for(unsigned int m = 0; m < _memberCount; m++){
                         ctlCallStack.push_back(loadStack(svc::varHP, m, tmp.geteHPv()));
@@ -164,9 +170,17 @@ int Battle::processInput(int c){
                     }
                 }
             }
-
-
             usleep(2000000);
+        }
+
+        ctlCallStack.push_back(loadStack(svc::isTeamWipeOut));
+        processPending = process::TeamWipeOutCheck;
+    }else if(processPending == process::TeamWipeOutCheck){
+        if(varMap["ret"].get<int>() != 1){
+            _currentChara = 0;
+            processPending = process::prePlayer;
+        }else{
+
         }
     }else if(processPending == process::PostBattle){
         ctlCallStack.push_back(loadStack(svc::restoreStat));

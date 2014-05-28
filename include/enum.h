@@ -79,6 +79,7 @@ enum svc{
     getItemType,        //itemIndex
     useItem,            //itemIndex, memberIndex
     isCharDead,         //memberIndex
+    isTeamWipeOut,
     queryAttack,        //memberIndex   26
     queryDefense,       //memberIndex
     varHP,              //memberIndex, Amount

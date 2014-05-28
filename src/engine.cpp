@@ -181,6 +181,9 @@ bool Engine::processCtlCall(){
             case svc::isCharDead:
                 ret = team[team.getNameList()[currCall[1].get<unsigned int>()]].isDead();
                 break;
+            case svc::isTeamWipeOut:
+                ret = team.isWipeOut();
+                break;
             case svc::queryAttack:
                 ret = team[team.getNameList()[currCall[1].get<unsigned int>()]].getAttack();
                 break;
@@ -200,7 +203,7 @@ bool Engine::processCtlCall(){
                 ret = 1;
                 break;
             case svc::moveVar:
-                varMap[currCall[1].get<std::string>()] = varMap[currCall[2].get<std::string>()];
+                varMap[currCall[1].get<std::string>()].set<int>(varMap[currCall[2].get<std::string>()].get<int>());
                 break;
 			case svc::endGame:
 				return 0;
