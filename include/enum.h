@@ -88,6 +88,7 @@ enum svc{
     varExp,             //memberIndex, Amount
     moveVar,            //dis, src      31
     qureySkillMonsterMenuRequired, //memberIndex, skillIndex
+    qureySkillTeamMenuRequired, //memberIndex, skillIndex
     useSkill,           //memberIndex, skillIndex
     gameOver,
     endGame = 255       //

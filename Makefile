@@ -16,7 +16,7 @@ LIB += -lcurses
 
 OBJDIR = $(PWD)/obj/
 
-OBJ = main.o array2d.o engine.o inventory.o item.o eventcontroller.o gmap.o mapcontroller.o mapobject.o objplayer.o point.o prompt.o render.o utils.o utf8.o
+OBJ = main.o array2d.o engine.o inventory.o item.o eventcontroller.o gmap.o mapcontroller.o mapobject.o objplayer.o point.o prompt.o render.o utils.o utf8.o battle.o character.o charmenu.o invmenu.o itemexec.o mainmenu.o menu.o monster.o monsterfactory.o  role.o rolefactory.o skill.o skillmenu.o team.o teammenu.o
 OBJ += json_reader.o json_value.o json_writer.o
 
 

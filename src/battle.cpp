@@ -111,13 +111,13 @@ int Battle::processInput(int c){
         _monsters[MonsterMenuCurrentPos].varHP((-1) * (rng) * (varMap["ret"].get<int>() + charaAttackBuff[_currentChara]) + _monsters[MonsterMenuCurrentPos].getDefense());
         processPending = process::PostPlayer;
     }else if(processPending == process::PrePlayerSkillQuery){
-        ctlCallStack.push_back(loadStack(svc::qureySkillMonsterMenuRequired, _currentChara, varMap["SkillMenuCurPos"].get<unsigned int>()))
+        ctlCallStack.push_back(loadStack(svc::qureySkillMonsterMenuRequired, _currentChara, varMap["SkillMenuCurPos"].get<unsigned int>()));
         ctlCallStack.push_back(loadStack(svc::moveVar, "eTarget", "ret"));
-        ctlCallStack.push_back(loadStack(svc::qureySkillPlayerMenuRequired, _currentChara, varMap["SkillMenuCurPos"].get<unsigned int>()))
+        ctlCallStack.push_back(loadStack(svc::qureySkillTeamMenuRequired, _currentChara, varMap["SkillMenuCurPos"].get<unsigned int>()));
         ctlCallStack.push_back(loadStack(svc::moveVar, "fTarget", "ret"));
         processPending = process::PrePlayerSkill;
     }else if(processPending == process::PrePlayerSkill){
-        if(varMap["eTarget"].get<int> == 1){
+        if(varMap["eTarget"].get<int>() == 1){
             processPending = process::skillMonsterMenu;
         }else{
            processPending = process::PrePlayerSkill2;
@@ -138,13 +138,13 @@ int Battle::processInput(int c){
                 break;
         }
     }else if(processPending == process::PrePlayerSkill2){
-        if(varMap["fTarget"].get<int> == 1){
+        if(varMap["fTarget"].get<int>() == 1){
             ctlCallStack.push_back(loadStack(svc::loadTeamMenu, 1));
             ctlCallStack.push_back(loadStack(svc::setStat, Stats::inTeamMenu));
         }
         processPending = process::PlayerSkill;
     }else if(processPending == process::PlayerSkill){
-        ctlCallStack.push_back(loadlStack(svc::useSkill, _currentChara, varMap["SkillMenuCurPos"].get<unsigned int>(), MonsterMenuCurrentPos, varMap["TeamMenuCurPos"].get<unsigned int>()));
+        ctlCallStack.push_back(loadStack(svc::useSkill, _currentChara, varMap["SkillMenuCurPos"].get<unsigned int>(), MonsterMenuCurrentPos, varMap["TeamMenuCurPos"].get<unsigned int>()));
         processPending = process::PostPlayer;
     }else if(processPending == process::PostPlayer){
         if(isMonsterWipeOut()){
