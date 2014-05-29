@@ -110,10 +110,18 @@ int Battle::processInput(int c){
     }else if(processPending == process::PlayerNormalAttack){
         float rng = (rand() % 6) / 10 + 0.75;
         int dmg = (-1) * (rng) * (varMap["ret"].get<int>() + charaAttackBuff[_currentChara]) + _monsters[MonsterMenuCurrentPos].getDefense();
+
+
         _monsters[MonsterMenuCurrentPos].varHP(dmg);
-        char kk[60];
-        sprintf(kk, "%s received %d point of damage!", _monsters[MonsterMenuCurrentPos].getName().c_str(), dmg);
+        char kk[100];
+        if(_monsters[MonsterMenuCurrentPos].isDead()){
+            sprintf(kk, "%s is Dead!", _monsters[MonsterMenuCurrentPos].getName().c_str());
+            _monsters.erase(_monsters.begin() + MonsterMenuCurrentPos);
+        }else{
+            sprintf(kk, "%s received %d point of damage!", _monsters[MonsterMenuCurrentPos].getName().c_str(), dmg);
+        }
         ctlCallStack.push_back(loadStack(svc::loadPrompt, UTF8_to_WChar(kk), UTF8_to_WChar("System")));
+
         processPending = process::PostPlayer;
     }else if(processPending == process::PrePlayerSkillQuery){
         if(varMap["SkillMenuCurPos"].get<unsigned int>() == 0xffffffff){
@@ -169,36 +177,21 @@ int Battle::processInput(int c){
     }else if(processPending == process::PostPlayerSkill){
         if(varMap["ret"].get<int>() == 0){
             ctlCallStack.push_back(loadStack(svc::loadPrompt, UTF8_to_WChar("Not Enough Mana!"), UTF8_to_WChar("System")));
-            processPending = process::notEnoughMana;
+            processPending = process::BattleMenu;
         }else{
             processPending = process::PostPlayer;
         }
-    }else if(processPending == process::notEnoughMana){
-        if(c == 'z'){
-            ctlCallStack.push_back(loadStack(svc::clearPrompt));
-            processPending = process::BattleMenu;
-        }
-    }else if(processPending == process::EscapeFailed){
-        if(c == 'z'){
-            ctlCallStack.push_back(loadStack(svc::clearPrompt));
-            processPending = process::PostPlayer;
-        }
     }else if(processPending == process::PostPlayer){
-        if(c == 'z'){
-            ctlCallStack.push_back(loadStack(svc::clearPrompt));
-
-            if(isMonsterWipeOut()){
-                processPending = PostBattle;
+        if(isMonsterWipeOut()){
+            processPending = process::PostBattle;
+        }else{
+             _currentChara++;
+            if(_currentChara >= _memberCount){
+                processPending = process::PreMonsterTurn;
             }else{
-                 _currentChara++;
-                if(_currentChara >= _memberCount){
-                    processPending = process::PreMonsterTurn;
-                }else{
-                    processPending = process::prePlayer;
-                }
+                processPending = process::prePlayer;
             }
         }
-
     }else if(processPending == PreMonsterTurn){
         for (unsigned int i = 0; i < _memberCount; i++){
             ctlCallStack.push_back(loadStack(svc::queryDefense, i));
@@ -270,10 +263,7 @@ int Battle::processInput(int c){
         }
         ctlCallStack.push_back(loadStack(svc::restoreStat));
     }else if(processPending == process::Escaped){
-        if(c == 'z'){
-            ctlCallStack.push_back(loadStack(svc::clearPrompt));
-            ctlCallStack.push_back(loadStack(svc::restoreStat));
-        }
+        ctlCallStack.push_back(loadStack(svc::restoreStat));
     }
     return 0;
 }

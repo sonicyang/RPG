@@ -59,7 +59,7 @@ eventController::~eventController()
 }
 
 int eventController::processInput(int c){
-    if(userInputRequired){
+    if(userInputRequired){ // Decpreted
         switch (c) {
             case KEY_LEFT:
 
@@ -116,7 +116,7 @@ int eventController::execTopEvent(){
             return 0;*/
         case eventCode::showPrompt:
             ctlCallStack.push_back(loadStack(svc::loadPrompt, UTF8_to_WChar(ss[2].c_str()), UTF8_to_WChar(ss[1].c_str())));
-            userInputRequired = 1;
+            userInputRequired = 0;
             break;
         case eventCode::endEvent:
             ctlCallStack.push_back(loadStack(svc::clearPrompt));

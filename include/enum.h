@@ -29,7 +29,8 @@ enum Stats{
     inInvMenu,
     inCharMenu,
     inSkillMenu,
-    inBattle
+    inBattle,
+    inPrompt
 };
 
 struct event{

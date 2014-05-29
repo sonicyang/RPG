@@ -62,6 +62,12 @@ void Engine::getParseUserInput(){
         case inBattle:
             battle.processInput(c);
             break;
+        case inPrompt:
+            if(c == 'z'){
+                prom.discardMessage();
+                this->restoreStat();
+            }
+            break;
     }
 }
 
@@ -94,6 +100,7 @@ bool Engine::processCtlCall(){
 				break;
 			case svc::loadPrompt:
 				prom.loadMessaage(currCall[1].get<wchar_t*>(), currCall[2].get<wchar_t*>());
+				this->setStat(Stats::inPrompt);
 				ret = 1;
 				break;
 			case svc::clearPrompt:

@@ -456,10 +456,10 @@
 	"utils.h"
 	"variant.h"
 
-1401074182 c:\users\sonicyang\github\rpg\include\prompt.h
+1401357201 c:\users\sonicyang\github\rpg\include\prompt.h
 	<string>
 
-1401296734 source:c:\users\sonicyang\github\rpg\src\eventcontroller.cpp
+1401357244 source:c:\users\sonicyang\github\rpg\src\eventcontroller.cpp
 	<algorithm>
 	<cstring>
 	<curses.h>
@@ -470,7 +470,7 @@
 	"json/value.h"
 	"utf8.h"
 
-1401074226 source:c:\users\sonicyang\github\rpg\src\prompt.cpp
+1401357196 source:c:\users\sonicyang\github\rpg\src\prompt.cpp
 	"prompt.h"
 
 1220890218 c:\users\sonicyang\github\rpg\include\curses.h
@@ -725,7 +725,7 @@
 	"point.h"
 	<string>
 
-1401339479 source:c:\users\sonicyang\github\rpg\src\engine.cpp
+1401356563 source:c:\users\sonicyang\github\rpg\src\engine.cpp
 	<curses.h>
 	<cstdlib>
 	<string>
@@ -810,7 +810,7 @@
 	<type_traits>
 	<string>
 
-1401339479 c:\users\sonicyang\github\rpg\include\enum.h
+1401356351 c:\users\sonicyang\github\rpg\include\enum.h
 	<string>
 	<vector>
 
@@ -884,10 +884,11 @@
 	"render.h"
 	"monster.h"
 
-1401296318 source:c:\users\sonicyang\github\rpg\src\battle.cpp
+1401357882 source:c:\users\sonicyang\github\rpg\src\battle.cpp
 	"battle.h"
 	<unistd.h>
 	<cstdlib>
+	"enum.h"
 	"utf8.h"
 
 1401345991 c:\users\sonicyang\github\rpg\include\battle.h
