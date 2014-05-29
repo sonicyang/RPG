@@ -14,6 +14,7 @@
 #include "variant.h"
 #include "menu.h"
 #include "itemexec.h"
+#include "utf8.h"
 
 Engine::Engine() :
     rdr(), ctlCall(),
@@ -72,6 +73,8 @@ void Engine::getParseUserInput(){
 }
 
 bool Engine::processCtlCall(){
+    char tmp[100];
+
     while(ctlCall.size() > 0){
 
 		std::vector< variant<paraVarType> >currCall = ctlCall.front();
@@ -114,32 +117,48 @@ bool Engine::processCtlCall(){
 				break;
             case svc::addItem:
                 inv.addItem(currCall[1].get<std::string>(), currCall[2].get<int>());
+                sprintf(tmp, "You get %d %s", currCall[2].get<int>(), currCall[1].get<std::string>().c_str());
+                ctlCall.push_back(loadStack(svc::loadPrompt, UTF8_to_WChar(tmp), UTF8_to_WChar("System")));
                 ret = 1;
                 break;
             case svc::removeItem:
                 ret = inv.removeItem(currCall[1].get<std::string>(), currCall[2].get<int>());
+                sprintf(tmp, "You lost %d %s", currCall[2].get<int>(), currCall[1].get<std::string>().c_str());
+                ctlCall.push_back(loadStack(svc::loadPrompt, UTF8_to_WChar(tmp), UTF8_to_WChar("System")));
                 break;
             case svc::incItem:
                 inv.incItem(currCall[1].get<std::string>());
+                sprintf(tmp, "You get a %s", currCall[1].get<std::string>().c_str());
+                ctlCall.push_back(loadStack(svc::loadPrompt, UTF8_to_WChar(tmp), UTF8_to_WChar("System")));
                 ret = 1;
                 break;
             case svc::decItem:
                 ret = inv.decItem(currCall[1].get<std::string>());
+                sprintf(tmp, "You lost a %s", currCall[1].get<std::string>().c_str());
+                ctlCall.push_back(loadStack(svc::loadPrompt, UTF8_to_WChar(tmp), UTF8_to_WChar("System")));
                 break;
             case svc::setMoney:
                 inv.setMoney(currCall[1].get<int>());
+                sprintf(tmp, "You Currently Have $%d", inv.getMoney());
+                ctlCall.push_back(loadStack(svc::loadPrompt, UTF8_to_WChar(tmp), UTF8_to_WChar("System")));
                 ret = 1;
                 break;
             case svc::addMoney:
                 inv.addMoney(currCall[1].get<int>());
+                sprintf(tmp, "You gained $%d", currCall[1].get<int>());
+                ctlCall.push_back(loadStack(svc::loadPrompt, UTF8_to_WChar(tmp), UTF8_to_WChar("System")));
                 ret = 1;
                 break;
             case svc::addCharToTeam:
                 team.addCharToTeam(currCall[1].get<std::string>());
+                sprintf(tmp, "%s joined the Team", currCall[1].get<std::string>().c_str());
+                ctlCall.push_back(loadStack(svc::loadPrompt, UTF8_to_WChar(tmp), UTF8_to_WChar("System")));
                 ret = 1;
                 break;
             case svc::removeCharFromTeam:
                 team.removeCharFromTeam(currCall[1].get<std::string>());
+                sprintf(tmp, "%s leaved the Team", currCall[1].get<std::string>().c_str());
+                ctlCall.push_back(loadStack(svc::loadPrompt, UTF8_to_WChar(tmp), UTF8_to_WChar("System")));
                 ret = 1;
                 break;
             case svc::battle:
@@ -186,6 +205,8 @@ bool Engine::processCtlCall(){
                 break;
             case svc::useItem:
                 ItemExec::Exec(inv, currCall[1].get<unsigned int>(), team, currCall[2].get<unsigned int>(), rdr);
+                sprintf(tmp, "Used %s", inv[inv.getNameList(currCall[1].get<unsigned int>())[0]].item.getName().c_str());
+                ctlCall.push_back(loadStack(svc::loadPrompt, UTF8_to_WChar(tmp), UTF8_to_WChar("System")));
                 ret = 1;
                 break;
             case svc::isCharDead:
@@ -202,14 +223,29 @@ bool Engine::processCtlCall(){
                 break;
             case svc::varHP:
                 team[team.getNameList()[currCall[1].get<unsigned int>()]].varHP(currCall[2].get<int>());
+                if(currCall[2].get<int>() > 0)
+                    sprintf(tmp, "%s HP recovered by %d points", team.getNameList()[currCall[1].get<unsigned int>()].c_str(), currCall[2].get<int>());
+                else
+                    sprintf(tmp, "%s received damage by %d points", team.getNameList()[currCall[1].get<unsigned int>()].c_str(), currCall[2].get<int>());
+                ctlCall.push_back(loadStack(svc::loadPrompt, UTF8_to_WChar(tmp), UTF8_to_WChar("System")));
                 ret = 1;
                 break;
             case svc::varMP:
                 team[team.getNameList()[currCall[1].get<unsigned int>()]].varMP(currCall[2].get<int>());
+                if(currCall[2].get<int>() > 0)
+                    sprintf(tmp, "%s MP increased by %d points", team.getNameList()[currCall[1].get<unsigned int>()].c_str(), currCall[2].get<int>());
+                else
+                    sprintf(tmp, "%s MP decreased by %d points", team.getNameList()[currCall[1].get<unsigned int>()].c_str(), currCall[2].get<int>());
+                ctlCall.push_back(loadStack(svc::loadPrompt, UTF8_to_WChar(tmp), UTF8_to_WChar("System")));
                 ret = 1;
                 break;
             case svc::varExp:
                 team[team.getNameList()[currCall[1].get<unsigned int>()]].varExp(currCall[2].get<int>());
+                if(currCall[2].get<int>() > 0)
+                    sprintf(tmp, "%s experience increased by %d points", team.getNameList()[currCall[1].get<unsigned int>()].c_str(), currCall[2].get<int>());
+                else
+                    sprintf(tmp, "%s experience decreased by %d points", team.getNameList()[currCall[1].get<unsigned int>()].c_str(), currCall[2].get<int>());
+                ctlCall.push_back(loadStack(svc::loadPrompt, UTF8_to_WChar(tmp), UTF8_to_WChar("System")));
                 ret = 1;
                 break;
             case svc::moveVar:
@@ -226,7 +262,7 @@ bool Engine::processCtlCall(){
                 ret = ItemExec::skillExec(team, currCall[1].get<unsigned int>(), currCall[2].get<unsigned int>(), battle.getMonsters(), currCall[3].get<unsigned int>(), currCall[4].get<unsigned int>(), rdr);
                 break;
             case svc::gameOver:
-
+                return -1;
                 break;
 			case svc::endGame:
 				return 0;

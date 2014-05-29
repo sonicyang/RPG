@@ -193,6 +193,7 @@ int Battle::processInput(int c){
             }
         }
     }else if(processPending == PreMonsterTurn){
+        ctlCallStack.push_back(loadStack(svc::loadPrompt, UTF8_to_WChar("It's Now Monster's Turn"), UTF8_to_WChar("System")));
         for (unsigned int i = 0; i < _memberCount; i++){
             ctlCallStack.push_back(loadStack(svc::queryDefense, i));
             char tmp[10];
@@ -246,10 +247,12 @@ int Battle::processInput(int c){
             usleep(1000000);
         }
 
+        ctlCallStack.push_back(loadStack(svc::loadPrompt, UTF8_to_WChar("That Hurts..."), UTF8_to_WChar("System")));
         ctlCallStack.push_back(loadStack(svc::isTeamWipeOut));
         processPending = process::TeamWipeOutCheck;
     }else if(processPending == process::TeamWipeOutCheck){
         if(varMap["ret"].get<int>() != 1){
+            ctlCallStack.push_back(loadStack(svc::loadPrompt, UTF8_to_WChar("It's Now your Turn"), UTF8_to_WChar("System")));
             _currentChara = 0;
             processPending = process::prePlayer;
         }else{

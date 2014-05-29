@@ -86,28 +86,49 @@ int startMenu(){
     return 0;
 }
 
+int gameOverMenu(){
+
+    //Print Selected Options
+    attron(A_BOLD);
+    mvaddstr(getmaxy(stdscr) / 2 - 4, getmaxx(stdscr) / 2, "GameOver");
+    attroff(A_BOLD);
+
+    usleep(2000000);
+    return 0;
+}
+
 
 int main()
 {
-    setlocale(LC_ALL, "");
-    Engine gCtl;
-    cbreak();
-    noecho();
-    keypad(stdscr, TRUE);
-
-    if(startMenu())
-        return 0;
-
-    nodelay(stdscr, true);
-    gCtl.updateScreen();
-
     for(;;){
-        gCtl.getParseUserInput();
-        if(!gCtl.processCtlCall())
-        	break;
+        setlocale(LC_ALL, "");
+        Engine gCtl;
+        cbreak();
+        noecho();
+        keypad(stdscr, TRUE);
+
+        if(startMenu())
+            return 0;
+
+        nodelay(stdscr, true);
         gCtl.updateScreen();
-        usleep(33333);
+
+        for(;;){
+            gCtl.getParseUserInput();
+            int g = gCtl.processCtlCall();
+            if(g == 1){
+                break;
+            }else if(g == -1){
+                gameOverMenu();
+                break;
+            }
+
+            gCtl.updateScreen();
+            usleep(33333);
+        }
+
     }
+
 
     //system("pause");
     return 0;

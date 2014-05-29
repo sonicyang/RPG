@@ -212,7 +212,7 @@
 	<cstring>
 	"chararray2d.h"
 
-1401112579 source:c:\users\sonicyang\github\rpg\main.cpp
+1401364922 source:c:\users\sonicyang\github\rpg\main.cpp
 	<iostream>
 	<curses.h>
 	<cstdlib>
@@ -884,7 +884,7 @@
 	"render.h"
 	"monster.h"
 
-1401357882 source:c:\users\sonicyang\github\rpg\src\battle.cpp
+1401358246 source:c:\users\sonicyang\github\rpg\src\battle.cpp
 	"battle.h"
 	<unistd.h>
 	<cstdlib>

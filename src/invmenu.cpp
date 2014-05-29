@@ -53,7 +53,7 @@ int InvMenu::processInput(int c){
             processPending = 2;
         }else{
             ctlCallStack.push_back(loadStack(svc::loadPrompt, UTF8_to_WChar("This Item is not Comsumable"), UTF8_to_WChar("System")));
-            processPending = 5;
+            processPending = 0;
         }
 
     }else if(processPending == 2){
@@ -65,13 +65,6 @@ int InvMenu::processInput(int c){
     }else if(processPending == 4){
         ctlCallStack.push_back(loadStack(svc::useItem, currentPos, varMap["TeamMenuCurPos"].get<unsigned int>()));
         processPending = 0;
-    }else if(processPending == 5){
-        switch(c){
-            case 'x':
-            case 'z':
-                ctlCallStack.push_back(loadStack(svc::clearPrompt));
-                processPending = 0;
-        }
     }
 
     return 0;
