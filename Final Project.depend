@@ -725,7 +725,7 @@
 	"point.h"
 	<string>
 
-1401339479 source:c:\users\sonicyang\github\rpg\src\engine.cpp
+1401295637 source:c:\users\sonicyang\github\rpg\src\engine.cpp
 	<curses.h>
 	<cstdlib>
 	<string>
@@ -810,7 +810,7 @@
 	<type_traits>
 	<string>
 
-1401339479 c:\users\sonicyang\github\rpg\include\enum.h
+1401296893 c:\users\sonicyang\github\rpg\include\enum.h
 	<string>
 	<vector>
 
@@ -870,19 +870,18 @@
 	"character.h"
 	"RoleFactory.h"
 
-1401339479 source:c:\users\sonicyang\github\rpg\src\itemexec.cpp
+1401116724 source:c:\users\sonicyang\github\rpg\src\itemexec.cpp
 	"itemexec.h"
 	"menu.h"
 	"render.h"
 	"prompt.h"
 
-1401339479 c:\users\sonicyang\github\rpg\include\itemexec.h
+1401116634 c:\users\sonicyang\github\rpg\include\itemexec.h
 	<string>
 	"item.h"
 	"inventory.h"
 	"team.h"
 	"render.h"
-	"monster.h"
 
 1401296318 source:c:\users\sonicyang\github\rpg\src\battle.cpp
 	"battle.h"
@@ -890,7 +889,7 @@
 	<cstdlib>
 	"utf8.h"
 
-1401345991 c:\users\sonicyang\github\rpg\include\battle.h
+1401294834 c:\users\sonicyang\github\rpg\include\battle.h
 	<curses.h>
 	<string>
 	<vector>
@@ -949,7 +948,7 @@
 1401283678 c:\users\sonicyang\github\rpg\include\invmenu.h
 	<menu.h>
 
-1401339479 source:c:\users\sonicyang\github\rpg\src\teammenu.cpp
+1401285102 source:c:\users\sonicyang\github\rpg\src\teammenu.cpp
 	<curses.h>
 	"teammenu.h"
 	"utils.h"
@@ -970,9 +969,488 @@
 1401286734 c:\users\sonicyang\github\rpg\include\skillmenu.h
 	<menu.h>
 
-1401339479 source:c:\users\sonicyang\github\rpg\src\skillmenu.cpp
+1401286740 source:c:\users\sonicyang\github\rpg\src\skillmenu.cpp
 	<curses.h>
 	"skillmenu.h"
 	"utils.h"
 	"enum.h"
+
+1401361804 source:/home/andrey/GameProjects/RPG/main.cpp
+	<iostream>
+	<ncurses.h>
+	<cstdlib>
+	<fstream>
+	<string>
+	<cerrno>
+	"point.h"
+	"engine.h"
+	<unistd.h>
+	<locale.h>
+
+1401355607 /home/andrey/GameProjects/RPG/include/point.h
+
+1401355859 /home/andrey/GameProjects/RPG/include/engine.h
+	<map>
+	<string>
+	<curses.h>
+	<deque>
+	"gmap.h"
+	"render.h"
+	"mapcontroller.h"
+	"eventcontroller.h"
+	"mapobject.h"
+	"objplayer.h"
+	"inventory.h"
+	"utils.h"
+	"variant.h"
+	"team.h"
+	"rolefactory.h"
+	"role.h"
+	"battle.h"
+	"mainmenu.h"
+	"teammenu.h"
+	"invmenu.h"
+	"charmenu.h"
+	"skillmenu.h"
+
+1401355607 /home/andrey/GameProjects/RPG/include/gmap.h
+	<string>
+	<set>
+	<map>
+	"mapobject.h"
+	"array2d.h"
+	"point.h"
+
+1401355607 /home/andrey/GameProjects/RPG/include/mapobject.h
+	<string>
+	<vector>
+	"eventcontroller.h"
+	"utils.h"
+	"point.h"
+
+1401355607 /home/andrey/GameProjects/RPG/include/eventcontroller.h
+	<vector>
+	<deque>
+	<map>
+	"prompt.h"
+	"utils.h"
+	"variant.h"
+
+1401355607 /home/andrey/GameProjects/RPG/include/prompt.h
+	<string>
+
+1401355607 /home/andrey/GameProjects/RPG/include/utils.h
+	<fstream>
+	<string>
+	<cerrno>
+	<vector>
+	<deque>
+	"item.h"
+	"variant.h"
+	"enum.h"
+
+1401355607 /home/andrey/GameProjects/RPG/include/item.h
+	<string>
+
+1401355607 /home/andrey/GameProjects/RPG/include/variant.h
+	<iostream>
+	<utility>
+	<typeinfo>
+	<type_traits>
+	<string>
+
+1401355607 /home/andrey/GameProjects/RPG/include/enum.h
+	<string>
+	<vector>
+
+1401355607 /home/andrey/GameProjects/RPG/include/array2d.h
+	"point.h"
+	<string>
+
+1401355679 /home/andrey/GameProjects/RPG/include/render.h
+	<curses.h>
+	"point.h"
+	"gmap.h"
+	"mapobject.h"
+	"objplayer.h"
+	"prompt.h"
+	"inventory.h"
+	"team.h"
+	"character.h"
+	"monster.h"
+
+1401355709 /home/andrey/GameProjects/RPG/include/objplayer.h
+	<string>
+	"mapobject.h"
+
+1401355607 /home/andrey/GameProjects/RPG/include/inventory.h
+	<map>
+	<string>
+	<vector>
+	"item.h"
+	"utils.h"
+
+1401355753 /home/andrey/GameProjects/RPG/include/team.h
+	<map>
+	<string>
+	<vector>
+	"character.h"
+	"rolefactory.h"
+
+1401355607 /home/andrey/GameProjects/RPG/include/character.h
+	<string>
+	"role.h"
+	"rolefactory.h"
+	"item.h"
+
+1401355607 /home/andrey/GameProjects/RPG/include/role.h
+	<string>
+	<map>
+	<vector>
+	"skill.h"
+
+1401355607 /home/andrey/GameProjects/RPG/include/skill.h
+	<string>
+
+1401355607 /home/andrey/GameProjects/RPG/include/rolefactory.h
+	<string>
+	<map>
+	"role.h"
+
+1401355607 /home/andrey/GameProjects/RPG/include/monster.h
+	<string>
+	<vector>
+	"skill.h"
+
+1401355833 /home/andrey/GameProjects/RPG/include/mapcontroller.h
+	"gmap.h"
+	"mapobject.h"
+	"objplayer.h"
+	"variant.h"
+	"point.h"
+
+1401355607 /home/andrey/GameProjects/RPG/include/battle.h
+	<curses.h>
+	<string>
+	<vector>
+	"inventory.h"
+	"team.h"
+	"monsterfactory.h"
+	"render.h"
+
+1401355607 /home/andrey/GameProjects/RPG/include/monsterfactory.h
+	<string>
+	<map>
+	"monster.h"
+
+1401355607 /home/andrey/GameProjects/RPG/include/mainmenu.h
+	<menu.h>
+
+1401355607 /home/andrey/GameProjects/RPG/include/menu.h
+	<map>
+	<vector>
+	<deque>
+	"utils.h"
+
+1401355607 /home/andrey/GameProjects/RPG/include/teammenu.h
+	<menu.h>
+
+1401355607 /home/andrey/GameProjects/RPG/include/invmenu.h
+	<menu.h>
+
+1401355607 /home/andrey/GameProjects/RPG/include/charmenu.h
+	<menu.h>
+
+1401355607 /home/andrey/GameProjects/RPG/include/skillmenu.h
+	<menu.h>
+
+1401355971 source:/home/andrey/GameProjects/RPG/src/array2d.cpp
+	<string>
+	<cstring>
+	"point.h"
+	"array2d.h"
+
+1401355607 source:/home/andrey/GameProjects/RPG/src/battle.cpp
+	"battle.h"
+	<unistd.h>
+	<cstdlib>
+	"enum.h"
+	"utf8.h"
+
+1401355607 /home/andrey/GameProjects/RPG/include/utf8.h
+	<iostream>
+	<fstream>
+	<string>
+	<stdlib.h>
+
+1401355607 source:/home/andrey/GameProjects/RPG/src/character.cpp
+	"character.h"
+	"enum.h"
+
+1401355607 source:/home/andrey/GameProjects/RPG/src/charmenu.cpp
+	<curses.h>
+	"charmenu.h"
+	"utils.h"
+	"enum.h"
+
+1401355607 source:/home/andrey/GameProjects/RPG/src/engine.cpp
+	<curses.h>
+	<cstdlib>
+	<string>
+	<cstring>
+	<string>
+	<algorithm>
+	"gmap.h"
+	"point.h"
+	"utils.h"
+	"json/reader.h"
+	"json/value.h"
+	"render.h"
+	"engine.h"
+	"variant.h"
+	"menu.h"
+	"itemexec.h"
+
+1401355607 /home/andrey/GameProjects/RPG/include/json/reader.h
+	"features.h"
+	"value.h"
+	<deque>
+	<stack>
+	<string>
+	<iostream>
+
+1401355607 /home/andrey/GameProjects/RPG/include/json/features.h
+	"forwards.h"
+
+1401355607 /home/andrey/GameProjects/RPG/include/json/forwards.h
+	"config.h"
+
+1401355607 /home/andrey/GameProjects/RPG/include/json/config.h
+	<cpptl/config.h>
+
+1401355607 /home/andrey/GameProjects/RPG/include/json/value.h
+	"forwards.h"
+	<string>
+	<vector>
+	<map>
+	<cpptl/smallmap.h>
+	<cpptl/forwards.h>
+
+1401355607 /home/andrey/GameProjects/RPG/include/itemexec.h
+	<string>
+	"item.h"
+	"inventory.h"
+	"team.h"
+	"render.h"
+	"monster.h"
+
+1401355607 source:/home/andrey/GameProjects/RPG/src/eventcontroller.cpp
+	<algorithm>
+	<cstring>
+	<curses.h>
+	"prompt.h"
+	"utils.h"
+	"eventcontroller.h"
+	"json/reader.h"
+	"json/value.h"
+	"utf8.h"
+
+1401355607 source:/home/andrey/GameProjects/RPG/src/gmap.cpp
+	<cstdlib>
+	<cstring>
+	<string>
+	<string>
+	<curses.h>
+	"json/reader.h"
+	"json/value.h"
+	"gmap.h"
+	"point.h"
+	"utils.h"
+	"array2d.h"
+	"mapobject.h"
+	"utf8.h"
+
+1401355607 source:/home/andrey/GameProjects/RPG/src/inventory.cpp
+	"inventory.h"
+
+1401355607 source:/home/andrey/GameProjects/RPG/src/invmenu.cpp
+	<curses.h>
+	<string>
+	"invmenu.h"
+	"utils.h"
+	"enum.h"
+	"utf8.h"
+
+1401355607 source:/home/andrey/GameProjects/RPG/src/item.cpp
+	<cstdlib>
+	<string>
+	"item.h"
+	"utils.h"
+	"json/value.h"
+	"json/reader.h"
+
+1401355607 source:/home/andrey/GameProjects/RPG/src/itemexec.cpp
+	"itemexec.h"
+	"menu.h"
+	"render.h"
+	"prompt.h"
+
+1401355607 source:/home/andrey/GameProjects/RPG/src/lib_json/json_reader.cpp
+	<json/reader.h>
+	<json/value.h>
+	<utility>
+	<cstdio>
+	<cassert>
+	<cstring>
+	<iostream>
+	<stdexcept>
+
+1401355607 source:/home/andrey/GameProjects/RPG/src/lib_json/json_value.cpp
+	<iostream>
+	<json/value.h>
+	<json/writer.h>
+	<utility>
+	<stdexcept>
+	<cstring>
+	<cassert>
+	<cpptl/conststring.h>
+	<cstddef>
+	"json_batchallocator.h"
+	"json_internalarray.inl"
+	"json_internalmap.inl"
+	"json_valueiterator.inl"
+
+1401355607 /home/andrey/GameProjects/RPG/include/json/writer.h
+	"value.h"
+	<vector>
+	<string>
+	<iostream>
+
+1401355607 /home/andrey/GameProjects/RPG/src/lib_json/json_batchallocator.h
+	<stdlib.h>
+	<assert.h>
+
+1401355607 /home/andrey/GameProjects/RPG/src/lib_json/json_internalarray.inl
+
+1401355607 /home/andrey/GameProjects/RPG/src/lib_json/json_internalmap.inl
+
+1401355607 /home/andrey/GameProjects/RPG/src/lib_json/json_valueiterator.inl
+
+1401355607 source:/home/andrey/GameProjects/RPG/src/lib_json/json_writer.cpp
+	<json/writer.h>
+	<utility>
+	<assert.h>
+	<stdio.h>
+	<string.h>
+	<iostream>
+	<sstream>
+	<iomanip>
+
+1401355607 source:/home/andrey/GameProjects/RPG/src/mainmenu.cpp
+	<curses.h>
+	"mainmenu.h"
+	"utils.h"
+	"enum.h"
+
+1401355607 source:/home/andrey/GameProjects/RPG/src/mapcontroller.cpp
+	<cstdlib>
+	<curses.h>
+	<deque>
+	"mapcontroller.h"
+	"utils.h"
+	"json/reader.h"
+	"json/value.h"
+	"engine.h"
+	"utf8.h"
+
+1401355607 source:/home/andrey/GameProjects/RPG/src/mapobject.cpp
+	<string>
+	<cstdlib>
+	"json/value.h"
+	"json/reader.h"
+	"utils.h"
+	"mapobject.h"
+
+1401355607 source:/home/andrey/GameProjects/RPG/src/menu.cpp
+	"menu.h"
+
+1401355607 source:/home/andrey/GameProjects/RPG/src/monster.cpp
+	"monster.h"
+
+1401355607 source:/home/andrey/GameProjects/RPG/src/monsterfactory.cpp
+	"monsterfactory.h"
+	<cstdlib>
+	"json/reader.h"
+	"json/value.h"
+	"utils.h"
+
+1401355607 source:/home/andrey/GameProjects/RPG/src/objplayer.cpp
+	"objplayer.h"
+
+1401355607 source:/home/andrey/GameProjects/RPG/src/point.cpp
+	"point.h"
+
+1401355607 source:/home/andrey/GameProjects/RPG/src/prompt.cpp
+	"prompt.h"
+
+1401361706 source:/home/andrey/GameProjects/RPG/src/render.cpp
+	<ncursesw/curses.h>
+	"render.h"
+	"gmap.h"
+	"point.h"
+	<locale.h>
+	"skill.h"
+
+1401355607 source:/home/andrey/GameProjects/RPG/src/role.cpp
+	"role.h"
+	<cmath>
+
+1401355607 source:/home/andrey/GameProjects/RPG/src/rolefactory.cpp
+	<cstdlib>
+	<iostream>
+	"rolefactory.h"
+	"json/reader.h"
+	"json/value.h"
+	"utils.h"
+
+1401355607 source:/home/andrey/GameProjects/RPG/src/skill.cpp
+	"skill.h"
+	<cstdlib>
+	"json/reader.h"
+	"json/value.h"
+	"utils.h"
+
+1401355607 source:/home/andrey/GameProjects/RPG/src/skillmenu.cpp
+	<curses.h>
+	"skillmenu.h"
+	"utils.h"
+	"enum.h"
+
+1401355607 source:/home/andrey/GameProjects/RPG/src/team.cpp
+	<cstdlib>
+	"team.h"
+	"json/value.h"
+	"json/reader.h"
+	"utils.h"
+
+1401355607 source:/home/andrey/GameProjects/RPG/src/teammenu.cpp
+	<curses.h>
+	"teammenu.h"
+	"utils.h"
+	"enum.h"
+
+1401355607 source:/home/andrey/GameProjects/RPG/src/utf8.cpp
+	"utf8.h"
+
+1401355607 source:/home/andrey/GameProjects/RPG/src/utils.cpp
+	<fstream>
+	<string>
+	<cerrno>
+	<vector>
+	<sstream>
+	<cstring>
+	<cstdarg>
+	<deque>
+	<cstdlib>
+	"utils.h"
 

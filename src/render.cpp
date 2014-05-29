@@ -5,7 +5,7 @@
 #include "gmap.h"
 #include "point.h"
 #include <locale.h>
-#include "Skill.h"
+#include "skill.h"
 
 render::render() : offset(0,0)
 {

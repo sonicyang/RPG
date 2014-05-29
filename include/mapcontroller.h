@@ -2,8 +2,8 @@
 #define MAPCONTROLLER_H
 
 #include "gmap.h"
-#include "mapObject.h"
-#include "objPLayer.h"
+#include "mapobject.h"
+#include "objplayer.h"
 #include "variant.h"
 #include "point.h"
 

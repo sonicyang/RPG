@@ -5,7 +5,7 @@
 #include "point.h"
 #include "gmap.h"
 #include "mapobject.h"
-#include "objPlayer.h"
+#include "objplayer.h"
 #include "prompt.h"
 #include "inventory.h"
 #include "team.h"

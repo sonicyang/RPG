@@ -23,6 +23,7 @@ OBJ += json_reader.o json_value.o json_writer.o
 OUT_EXE = RPG
 
 # Game parts
+
 $(OUT_EXE): $(addprefix $(OBJDIR),$(OBJ))
 	@echo "    LD    "$@
 	@$(CXX) $(addprefix $(OBJDIR),$(OBJ)) $(CXXFLAG) $(LIB) -o $@
@@ -37,12 +38,14 @@ $(OBJDIR)%.o: $(GAMESRC)/%.cpp
 
 $(OBJDIR)main.o: $(PWD)/main.cpp
 	@echo "    CC    "$@
+	@mkdir -p $(OBJDIR)
 	@$(CXX) $< $(CXXFLAG) $(INCLUDE) -c -o $@
 
 #Json parts
 $(OBJDIR)%.o: $(JSONSRC)/%.cpp
 	@echo "    CC    "$@
 	@$(CXX) $< $(CXXFLAG) $(INCLUDE) -c -o $@
+
 
 
 .PHONY: clean

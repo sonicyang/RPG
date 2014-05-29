@@ -2,7 +2,7 @@
 #define OBJPLAYER_H
 
 #include <string>
-#include "mapObject.h"
+#include "mapobject.h"
 
 class objPlayer : public mapObject
 {
