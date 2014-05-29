@@ -18,6 +18,8 @@ class inventory
         int decItem(std::string);
         int removeItem(std::string, unsigned int);
 
+        void clearInv() { _inventorySlots.clear(); };
+
         void enableNull(void);
         void disableNull(void);
 

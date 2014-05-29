@@ -30,7 +30,8 @@ enum Stats{
     inCharMenu,
     inSkillMenu,
     inBattle,
-    inPrompt
+    inPrompt,
+    inVender,
 };
 
 struct event{
@@ -91,6 +92,9 @@ enum svc{
     qureySkillMonsterMenuRequired, //memberIndex, skillIndex
     qureySkillTeamMenuRequired, //memberIndex, skillIndex
     useSkill,           //memberIndex, skillIndex
+    setupVender,        //List of Item
+    loadVenderInvMenu,
+    sellItem,           //itemIndex
     gameOver,
     endGame = 255       //
 };

@@ -23,6 +23,7 @@
 #include "invmenu.h"
 #include "charmenu.h"
 #include "skillmenu.h"
+#include "vender.h"
 
 using namespace std;
 
@@ -47,6 +48,7 @@ class Engine
         mapController mapCtl;
         eventController evtCtl;
         inventory inv;
+
         Team team;
 
         prompt prom;
@@ -58,6 +60,8 @@ class Engine
         InvMenu invmenu;
         CharMenu charmenu;
         SkillMenu skillmenu;
+
+        Vender vendor;
 
         void menuRutin();
         int invMenuRoutin(const int val = 0);
