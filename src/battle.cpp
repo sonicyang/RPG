@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <cstdlib>
 
+#include "enum.h"
 #include "utf8.h"
 
 Battle::Battle(std::string monsterList, std::deque< std::vector< variant<paraVarType> > >& a, std::map< std::string, variant<paraVarType> >& b) :
@@ -68,6 +69,9 @@ int Battle::processInput(int c){
                         processPending = MonsterMenu;
                         break;
                     case 1:
+                        ctlCallStack.push_back(loadStack(svc::loadSkillMenu, 1));
+                        ctlCallStack.push_back(loadStack(svc::setStat, Stats::inSkillMenu));
+                        processPending = process::PrePlayerSkillQuery;
                         break;
                     case 2:
                         ctlCallStack.push_back(loadStack(svc::loadInvMenu, 0));
@@ -102,13 +106,46 @@ int Battle::processInput(int c){
                 processPending = process::BattleMenu;
                 break;
         }
-
     }else if(processPending == process::PlayerNormalAttack){
         float rng = (rand() % 6) / 10 + 0.75;
         _monsters[MonsterMenuCurrentPos].varHP((-1) * (rng) * (varMap["ret"].get<int>() + charaAttackBuff[_currentChara]) + _monsters[MonsterMenuCurrentPos].getDefense());
         processPending = process::PostPlayer;
+    }else if(processPending == process::PrePlayerSkillQuery){
+        ctlCallStack.push_back(loadStack(svc::qureySkillMonsterMenuRequired, _currentChara, varMap["SkillMenuCurPos"].get<unsigned int>()))
+        ctlCallStack.push_back(loadStack(svc::moveVar, "eTarget", "ret"));
+        ctlCallStack.push_back(loadStack(svc::qureySkillPlayerMenuRequired, _currentChara, varMap["SkillMenuCurPos"].get<unsigned int>()))
+        ctlCallStack.push_back(loadStack(svc::moveVar, "fTarget", "ret"));
+        processPending = process::PrePlayerSkill;
+    }else if(processPending == process::PrePlayerSkill){
+        if(varMap["eTarget"].get<int> == 1){
+            processPending = process::skillMonsterMenu;
+        }else{
+           processPending = process::PrePlayerSkill2;
+        }
+    }else if(processPending == process::skillMonsterMenu){
+        switch (c) {
+            case KEY_LEFT:
+                MonsterMenuCurrentPos = (MonsterMenuCurrentPos==0)? _monsters.size() - 1 : MonsterMenuCurrentPos - 1;
+                break;
+            case KEY_RIGHT:
+                MonsterMenuCurrentPos = (MonsterMenuCurrentPos == _monsters.size() - 1)? 0 : MonsterMenuCurrentPos + 1;
+                break;
+            case 'z':
+                processPending = process::PrePlayerSkill2;
+                break;
+            case 'x':
+                processPending = process::BattleMenu;
+                break;
+        }
+    }else if(processPending == process::PrePlayerSkill2){
+        if(varMap["fTarget"].get<int> == 1){
+            ctlCallStack.push_back(loadStack(svc::loadTeamMenu, 1));
+            ctlCallStack.push_back(loadStack(svc::setStat, Stats::inTeamMenu));
+        }
+        processPending = process::PlayerSkill;
     }else if(processPending == process::PlayerSkill){
-
+        ctlCallStack.push_back(loadlStack(svc::useSkill, _currentChara, varMap["SkillMenuCurPos"].get<unsigned int>(), MonsterMenuCurrentPos, varMap["TeamMenuCurPos"].get<unsigned int>()));
+        processPending = process::PostPlayer;
     }else if(processPending == process::PostPlayer){
         if(isMonsterWipeOut()){
             processPending = PostBattle;

@@ -207,6 +207,16 @@ bool Engine::processCtlCall(){
                 break;
             case svc::moveVar:
                 varMap[currCall[1].get<std::string>()].set<int>(varMap[currCall[2].get<std::string>()].get<int>());
+                ret = 1;
+                break;
+            case svc::qureySkillMonsterMenuRequired:
+                ret = team[team.getNameList()[currCall[1].get<unsigned int>()]].getSkillList()[currCall[2].get<unsigned int>()].geteTarget();
+                break;
+            case svc::qureySkillTeamMenuRequired:
+                ret = team[team.getNameList()[currCall[1].get<unsigned int>()]].getSkillList()[currCall[2].get<unsigned int>()].getfTarget();
+                break;
+            case svc::useSkill:
+                ItemExec::skillExec();
                 break;
             case svc::gameOver:
 

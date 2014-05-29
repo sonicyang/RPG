@@ -87,6 +87,8 @@ enum svc{
     varMP,              //memberIndex, Amount
     varExp,             //memberIndex, Amount
     moveVar,            //dis, src      31
+    qureySkillMonsterMenuRequired, //memberIndex, skillIndex
+    useSkill,           //memberIndex, skillIndex
     gameOver,
     endGame = 255       //
 };
