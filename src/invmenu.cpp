@@ -40,6 +40,7 @@ int InvMenu::processInput(int c){
                 break;
             case 'x':
             case 'q':
+                currentPos = 0xffffffff;
                 ctlCallStack.push_back(loadStack(svc::restoreStat));
                 break;
         }

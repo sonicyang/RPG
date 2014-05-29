@@ -50,7 +50,8 @@ class eventController
             set,
             addCharToTeam,      //Name
             removeCharFromTeam,  //Name          15,
-            battle               //Name, Name, Name, Name
+            battle,               //Name, Name, Name, Name
+            vendor               //itemNames
         };
 
 };

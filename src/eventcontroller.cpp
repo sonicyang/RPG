@@ -198,9 +198,16 @@ int eventController::execTopEvent(){
             ctlCallStack.push_back(loadStack(svc::battle, mons));
             userInputRequired = 0;
             break;
-        }
+            }
+        case eventCode::vendor:{
+            std::vector<std::string> its;
+            for(unsigned int i = 1; i < ss.size(); i++)
+                its.push_back(ss[i]);
+            ctlCallStack.push_back(loadStack(svc::setupVender, its));
+            ctlCallStack.push_back(loadStack(svc::setStat, Stats::inVender));
+            break;
+            }
     }
-
     currentEvent.pc++;
     return 1;
 }

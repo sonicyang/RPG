@@ -27,6 +27,7 @@ enum Stats{
     inMainMenu,
     inTeamMenu,
     inInvMenu,
+    inVendorInvMenu,
     inCharMenu,
     inSkillMenu,
     inBattle,

@@ -53,6 +53,7 @@ void Engine::getParseUserInput(){
             teammenu.processInput(c);
             break;
         case inInvMenu:
+        case inVendorInvMenu:
             invmenu.processInput(c);
             break;
         case inCharMenu:
@@ -144,13 +145,17 @@ bool Engine::processCtlCall(){
             case svc::setMoney:
                 inv.setMoney(currCall[1].get<int>());
                 sprintf(tmp, "You Currently Have $%d", inv.getMoney());
-                ctlCall.push_back(loadStack(svc::loadPrompt, UTF8_to_WChar(tmp), UTF8_to_WChar("System")));
                 ret = 1;
                 break;
             case svc::addMoney:
                 inv.addMoney(currCall[1].get<int>());
-                sprintf(tmp, "You gained $%d", currCall[1].get<int>());
-                ctlCall.push_back(loadStack(svc::loadPrompt, UTF8_to_WChar(tmp), UTF8_to_WChar("System")));
+
+                if(currCall[1].get<int>() > 0)
+                    sprintf(tmp, "You gained $%d", currCall[1].get<int>());
+                else if(currCall[1].get<int>() < 0)
+                    sprintf(tmp, "You lost $%d", (-1)* currCall[1].get<int>());
+                if(currCall[1].get<int>() != 0)
+                    ctlCall.push_back(loadStack(svc::loadPrompt, UTF8_to_WChar(tmp), UTF8_to_WChar("System")));
                 ret = 1;
                 break;
             case svc::addCharToTeam:
@@ -274,10 +279,12 @@ bool Engine::processCtlCall(){
                 break;
             case svc::loadVenderInvMenu:
                 invmenu.init(vendor.getVenderInv().getNumOfItems(), currCall[1].get<int>());
+                vendor.getVenderInv().setMoney(inv.getMoney());
                 ret = 1;
                 break;
             case svc::sellItem:
                 ctlCall.push_back(loadStack(svc::addMoney, inv[inv.getNameList(currCall[1].get<unsigned int>())[0]].item.getSellPrice()));
+                ctlCall.push_back(loadStack(svc::decItem, inv.getNameList(currCall[1].get<unsigned int>())[0]));
                 break;
             case svc::gameOver:
                 return -1;
@@ -309,6 +316,9 @@ void Engine::updateScreen(){
             break;
         case Stats::inInvMenu:
             rdr.render_InvMenu(inv, varMap["InvMenuCurPos"].get<unsigned int>());
+            break;
+        case Stats::inVendorInvMenu:
+            rdr.render_InvMenu(vendor.getVenderInv(), varMap["InvMenuCurPos"].get<unsigned int>());
             break;
         case Stats::inCharMenu:
             rdr.render_CharMenu(team[team.getNameList()[varMap["TeamMenuCurPos"].get<unsigned int>()]], varMap["CharMenuCurPos"].get<unsigned int>());
