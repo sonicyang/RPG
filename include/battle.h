@@ -40,6 +40,7 @@ class Battle
             PlayerSkill,
             notEnoughMana,
             PostPlayerSkill,
+            EscapeFailed,
             PostPlayer,
             PreMonsterTurn,
             MonsterTurn,
