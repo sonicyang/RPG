@@ -55,6 +55,7 @@ class Battle
 
         MonsterFactory _monsterCache;
         std::vector<Monster> _monsters;
+        std::vector<Monster> _monstersBak;
         unsigned int _memberCount = 0;
         int _chance = 0;
 

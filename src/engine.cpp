@@ -225,27 +225,30 @@ bool Engine::processCtlCall(){
                 team[team.getNameList()[currCall[1].get<unsigned int>()]].varHP(currCall[2].get<int>());
                 if(currCall[2].get<int>() > 0)
                     sprintf(tmp, "%s HP recovered by %d points", team.getNameList()[currCall[1].get<unsigned int>()].c_str(), currCall[2].get<int>());
-                else
-                    sprintf(tmp, "%s received damage by %d points", team.getNameList()[currCall[1].get<unsigned int>()].c_str(), currCall[2].get<int>());
-                ctlCall.push_back(loadStack(svc::loadPrompt, UTF8_to_WChar(tmp), UTF8_to_WChar("System")));
+                else if(currCall[2].get<int>() < 0)
+                    sprintf(tmp, "%s received damage by %d points", team.getNameList()[currCall[1].get<unsigned int>()].c_str(), (-1)* currCall[2].get<int>());
+                if(currCall[2].get<int>() != 0)
+                    ctlCall.push_back(loadStack(svc::loadPrompt, UTF8_to_WChar(tmp), UTF8_to_WChar("System")));
                 ret = 1;
                 break;
             case svc::varMP:
                 team[team.getNameList()[currCall[1].get<unsigned int>()]].varMP(currCall[2].get<int>());
                 if(currCall[2].get<int>() > 0)
                     sprintf(tmp, "%s MP increased by %d points", team.getNameList()[currCall[1].get<unsigned int>()].c_str(), currCall[2].get<int>());
-                else
-                    sprintf(tmp, "%s MP decreased by %d points", team.getNameList()[currCall[1].get<unsigned int>()].c_str(), currCall[2].get<int>());
-                ctlCall.push_back(loadStack(svc::loadPrompt, UTF8_to_WChar(tmp), UTF8_to_WChar("System")));
+                else if(currCall[2].get<int>() < 0)
+                    sprintf(tmp, "%s MP decreased by %d points", team.getNameList()[currCall[1].get<unsigned int>()].c_str(), (-1)* currCall[2].get<int>());
+                if(currCall[2].get<int>() != 0)
+                    ctlCall.push_back(loadStack(svc::loadPrompt, UTF8_to_WChar(tmp), UTF8_to_WChar("System")));
                 ret = 1;
                 break;
             case svc::varExp:
                 team[team.getNameList()[currCall[1].get<unsigned int>()]].varExp(currCall[2].get<int>());
                 if(currCall[2].get<int>() > 0)
                     sprintf(tmp, "%s experience increased by %d points", team.getNameList()[currCall[1].get<unsigned int>()].c_str(), currCall[2].get<int>());
-                else
-                    sprintf(tmp, "%s experience decreased by %d points", team.getNameList()[currCall[1].get<unsigned int>()].c_str(), currCall[2].get<int>());
-                ctlCall.push_back(loadStack(svc::loadPrompt, UTF8_to_WChar(tmp), UTF8_to_WChar("System")));
+                else if(currCall[2].get<int>() < 0)
+                    sprintf(tmp, "%s experience decreased by %d points", team.getNameList()[currCall[1].get<unsigned int>()].c_str(), (-1)* currCall[2].get<int>());
+                if(currCall[2].get<int>() != 0)
+                    ctlCall.push_back(loadStack(svc::loadPrompt, UTF8_to_WChar(tmp), UTF8_to_WChar("System")));
                 ret = 1;
                 break;
             case svc::moveVar:

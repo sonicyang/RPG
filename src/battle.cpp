@@ -27,6 +27,7 @@ int Battle::loadBattle(int memberCount, std::vector<std::string>& monsters, int 
     for(unsigned int i = 0; i < monsters.size(); i++){
         _monsters.push_back(_monsterCache[monsters[i]]);
     }
+    _monstersBak = _monsters;
     charaAttackBuff.resize(memberCount);
     charaDefenseBuff.resize(memberCount);
     processPending = 0;
@@ -118,7 +119,7 @@ int Battle::processInput(int c){
             sprintf(kk, "%s is Dead!", _monsters[MonsterMenuCurrentPos].getName().c_str());
             _monsters.erase(_monsters.begin() + MonsterMenuCurrentPos);
         }else{
-            sprintf(kk, "%s received %d point of damage!", _monsters[MonsterMenuCurrentPos].getName().c_str(), dmg);
+            sprintf(kk, "%s received %d point of damage!", _monsters[MonsterMenuCurrentPos].getName().c_str(), (-1)*dmg);
         }
         ctlCallStack.push_back(loadStack(svc::loadPrompt, UTF8_to_WChar(kk), UTF8_to_WChar("System")));
 
@@ -246,12 +247,14 @@ int Battle::processInput(int c){
             }
             usleep(1000000);
         }
-
-        ctlCallStack.push_back(loadStack(svc::loadPrompt, UTF8_to_WChar("That Hurts..."), UTF8_to_WChar("System")));
         ctlCallStack.push_back(loadStack(svc::isTeamWipeOut));
+        std::string ss("isTeamWipeOut");
+        std::string ss2("ret");
+        ctlCallStack.push_back(loadStack(svc::moveVar, ss, ss2));
+
         processPending = process::TeamWipeOutCheck;
     }else if(processPending == process::TeamWipeOutCheck){
-        if(varMap["ret"].get<int>() != 1){
+        if(varMap["isTeamWipeOut"].get<int>() != 1){
             ctlCallStack.push_back(loadStack(svc::loadPrompt, UTF8_to_WChar("It's Now your Turn"), UTF8_to_WChar("System")));
             _currentChara = 0;
             processPending = process::prePlayer;
@@ -259,12 +262,12 @@ int Battle::processInput(int c){
             ctlCallStack.push_back(loadStack(svc::gameOver));
         }
     }else if(processPending == process::PostBattle){
-        for(unsigned int i = 0; i < _monsters.size(); i++){
+        ctlCallStack.push_back(loadStack(svc::restoreStat));
+        for(unsigned int i = 0; i < _monstersBak.size(); i++){
             for(unsigned int j = 0; j < _memberCount; j++){
-                ctlCallStack.push_back(loadStack(svc::varExp, j, _monsters[i].getExp()));
+                ctlCallStack.push_back(loadStack(svc::varExp, j, _monstersBak[i].getExp()));
             }
         }
-        ctlCallStack.push_back(loadStack(svc::restoreStat));
     }else if(processPending == process::Escaped){
         ctlCallStack.push_back(loadStack(svc::restoreStat));
     }

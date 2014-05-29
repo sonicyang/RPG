@@ -116,7 +116,7 @@ int main()
         for(;;){
             gCtl.getParseUserInput();
             int g = gCtl.processCtlCall();
-            if(g == 1){
+            if(g == 0){
                 break;
             }else if(g == -1){
                 gameOverMenu();
