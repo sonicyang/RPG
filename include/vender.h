@@ -19,10 +19,14 @@ class Vender
         inventory& getVenderInv(){ return venderInv; };
 
         int getProcessStat() { return processStat; };
+        std::vector<std::string>& getOptions() { return mOptions; };
+
     protected:
     private:
         std::deque< std::vector< variant<paraVarType> > >& ctlCallStack;
         std::map< std::string, variant<paraVarType> >& varMap;
+
+        std::vector<std::string> mOptions;
 
         inventory venderInv;
         int processStat = 0;

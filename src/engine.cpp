@@ -27,7 +27,8 @@ Engine::Engine() :
     teammenu(ctlCall, varMap),
     invmenu(ctlCall, varMap),
     charmenu(ctlCall, varMap),
-    skillmenu(ctlCall, varMap)
+    skillmenu(ctlCall, varMap),
+    vendor(ctlCall, varMap)
 {
 
 }
@@ -68,6 +69,9 @@ void Engine::getParseUserInput(){
                 prom.discardMessage();
                 this->restoreStat();
             }
+            break;
+        case inVender:
+            vendor.processInput(c);
             break;
     }
 }
@@ -264,6 +268,17 @@ bool Engine::processCtlCall(){
             case svc::useSkill:
                 ret = ItemExec::skillExec(team, currCall[1].get<unsigned int>(), currCall[2].get<unsigned int>(), battle.getMonsters(), currCall[3].get<unsigned int>(), currCall[4].get<unsigned int>(), rdr);
                 break;
+            case svc::setupVender:
+                vendor.setUp(currCall[1].get<std::vector<std::string> >());
+                ret = 1;
+                break;
+            case svc::loadVenderInvMenu:
+                invmenu.init(vendor.getVenderInv().getNumOfItems(), currCall[1].get<int>());
+                ret = 1;
+                break;
+            case svc::sellItem:
+                ctlCall.push_back(loadStack(svc::addMoney, inv[inv.getNameList(currCall[1].get<unsigned int>())[0]].item.getSellPrice()));
+                break;
             case svc::gameOver:
                 return -1;
                 break;
@@ -305,6 +320,17 @@ void Engine::updateScreen(){
             rdr.render_BattleScene(battle.getMonsters(), battle.getMonsterTag());
             rdr.render_BattleTeam(team, battle.getCurrentChara());
             rdr.render_BattleMenu(battle.getMenuPos());
+            break;
+        case Stats::inVender:
+            switch(vendor.getProcessStat()){
+                case 0:
+                    rdr.render_VenderMenu(varMap["VenderTopCurPos"].get<unsigned int>(), vendor.getOptions());
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    break;
+            }
             break;
     }
 

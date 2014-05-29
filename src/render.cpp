@@ -423,6 +423,33 @@ void render::render_BattleMenu(unsigned int curPos){
     }attroff(A_BOLD);
 }
 
+void render::render_VenderMenu(int curPos, std::vector<std::string> options){
+    clear();
+
+    //Make Frame and Print Title
+    for(unsigned int i = 0; i < screen_max.m_x; i++)
+        mvaddch(0, i, '=');
+    for(unsigned int i = 1; i < screen_max.m_y; i++)mvaddch(i, 0, '|'),mvaddch(i, screen_max.m_x - 1, '|');
+    for(unsigned int i = 0; i < screen_max.m_x; i++)
+        mvaddch(screen_max.m_y - 1, i, '=');
+    for(unsigned int i = 0; i < screen_max.m_x; i++)
+        mvaddch(2, i, '=');
+    for(unsigned int i = 3; i < screen_max.m_y; i++)
+        mvaddch(i, 25, '|');
+
+    mvaddstr(1, screen_max.m_x/2 - 3, "Vendor");
+
+
+    //Print All Options
+    for(unsigned int i = 0; i < options.size(); i++)
+        mvaddstr(4 + 2*i, 2, options[i].c_str());
+
+    //Print Selected Options
+    attron(A_BOLD);
+    mvaddstr(4 + 2*curPos, 2, options[curPos].c_str());
+    attroff(A_BOLD);
+}
+
 void render::update(){
     refresh();
     return;

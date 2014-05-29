@@ -34,6 +34,8 @@ class render
         void render_BattleTeam(Team& team, unsigned int turn);
         void render_BattleMenu(unsigned int curPos);
 
+        void render_VenderMenu(int curPos, std::vector<std::string> options);
+
         void update();
     protected:
     private:

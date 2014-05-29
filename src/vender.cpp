@@ -9,7 +9,9 @@ Vender::Vender(std::deque< std::vector< variant<paraVarType> > >& a, std::map< s
     ctlCallStack(a),
     varMap(b)
 {
-    //ctor
+    mOptions.push_back("Sell");
+    mOptions.push_back("Buy");
+    mOptions.push_back("Exit");
 }
 
 Vender::~Vender()

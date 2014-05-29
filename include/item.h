@@ -16,8 +16,8 @@ class Item
         unsigned int getID() const { return _id; };
         std::string getName() const { return _name; };
         std::string getDescription() const { return _description; };
-        int getSalePrice() const { return _price * 0.7; };
-        int gerBuyPrice() const { return _price; };
+        int getSellPrice() const { return _price * 0.7; };
+        int getBuyPrice() const { return _price; };
 
         bool isComsumable() const { return _iscomsumable; };
         bool isUsable() const;
