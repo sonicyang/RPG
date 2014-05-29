@@ -1,7 +1,7 @@
 {
 	"Name" : "Burst",
 	"Description" : "Burst Attack",
-	"MPC" : 10,
+	"MPC" : 50,
 	"eTarget" : 0,
 	"eHPv" : -100,
 	"eMPv" : 0,

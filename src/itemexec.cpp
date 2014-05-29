@@ -75,6 +75,9 @@ int ItemExec::changeItem(inventory& inv, int item, Team& team, int chara, int sl
 int ItemExec::skillExec(Team& _team, int chara, int skill, std::vector<Monster>& _monsters, int monsterId, int friendlyId, render& rdr){
     std::vector<std::string> memberList = _team.getNameList();
     Skill tmp = _team[memberList[chara]].getSkillList()[skill];
+    
+    if(_team[memberList[chara]].getMP() < tmp.getMPC())
+        return 0;
 
     if(tmp.geteTarget() == 0){
         _monsters[monsterId].varHP(tmp.geteHPv());
@@ -92,7 +95,10 @@ int ItemExec::skillExec(Team& _team, int chara, int skill, std::vector<Monster>&
         for(unsigned int m = 0; m < memberList.size(); m++){
             _team[memberList[m]].varHP(tmp.getfHPv());
             _team[memberList[m]].varMP(tmp.getfMPv());
-        }    
+        }
     }
-    return 0;
+
+
+    _team[memberList[chara]].varMP((-1) * tmp.getMPC());
+    return 1;
 }

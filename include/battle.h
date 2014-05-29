@@ -38,6 +38,8 @@ class Battle
             PrePlayerSkill2,
             skillMonsterMenu,
             PlayerSkill,
+            notEnoughMana,
+            PostPlayerSkill,
             PostPlayer,
             PreMonsterTurn,
             MonsterTurn,

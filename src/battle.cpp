@@ -50,7 +50,7 @@ int Battle::processInput(int c){
             processPending = process::BattleMenu;
         }
     }else if(processPending == process::BattleMenu){
-        switch (c) {
+         switch (c) {
             case KEY_UP:
                 battleMenuCurrentPos = (battleMenuCurrentPos < 2)? battleMenuCurrentPos : battleMenuCurrentPos - 2;
                 break;
@@ -64,7 +64,7 @@ int Battle::processInput(int c){
                 battleMenuCurrentPos = ((battleMenuCurrentPos % 2) != 1)? battleMenuCurrentPos + 1: battleMenuCurrentPos;
                 break;
             case 'z':
-                switch(battleMenuCurrentPos){
+                 switch(battleMenuCurrentPos){
                     case 0://Attack
                         processPending = MonsterMenu;
                         break;
@@ -80,7 +80,7 @@ int Battle::processInput(int c){
                         break;
                     case 3:
                         int p = rand() % 100;
-                        if(p - _chance < 0){
+                         if(p - _chance < 0){
                             ctlCallStack.push_back(loadStack(svc::loadPrompt, UTF8_to_WChar("You Successfully Escaped!"), UTF8_to_WChar("System")));
                             processPending = process::Escaped;
                         }else{
@@ -159,7 +159,19 @@ int Battle::processInput(int c){
             processPending = process::BattleMenu;
         }else{
             ctlCallStack.push_back(loadStack(svc::useSkill, _currentChara, varMap["SkillMenuCurPos"].get<unsigned int>(), MonsterMenuCurrentPos, varMap["TeamMenuCurPos"].get<unsigned int>()));
+            processPending = process::PostPlayerSkill;
+        }
+    }else if(processPending == process::PostPlayerSkill){
+        if(varMap["ret"].get<int>() == 0){
+            ctlCallStack.push_back(loadStack(svc::loadPrompt, UTF8_to_WChar("Not Enough Mana!"), UTF8_to_WChar("System")));
+            processPending = process::notEnoughMana;
+        }else{
             processPending = process::PostPlayer;
+        }
+    }else if(processPending == process::notEnoughMana){
+        if(c == 'z'){
+            ctlCallStack.push_back(loadStack(svc::clearPrompt));
+            processPending = process::BattleMenu;
         }
     }else if(processPending == process::PostPlayer){
         if(isMonsterWipeOut()){
@@ -243,8 +255,10 @@ int Battle::processInput(int c){
         }
         ctlCallStack.push_back(loadStack(svc::restoreStat));
     }else if(processPending == process::Escaped){
-        ctlCallStack.push_back(loadStack(svc::clearPrompt));
-        ctlCallStack.push_back(loadStack(svc::restoreStat));
+        if(c == 'z'){
+            ctlCallStack.push_back(loadStack(svc::clearPrompt));
+            ctlCallStack.push_back(loadStack(svc::restoreStat));
+        }
     }
     return 0;
 }

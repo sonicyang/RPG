@@ -216,7 +216,7 @@ bool Engine::processCtlCall(){
                 ret = team[team.getNameList()[currCall[1].get<unsigned int>()]].getSkillList()[currCall[2].get<unsigned int>()].getfTarget();
                 break;
             case svc::useSkill:
-                ItemExec::skillExec(team, currCall[1].get<unsigned int>(), currCall[2].get<unsigned int>(), battle.getMonsters(), currCall[3].get<unsigned int>(), currCall[4].get<unsigned int>(), rdr);
+                ret = ItemExec::skillExec(team, currCall[1].get<unsigned int>(), currCall[2].get<unsigned int>(), battle.getMonsters(), currCall[3].get<unsigned int>(), currCall[4].get<unsigned int>(), rdr);
                 break;
             case svc::gameOver:
 
