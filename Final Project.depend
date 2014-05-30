@@ -730,7 +730,7 @@
 	"point.h"
 	<string>
 
-1401460529 source:c:\users\sonicyang\github\rpg\src\engine.cpp
+1401466117 source:c:\users\sonicyang\github\rpg\src\engine.cpp
 	<curses.h>
 	<cstdlib>
 	<string>
@@ -821,14 +821,16 @@
 	<string>
 	<vector>
 
-1401279821 source:c:\users\sonicyang\github\rpg\src\menu.cpp
+1401464734 source:c:\users\sonicyang\github\rpg\src\menu.cpp
 	"menu.h"
+	"engine.h"
 
-1401279820 c:\users\sonicyang\github\rpg\include\menu.h
+1401465750 c:\users\sonicyang\github\rpg\include\menu.h
 	<map>
 	<vector>
 	<deque>
 	"utils.h"
+	"genericcontorller.h"
 
 1401119754 source:c:\users\sonicyang\github\rpg\src\character.cpp
 	"character.h"
@@ -937,16 +939,16 @@
 1401125413 c:\users\sonicyang\github\rpg\include\skill.h
 	<string>
 
-1401285110 source:c:\users\sonicyang\github\rpg\src\mainmenu.cpp
+1401463124 source:c:\users\sonicyang\github\rpg\src\mainmenu.cpp
 	<curses.h>
 	"mainmenu.h"
 	"utils.h"
 	"enum.h"
 
-1401279719 c:\users\sonicyang\github\rpg\include\mainmenu.h
+1401466233 c:\users\sonicyang\github\rpg\include\mainmenu.h
 	<menu.h>
 
-1401378331 source:c:\users\sonicyang\github\rpg\src\invmenu.cpp
+1401463106 source:c:\users\sonicyang\github\rpg\src\invmenu.cpp
 	<curses.h>
 	<string>
 	"invmenu.h"
@@ -954,31 +956,31 @@
 	"enum.h"
 	"utf8.h"
 
-1401283678 c:\users\sonicyang\github\rpg\include\invmenu.h
+1401465240 c:\users\sonicyang\github\rpg\include\invmenu.h
 	<menu.h>
 
-1401339479 source:c:\users\sonicyang\github\rpg\src\teammenu.cpp
+1401465125 source:c:\users\sonicyang\github\rpg\src\teammenu.cpp
 	<curses.h>
 	"teammenu.h"
 	"utils.h"
 	"enum.h"
 
-1401281983 c:\users\sonicyang\github\rpg\include\teammenu.h
+1401465240 c:\users\sonicyang\github\rpg\include\teammenu.h
 	<menu.h>
 
-1401282272 c:\users\sonicyang\github\rpg\include\charmenu.h
+1401465240 c:\users\sonicyang\github\rpg\include\charmenu.h
 	<menu.h>
 
-1401285219 source:c:\users\sonicyang\github\rpg\src\charmenu.cpp
+1401461934 source:c:\users\sonicyang\github\rpg\src\charmenu.cpp
 	<curses.h>
 	"charmenu.h"
 	"utils.h"
 	"enum.h"
 
-1401286734 c:\users\sonicyang\github\rpg\include\skillmenu.h
+1401465240 c:\users\sonicyang\github\rpg\include\skillmenu.h
 	<menu.h>
 
-1401339479 source:c:\users\sonicyang\github\rpg\src\skillmenu.cpp
+1401464799 source:c:\users\sonicyang\github\rpg\src\skillmenu.cpp
 	<curses.h>
 	"skillmenu.h"
 	"utils.h"

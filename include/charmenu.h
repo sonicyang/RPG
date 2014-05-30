@@ -3,14 +3,14 @@
 
 #include <menu.h>
 
+class Engine;
 
 class CharMenu : public Menu
 {
     public:
-        CharMenu(std::deque< std::vector< variant<paraVarType> > >&, std::map< std::string, variant<paraVarType> >&);
+        CharMenu(Engine*, std::map< std::string, variant<paraVarType> >&);
         virtual ~CharMenu();
 
-        virtual int processInput(int);
 
         void init(int m);
     protected:

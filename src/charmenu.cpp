@@ -4,8 +4,8 @@
 #include "utils.h"
 #include "enum.h"
 
-CharMenu::CharMenu(std::deque< std::vector< variant<paraVarType> > >& a, std::map< std::string, variant<paraVarType> >& b) :
-    Menu(a, b)
+CharMenu::CharMenu(Engine* eng, std::map< std::string, variant<paraVarType> >& b) :
+    Menu(eng, b)
 {
     currentPos = 0;
     varMap["CharMenuCurPos"].set<unsigned int>(currentPos);
@@ -16,6 +16,7 @@ CharMenu::~CharMenu()
     //dtor
 }
 
+/*
 int CharMenu::processInput(int c){
     if(!processPending){
         switch (c) {
@@ -55,6 +56,7 @@ int CharMenu::processInput(int c){
 
     return 0;
 }
+*/
 
 void CharMenu::init(int m){
     currentPos = 0;

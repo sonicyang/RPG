@@ -4,8 +4,8 @@
 #include "utils.h"
 #include "enum.h"
 
-TeamMenu::TeamMenu(std::deque< std::vector< variant<paraVarType> > >& a, std::map< std::string, variant<paraVarType> >& b) :
-    Menu(a, b)
+TeamMenu::TeamMenu(Engine* eng, std::map< std::string, variant<paraVarType> >& b) :
+    Menu(eng, b)
 {
     currentPos = 0;
     varMap["TeamMenuCurPos"].set<unsigned int>(currentPos);
@@ -16,6 +16,7 @@ TeamMenu::~TeamMenu()
     //dtor
 }
 
+/*
 int TeamMenu::processInput(int c){
 
     switch (c) {
@@ -43,6 +44,7 @@ int TeamMenu::processInput(int c){
     varMap["TeamMenuCurPos"].set<unsigned int>(currentPos);
     return 0;
 }
+*/
 
 void TeamMenu::init(int val, int m){
     currentPos = 0;

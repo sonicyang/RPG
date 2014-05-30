@@ -3,14 +3,14 @@
 
 #include <menu.h>
 
+class Engine;
 
 class SkillMenu : public Menu
 {
     public:
-        SkillMenu(std::deque< std::vector< variant<paraVarType> > >&, std::map< std::string, variant<paraVarType> >&);
+        SkillMenu(Engine*, std::map< std::string, variant<paraVarType> >&);
         virtual ~SkillMenu();
 
-        virtual int processInput(int);
 
         void init(int val, int m);
     protected:

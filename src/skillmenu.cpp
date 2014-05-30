@@ -4,8 +4,8 @@
 #include "utils.h"
 #include "enum.h"
 
-SkillMenu::SkillMenu(std::deque< std::vector< variant<paraVarType> > >& a, std::map< std::string, variant<paraVarType> >& b) :
-    Menu(a, b)
+SkillMenu::SkillMenu(Engine* eng, std::map< std::string, variant<paraVarType> >& b) :
+    Menu(eng, b)
 {
     currentPos = 0;
     varMap["SkillMenuCurPos"].set<unsigned int>(currentPos);
@@ -15,6 +15,7 @@ SkillMenu::~SkillMenu()
 {
     //dtor
 }
+/*
 
 int SkillMenu::processInput(int c){
     switch (c) {
@@ -43,7 +44,7 @@ int SkillMenu::processInput(int c){
 
     return 0;
 }
-
+*/
 void SkillMenu::init(int val, int m){
     currentPos = 0;
     varMap["SkillMenuCurPos"].set<unsigned int>(currentPos);

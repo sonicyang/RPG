@@ -23,11 +23,11 @@ Engine::Engine() :
     inv(),
     team("data/team/team_list.lst"),
     battle("data/monsters/monster_list.lst", ctlCall, varMap),
-    mainmenu(ctlCall, varMap),
-    teammenu(ctlCall, varMap),
-    invmenu(ctlCall, varMap),
-    charmenu(ctlCall, varMap),
-    skillmenu(ctlCall, varMap),
+    mainmenu(this, varMap),
+    teammenu(this, varMap),
+    invmenu(this, varMap),
+    charmenu(this, varMap),
+    skillmenu(this, varMap),
     vendor(ctlCall, varMap)
 {
 
@@ -47,23 +47,23 @@ void Engine::getParseUserInput(){
             //evtCtl.processInput(c);
             break;
         case inMainMenu:
-            mainmenu.processInput(c);
+            //mainmenu.processInput(c);
             break;
         case inTeamMenu:
-            teammenu.processInput(c);
+            //teammenu.processInput(c);
             break;
         case inInvMenu:
         case inVendorInvMenu:
-            invmenu.processInput(c);
+            //invmenu.processInput(c);
             break;
         case inCharMenu:
-            charmenu.processInput(c);
+            //charmenu.processInput(c);
             break;
         case inSkillMenu:
-            skillmenu.processInput(c);
+            //skillmenu.processInput(c);
             break;
         case inBattle:
-            battle.processInput(c);
+            //battle.processInput(c);
             break;
         case inPrompt:
             if(c == 'z'){
@@ -367,7 +367,7 @@ void Engine::setStat(int s){
             controllerStack.push_back(&evtCtl);
             break;
         case inMainMenu:
-           //mainmenu.processInput(c);
+            controllerStack.push_back(&mainmenu);
             break;
         case inTeamMenu:
             //teammenu.processInput(c);

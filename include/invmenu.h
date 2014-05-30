@@ -3,14 +3,13 @@
 
 #include <menu.h>
 
+class Engine;
 
 class InvMenu : public Menu
 {
     public:
-        InvMenu(std::deque< std::vector< variant<paraVarType> > >&, std::map< std::string, variant<paraVarType> >&);
+        InvMenu(Engine*, std::map< std::string, variant<paraVarType> >&);
         virtual ~InvMenu();
-
-        virtual int processInput(int);
 
         void init(int val, int m);
     protected:

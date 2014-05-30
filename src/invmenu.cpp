@@ -6,8 +6,8 @@
 #include "enum.h"
 #include "utf8.h"
 
-InvMenu::InvMenu(std::deque< std::vector< variant<paraVarType> > >& a, std::map< std::string, variant<paraVarType> >& b) :
-    Menu(a, b)
+InvMenu::InvMenu(Engine* eng, std::map< std::string, variant<paraVarType> >& b) :
+    Menu(eng, b)
 {
     currentPos = 0;
     varMap["InvMenuCurPos"].set<unsigned int>(currentPos);   //ctor
@@ -18,6 +18,7 @@ InvMenu::~InvMenu()
     //dtor
 }
 
+/*
 int InvMenu::processInput(int c){
     if(!processPending){
         switch (c) {
@@ -70,6 +71,7 @@ int InvMenu::processInput(int c){
 
     return 0;
 }
+*/
 
 void InvMenu::init(int val, int m){
     currentPos = 0;
