@@ -35,36 +35,38 @@ class Engine
         Engine();
         ~Engine();
 
+        void excute();
+        void parseUserInput();
+        variant<paraVarType> engineCall(std::vector< variant<paraVarType> > );
+
         void getParseUserInput();
         int processCtlCall();
         void updateScreen();
 
-        variant<paraVarType> engineCall(std::vector< variant<paraVarType> > );
+
 
         int getStat() { return stat; };
     protected:
     private:
+        int stop = 0;
+
         render rdr;
 
         std::deque< std::vector< variant<paraVarType> > > ctlCall;
         std::map< std::string, variant<paraVarType> > varMap;
 
+        std::vector<genericContorller*> controllerStack;
         mapController mapCtl;
         eventController evtCtl;
         inventory inv;
-
         Team team;
-
         prompt prom;
-
         Battle battle;
-
         MainMenu mainmenu;
         TeamMenu teammenu;
         InvMenu invmenu;
         CharMenu charmenu;
         SkillMenu skillmenu;
-
         Vender vendor;
 
         void menuRutin();

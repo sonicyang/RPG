@@ -212,7 +212,7 @@
 	<cstring>
 	"chararray2d.h"
 
-1401364997 source:c:\users\sonicyang\github\rpg\main.cpp
+1401454581 source:c:\users\sonicyang\github\rpg\main.cpp
 	<iostream>
 	<curses.h>
 	<cstdlib>
@@ -283,7 +283,7 @@
 	"objPlayer.h"
 	"utils.h"
 
-1401376781 c:\users\sonicyang\github\rpg\include\render.h
+1401454486 c:\users\sonicyang\github\rpg\include\render.h
 	<curses.h>
 	"point.h"
 	"gmap.h"
@@ -395,7 +395,7 @@
 1399780742 source:c:\users\sonicyang\github\rpg\src\point.cpp
 	"point.h"
 
-1401377022 source:c:\users\sonicyang\github\rpg\src\render.cpp
+1401454502 source:c:\users\sonicyang\github\rpg\src\render.cpp
 	<curses.h>
 	"render.h"
 	"gmap.h"
@@ -430,7 +430,7 @@
 1400261745 source:c:\users\sonicyang\github\rpg\src\objplayer.cpp
 	"objplayer.h"
 
-1401445595 c:\users\sonicyang\github\rpg\include\mapcontroller.h
+1401445916 c:\users\sonicyang\github\rpg\include\mapcontroller.h
 	"gmap.h"
 	"mapObject.h"
 	"objPLayer.h"
@@ -438,7 +438,7 @@
 	"point.h"
 	"genericcontorller.h"
 
-1401279719 source:c:\users\sonicyang\github\rpg\src\mapcontroller.cpp
+1401454521 source:c:\users\sonicyang\github\rpg\src\mapcontroller.cpp
 	<cstdlib>
 	<curses.h>
 	<deque>
@@ -448,6 +448,7 @@
 	"json/value.h"
 	"engine.h"
 	"utf8.h"
+	"render.h"
 
 1401377378 c:\users\sonicyang\github\rpg\include\eventcontroller.h
 	<vector>
@@ -727,7 +728,7 @@
 	"point.h"
 	<string>
 
-1401445169 source:c:\users\sonicyang\github\rpg\src\engine.cpp
+1401454684 source:c:\users\sonicyang\github\rpg\src\engine.cpp
 	<curses.h>
 	<cstdlib>
 	<string>
@@ -746,7 +747,7 @@
 	"itemexec.h"
 	"utf8.h"
 
-1401445286 c:\users\sonicyang\github\rpg\include\engine.h
+1401453989 c:\users\sonicyang\github\rpg\include\engine.h
 	<map>
 	<string>
 	<curses.h>
@@ -992,11 +993,11 @@
 	"utils.h"
 	"menu.h"
 
-1401444534 source:c:\users\sonicyang\github\rpg\src\genericcontorller.cpp
+1401453946 source:c:\users\sonicyang\github\rpg\src\genericcontorller.cpp
 	"genericcontorller.h"
 	"engine.h"
 
-1401445537 c:\users\sonicyang\github\rpg\include\genericcontorller.h
+1401453945 c:\users\sonicyang\github\rpg\include\genericcontorller.h
 	"variant.h"
 	"utils.h"
 

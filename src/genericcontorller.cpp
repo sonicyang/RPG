@@ -2,10 +2,9 @@
 
 #include "engine.h"
 
-genericContorller::genericContorller(Engine* eng)
+genericContorller::genericContorller(Engine* eng) : engine(eng)
 {
-    engine = eng;
-    //engineCall = &Engine::engineCall;
+
 }
 
 genericContorller::~genericContorller()
@@ -34,6 +33,10 @@ int genericContorller::hKeyZ(){
 }
 
 int genericContorller::hKeyX(){
+    return 0;
+}
+
+int genericContorller::hKeyQ(){
     return 0;
 }
 

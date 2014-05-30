@@ -18,6 +18,7 @@ class genericContorller
         virtual int hKeyRight();
         virtual int hKeyZ();
         virtual int hKeyX();
+        virtual int hKeyQ();
 
         virtual int hDoEvent();
 

@@ -100,6 +100,15 @@ int gameOverMenu(){
 
 int main()
 {
+    Engine gCtl;
+    initscr();
+    cbreak();
+    noecho();
+    nodelay(stdscr, true);
+    keypad(stdscr, TRUE);
+    gCtl.excute();
+    endwin();
+    /*
     for(;;){
         setlocale(LC_ALL, "");
         Engine gCtl;
@@ -129,7 +138,7 @@ int main()
 
     }
 
-
+*/
     //system("pause");
     return 0;
 }

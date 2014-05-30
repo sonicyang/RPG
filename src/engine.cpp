@@ -77,6 +77,47 @@ void Engine::getParseUserInput(){
     }
 }
 
+void Engine::parseUserInput(){
+    int c = getch();
+    switch(c){
+        case KEY_UP:
+            controllerStack.back()->hKeyUp();
+            break;
+        case KEY_DOWN:
+            controllerStack.back()->hKeyDown();
+            break;
+        case KEY_LEFT:
+            controllerStack.back()->hKeyLeft();
+            break;
+        case KEY_RIGHT:
+            controllerStack.back()->hKeyRight();
+            break;
+        case 'z':
+            controllerStack.back()->hKeyZ();
+            break;
+        case 'x':
+            controllerStack.back()->hKeyX();
+            break;
+        case 'q':
+            controllerStack.back()->hKeyQ();
+            break;
+
+    }
+
+}
+
+void Engine::excute(){
+    controllerStack.push_back(&mapCtl);
+
+    for(;!stop;){
+        parseUserInput();
+        controllerStack.back()->hDoEvent();
+        controllerStack.back()->hRender();
+    }
+
+
+}
+
 variant<paraVarType> Engine::engineCall(std::vector< variant<paraVarType> > params){
     char tmp[100];
 
@@ -256,9 +297,11 @@ variant<paraVarType> Engine::engineCall(std::vector< variant<paraVarType> > para
             ctlCall.push_back(loadStack(svc::decItem, inv.getNameList(params[1].get<unsigned int>())[0]));
             break;
         case svc::gameOver:
+            stop = 1;
             ret.set<int>(-1);
             break;
         case svc::endGame:
+            stop = 1;
             ret.set<int>(0);
             break;
     }
@@ -494,8 +537,8 @@ void Engine::updateScreen(){
     switch(stat){
         case Stats::onMap:
         case Stats::inEvent:
-            rdr.render_map(mapCtl.getCurrentMap());
-            rdr.render_Player(mapCtl.getPlayer());
+            //rdr.render_map(mapCtl.getCurrentMap());
+            //rdr.render_Player(mapCtl.getPlayer());
             break;
         case Stats::inMainMenu:
             rdr.render_MainMenu(varMap["MainMenuCurPos"].get<unsigned int>(), mainmenu.getOptions());

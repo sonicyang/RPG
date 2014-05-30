@@ -7,6 +7,7 @@
 #include "json/value.h"
 #include "engine.h"
 #include "utf8.h"
+#include "render.h"
 
 using namespace std;
 
@@ -44,33 +45,59 @@ void mapController::setCurrentMap(std::string a){
         currentMap = a;
 }
 
-int mapController::processInput(int c){
-    switch (c) {
-        case KEY_LEFT:
-            movePlayer(Point(-1,0));
-            break;
-        case KEY_RIGHT:
-            movePlayer(Point(1,0));
-            break;
-        case KEY_UP:
-            movePlayer(Point(0,-1));
-            break;
-        case KEY_DOWN:
-            movePlayer(Point(0,1));
-            break;
-        case 'z':
-            if(isPlayerFacingObject()){
-                if(getPlayerFacingObject().getTriggerType() == buttonTrig){
-                    engine->engineCall(loadStack(svc::setStat, Stats::inEvent));
-                    engine->engineCall(loadStack(svc::loadEvent, getPlayerFacingObject().getTrigger()));
-                }
-            }
-            break;
-        case 'q':
-            engine->engineCall(loadStack(svc::loadMainMenu));
-        	engine->engineCall(loadStack(svc::setStat, Stats::inMainMenu));
-            break;
+
+int mapController::hKeyUp(){
+    movePlayer(Point(0,-1));
+    return 0;
+}
+
+int mapController::hKeyDown(){
+    movePlayer(Point(0,1));
+    return 0;
+}
+
+int mapController::hKeyLeft(){
+    movePlayer(Point(-1,0));
+    return 0;
+}
+
+int mapController::hKeyRight(){
+    movePlayer(Point(1,0));
+    return 0;
+}
+
+int mapController::hKeyZ(){
+    if(isPlayerFacingObject()){
+        if(getPlayerFacingObject().getTriggerType() == buttonTrig){
+            engine->engineCall(loadStack(svc::setStat, Stats::inEvent));
+            engine->engineCall(loadStack(svc::loadEvent, getPlayerFacingObject().getTrigger()));
+        }
     }
+    return 0;
+}
+
+int mapController::hKeyX(){
+    return 0;
+}
+
+int mapController::hKeyQ(){
+    engine->engineCall(loadStack(svc::loadMainMenu));
+    engine->engineCall(loadStack(svc::setStat, Stats::inMainMenu));
+    return 0;
+}
+
+int mapController::hDoEvent(){
+    return 0;
+}
+
+int mapController::hRender(){
+    render::render_map(map_list[currentMap], player);
+    return 0;
+}
+
+
+int mapController::processInput(int c){
+
     return 0;
 }
 

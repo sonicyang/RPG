@@ -17,6 +17,18 @@ class mapController : public genericContorller
         mapController(std::string maplist, Engine* eng);
         ~mapController();
 
+        int hKeyUp();
+        int hKeyDown();
+        int hKeyLeft();
+        int hKeyRight();
+        int hKeyZ();
+        int hKeyX();
+        int hKeyQ();
+
+        int hDoEvent();
+
+        int hRender();
+
         int processInput(int c);
 
         const gmap& getCurrentMap();
