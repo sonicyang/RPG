@@ -11,6 +11,15 @@ class CharMenu : public Menu
         CharMenu(Engine*, std::map< std::string, variant<paraVarType> >&);
         virtual ~CharMenu();
 
+        int hKeyUp();
+        int hKeyDown();
+        int hKeyZ();
+        int hKeyX();
+        int hKeyQ();
+
+        int hDoEvent();
+
+        int hRender();
 
         void init(int m);
     protected:
