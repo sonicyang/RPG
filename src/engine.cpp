@@ -37,6 +37,7 @@ Engine::~Engine()
 {
 }
 
+/*
 void Engine::getParseUserInput(){
     int c = getch();
     switch(stat){
@@ -76,30 +77,31 @@ void Engine::getParseUserInput(){
             break;
     }
 }
+*/
 
-void Engine::parseUserInput(){
+void Engine::parseUserInput(genericContorller& controller){
     int c = getch();
     switch(c){
         case KEY_UP:
-            controllerStack.back()->hKeyUp();
+            controller.hKeyUp();
             break;
         case KEY_DOWN:
-            controllerStack.back()->hKeyDown();
+            controller.hKeyDown();
             break;
         case KEY_LEFT:
-            controllerStack.back()->hKeyLeft();
+            controller.hKeyLeft();
             break;
         case KEY_RIGHT:
-            controllerStack.back()->hKeyRight();
+            controller.hKeyRight();
             break;
         case 'z':
-            controllerStack.back()->hKeyZ();
+            controller.hKeyZ();
             break;
         case 'x':
-            controllerStack.back()->hKeyX();
+            controller.hKeyX();
             break;
         case 'q':
-            controllerStack.back()->hKeyQ();
+            controller.hKeyQ();
             break;
 
     }
@@ -107,15 +109,21 @@ void Engine::parseUserInput(){
 }
 
 void Engine::excute(){
-    controllerStack.push_back(&mapCtl);
-
     for(;!stop;){
-        parseUserInput();
-        controllerStack.back()->hDoEvent();
-        controllerStack.back()->hRender();
+        parseUserInput(mapCtl);
+        mapCtl.hDoEvent();
+        mapCtl.hRender();
     }
+}
 
-
+void Engine::excute(genericContorller& controller){
+    for(;!stop;){
+        parseUserInput(controller);
+        controller.hDoEvent();
+        controller.hRender();
+    }
+    if(stop == 1) //Nested stop signal
+        stop = 0;
 }
 
 variant<paraVarType> Engine::engineCall(std::vector< variant<paraVarType> > params){
@@ -134,7 +142,7 @@ variant<paraVarType> Engine::engineCall(std::vector< variant<paraVarType> > para
             break;
         case svc::restoreStat:
             prom.discardMessage();
-            this->restoreStat();
+            stop = 0;
             break;
         case svc::setStat:
             this->setStat(params[1].get<Stats>());
@@ -296,17 +304,18 @@ variant<paraVarType> Engine::engineCall(std::vector< variant<paraVarType> > para
             ctlCall.push_back(loadStack(svc::decItem, inv.getNameList(params[1].get<unsigned int>())[0]));
             break;
         case svc::gameOver:
-            stop = 1;
+            stop = -1;
             ret.set<int>(-1);
             break;
         case svc::endGame:
-            stop = 1;
+            stop = -1;
             ret.set<int>(0);
             break;
     }
     return ret;
 }
 
+/*
 void Engine::updateScreen(){
     switch(stat){
         case Stats::onMap:
@@ -357,27 +366,28 @@ void Engine::updateScreen(){
     rdr.update();
     return;
 }
+*/
 
 void Engine::setStat(int s){
     switch(s){
         case onMap:
-            controllerStack.push_back(&mapCtl);
+            excute(mapCtl);
             break;
         case inEvent:
-            controllerStack.push_back(&evtCtl);
+            excute(evtCtl);
             break;
         case inMainMenu:
-            controllerStack.push_back(&mainmenu);
+            excute(mainmenu);
             break;
         case inTeamMenu:
-            controllerStack.push_back(&teammenu);
+            excute(teammenu);
             break;
         case inInvMenu:
         case inVendorInvMenu:
             //invmenu.processInput(c);
             break;
         case inCharMenu:
-            controllerStack.push_back(&charmenu);
+            excute(charmenu);
             break;
         case inSkillMenu:
             //skillmenu.processInput(c);
@@ -398,10 +408,4 @@ void Engine::setStat(int s){
     return;
 }
 
-void Engine::restoreStat(){
-    if(controllerStack.size() > 0){
-        controllerStack.pop_back();
-    }
-    return;
-}
 

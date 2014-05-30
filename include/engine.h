@@ -36,16 +36,13 @@ class Engine
         ~Engine();
 
         void excute();
-        void parseUserInput();
+        void excute(genericContorller&);
+        void parseUserInput(genericContorller&);
         variant<paraVarType> engineCall(std::vector< variant<paraVarType> > );
 
         void getParseUserInput();
         int processCtlCall();
         void updateScreen();
-
-
-
-        int getStat() { return stat; };
     protected:
     private:
         int stop = 0;
@@ -75,9 +72,6 @@ class Engine
         int charMenuRoutin(const int val = 0, std::string cname = "");
 
         void setStat(int s);
-        void restoreStat();
-        int stat = 1;
-        vector<int> _stat;
 };
 
 #endif // CONTROLLER_H
