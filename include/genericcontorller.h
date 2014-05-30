@@ -1,0 +1,29 @@
+#ifndef GENERICCONTORLLER_H
+#define GENERICCONTORLLER_H
+
+#include "engine.h"
+#include "variant.h"
+#include "utils.h"
+
+class genericContorller
+{
+    public:
+        genericContorller(Engine*);
+        virtual ~genericContorller();
+
+        virtual int hKeyUp();
+        virtual int hKeyDown();
+        virtual int hKeyLeft();
+        virtual int hKeyRight();
+        virtual int hKeyZ();
+        virtual int hKeyX();
+
+        virtual int hDoEvent();
+
+        virtual int hRender();
+    protected:
+        Engine* engine;
+    private:
+};
+
+#endif // GENERICCONTORLLER_H

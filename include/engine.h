@@ -34,8 +34,10 @@ class Engine
         ~Engine();
 
         void getParseUserInput();
-        bool processCtlCall();
+        int processCtlCall();
         void updateScreen();
+
+        variant<paraVarType> engineCall();
 
         int getStat() { return stat; };
     protected:

@@ -77,7 +77,13 @@ void Engine::getParseUserInput(){
     }
 }
 
-bool Engine::processCtlCall(){
+variant<paraVarType> Engine::engineCall(){
+
+    //return 0;
+}
+
+
+int Engine::processCtlCall(){
     char tmp[100];
 
     while(ctlCall.size() > 0){
