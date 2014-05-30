@@ -142,7 +142,7 @@ variant<paraVarType> Engine::engineCall(std::vector< variant<paraVarType> > para
             break;
         case svc::restoreStat:
             prom.discardMessage();
-            stop = 0;
+            stop = 1;
             break;
         case svc::setStat:
             this->setStat(params[1].get<Stats>());
@@ -213,7 +213,7 @@ variant<paraVarType> Engine::engineCall(std::vector< variant<paraVarType> > para
             teammenu.init(&team, params[1].get<int>());
             break;
         case svc::loadInvMenu:
-            invmenu.init(inv.getNumOfItems(), params[1].get<int>());
+            invmenu.init(params[1].get<int>(), &inv);
             break;
         case svc::loadCharMenu:
             charmenu.init(params[1].get<int>(), &team[team.getNameList()[params[2].get<unsigned int>()]]);
@@ -296,7 +296,7 @@ variant<paraVarType> Engine::engineCall(std::vector< variant<paraVarType> > para
             vendor.setUp(params[1].get<std::vector<std::string> >());
             break;
         case svc::loadVenderInvMenu:
-            invmenu.init(vendor.getVenderInv().getNumOfItems(), params[1].get<int>());
+            invmenu.init(params[1].get<int>(), &(vendor.getVenderInv()));
             vendor.getVenderInv().setMoney(inv.getMoney());
             break;
         case svc::sellItem:
@@ -384,7 +384,7 @@ void Engine::setStat(int s){
             break;
         case inInvMenu:
         case inVendorInvMenu:
-            //invmenu.processInput(c);
+            excute(invmenu);
             break;
         case inCharMenu:
             excute(charmenu);

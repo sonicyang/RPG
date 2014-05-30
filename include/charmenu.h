@@ -27,7 +27,6 @@ class CharMenu : public Menu
     private:
         unsigned int currentPos;
         unsigned int mode;
-        bool processPending = 0;
         Character* currChara;
 };
 

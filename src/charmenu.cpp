@@ -35,7 +35,8 @@ int CharMenu::hKeyZ(){
             engine->engineCall(loadStack(svc::invEnableNull));
             engine->engineCall(loadStack(svc::loadInvMenu, 1));
             engine->engineCall(loadStack(svc::setStat, Stats::inInvMenu));
-            processPending = 1;
+            engine->engineCall(loadStack(svc::changeEquip, varMap["InvMenuCurPos"].get<unsigned int>(), varMap["TeamMenuCurPos"].get<unsigned int>(), currentPos));
+            engine->engineCall(loadStack(svc::invDisableNull));
         }else{
             engine->engineCall(loadStack(svc::loadSkillMenu, 1));
             engine->engineCall(loadStack(svc::setStat, Stats::inSkillMenu));
@@ -59,11 +60,6 @@ int CharMenu::hKeyQ(){
 }
 
 int CharMenu::hDoEvent(){
-    if(processPending){
-        engine->engineCall(loadStack(svc::changeEquip, varMap["InvMenuCurPos"].get<unsigned int>(), varMap["TeamMenuCurPos"].get<unsigned int>(), currentPos));
-        engine->engineCall(loadStack(svc::invDisableNull));
-        processPending = 0;
-    }
     return 0;
 }
 
@@ -76,6 +72,5 @@ void CharMenu::init(int m, Character* chara){
     currentPos = 0;
     varMap["CharMenuCurPos"].set<unsigned int>(currentPos);
     mode = m;
-    processPending = 0;
     currChara = chara;
 }
