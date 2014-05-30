@@ -29,8 +29,6 @@ class mapController : public genericContorller
 
         int hRender();
 
-        int processInput(int c);
-
         const gmap& getCurrentMap();
         void setCurrentMap(std::string);
 

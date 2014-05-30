@@ -45,7 +45,6 @@ void mapController::setCurrentMap(std::string a){
         currentMap = a;
 }
 
-
 int mapController::hKeyUp(){
     movePlayer(Point(0,-1));
     return 0;
@@ -92,12 +91,6 @@ int mapController::hDoEvent(){
 
 int mapController::hRender(){
     render::render_map(map_list[currentMap], player);
-    return 0;
-}
-
-
-int mapController::processInput(int c){
-
     return 0;
 }
 

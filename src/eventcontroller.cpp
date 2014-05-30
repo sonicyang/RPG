@@ -7,11 +7,12 @@
 #include "json/reader.h"
 #include "json/value.h"
 #include "utf8.h"
+#include "engine.h"
 
 using namespace std;
 
-eventController::eventController(std::string eventlist, std::deque< std::vector< variant<paraVarType> > >& s, std::map< std::string, variant<paraVarType> >& m) :
-    ctlCallStack(s),
+eventController::eventController(std::string eventlist, Engine* eng, std::map< std::string, variant<paraVarType> >& m) :
+    genericContorller(eng),
     varMap(m),
     userInputRequired(0)
 {
@@ -58,36 +59,9 @@ eventController::~eventController()
     //dtor
 }
 
-int eventController::processInput(int c){
-    if(userInputRequired){ // Decpreted
-        switch (c) {
-            case KEY_LEFT:
-
-                break;
-            case KEY_RIGHT:
-
-                break;
-            case KEY_UP:
-
-                break;
-            case KEY_DOWN:
-
-                break;
-            case 'z':
-                execTopEvent();
-                break;
-            case 'x':
-                ctlCallStack.push_back(loadStack(svc::popEvent));
-                ctlCallStack.push_back(loadStack(svc::restoreStat));
-                break;
-            case KEY_END:
-                ctlCallStack.push_back(loadStack(svc::endGame));
-                break;
-        }
-    }else{
-        execTopEvent();
-    }
-    return 1;
+int eventController::hDoEvent(){
+    execTopEvent();
+    return 0;
 }
 
 void eventController::popEventStack(){
@@ -101,8 +75,8 @@ int eventController::execTopEvent(){
     struct event& currentEvent = eventStack.back();
 
     if(currentEvent.stk.size() == 0){
-        ctlCallStack.push_back(loadStack(svc::popEvent));
-        ctlCallStack.push_back(loadStack(svc::restoreStat));
+        engine->engineCall(loadStack(svc::popEvent));
+        engine->engineCall(loadStack(svc::restoreStat));
         return -1;
     }
 
@@ -115,33 +89,28 @@ int eventController::execTopEvent(){
             currBattle.exec();
             return 0;*/
         case eventCode::showPrompt:
-            ctlCallStack.push_back(loadStack(svc::loadPrompt, UTF8_to_WChar(ss[2].c_str()), UTF8_to_WChar(ss[1].c_str())));
+            engine->engineCall(loadStack(svc::loadPrompt, UTF8_to_WChar(ss[2].c_str()), UTF8_to_WChar(ss[1].c_str())));
             userInputRequired = 0;
             break;
         case eventCode::endEvent:
-            ctlCallStack.push_back(loadStack(svc::clearPrompt));
-            ctlCallStack.push_back(loadStack(svc::popEvent));
-            ctlCallStack.push_back(loadStack(svc::restoreStat));
+            engine->engineCall(loadStack(svc::clearPrompt));
+            engine->engineCall(loadStack(svc::popEvent));
+            engine->engineCall(loadStack(svc::restoreStat));
             break;
         case eventCode::transferMap:
-            ctlCallStack.push_back(loadStack(svc::changeMap, ss[1], atoi(ss[2].c_str()), atoi(ss[3].c_str())));
-            userInputRequired = 0;
+            engine->engineCall(loadStack(svc::changeMap, ss[1], atoi(ss[2].c_str()), atoi(ss[3].c_str())));
             break;
         case eventCode::addItem:
-            ctlCallStack.push_back(loadStack(svc::addItem, ss[1], atoi(ss[2].c_str())));
-            userInputRequired = 0;
+            engine->engineCall(loadStack(svc::addItem, ss[1], atoi(ss[2].c_str())));
             break;
         case eventCode::removeItem:
-            ctlCallStack.push_back(loadStack(svc::removeItem, ss[1], atoi(ss[2].c_str())));
-            userInputRequired = 0;
+            engine->engineCall(loadStack(svc::removeItem, ss[1], atoi(ss[2].c_str())));
             break;
         case eventCode::setMoney:
-            ctlCallStack.push_back(loadStack(svc::setMoney, atoi(ss[1].c_str())));
-            userInputRequired = 0;
+            engine->engineCall(loadStack(svc::setMoney, atoi(ss[1].c_str())));
             break;
         case eventCode::addMoney:
-            ctlCallStack.push_back(loadStack(svc::addMoney, atoi(ss[1].c_str())));
-            userInputRequired = 0;
+            engine->engineCall(loadStack(svc::addMoney, atoi(ss[1].c_str())));
             break;
         case eventCode::jner:
             if(varMap[ss[1]].get<int>() != atoi(ss[2].c_str())){
@@ -149,7 +118,6 @@ int eventController::execTopEvent(){
                 if(eventStack.back().pc >= currentEvent.stk.size())
                     throw(64);
             }
-            userInputRequired = 0;
             break;
         case eventCode::jer:
             if(varMap[ss[1]].get<int>() == atoi(ss[2].c_str())){
@@ -157,7 +125,6 @@ int eventController::execTopEvent(){
                 if(currentEvent.pc >= currentEvent.stk.size())
                     throw(64);
             }
-            userInputRequired = 0;
             break;
         case eventCode::jne:
             if(varMap[ss[1]].get<int>() != atoi(ss[2].c_str())){
@@ -165,7 +132,6 @@ int eventController::execTopEvent(){
                 if(eventStack.back().pc >= currentEvent.stk.size())
                     throw(64);
             }
-            userInputRequired = 0;
             break;
         case eventCode::je:
             if(varMap[ss[1]].get<int>() == atoi(ss[2].c_str())){
@@ -173,38 +139,32 @@ int eventController::execTopEvent(){
                 if(currentEvent.pc >= currentEvent.stk.size())
                     throw(64);
             }
-            userInputRequired = 0;
             break;
         case eventCode::mov:
             varMap[ss[1]].set<int>(varMap[ss[2]].get<int>());
-            userInputRequired = 0;
             break;
         case eventCode::set:
             varMap[ss[1]].set<int>(atoi(ss[2].c_str()));
-            userInputRequired = 0;
             break;
         case eventCode::addCharToTeam:
-            ctlCallStack.push_back(loadStack(svc::addCharToTeam, ss[1]));
-            userInputRequired = 0;
+            engine->engineCall(loadStack(svc::addCharToTeam, ss[1]));
             break;
         case eventCode::removeCharFromTeam:
-            ctlCallStack.push_back(loadStack(svc::removeCharFromTeam, ss[1]));
-            userInputRequired = 0;
+            engine->engineCall(loadStack(svc::removeCharFromTeam, ss[1]));
             break;
         case eventCode::battle:{
             std::vector<std::string> mons;
             for(unsigned int i = 1; i < ss.size(); i++)
                 mons.push_back(ss[i]);
-            ctlCallStack.push_back(loadStack(svc::battle, mons));
-            userInputRequired = 0;
+            engine->engineCall(loadStack(svc::battle, mons));
             break;
             }
         case eventCode::vendor:{
             std::vector<std::string> its;
             for(unsigned int i = 1; i < ss.size(); i++)
                 its.push_back(ss[i]);
-            ctlCallStack.push_back(loadStack(svc::setupVender, its));
-            ctlCallStack.push_back(loadStack(svc::setStat, Stats::inVender));
+            engine->engineCall(loadStack(svc::setupVender, its));
+            engine->engineCall(loadStack(svc::setStat, Stats::inVender));
             break;
             }
     }
@@ -215,6 +175,5 @@ int eventController::execTopEvent(){
 int eventController::pushEvent(std::string name){
 	eventStack.push_back(event_list[name]);
 	eventStack.back().pc = 0;
-	userInputRequired = 0;
 	return 0;
 }
