@@ -3,12 +3,14 @@
 #include "charmenu.h"
 #include "utils.h"
 #include "enum.h"
+#include "engine.h"
 
 CharMenu::CharMenu(Engine* eng, std::map< std::string, variant<paraVarType> >& b) :
     Menu(eng, b)
 {
     currentPos = 0;
     varMap["CharMenuCurPos"].set<unsigned int>(currentPos);
+    currChara = NULL;
 }
 
 CharMenu::~CharMenu()
@@ -16,17 +18,17 @@ CharMenu::~CharMenu()
     //dtor
 }
 
-int MainMenu::hKeyUp(){
+int CharMenu::hKeyUp(){
     currentPos = (currentPos==0)? 5 : currentPos - 1;
     return 0;
 }
 
-int MainMenu::hKeyDown(){
+int CharMenu::hKeyDown(){
     currentPos = (currentPos == 5)? 0 : currentPos + 1;
     return 0;
 }
 
-int MainMenu::hKeyZ(){
+int CharMenu::hKeyZ(){
     varMap["CharMenuCurPos"].set<unsigned int>(currentPos);
     if(mode == 0){
         if(currentPos < 5){
@@ -44,13 +46,13 @@ int MainMenu::hKeyZ(){
     return 0;
 }
 
-int MainMenu::hKeyX(){
+int CharMenu::hKeyX(){
     varMap["CharMenuCurPos"].set<unsigned int>(0xffffffff);
     engine->engineCall(loadStack(svc::restoreStat));
     return 0;
 }
 
-int MainMenu::hKeyQ(){
+int CharMenu::hKeyQ(){
     varMap["CharMenuCurPos"].set<unsigned int>(0xffffffff);
     engine->engineCall(loadStack(svc::restoreStat));
     return 0;
@@ -65,14 +67,15 @@ int CharMenu::hDoEvent(){
     return 0;
 }
 
-int MainMenu::hRender(){
-    render::render_MainMenu(currentPos, mOption);
+int CharMenu::hRender(){
+    render::render_CharMenu((*currChara), currentPos);
     return 0;
 }
 
-void CharMenu::init(int m){
+void CharMenu::init(int m, Character* chara){
     currentPos = 0;
     varMap["CharMenuCurPos"].set<unsigned int>(currentPos);
     mode = m;
     processPending = 0;
+    currChara = chara;
 }

@@ -202,13 +202,13 @@ variant<paraVarType> Engine::engineCall(std::vector< variant<paraVarType> > para
             mainmenu.init();
             break;
         case svc::loadTeamMenu:
-            teammenu.init(team.getNameList().size(), params[1].get<int>());
+            teammenu.init(&team, params[1].get<int>());
             break;
         case svc::loadInvMenu:
             invmenu.init(inv.getNumOfItems(), params[1].get<int>());
             break;
         case svc::loadCharMenu:
-            charmenu.init(params[1].get<int>());
+            charmenu.init(params[1].get<int>(), &team[team.getNameList()[params[2].get<unsigned int>()]]);
             break;
         case svc::loadSkillMenu:
             skillmenu.init(team[team.getNameList()[varMap["TeamMenuCurPos"].get<unsigned int>()]].getSkillList().size(), params[1].get<int>());
@@ -370,14 +370,14 @@ void Engine::setStat(int s){
             controllerStack.push_back(&mainmenu);
             break;
         case inTeamMenu:
-            //teammenu.processInput(c);
+            controllerStack.push_back(&teammenu);
             break;
         case inInvMenu:
         case inVendorInvMenu:
             //invmenu.processInput(c);
             break;
         case inCharMenu:
-            //charmenu.processInput(c);
+            controllerStack.push_back(&charmenu);
             break;
         case inSkillMenu:
             //skillmenu.processInput(c);

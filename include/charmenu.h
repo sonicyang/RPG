@@ -1,7 +1,8 @@
 #ifndef CHARMENU_H
 #define CHARMENU_H
 
-#include <menu.h>
+#include "menu.h"
+#include "character.h"
 
 class Engine;
 
@@ -21,12 +22,13 @@ class CharMenu : public Menu
 
         int hRender();
 
-        void init(int m);
+        void init(int m, Character*);
     protected:
     private:
         unsigned int currentPos;
         unsigned int mode;
         bool processPending = 0;
+        Character* currChara;
 };
 
 #endif // CHARMENU_H
