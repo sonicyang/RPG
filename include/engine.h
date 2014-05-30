@@ -27,6 +27,8 @@
 
 using namespace std;
 
+class mapController;
+
 class Engine
 {
     public:
@@ -37,7 +39,7 @@ class Engine
         int processCtlCall();
         void updateScreen();
 
-        variant<paraVarType> engineCall();
+        variant<paraVarType> engineCall(std::vector< variant<paraVarType> > );
 
         int getStat() { return stat; };
     protected:

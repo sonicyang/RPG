@@ -10,7 +10,7 @@
 
 using namespace std;
 
-mapController::mapController(std::string maplist, std::deque< std::vector< variant<paraVarType> > >& s) : ctlCallStack(s)
+mapController::mapController(std::string maplist, Engine* eng) : genericContorller(eng)
 {
     std::string in = get_file_contents(maplist.c_str());
 
@@ -61,17 +61,14 @@ int mapController::processInput(int c){
         case 'z':
             if(isPlayerFacingObject()){
                 if(getPlayerFacingObject().getTriggerType() == buttonTrig){
-                    ctlCallStack.push_back(loadStack(svc::setStat, Stats::inEvent));
-                    ctlCallStack.push_back(loadStack(svc::loadEvent, getPlayerFacingObject().getTrigger()));
+                    engine->engineCall(loadStack(svc::setStat, Stats::inEvent));
+                    engine->engineCall(loadStack(svc::loadEvent, getPlayerFacingObject().getTrigger()));
                 }
             }
             break;
-        case KEY_END:
-            ctlCallStack.push_back(loadStack(svc::endGame));
-            break;
         case 'q':
-            ctlCallStack.push_back(loadStack(svc::loadMainMenu));
-        	ctlCallStack.push_back(loadStack(svc::setStat, Stats::inMainMenu));
+            engine->engineCall(loadStack(svc::loadMainMenu));
+        	engine->engineCall(loadStack(svc::setStat, Stats::inMainMenu));
             break;
     }
     return 0;
@@ -90,8 +87,8 @@ int mapController::setPlayerPosition(Point a){
 
     if(isPlayerOnObject()){
         if(getPlayerOnObject().getTriggerType() == stepOnTrig){
-            ctlCallStack.push_back(loadStack(svc::setStat, Stats::inEvent));
-            ctlCallStack.push_back(loadStack(svc::loadEvent, getPlayerOnObject().getTrigger()));
+            engine->engineCall(loadStack(svc::loadEvent, getPlayerOnObject().getTrigger()));
+            engine->engineCall(loadStack(svc::setStat, Stats::inEvent));
         }
     }
 

@@ -430,12 +430,13 @@
 1400261745 source:c:\users\sonicyang\github\rpg\src\objplayer.cpp
 	"objplayer.h"
 
-1400653977 c:\users\sonicyang\github\rpg\include\mapcontroller.h
+1401445595 c:\users\sonicyang\github\rpg\include\mapcontroller.h
 	"gmap.h"
 	"mapObject.h"
 	"objPLayer.h"
 	"variant.h"
 	"point.h"
+	"genericcontorller.h"
 
 1401279719 source:c:\users\sonicyang\github\rpg\src\mapcontroller.cpp
 	<cstdlib>
@@ -726,7 +727,7 @@
 	"point.h"
 	<string>
 
-1401443552 source:c:\users\sonicyang\github\rpg\src\engine.cpp
+1401445169 source:c:\users\sonicyang\github\rpg\src\engine.cpp
 	<curses.h>
 	<cstdlib>
 	<string>
@@ -745,7 +746,7 @@
 	"itemexec.h"
 	"utf8.h"
 
-1401444002 c:\users\sonicyang\github\rpg\include\engine.h
+1401445286 c:\users\sonicyang\github\rpg\include\engine.h
 	<map>
 	<string>
 	<curses.h>
@@ -991,12 +992,11 @@
 	"utils.h"
 	"menu.h"
 
-1401443913 source:c:\users\sonicyang\github\rpg\src\genericcontorller.cpp
+1401444534 source:c:\users\sonicyang\github\rpg\src\genericcontorller.cpp
 	"genericcontorller.h"
 	"engine.h"
 
-1401443558 c:\users\sonicyang\github\rpg\include\genericcontorller.h
-	"engine.h"
+1401445537 c:\users\sonicyang\github\rpg\include\genericcontorller.h
 	"variant.h"
 	"utils.h"
 

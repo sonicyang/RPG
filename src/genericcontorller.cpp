@@ -5,7 +5,6 @@
 genericContorller::genericContorller(Engine* eng)
 {
     engine = eng;
-    engine->engineCall();
     //engineCall = &Engine::engineCall;
 }
 

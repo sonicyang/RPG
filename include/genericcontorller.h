@@ -1,14 +1,15 @@
 #ifndef GENERICCONTORLLER_H
 #define GENERICCONTORLLER_H
 
-#include "engine.h"
 #include "variant.h"
 #include "utils.h"
+
+class Engine;
 
 class genericContorller
 {
     public:
-        genericContorller(Engine*);
+        genericContorller(Engine *);
         virtual ~genericContorller();
 
         virtual int hKeyUp();
