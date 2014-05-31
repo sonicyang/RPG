@@ -20,7 +20,7 @@ class render
 
         static void render_map(gmap, objPlayer);
         //static void render_Player(objPlayer);
-        static void render_prompt(prompt P);
+        static void render_prompt(prompt& P);
 
         static void render_MainMenu(int curPos, std::vector<std::string> options);
         static void render_TeamMenu(Team&, unsigned int curPos);

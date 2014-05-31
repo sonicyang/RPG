@@ -169,8 +169,10 @@ variant<paraVarType> Engine::engineCall(std::vector< variant<paraVarType> > para
             break;
         case svc::removeItem:
             ret.set<int>(inv.removeItem(params[1].get<std::string>(), params[2].get<int>()));
-            sprintf(tmp, "You lost %d %s", params[2].get<int>(), params[1].get<std::string>().c_str());
-            ctlCall.push_back(loadStack(svc::loadPrompt, UTF8_to_WChar(tmp), UTF8_to_WChar("System")));
+            if(ret.get<int>() != -1){
+                sprintf(tmp, "You lost %d %s", params[2].get<int>(), params[1].get<std::string>().c_str());
+                ctlCall.push_back(loadStack(svc::loadPrompt, UTF8_to_WChar(tmp), UTF8_to_WChar("System")));
+            }
             break;
         case svc::incItem:
             inv.incItem(params[1].get<std::string>());
@@ -179,22 +181,26 @@ variant<paraVarType> Engine::engineCall(std::vector< variant<paraVarType> > para
             break;
         case svc::decItem:
             ret.set<int>(inv.decItem(params[1].get<std::string>()));
-            sprintf(tmp, "You lost a %s", params[1].get<std::string>().c_str());
-            ctlCall.push_back(loadStack(svc::loadPrompt, UTF8_to_WChar(tmp), UTF8_to_WChar("System")));
+            if(ret.get<int>() != -1){
+                sprintf(tmp, "You lost a %s", params[1].get<std::string>().c_str());
+                ctlCall.push_back(loadStack(svc::loadPrompt, UTF8_to_WChar(tmp), UTF8_to_WChar("System")));
+            }
             break;
         case svc::setMoney:
             inv.setMoney(params[1].get<int>());
             sprintf(tmp, "You Currently Have $%d", inv.getMoney());
             break;
         case svc::addMoney:
-            inv.addMoney(params[1].get<int>());
-
-            if(params[1].get<int>() > 0)
-                sprintf(tmp, "You gained $%d", params[1].get<int>());
-            else if(params[1].get<int>() < 0)
-                sprintf(tmp, "You lost $%d", (-1)* params[1].get<int>());
-            if(params[1].get<int>() != 0)
-                ctlCall.push_back(loadStack(svc::loadPrompt, UTF8_to_WChar(tmp), UTF8_to_WChar("System")));
+            ret.set<int>(inv.addMoney(params[1].get<int>()));
+            
+            if(ret.get<int>() != -1){
+                if(params[1].get<int>() > 0)
+                    sprintf(tmp, "You gained $%d", params[1].get<int>());
+                else if(params[1].get<int>() < 0)
+                    sprintf(tmp, "You lost $%d", (-1)* params[1].get<int>());
+                if(params[1].get<int>() != 0)
+                    ctlCall.push_back(loadStack(svc::loadPrompt, UTF8_to_WChar(tmp), UTF8_to_WChar("System")));
+            }
             break;
         case svc::addCharToTeam:
             team.addCharToTeam(params[1].get<std::string>());
@@ -316,6 +322,8 @@ variant<paraVarType> Engine::engineCall(std::vector< variant<paraVarType> > para
             ret.set<int>(0);
             break;
     }
+
+    varMap["ret"] = ret;
     return ret;
 }
 

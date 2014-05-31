@@ -29,8 +29,8 @@ int prompt::hRender(){
 
 void prompt::discardMessage(){
     if(m_message.size() > 0){
-        m_message.pop_back();
-        m_whom.pop_back();
+        m_message.pop_front();
+        m_whom.pop_front();
     }
 }
 void prompt::loadMessaage(const wchar_t* m, const wchar_t* w){

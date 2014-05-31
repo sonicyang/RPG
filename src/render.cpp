@@ -57,7 +57,7 @@ void render::render_map(gmap toRender, objPlayer mo){
     return;
 }
 
-void render::render_prompt(prompt P){
+void render::render_prompt(prompt& P){
     attron(A_BOLD);
     mvaddstr(getmaxy(stdscr) - 7, 0, "=========");
     mvaddstr(getmaxy(stdscr) - 6, 0, "|       |");

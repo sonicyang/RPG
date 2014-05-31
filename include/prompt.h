@@ -23,9 +23,9 @@ class prompt : public genericContorller
 
         bool hasMessage(){ return !(m_message.size() == 0); }
 
-        const std::wstring getMessage() const { return m_message.back(); }
+        const std::wstring getMessage() const { return m_message.front(); }
         void setMessage(std::wstring val) { m_message.push_back(val); }
-        const std::wstring getWhom() const { return m_whom.back(); }
+        const std::wstring getWhom() const { return m_whom.front(); }
         void setWhom(std::wstring val) { m_whom.push_back(val); }
     protected:
     private:
