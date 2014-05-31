@@ -35,10 +35,11 @@ int CharMenu::hKeyZ(){
             engine->engineCall(loadStack(svc::invEnableNull));
             engine->engineCall(loadStack(svc::loadInvMenu, 1));
             engine->engineCall(loadStack(svc::setStat, Stats::inInvMenu));
-            engine->engineCall(loadStack(svc::changeEquip, varMap["InvMenuCurPos"].get<unsigned int>(), varMap["TeamMenuCurPos"].get<unsigned int>(), currentPos));
+            if(varMap["InvMenuCurPos"].get<unsigned int>() != 0xffffffff)
+                engine->engineCall(loadStack(svc::changeEquip, varMap["InvMenuCurPos"].get<unsigned int>(), varMap["TeamMenuCurPos"].get<unsigned int>(), currentPos));
             engine->engineCall(loadStack(svc::invDisableNull));
         }else{
-            engine->engineCall(loadStack(svc::loadSkillMenu, 1));
+            engine->engineCall(loadStack(svc::loadSkillMenu, 1, varMap["TeamMenuCurPos"].get<unsigned int>()));
             engine->engineCall(loadStack(svc::setStat, Stats::inSkillMenu));
         }
     }else{

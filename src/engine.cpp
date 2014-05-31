@@ -4,6 +4,8 @@
 #include <cstring>
 #include <string>
 #include <algorithm>
+#include <unistd.h>
+
 #include "gmap.h"
 #include "point.h"
 #include "utils.h"
@@ -113,6 +115,7 @@ void Engine::excute(){
         parseUserInput(mapCtl);
         mapCtl.hDoEvent();
         mapCtl.hRender();
+        usleep(16666);
     }
 }
 
@@ -121,6 +124,7 @@ void Engine::excute(genericContorller& controller){
         parseUserInput(controller);
         controller.hDoEvent();
         controller.hRender();
+        usleep(16666);
     }
     if(stop == 1) //Nested stop signal
         stop = 0;
@@ -210,7 +214,7 @@ variant<paraVarType> Engine::engineCall(std::vector< variant<paraVarType> > para
             mainmenu.init();
             break;
         case svc::loadTeamMenu:
-            teammenu.init(&team, params[1].get<int>());
+            teammenu.init(params[1].get<int>(), &team);
             break;
         case svc::loadInvMenu:
             invmenu.init(params[1].get<int>(), &inv);
@@ -219,7 +223,7 @@ variant<paraVarType> Engine::engineCall(std::vector< variant<paraVarType> > para
             charmenu.init(params[1].get<int>(), &team[team.getNameList()[params[2].get<unsigned int>()]]);
             break;
         case svc::loadSkillMenu:
-            skillmenu.init(team[team.getNameList()[varMap["TeamMenuCurPos"].get<unsigned int>()]].getSkillList().size(), params[1].get<int>());
+            skillmenu.init(params[1].get<int>(), &team[team.getNameList()[params[2].get<unsigned int>()]]);
             break;
         case svc::invEnableNull:
             inv.enableNull();
@@ -390,7 +394,7 @@ void Engine::setStat(int s){
             excute(charmenu);
             break;
         case inSkillMenu:
-            //skillmenu.processInput(c);
+            excute(skillmenu);
             break;
         case inBattle:
             //battle.processInput(c);

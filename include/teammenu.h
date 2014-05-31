@@ -20,7 +20,7 @@ class TeamMenu : public Menu
 
         int hRender();
 
-        void init(Team* t, int m);
+        void init(int m, Team* t);
     protected:
     private:
         unsigned int currentPos;

@@ -15,9 +15,9 @@ class eventController : public genericContorller
 {
     public:
         eventController(std::string event_list, Engine*, std::map< std::string, variant<paraVarType> >&);
-        ~eventController();
+        virtual ~eventController();
 
-        int hDoEvent();
+        virtual int hDoEvent();
 
         void popEventStack();
         int execTopEvent();

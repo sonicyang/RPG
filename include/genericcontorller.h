@@ -12,17 +12,17 @@ class genericContorller
         genericContorller(Engine *);
         virtual ~genericContorller();
 
-        virtual int hKeyUp();
-        virtual int hKeyDown();
-        virtual int hKeyLeft();
-        virtual int hKeyRight();
-        virtual int hKeyZ();
-        virtual int hKeyX();
-        virtual int hKeyQ();
+        virtual int hKeyUp() {return 0;};
+        virtual int hKeyDown() {return 0;};
+        virtual int hKeyLeft() {return 0;};
+        virtual int hKeyRight() {return 0;};
+        virtual int hKeyZ() {return 0;};
+        virtual int hKeyX() {return 0;};
+        virtual int hKeyQ() {return 0;};
 
-        virtual int hDoEvent();
+        virtual int hDoEvent() {return 0;};
 
-        virtual int hRender();
+        virtual int hRender() {return 0;};
     protected:
         Engine* engine;
     private:

@@ -55,7 +55,7 @@ int TeamMenu::hRender(){
     return 0;
 }
 
-void TeamMenu::init(Team* t, int m){
+void TeamMenu::init(int m, Team* t){
     currentPos = 0;
     varMap["TeamMenuCurPos"].set<unsigned int>(currentPos);
     _limiter = t->getNameList().size();
