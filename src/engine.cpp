@@ -24,6 +24,7 @@ Engine::Engine() :
     evtCtl("data/events/eventlist.lst", this, varMap),
     inv(),
     team("data/team/team_list.lst"),
+    prom(this),
     battle("data/monsters/monster_list.lst", ctlCall, varMap),
     mainmenu(this, varMap),
     teammenu(this, varMap),
@@ -145,7 +146,6 @@ variant<paraVarType> Engine::engineCall(std::vector< variant<paraVarType> > para
             evtCtl.popEventStack();
             break;
         case svc::restoreStat:
-            prom.discardMessage();
             stop = 1;
             break;
         case svc::setStat:
@@ -400,10 +400,7 @@ void Engine::setStat(int s){
             //battle.processInput(c);
             break;
         case inPrompt:
-            //if(c == 'z'){
-            //    prom.discardMessage();
-             //   this->restoreStat();
-            //}
+            excute(prom);
             break;
         case inVender:
             //vendor.processInput(c);

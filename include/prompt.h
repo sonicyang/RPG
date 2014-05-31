@@ -1,15 +1,21 @@
 #ifndef PROMPT_H
 #define PROMPT_H
 
-#include <vector>
+#include <deque>
 #include <string>
+#include "genericcontorller.h"
 
-class prompt
+class Engine;
+
+class prompt : public genericContorller
 {
     public:
-        prompt();
-        prompt(const wchar_t*, const wchar_t*);
+        prompt(Engine*);
         ~prompt();
+        
+        int hKeyZ();
+
+        int hRender(); 
 
         void discardMessage();
         void loadMessaage(const wchar_t*, const wchar_t*);
@@ -23,8 +29,8 @@ class prompt
         void setWhom(std::wstring val) { m_whom.push_back(val); }
     protected:
     private:
-        std::vector<std::wstring> m_message;
-        std::vector<std::wstring> m_whom;
+        std::deque<std::wstring> m_message;
+        std::deque<std::wstring> m_whom;
 };
 
 #endif // PROMPT_H

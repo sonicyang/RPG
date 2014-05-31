@@ -68,8 +68,8 @@ int mapController::hKeyRight(){
 int mapController::hKeyZ(){
     if(isPlayerFacingObject()){
         if(getPlayerFacingObject().getTriggerType() == buttonTrig){
-            engine->engineCall(loadStack(svc::setStat, Stats::inEvent));
             engine->engineCall(loadStack(svc::loadEvent, getPlayerFacingObject().getTrigger()));
+            engine->engineCall(loadStack(svc::setStat, Stats::inEvent));
         }
     }
     return 0;

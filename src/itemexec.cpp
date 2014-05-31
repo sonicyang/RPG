@@ -61,7 +61,7 @@ int ItemExec::changeItem(inventory& inv, int item, Team& team, int chara, int sl
         }
 
     if(ret == -1){
-        rdr.render_prompt(prompt(L"You can't wear a shoe on your Head", L"System"));
+        //rdr.render_prompt(prompt(L"You can't wear a shoe on your Head", L"System"));
         while(getch()!='z');
     }else{
         inv.decItem(inv.getNameList(item)[0]);

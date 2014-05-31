@@ -74,7 +74,7 @@ void eventController::popEventStack(){
 int eventController::execTopEvent(){
     struct event& currentEvent = eventStack.back();
 
-    if(currentEvent.stk.size() == 0){
+    if(currentEvent.stk.size() == currentEvent.pc + 1){
         engine->engineCall(loadStack(svc::popEvent));
         engine->engineCall(loadStack(svc::restoreStat));
         return -1;
