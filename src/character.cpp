@@ -69,9 +69,10 @@ int Character::setExp(const int a){
     if(a >= 0 && a < getLevelUpExp()){
         this->_exp = a;
     }else if(a >= 0 && a >= getLevelUpExp()){
-        this->setExp(a - getLevelUpExp());
+        
+        int cc = setExp(a - getLevelUpExp()) + 1;
         LevelUP();
-        return 1;
+        return cc;
     }
     return 0;
 }
@@ -81,8 +82,7 @@ int Character::getExp(void) const {
 }
 
 int Character::varExp(const int val){
-    setExp(getExp() + val);
-    return 0;
+    return setExp(getExp() + val);
 }
 
 int Character::getMaxHP(void) {

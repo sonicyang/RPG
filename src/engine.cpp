@@ -165,25 +165,25 @@ variant<paraVarType> Engine::engineCall(std::vector< variant<paraVarType> > para
         case svc::addItem:
             inv.addItem(params[1].get<std::string>(), params[2].get<int>());
             sprintf(tmp, "You get %d %s", params[2].get<int>(), params[1].get<std::string>().c_str());
-            ctlCall.push_back(loadStack(svc::loadPrompt, UTF8_to_WChar(tmp), UTF8_to_WChar("System")));
+            engineCall(loadStack(svc::loadPrompt, UTF8_to_WChar(tmp), UTF8_to_WChar("System")));
             break;
         case svc::removeItem:
             ret.set<int>(inv.removeItem(params[1].get<std::string>(), params[2].get<int>()));
             if(ret.get<int>() != -1){
                 sprintf(tmp, "You lost %d %s", params[2].get<int>(), params[1].get<std::string>().c_str());
-                ctlCall.push_back(loadStack(svc::loadPrompt, UTF8_to_WChar(tmp), UTF8_to_WChar("System")));
+                engineCall(loadStack(svc::loadPrompt, UTF8_to_WChar(tmp), UTF8_to_WChar("System")));
             }
             break;
         case svc::incItem:
             inv.incItem(params[1].get<std::string>());
             sprintf(tmp, "You get a %s", params[1].get<std::string>().c_str());
-            ctlCall.push_back(loadStack(svc::loadPrompt, UTF8_to_WChar(tmp), UTF8_to_WChar("System")));
+            engineCall(loadStack(svc::loadPrompt, UTF8_to_WChar(tmp), UTF8_to_WChar("System")));
             break;
         case svc::decItem:
             ret.set<int>(inv.decItem(params[1].get<std::string>()));
             if(ret.get<int>() != -1){
                 sprintf(tmp, "You lost a %s", params[1].get<std::string>().c_str());
-                ctlCall.push_back(loadStack(svc::loadPrompt, UTF8_to_WChar(tmp), UTF8_to_WChar("System")));
+                engineCall(loadStack(svc::loadPrompt, UTF8_to_WChar(tmp), UTF8_to_WChar("System")));
             }
             break;
         case svc::setMoney:
@@ -199,22 +199,22 @@ variant<paraVarType> Engine::engineCall(std::vector< variant<paraVarType> > para
                 else if(params[1].get<int>() < 0)
                     sprintf(tmp, "You lost $%d", (-1)* params[1].get<int>());
                 if(params[1].get<int>() != 0)
-                    ctlCall.push_back(loadStack(svc::loadPrompt, UTF8_to_WChar(tmp), UTF8_to_WChar("System")));
+                    engineCall(loadStack(svc::loadPrompt, UTF8_to_WChar(tmp), UTF8_to_WChar("System")));
             }
             break;
         case svc::addCharToTeam:
             team.addCharToTeam(params[1].get<std::string>());
             sprintf(tmp, "%s joined the Team", params[1].get<std::string>().c_str());
-            ctlCall.push_back(loadStack(svc::loadPrompt, UTF8_to_WChar(tmp), UTF8_to_WChar("System")));
+            engineCall(loadStack(svc::loadPrompt, UTF8_to_WChar(tmp), UTF8_to_WChar("System")));
             break;
         case svc::removeCharFromTeam:
             team.removeCharFromTeam(params[1].get<std::string>());
             sprintf(tmp, "%s leaved the Team", params[1].get<std::string>().c_str());
-            ctlCall.push_back(loadStack(svc::loadPrompt, UTF8_to_WChar(tmp), UTF8_to_WChar("System")));
+            engineCall(loadStack(svc::loadPrompt, UTF8_to_WChar(tmp), UTF8_to_WChar("System")));
             break;
         case svc::battle:
             battle.loadBattle(&team, params[1].get< std::vector< std::string> >());
-            ctlCall.push_back(loadStack(svc::setStat, Stats::inBattle));
+            engineCall(loadStack(svc::setStat, Stats::inBattle));
             break;
         case svc::loadMainMenu:
             mainmenu.init();
@@ -249,7 +249,7 @@ variant<paraVarType> Engine::engineCall(std::vector< variant<paraVarType> > para
         case svc::useItem:
             ItemExec::Exec(inv, params[1].get<unsigned int>(), team, params[2].get<unsigned int>(), rdr);
             sprintf(tmp, "Used %s", inv[inv.getNameList(params[1].get<unsigned int>())[0]].item.getName().c_str());
-            ctlCall.push_back(loadStack(svc::loadPrompt, UTF8_to_WChar(tmp), UTF8_to_WChar("System")));
+            engineCall(loadStack(svc::loadPrompt, UTF8_to_WChar(tmp), UTF8_to_WChar("System")));
             break;
         case svc::isCharDead:
             ret.set<int>(team[team.getNameList()[params[1].get<unsigned int>()]].isDead());
@@ -270,7 +270,7 @@ variant<paraVarType> Engine::engineCall(std::vector< variant<paraVarType> > para
             else if(params[2].get<int>() < 0)
                 sprintf(tmp, "%s received damage by %d points", team.getNameList()[params[1].get<unsigned int>()].c_str(), (-1)* params[2].get<int>());
             if(params[2].get<int>() != 0)
-                ctlCall.push_back(loadStack(svc::loadPrompt, UTF8_to_WChar(tmp), UTF8_to_WChar("System")));
+                engineCall(loadStack(svc::loadPrompt, UTF8_to_WChar(tmp), UTF8_to_WChar("System")));
             break;
         case svc::varMP:
             team[team.getNameList()[params[1].get<unsigned int>()]].varMP(params[2].get<int>());
@@ -279,16 +279,20 @@ variant<paraVarType> Engine::engineCall(std::vector< variant<paraVarType> > para
             else if(params[2].get<int>() < 0)
                 sprintf(tmp, "%s MP decreased by %d points", team.getNameList()[params[1].get<unsigned int>()].c_str(), (-1)* params[2].get<int>());
             if(params[2].get<int>() != 0)
-                ctlCall.push_back(loadStack(svc::loadPrompt, UTF8_to_WChar(tmp), UTF8_to_WChar("System")));
+                engineCall(loadStack(svc::loadPrompt, UTF8_to_WChar(tmp), UTF8_to_WChar("System")));
             break;
         case svc::varExp:
-            team[team.getNameList()[params[1].get<unsigned int>()]].varExp(params[2].get<int>());
+            ret.set<int>(team[team.getNameList()[params[1].get<unsigned int>()]].varExp(params[2].get<int>()));
             if(params[2].get<int>() > 0)
                 sprintf(tmp, "%s experience increased by %d points", team.getNameList()[params[1].get<unsigned int>()].c_str(), params[2].get<int>());
             else if(params[2].get<int>() < 0)
                 sprintf(tmp, "%s experience decreased by %d points", team.getNameList()[params[1].get<unsigned int>()].c_str(), (-1)* params[2].get<int>());
             if(params[2].get<int>() != 0)
-                ctlCall.push_back(loadStack(svc::loadPrompt, UTF8_to_WChar(tmp), UTF8_to_WChar("System")));
+                engineCall(loadStack(svc::loadPrompt, UTF8_to_WChar(tmp), UTF8_to_WChar("System")));
+            if(ret.get<int>() > 0){
+                sprintf(tmp, "%s level up by %d level(s)", team.getNameList()[params[1].get<unsigned int>()].c_str(), ret.get<int>());
+                engineCall(loadStack(svc::loadPrompt, UTF8_to_WChar(tmp), UTF8_to_WChar("System")));
+            }
             break;
         case svc::moveVar:
             varMap[params[1].get<std::string>()].set<int>(varMap[params[2].get<std::string>()].get<int>());
@@ -307,8 +311,8 @@ variant<paraVarType> Engine::engineCall(std::vector< variant<paraVarType> > para
             vendor.getVenderInv().setMoney(inv.getMoney());
             break;
         case svc::sellItem:
-            ctlCall.push_back(loadStack(svc::addMoney, inv[inv.getNameList(params[1].get<unsigned int>())[0]].item.getSellPrice()));
-            ctlCall.push_back(loadStack(svc::decItem, inv.getNameList(params[1].get<unsigned int>())[0]));
+            engineCall(loadStack(svc::addMoney, inv[inv.getNameList(params[1].get<unsigned int>())[0]].item.getSellPrice()));
+            engineCall(loadStack(svc::decItem, inv.getNameList(params[1].get<unsigned int>())[0]));
             break;
         case svc::gameOver:
             stop = -1;

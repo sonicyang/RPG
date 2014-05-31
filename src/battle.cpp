@@ -32,6 +32,7 @@ int Battle::loadBattle(Team* t, std::vector<std::string>& monsters, int chance){
     _monstersBak = _monsters;
     charaAttackBuff.resize(_memberCount);
     charaDefenseBuff.resize(_memberCount);
+    team = t;
     processStat = 0;
     return 0;
 }
@@ -223,7 +224,7 @@ int Battle::hDoEvent(){
     }else if(processStat == process::PostBattle){
         for(unsigned int i = 0; i < _monstersBak.size(); i++){
             for(unsigned int j = 0; j < _memberCount; j++){
-                engine->engineCall(loadStack(svc::varExp, j, _monstersBak[i].getExp()));
+                engine->engineCall(loadStack(svc::varExp, j, _monstersBak[i].getExp())).get<int>();
             }
         }
         engine->engineCall(loadStack(svc::restoreStat));
