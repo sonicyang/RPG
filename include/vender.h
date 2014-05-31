@@ -5,34 +5,38 @@
 #include <string>
 
 #include "inventory.h"
+#include "genericcontorller.h"
 
-class Vender
+class Engine;
+
+class Vender : public genericContorller
 {
     public:
-        Vender(std::deque< std::vector< variant<paraVarType> > >&, std::map< std::string, variant<paraVarType> >&);
+        Vender(Engine*, std::map< std::string, variant<paraVarType> >&);
         virtual ~Vender();
 
         int setUp(std::vector<std::string>);
 
-        int processInput(int c);
+        int hKeyUp();
+        int hKeyDown();
+        int hKeyZ();
+        int hKeyX();
+
+        int hRender();
 
         inventory& getVenderInv(){ return venderInv; };
 
-        int getProcessStat() { return processStat; };
         std::vector<std::string>& getOptions() { return mOptions; };
 
     protected:
     private:
-        std::deque< std::vector< variant<paraVarType> > >& ctlCallStack;
         std::map< std::string, variant<paraVarType> >& varMap;
 
         std::vector<std::string> mOptions;
 
         inventory venderInv;
-        int processStat = 0;
 
         unsigned int topCurPos = 0;
-        unsigned int venderInvCurPos = 0;
 };
 
 #endif // VENDER_H

@@ -34,9 +34,6 @@ class Battle : public genericContorller
         int loadBattle(Team* t, std::vector<std::string>& monsters, int chance = 0);
 
         std::vector<Monster>& getMonsters() { return _monsters; };
-        int getMonsterTag() { return MonsterMenuCurrentPos; };
-        int getCurrentChara() { return _currentChara; };
-        int getMenuPos() { return battleMenuCurrentPos; };
 
         enum process{ 
             prePlayer = 0,

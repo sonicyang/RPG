@@ -87,7 +87,7 @@ int inventory::addMoney(int val){
     if(val > 0){
         _money += val;
     }else{
-        if(_money > (-1) * val)
+        if(_money >= (-1) * val)
             _money += val;
         else
             return -1;   

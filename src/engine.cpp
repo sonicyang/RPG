@@ -31,7 +31,7 @@ Engine::Engine() :
     invmenu(this, varMap),
     charmenu(this, varMap),
     skillmenu(this, varMap),
-    vendor(ctlCall, varMap)
+    vendor(this, varMap)
 {
 
 }
@@ -412,7 +412,7 @@ void Engine::setStat(int s){
             excute(prom);
             break;
         case inVender:
-            //vendor.processInput(c);
+            excute(vendor);
             break;
     }
     return;
