@@ -33,6 +33,7 @@ enum Stats{
     inBattle,
     inPrompt,
     inVender,
+    inHelp
 };
 
 struct event{
@@ -96,7 +97,8 @@ enum svc{
     loadVenderInvMenu,
     sellItem,           //itemIndex
     gameOver,
-    endGame = 255       //
+    endGame = 255,       //
+    closeGame
 };
 
 #endif // ENUM_H_INCLUDED

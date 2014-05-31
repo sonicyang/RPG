@@ -19,7 +19,6 @@
 #include "utf8.h"
 
 Engine::Engine() :
-    rdr(), ctlCall(),
     mapCtl("data/maps/maplist.lst", this),
     evtCtl("data/events/eventlist.lst", this, varMap),
     inv(),
@@ -31,7 +30,9 @@ Engine::Engine() :
     invmenu(this, varMap),
     charmenu(this, varMap),
     skillmenu(this, varMap),
-    vendor(this, varMap)
+    vendor(this, varMap),
+    startmenu(this, varMap),
+    helpmenu(this, varMap)
 {
 
 }
@@ -112,10 +113,11 @@ void Engine::parseUserInput(genericContorller& controller){
 }
 
 void Engine::excute(){
-    for(;!stop;){
-        parseUserInput(mapCtl);
-        mapCtl.hDoEvent();
-        mapCtl.hRender();
+    for(;!fullstop;){
+        stop = 0;
+        parseUserInput(startmenu);
+        startmenu.hDoEvent();
+        startmenu.hRender();
         usleep(16666);
     }
 }
@@ -129,7 +131,7 @@ void Engine::excute(genericContorller& controller){
     }
     if(stop == 1) //Nested stop signal
         stop = 0;
-}
+} 
 
 variant<paraVarType> Engine::engineCall(std::vector< variant<paraVarType> > params){
     char tmp[100];
@@ -238,7 +240,11 @@ variant<paraVarType> Engine::engineCall(std::vector< variant<paraVarType> > para
             inv.disableNull();
             break;
         case svc::changeEquip:
-            ItemExec::changeItem(inv, params[1].get<unsigned int>(), team, params[2].get<unsigned int>(), params[3].get<unsigned int>(), rdr);
+            ret.set<int>(ItemExec::changeItem(inv, params[1].get<unsigned int>(), team, params[2].get<unsigned int>(), params[3].get<unsigned int>()));
+
+            if(ret.get<int>() == -1){
+                engineCall(loadStack(svc::loadPrompt, UTF8_to_WChar("You Can't Wear a Shoe on Your Head!"), UTF8_to_WChar("System")));
+            }
             break;
         case svc::isItemUsable:
             ret.set<int>(inv[inv.getNameList(params[1].get<unsigned int>())[0]].item.isUsable());
@@ -247,7 +253,7 @@ variant<paraVarType> Engine::engineCall(std::vector< variant<paraVarType> > para
             ret.set<int>(inv[inv.getNameList(params[1].get<unsigned int>())[0]].item.getType());
             break;
         case svc::useItem:
-            ItemExec::Exec(inv, params[1].get<unsigned int>(), team, params[2].get<unsigned int>(), rdr);
+            ItemExec::Exec(inv, params[1].get<unsigned int>(), team, params[2].get<unsigned int>());
             sprintf(tmp, "Used %s", inv[inv.getNameList(params[1].get<unsigned int>())[0]].item.getName().c_str());
             engineCall(loadStack(svc::loadPrompt, UTF8_to_WChar(tmp), UTF8_to_WChar("System")));
             break;
@@ -301,7 +307,7 @@ variant<paraVarType> Engine::engineCall(std::vector< variant<paraVarType> > para
             ret.set<Skill>(team[team.getNameList()[params[1].get<unsigned int>()]].getSkillList()[params[2].get<unsigned int>()]);
             break;
         case svc::useSkill:
-            ret.set<int>(ItemExec::skillExec(team, params[1].get<unsigned int>(), params[2].get<unsigned int>(), battle.getMonsters(), params[3].get<unsigned int>(), params[4].get<unsigned int>(), rdr));
+            ret.set<int>(ItemExec::skillExec(team, params[1].get<unsigned int>(), params[2].get<unsigned int>(), battle.getMonsters(), params[3].get<unsigned int>(), params[4].get<unsigned int>()));
             break;
         case svc::setupVender:
             vendor.setUp(params[1].get<std::vector<std::string> >());
@@ -315,12 +321,16 @@ variant<paraVarType> Engine::engineCall(std::vector< variant<paraVarType> > para
             engineCall(loadStack(svc::decItem, inv.getNameList(params[1].get<unsigned int>())[0]));
             break;
         case svc::gameOver:
+            render::render_gameOver();
             stop = -1;
             ret.set<int>(-1);
             break;
         case svc::endGame:
             stop = -1;
             ret.set<int>(0);
+            break;
+        case svc::closeGame:
+            fullstop = 1;
             break;
     }
 
@@ -413,6 +423,9 @@ void Engine::setStat(int s){
             break;
         case inVender:
             excute(vendor);
+            break;
+        case inHelp:
+            excute(helpmenu);
             break;
     }
     return;

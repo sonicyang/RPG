@@ -24,6 +24,8 @@
 #include "charmenu.h"
 #include "skillmenu.h"
 #include "vender.h"
+#include "startmenu.h"
+#include "helpmenu.h"
 
 using namespace std;
 
@@ -40,16 +42,11 @@ class Engine
         void parseUserInput(genericContorller&);
         variant<paraVarType> engineCall(std::vector< variant<paraVarType> > );
 
-        void getParseUserInput();
-        int processCtlCall();
-        void updateScreen();
     protected:
     private:
         int stop = 0;
+        int fullstop = 0;
 
-        render rdr;
-
-        std::deque< std::vector< variant<paraVarType> > > ctlCall;
         std::map< std::string, variant<paraVarType> > varMap;
 
         std::vector<genericContorller*> controllerStack;
@@ -65,11 +62,8 @@ class Engine
         CharMenu charmenu;
         SkillMenu skillmenu;
         Vender vendor;
-
-        void menuRutin();
-        int invMenuRoutin(const int val = 0);
-        int teamMenuRoutin(const int val = 0);
-        int charMenuRoutin(const int val = 0, std::string cname = "");
+        StartMenu startmenu;
+        HelpMenu helpmenu;
 
         void setStat(int s);
 };

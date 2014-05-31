@@ -4,7 +4,7 @@
 #include "render.h"
 #include "prompt.h"
 
-int ItemExec::Exec(inventory& inv, int item, Team& team, int chara, render& rdr){
+int ItemExec::Exec(inventory& inv, int item, Team& team, int chara){
 
     std::string name = inv.getNameList(item)[0];
 
@@ -30,7 +30,7 @@ int ItemExec::Exec(inventory& inv, int item, Team& team, int chara, render& rdr)
     return 0;
 }
 
-int ItemExec::changeItem(inventory& inv, int item, Team& team, int chara, int slot, render& rdr){
+int ItemExec::changeItem(inventory& inv, int item, Team& team, int chara, int slot){
     Item selectedItem = inv[inv.getNameList(item)[0]].item;
     Item currItemName;
 
@@ -60,19 +60,16 @@ int ItemExec::changeItem(inventory& inv, int item, Team& team, int chara, int sl
             break;
         }
 
-    if(ret == -1){
-        //rdr.render_prompt(prompt(L"You can't wear a shoe on your Head", L"System"));
-        while(getch()!='z');
-    }else{
+    if(ret != -1){
         inv.decItem(inv.getNameList(item)[0]);
         if(currItemName.getName() != "Empty")
             inv.incItem(currItemName.getName());
     }
 
-    return 0;
+    return ret;
 }
 
-int ItemExec::skillExec(Team& _team, int chara, int skill, std::vector<Monster>& _monsters, int monsterId, int friendlyId, render& rdr){
+int ItemExec::skillExec(Team& _team, int chara, int skill, std::vector<Monster>& _monsters, int monsterId, int friendlyId){
     std::vector<std::string> memberList = _team.getNameList();
     Skill tmp = _team[memberList[chara]].getSkillList()[skill];
     

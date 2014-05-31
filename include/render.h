@@ -34,6 +34,10 @@ class render
 
         static void render_VenderMenu(int curPos, std::vector<std::string> options);
 
+        static void render_StartMenu(int curPos, std::vector<std::string> options);
+        static void render_gameOver();
+        static void render_HelpMenu();
+
         static void update();
     protected:
     private:

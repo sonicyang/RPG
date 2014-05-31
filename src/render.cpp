@@ -1,6 +1,7 @@
 #define _XOPEN_SOURCE_EXTENDED
 
 #include <curses.h>
+#include <unistd.h>
 #include "render.h"
 #include "gmap.h"
 #include "point.h"
@@ -441,6 +442,53 @@ void render::render_VenderMenu(int curPos, std::vector<std::string> options){
     attron(A_BOLD);
     mvaddstr(4 + 2*curPos, 2, options[curPos].c_str());
     attroff(A_BOLD);
+}
+
+void render::render_StartMenu(int curPos, std::vector<std::string> options){
+      clear();
+
+      //Print All Options
+      for(unsigned int i = 0; i < options.size(); i++)
+          mvaddstr(16 + 2*i, 40 - options[i].size()/2, options[i].c_str());
+
+      //Print Selected Options
+      attron(A_BOLD);
+      mvaddstr(16 + 2*curPos, 40 - options[curPos].size()/2, options[curPos].c_str());
+      attroff(A_BOLD);
+}
+
+void render::render_gameOver(){
+
+    //Print Selected Options
+    attron(A_BOLD);
+    mvaddstr(getmaxy(stdscr) / 2 - 4, getmaxx(stdscr) / 2, "GameOver");
+    attroff(A_BOLD);
+
+    usleep(2000000);
+    return;
+}
+
+void render::render_HelpMenu(){
+    clear();
+
+    //Make Frame and Print Title
+    mvaddstr(0, 0, "================================================================================");
+    for(int i = 1; i < 24; i++)mvaddch(i, 0, '|'),mvaddch(i, 79, '|');
+    mvaddstr(24, 0, "===============================================================================");
+    mvaddstr(2, 0, "================================================================================");
+
+    //Print Title
+    mvaddstr(1, 38, "HELP");
+
+    mvaddstr(4, 2, "This is a Mini RPG Game");
+
+    mvaddstr(8, 2, "Key Mapping:");
+    mvaddstr(10, 2, "\t z - Select");
+    mvaddstr(12, 2, "\t x - Cancel");
+    mvaddstr(14, 2, "\t q - Menu");
+    mvaddstr(16, 2, "\t Arrow Keys - Move");
+
+   
 }
 
 void render::update(){
