@@ -27,40 +27,43 @@
 
 using namespace std;
 
+class mapController;
+
 class Engine
 {
     public:
         Engine();
         ~Engine();
 
-        void getParseUserInput();
-        bool processCtlCall();
-        void updateScreen();
+        void excute();
+        void excute(genericContorller&);
+        void parseUserInput(genericContorller&);
+        variant<paraVarType> engineCall(std::vector< variant<paraVarType> > );
 
-        int getStat() { return stat; };
+        void getParseUserInput();
+        int processCtlCall();
+        void updateScreen();
     protected:
     private:
+        int stop = 0;
+
         render rdr;
 
         std::deque< std::vector< variant<paraVarType> > > ctlCall;
         std::map< std::string, variant<paraVarType> > varMap;
 
+        std::vector<genericContorller*> controllerStack;
         mapController mapCtl;
         eventController evtCtl;
         inventory inv;
-
         Team team;
-
         prompt prom;
-
         Battle battle;
-
         MainMenu mainmenu;
         TeamMenu teammenu;
         InvMenu invmenu;
         CharMenu charmenu;
         SkillMenu skillmenu;
-
         Vender vendor;
 
         void menuRutin();
@@ -69,9 +72,6 @@ class Engine
         int charMenuRoutin(const int val = 0, std::string cname = "");
 
         void setStat(int s);
-        void restoreStat();
-        int stat = 1;
-        vector<int> _stat;
 };
 
 #endif // CONTROLLER_H

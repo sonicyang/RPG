@@ -82,3 +82,15 @@ const inventorySlot& inventory::operator[](std::string subscript){
     }
     return _inventorySlots[subscript];
 }
+
+int inventory::addMoney(int val){
+    if(val > 0){
+        _money += val;
+    }else{
+        if(_money >= (-1) * val)
+            _money += val;
+        else
+            return -1;   
+    }
+    return 0;
+}

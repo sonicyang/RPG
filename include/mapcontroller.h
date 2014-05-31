@@ -6,14 +6,27 @@
 #include "objPLayer.h"
 #include "variant.h"
 #include "point.h"
+#include "genericcontorller.h"
 
-class mapController
+class Engine;
+
+class mapController : public genericContorller
 {
     public:
-        mapController(std::string maplist, std::deque< std::vector< variant<paraVarType> > >&);
+        mapController(std::string maplist, Engine* eng);
         ~mapController();
 
-        int processInput(int c);
+        int hKeyUp();
+        int hKeyDown();
+        int hKeyLeft();
+        int hKeyRight();
+        int hKeyZ();
+        int hKeyX();
+        int hKeyQ();
+
+        int hDoEvent();
+
+        int hRender();
 
         const gmap& getCurrentMap();
         void setCurrentMap(std::string);
@@ -41,7 +54,7 @@ class mapController
 
         Point getPlayerFacing();
 
-        std::deque< std::vector< variant<paraVarType> > >& ctlCallStack;
+        //std::deque< std::vector< variant<paraVarType> > >& ctlCallStack;
 };
 
 #endif // MAPCONTROLLER_H

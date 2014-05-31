@@ -9,8 +9,9 @@
 #include "item.h"
 #include "variant.h"
 #include "enum.h"
+#include "skill.h"
 
-#define paraVarType int, unsigned int, wchar_t*, std::string, Stats, svc, std::vector<std::string>
+#define paraVarType int, unsigned int, wchar_t*, std::string, Stats, svc, std::vector<std::string>, Skill
 
 char* stringToAllocChar(std::string);  //deceprated
 void recycleMem(std::deque< std::vector<void*> >); //deceprated

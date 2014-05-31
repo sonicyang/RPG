@@ -1,23 +1,32 @@
 #ifndef TEAMMENU_H
 #define TEAMMENU_H
 
-#include <menu.h>
+#include "menu.h"
+#include "team.h"
 
+class Engine;
 
 class TeamMenu : public Menu
 {
     public:
-        TeamMenu(std::deque< std::vector< variant<paraVarType> > >&, std::map< std::string, variant<paraVarType> >&);
+        TeamMenu(Engine*, std::map< std::string, variant<paraVarType> >&);
         virtual ~TeamMenu();
 
-        virtual int processInput(int);
+        int hKeyUp();
+        int hKeyDown();
+        int hKeyZ();
+        int hKeyX();
+        int hKeyQ();
 
-        void init(int val, int m);
+        int hRender();
+
+        void init(int m, Team* t);
     protected:
     private:
         unsigned int currentPos;
         unsigned int _limiter;
         unsigned int mode;
+        Team* team;
 };
 
 #endif // TEAMMENU_H

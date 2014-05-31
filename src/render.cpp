@@ -7,25 +7,23 @@
 #include <locale.h>
 #include "Skill.h"
 
-render::render() : offset(0,0)
+render::render()
 {
-    setlocale(LC_ALL, "");
-    scr = initscr();
-    getmaxyx(scr, screen_max.m_y, screen_max.m_x);
 }
 
 render::~render()
 {
-    endwin();
 }
 
-void render::render_map(gmap toRender){
+void render::render_map(gmap toRender, objPlayer mo){
     clear();
     mvaddstr(1, 1, "CurrentMap:");
     addstr(toRender.Getname().c_str());
 
-    offset.m_x = screen_max.m_x / 2 - toRender.Getsize().m_x;
-    offset.m_y = (screen_max.m_y - toRender.Getsize().m_y) / 2;
+    Point offset;
+
+    offset.m_x = getmaxx(stdscr) / 2 - toRender.Getsize().m_x;
+    offset.m_y = (getmaxy(stdscr) - toRender.Getsize().m_y) / 2;
 
     for(unsigned int i = 0; i < toRender.Getsize().m_y; i++){
         for(unsigned int j = 0; j < toRender.Getsize().m_x; j++){
@@ -49,10 +47,6 @@ void render::render_map(gmap toRender){
 
     }
 
-    return;
-}
-
- void render::render_Player(objPlayer mo){
     if(mo.Geticon() < 128){
         mvaddch(mo.GetCord().Get_y() + offset.m_y, mo.GetCord().Get_x() + offset.m_x, mo.Geticon());
         insch(' ');
@@ -60,36 +54,35 @@ void render::render_map(gmap toRender){
         mvaddch(mo.GetCord().Get_y() + offset.m_y, mo.GetCord().Get_x() + offset.m_x, mo.Geticon());
     }
 
-    move(24,50);
     return;
 }
 
-void render::render_prompt(prompt P){
+void render::render_prompt(prompt& P){
     attron(A_BOLD);
-    mvaddstr(screen_max.m_y - 7, 0, "=========");
-    mvaddstr(screen_max.m_y - 6, 0, "|       |");
-    for(unsigned int i = 0; i < screen_max.m_x ; i++)
-        mvaddch(screen_max.m_y - 5, i, '=');
+    mvaddstr(getmaxy(stdscr) - 7, 0, "=========");
+    mvaddstr(getmaxy(stdscr) - 6, 0, "|       |");
+    for(int i = 0; i < getmaxx(stdscr) ; i++)
+        mvaddch(getmaxy(stdscr) - 5, i, '=');
 
     for(int j = 4; j > 1; j--){
-        mvaddch(screen_max.m_y - j, 0, '|');
-        for(unsigned int i = 1; i < screen_max.m_x - 1; i++)mvaddch(screen_max.m_y - j, i, ' ');
-        mvaddch(screen_max.m_y - j, screen_max.m_x - 1, '|');
+        mvaddch(getmaxy(stdscr) - j, 0, '|');
+        for(int i = 1; i < getmaxx(stdscr) - 1; i++)mvaddch(getmaxy(stdscr) - j, i, ' ');
+        mvaddch(getmaxy(stdscr) - j, getmaxx(stdscr) - 1, '|');
     }
 
-    for(unsigned int i = 0; i < screen_max.m_x ; i++)
-        mvaddch(screen_max.m_y - 1, i, '=');
+    for(int i = 0; i < getmaxx(stdscr) ; i++)
+        mvaddch(getmaxy(stdscr) - 1, i, '=');
     attroff(A_BOLD);
 
-    mvaddwstr(screen_max.m_y - 6, 1, P.getWhom().c_str());
+    mvaddwstr(getmaxy(stdscr) - 6, 1, P.getWhom().c_str());
 
     const wchar_t* inner = P.getMessage().c_str();
-    unsigned int cur = 1;
+    int cur = 1;
     unsigned int line = 0;
     while((*inner) != 0){
-        mvaddch(screen_max.m_y - 4 + line, cur, *inner);
+        mvaddch(getmaxy(stdscr) - 4 + line, cur, *inner);
         cur++;inner++;
-        if(cur > screen_max.m_x - 2){
+        if(cur > getmaxx(stdscr) - 2){
             cur = 1;
             line++;
         }
@@ -101,16 +94,16 @@ void render::render_MainMenu(int curPos, std::vector<std::string> options){
     clear();
 
     //Make Frame and Print Title
-    for(unsigned int i = 0; i < screen_max.m_x; i++)
+    for(int i = 0; i < getmaxx(stdscr); i++)
         mvaddch(0, i, '=');
-    for(unsigned int i = 1; i < screen_max.m_y; i++)mvaddch(i, 0, '|'),mvaddch(i, screen_max.m_x - 1, '|');
-    for(unsigned int i = 0; i < screen_max.m_x; i++)
-        mvaddch(screen_max.m_y - 1, i, '=');
-    for(unsigned int i = 0; i < screen_max.m_x; i++)
+    for(int i = 1; i < getmaxy(stdscr); i++)mvaddch(i, 0, '|'),mvaddch(i, getmaxx(stdscr) - 1, '|');
+    for(int i = 0; i < getmaxx(stdscr); i++)
+        mvaddch(getmaxy(stdscr) - 1, i, '=');
+    for(int i = 0; i < getmaxx(stdscr); i++)
         mvaddch(2, i, '=');
-    for(unsigned int i = 3; i < screen_max.m_y; i++)mvaddch(i, 25, '|');
+    for(int i = 3; i < getmaxy(stdscr); i++)mvaddch(i, 25, '|');
 
-    mvaddstr(1, screen_max.m_x/2 - 2, "MENU");
+    mvaddstr(1, getmaxx(stdscr)/2 - 2, "MENU");
 
     //Print All Options
     for(unsigned int i = 0; i < options.size(); i++)
@@ -126,15 +119,15 @@ void render::render_TeamMenu(Team& team, unsigned int curPos){
     clear();
 
     //Make Frame and Print Title
-    for(unsigned int i = 0; i < screen_max.m_x; i++)
+    for(int i = 0; i < getmaxx(stdscr); i++)
         mvaddch(0, i, '=');
-    for(unsigned int i = 1; i < screen_max.m_y; i++)mvaddch(i, 0, '|'),mvaddch(i, screen_max.m_x - 1, '|');
-    for(unsigned int i = 0; i < screen_max.m_x; i++)
-        mvaddch(screen_max.m_y - 1, i, '=');
-    for(unsigned int i = 0; i < screen_max.m_x; i++)
+    for(int i = 1; i < getmaxy(stdscr); i++)mvaddch(i, 0, '|'),mvaddch(i, getmaxx(stdscr) - 1, '|');
+    for(int i = 0; i < getmaxx(stdscr); i++)
+        mvaddch(getmaxy(stdscr) - 1, i, '=');
+    for(int i = 0; i < getmaxx(stdscr); i++)
         mvaddch(2, i, '=');
 
-    mvaddstr(1, screen_max.m_x/2 - 2, "TEAM");
+    mvaddstr(1, getmaxx(stdscr)/2 - 2, "TEAM");
 
     std::vector<std::string> memberList = team.getNameList();
 
@@ -143,7 +136,7 @@ void render::render_TeamMenu(Team& team, unsigned int curPos){
             attron(A_BOLD);
 
         //draw per frame
-        for(unsigned int j = 1; j < screen_max.m_x - 1; j++){
+        for(int j = 1; j < getmaxx(stdscr) - 1; j++){
             mvaddch(3 + i * 6, j, '~');
             mvaddch(3 + i * 6 + 5, j, '~');
         }
@@ -190,23 +183,23 @@ void render::render_InvMenu(inventory& inv, int curPos){
     clear();
 
     //Make Frame and Print Title
-    for(unsigned int i = 0; i < screen_max.m_x; i++)
+    for(int i = 0; i < getmaxx(stdscr); i++)
         mvaddch(0, i, '=');
-    for(unsigned int i = 1; i < screen_max.m_y; i++)mvaddch(i, 0, '|'),mvaddch(i, screen_max.m_x - 1, '|');
-    for(unsigned int i = 0; i < screen_max.m_x; i++)
-        mvaddch(screen_max.m_y - 1, i, '=');
-    for(unsigned int i = 0; i < screen_max.m_x; i++)
+    for(int i = 1; i < getmaxy(stdscr); i++)mvaddch(i, 0, '|'),mvaddch(i, getmaxx(stdscr) - 1, '|');
+    for(int i = 0; i < getmaxx(stdscr); i++)
+        mvaddch(getmaxy(stdscr) - 1, i, '=');
+    for(int i = 0; i < getmaxx(stdscr); i++)
         mvaddch(2, i, '=');
-    for(unsigned int i = 3; i < screen_max.m_y; i++)
+    for(int i = 3; i < getmaxy(stdscr); i++)
         mvaddch(i, 25, '|');
-    for(unsigned int i = 26; i < screen_max.m_x; i++)
-        mvaddch(screen_max.m_y - 3, i, '=');
+    for(int i = 26; i < getmaxx(stdscr); i++)
+        mvaddch(getmaxy(stdscr) - 3, i, '=');
 
-    mvaddstr(1, screen_max.m_x/2 - 5, "INVENTORY");
+    mvaddstr(1, getmaxx(stdscr)/2 - 5, "INVENTORY");
 
     char mString[40];
     sprintf(mString, "Money: $%d", inv.getMoney());
-    mvaddstr(screen_max.m_y - 2, 28, mString);
+    mvaddstr(getmaxy(stdscr) - 2, 28, mString);
 
     for (unsigned int i = 0; i < nameList.size(); i++){
         mvaddstr(i*2 + 4, 2, nameList[i].c_str());
@@ -234,17 +227,17 @@ void render::render_CharMenu(Character& chara, int curPos){
     clear();
 
     //Make Frame and Print Title
-    for(unsigned int i = 0; i < screen_max.m_x; i++)
+    for(int i = 0; i < getmaxx(stdscr); i++)
         mvaddch(0, i, '=');
-    for(unsigned int i = 1; i < screen_max.m_y; i++)mvaddch(i, 0, '|'),mvaddch(i, screen_max.m_x - 1, '|');
-    for(unsigned int i = 0; i < screen_max.m_x; i++)
-        mvaddch(screen_max.m_y - 1, i, '=');
-    for(unsigned int i = 0; i < screen_max.m_x; i++)
+    for(int i = 1; i < getmaxy(stdscr); i++)mvaddch(i, 0, '|'),mvaddch(i, getmaxx(stdscr) - 1, '|');
+    for(int i = 0; i < getmaxx(stdscr); i++)
+        mvaddch(getmaxy(stdscr) - 1, i, '=');
+    for(int i = 0; i < getmaxx(stdscr); i++)
         mvaddch(2, i, '=');
-    for(unsigned int i = 3; i < screen_max.m_y; i++)
+    for(int i = 3; i < getmaxy(stdscr); i++)
         mvaddch(i, 25, '|');
 
-    mvaddstr(1, (screen_max.m_x - chara.getName().size())/2, chara.getName().c_str());
+    mvaddstr(1, (getmaxx(stdscr) - chara.getName().size())/2, chara.getName().c_str());
 
 
     char tmp[10];
@@ -318,17 +311,17 @@ void render::render_SkillMenu(Character& chara, int curPos){
     clear();
 
     //Make Frame and Print Title
-    for(unsigned int i = 0; i < screen_max.m_x; i++)
+    for(int i = 0; i < getmaxx(stdscr); i++)
         mvaddch(0, i, '=');
-    for(unsigned int i = 1; i < screen_max.m_y; i++)mvaddch(i, 0, '|'),mvaddch(i, screen_max.m_x - 1, '|');
-    for(unsigned int i = 0; i < screen_max.m_x; i++)
-        mvaddch(screen_max.m_y - 1, i, '=');
-    for(unsigned int i = 0; i < screen_max.m_x; i++)
+    for(int i = 1; i < getmaxy(stdscr); i++)mvaddch(i, 0, '|'),mvaddch(i, getmaxx(stdscr) - 1, '|');
+    for(int i = 0; i < getmaxx(stdscr); i++)
+        mvaddch(getmaxy(stdscr) - 1, i, '=');
+    for(int i = 0; i < getmaxx(stdscr); i++)
         mvaddch(2, i, '=');
-    for(unsigned int i = 3; i < screen_max.m_y; i++)
+    for(int i = 3; i < getmaxy(stdscr); i++)
         mvaddch(i, 25, '|');
 
-    mvaddstr(1, screen_max.m_x/2 - 3, "Skills");
+    mvaddstr(1, getmaxx(stdscr)/2 - 3, "Skills");
 
     std::vector<Skill> skills = chara.getSkillList();
 
@@ -355,20 +348,20 @@ void render::render_BattleScene(std::vector<Monster> m, int tag){
     clear();
 
     //Make Frame and Print Title
-    for(unsigned int i = 0; i < screen_max.m_x; i++)
+    for(int i = 0; i < getmaxx(stdscr); i++)
         mvaddch(0, i, '=');
-    for(unsigned int i = 1; i < screen_max.m_y; i++)mvaddch(i, 0, '|'),mvaddch(i, screen_max.m_x - 1, '|');
-    for(unsigned int i = 0; i < screen_max.m_x; i++)
-        mvaddch(screen_max.m_y - 1, i, '=');
+    for(int i = 1; i < getmaxy(stdscr); i++)mvaddch(i, 0, '|'),mvaddch(i, getmaxx(stdscr) - 1, '|');
+    for(int i = 0; i < getmaxx(stdscr); i++)
+        mvaddch(getmaxy(stdscr) - 1, i, '=');
 
-    int segment = screen_max.m_x / (m.size() + 1);
+    int segment = getmaxx(stdscr) / (m.size() + 1);
     for(unsigned int i = 0; i < m.size(); i++){
         if((int)i == tag) attron(A_BOLD);
-        mvaddstr((screen_max.m_y - 8) / 2, (i + 1) * segment - m[i].getName().size()/2, m[i].getName().c_str());
+        mvaddstr((getmaxy(stdscr) - 8) / 2, (i + 1) * segment - m[i].getName().size()/2, m[i].getName().c_str());
 
         char tmp[10];
         sprintf(tmp, "%d/", m[i].getHP());
-        mvaddstr((screen_max.m_y - 8) / 2 + 1, (i + 1) * segment - m[i].getName().size()/2, tmp);
+        mvaddstr((getmaxy(stdscr) - 8) / 2 + 1, (i + 1) * segment - m[i].getName().size()/2, tmp);
         sprintf(tmp, "%d", m[i].getMaxHP());
         addstr(tmp);
 
@@ -377,9 +370,9 @@ void render::render_BattleScene(std::vector<Monster> m, int tag){
 }
 
 void render::render_BattleTeam(Team& team, unsigned int turn){
-    for(unsigned int i = 0; i < screen_max.m_x; i++)
-        mvaddch(screen_max.m_y - 8, i, '=');
-    for(unsigned int i = screen_max.m_y - 7; i < screen_max.m_y; i++)
+    for(int i = 0; i < getmaxx(stdscr); i++)
+        mvaddch(getmaxy(stdscr) - 8, i, '=');
+    for(int i = getmaxy(stdscr) - 7; i < getmaxy(stdscr); i++)
         mvaddch(i, 30, '|');
 
     ::std::vector<std::string> nameList = team.getNameList();
@@ -389,15 +382,15 @@ void render::render_BattleTeam(Team& team, unsigned int turn){
             //Print Informations
             char tmp[10];
 
-            mvaddstr(screen_max.m_y - 6 + i, 2, team[nameList[i]].getName().c_str());
+            mvaddstr(getmaxy(stdscr) - 6 + i, 2, team[nameList[i]].getName().c_str());
 
             sprintf(tmp, "%d/", team[nameList[i]].getHP());
-            mvaddstr(screen_max.m_y - 6 + i, 13, tmp);
+            mvaddstr(getmaxy(stdscr) - 6 + i, 13, tmp);
             sprintf(tmp, "%d", team[nameList[i]].getMaxHP());
             addstr(tmp);
 
             sprintf(tmp, "%d/", team[nameList[i]].getMP());
-            mvaddstr(screen_max.m_y - 6 + i, 23, tmp);
+            mvaddstr(getmaxy(stdscr) - 6 + i, 23, tmp);
             sprintf(tmp, "%d", team[nameList[i]].getMaxMP());
             addstr(tmp);
 
@@ -407,19 +400,19 @@ void render::render_BattleTeam(Team& team, unsigned int turn){
 
 void render::render_BattleMenu(unsigned int curPos){
     if(curPos == 0)attron(A_BOLD);{
-        mvaddstr(screen_max.m_y - 6, 32, "Attack");
+        mvaddstr(getmaxy(stdscr) - 6, 32, "Attack");
     }attroff(A_BOLD);
 
     if(curPos == 1)attron(A_BOLD);{
-        mvaddstr(screen_max.m_y - 6, 42, "Skills");
+        mvaddstr(getmaxy(stdscr) - 6, 42, "Skills");
     }attroff(A_BOLD);
 
     if(curPos == 2)attron(A_BOLD);{
-        mvaddstr(screen_max.m_y - 4, 32, "Inventory");
+        mvaddstr(getmaxy(stdscr) - 4, 32, "Inventory");
     }attroff(A_BOLD);
 
     if(curPos == 3)attron(A_BOLD);{
-        mvaddstr(screen_max.m_y - 4, 42, "Escape");
+        mvaddstr(getmaxy(stdscr) - 4, 42, "Escape");
     }attroff(A_BOLD);
 }
 
@@ -427,17 +420,17 @@ void render::render_VenderMenu(int curPos, std::vector<std::string> options){
     clear();
 
     //Make Frame and Print Title
-    for(unsigned int i = 0; i < screen_max.m_x; i++)
+    for(int i = 0; i < getmaxx(stdscr); i++)
         mvaddch(0, i, '=');
-    for(unsigned int i = 1; i < screen_max.m_y; i++)mvaddch(i, 0, '|'),mvaddch(i, screen_max.m_x - 1, '|');
-    for(unsigned int i = 0; i < screen_max.m_x; i++)
-        mvaddch(screen_max.m_y - 1, i, '=');
-    for(unsigned int i = 0; i < screen_max.m_x; i++)
+    for(int i = 1; i < getmaxy(stdscr); i++)mvaddch(i, 0, '|'),mvaddch(i, getmaxx(stdscr) - 1, '|');
+    for(int i = 0; i < getmaxx(stdscr); i++)
+        mvaddch(getmaxy(stdscr) - 1, i, '=');
+    for(int i = 0; i < getmaxx(stdscr); i++)
         mvaddch(2, i, '=');
-    for(unsigned int i = 3; i < screen_max.m_y; i++)
+    for(int i = 3; i < getmaxy(stdscr); i++)
         mvaddch(i, 25, '|');
 
-    mvaddstr(1, screen_max.m_x/2 - 3, "Vendor");
+    mvaddstr(1, getmaxx(stdscr)/2 - 3, "Vendor");
 
 
     //Print All Options

@@ -3,9 +3,10 @@
 #include "teammenu.h"
 #include "utils.h"
 #include "enum.h"
+#include "engine.h"
 
-TeamMenu::TeamMenu(std::deque< std::vector< variant<paraVarType> > >& a, std::map< std::string, variant<paraVarType> >& b) :
-    Menu(a, b)
+TeamMenu::TeamMenu(Engine* eng, std::map< std::string, variant<paraVarType> >& b) :
+    Menu(eng, b)
 {
     currentPos = 0;
     varMap["TeamMenuCurPos"].set<unsigned int>(currentPos);
@@ -16,37 +17,48 @@ TeamMenu::~TeamMenu()
     //dtor
 }
 
-int TeamMenu::processInput(int c){
-
-    switch (c) {
-        case KEY_UP:
-            currentPos = (currentPos == 0)? 0 : currentPos - 1;
-            break;
-        case KEY_DOWN:
-            currentPos = (currentPos == _limiter - 1 )? _limiter - 1 : currentPos + 1;
-            break;
-        case 'z':
-            if(mode == 0){
-                ctlCallStack.push_back(loadStack(svc::loadCharMenu, 0));
-                ctlCallStack.push_back(loadStack(svc::setStat, Stats::inCharMenu));
-            }else{
-                ctlCallStack.push_back(loadStack(svc::restoreStat));
-            }
-            break;
-        case 'x':
-        case 'q':
-            currentPos = 0xffffffff;
-            ctlCallStack.push_back(loadStack(svc::restoreStat));
-            break;
-    }
-
-    varMap["TeamMenuCurPos"].set<unsigned int>(currentPos);
+int TeamMenu::hKeyUp(){
+    currentPos = (currentPos == 0)? 0 : currentPos - 1;
     return 0;
 }
 
-void TeamMenu::init(int val, int m){
+int TeamMenu::hKeyDown(){
+    currentPos = (currentPos == _limiter - 1 )? _limiter - 1 : currentPos + 1;
+    return 0;
+}
+
+int TeamMenu::hKeyZ(){
+    varMap["TeamMenuCurPos"].set<unsigned int>(currentPos);
+    if(mode == 0){
+        engine->engineCall(loadStack(svc::loadCharMenu, 0, currentPos));
+        engine->engineCall(loadStack(svc::setStat, Stats::inCharMenu));
+    }else{
+        engine->engineCall(loadStack(svc::restoreStat));
+    }
+    return 0;
+}
+
+int TeamMenu::hKeyX(){
+    varMap["TeamMenuCurPos"].set<unsigned int>(0xffffffff);
+    engine->engineCall(loadStack(svc::restoreStat));
+    return 0;
+}
+
+int TeamMenu::hKeyQ(){
+    varMap["TeamMenuCurPos"].set<unsigned int>(0xffffffff);
+    engine->engineCall(loadStack(svc::restoreStat));
+    return 0;
+}
+
+int TeamMenu::hRender(){
+    render::render_TeamMenu(*team, currentPos);
+    return 0;
+}
+
+void TeamMenu::init(int m, Team* t){
     currentPos = 0;
     varMap["TeamMenuCurPos"].set<unsigned int>(currentPos);
-    _limiter = val;
+    _limiter = t->getNameList().size();
+    team = t;
     mode = m;
 }

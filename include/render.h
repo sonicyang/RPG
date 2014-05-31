@@ -17,33 +17,28 @@ class render
     public:
         render();
         ~render();
-        WINDOW* Getscr() { return scr; }
-        Point Getscreen_max() { return screen_max; }
 
-        void render_map(gmap);
-        void render_Player(objPlayer);
-        void render_prompt(prompt P);
+        static void render_map(gmap, objPlayer);
+        //static void render_Player(objPlayer);
+        static void render_prompt(prompt& P);
 
-        void render_MainMenu(int curPos, std::vector<std::string> options);
-        void render_TeamMenu(Team&, unsigned int curPos);
-        void render_InvMenu(inventory& inv, int curPos);
-        void render_CharMenu(Character& chara, int curPos);
-        void render_SkillMenu(Character& chara, int curPos);
+        static void render_MainMenu(int curPos, std::vector<std::string> options);
+        static void render_TeamMenu(Team&, unsigned int curPos);
+        static void render_InvMenu(inventory& inv, int curPos);
+        static void render_CharMenu(Character& chara, int curPos);
+        static void render_SkillMenu(Character& chara, int curPos);
 
-        void render_BattleScene(std::vector<Monster> m, int tag = -1);
-        void render_BattleTeam(Team& team, unsigned int turn);
-        void render_BattleMenu(unsigned int curPos);
+        static void render_BattleScene(std::vector<Monster> m, int tag = -1);
+        static void render_BattleTeam(Team& team, unsigned int turn);
+        static void render_BattleMenu(unsigned int curPos);
 
-        void render_VenderMenu(int curPos, std::vector<std::string> options);
+        static void render_VenderMenu(int curPos, std::vector<std::string> options);
 
-        void update();
+        static void update();
     protected:
     private:
-        WINDOW* scr;
-        Point screen_max;
-        Point offset;
 
-        void mvaddutf8(int y, int x, wchar_t);
+        static void mvaddutf8(int y, int x, wchar_t);
 };
 
 #endif // RENDER_H

@@ -3,9 +3,11 @@
 #include "skillmenu.h"
 #include "utils.h"
 #include "enum.h"
+#include "render.h"
+#include "engine.h"
 
-SkillMenu::SkillMenu(std::deque< std::vector< variant<paraVarType> > >& a, std::map< std::string, variant<paraVarType> >& b) :
-    Menu(a, b)
+SkillMenu::SkillMenu(Engine* eng, std::map< std::string, variant<paraVarType> >& b) :
+    Menu(eng, b)
 {
     currentPos = 0;
     varMap["SkillMenuCurPos"].set<unsigned int>(currentPos);
@@ -15,6 +17,7 @@ SkillMenu::~SkillMenu()
 {
     //dtor
 }
+/*
 
 int SkillMenu::processInput(int c){
     switch (c) {
@@ -29,7 +32,6 @@ int SkillMenu::processInput(int c){
             if(mode == 0){
 
             }else{
-                ctlCallStack.push_back(loadStack(svc::restoreStat));
             }
             break;
         case 'x':
@@ -43,10 +45,45 @@ int SkillMenu::processInput(int c){
 
     return 0;
 }
+*/
 
-void SkillMenu::init(int val, int m){
+int SkillMenu::hKeyUp(){
+    currentPos = (currentPos == 0)? 0 : currentPos - 1;
+    return 0;
+}
+
+int SkillMenu::hKeyDown(){
+    currentPos = (currentPos == _limiter - 1 )? _limiter - 1 : currentPos + 1;
+    return 0;
+}
+
+int SkillMenu::hKeyZ(){
+    varMap["SkillMenuCurPos"].set<unsigned int>(currentPos);
+    engine->engineCall(loadStack(svc::restoreStat));
+    return 0;
+}
+
+int SkillMenu::hKeyX(){
+    varMap["SkillMenuCurPos"].set<unsigned int>(0xffffffff);
+    engine->engineCall(loadStack(svc::restoreStat));
+    return 0;
+}
+
+int SkillMenu::hKeyQ(){
+    varMap["SkillMenuCurPos"].set<unsigned int>(0xffffffff);
+    engine->engineCall(loadStack(svc::restoreStat));
+    return 0;
+}
+
+int SkillMenu::hRender(){
+    render::render_SkillMenu(*currChara, currentPos);
+    return 0;
+}
+
+void SkillMenu::init(int m, Character* c){
     currentPos = 0;
     varMap["SkillMenuCurPos"].set<unsigned int>(currentPos);
     mode = m;
-    _limiter = val;
+    _limiter = c->getSkillList().size();
+    currChara = c;
 }

@@ -7,24 +7,25 @@
 #include "prompt.h"
 #include "utils.h"
 #include "variant.h"
+#include "genericcontorller.h"
 
-class eventController
+class Engine;
+
+class eventController : public genericContorller
 {
     public:
-        eventController(std::string event_list, std::deque< std::vector< variant<paraVarType> > >&, std::map< std::string, variant<paraVarType> >&);
-        ~eventController();
+        eventController(std::string event_list, Engine*, std::map< std::string, variant<paraVarType> >&);
+        virtual ~eventController();
 
-        int processInput(int c);
+        virtual int hDoEvent();
 
         void popEventStack();
         int execTopEvent();
-
         int pushEvent(std::string);
 
     protected:
     private:
         std::vector<event> eventStack;
-        std::deque< std::vector< variant<paraVarType> > >& ctlCallStack;
         std::map< std::string, variant<paraVarType> >& varMap;
 
         std::map<std::string, event> event_list;

@@ -1,23 +1,32 @@
 #ifndef SKILLMENU_H
 #define SKILLMENU_H
 
-#include <menu.h>
+#include "menu.h"
+#include "character.h"
 
+class Engine;
 
 class SkillMenu : public Menu
 {
     public:
-        SkillMenu(std::deque< std::vector< variant<paraVarType> > >&, std::map< std::string, variant<paraVarType> >&);
+        SkillMenu(Engine*, std::map< std::string, variant<paraVarType> >&);
         virtual ~SkillMenu();
+        
+        int hKeyUp();
+        int hKeyDown();
+        int hKeyZ();
+        int hKeyX();
+        int hKeyQ();
 
-        virtual int processInput(int);
+        int hRender();
 
-        void init(int val, int m);
+        void init(int m, Character* c);
     protected:
     private:
         unsigned int currentPos;
         unsigned int _limiter;
         unsigned int mode;
+        Character* currChara;
 };
 
 #endif // SKILLMENU_H

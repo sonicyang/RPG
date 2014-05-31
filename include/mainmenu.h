@@ -3,13 +3,21 @@
 
 #include <menu.h>
 
+class Engine;
+
 class MainMenu : public Menu
 {
     public:
-        MainMenu(std::deque< std::vector< variant<paraVarType> > >&, std::map< std::string, variant<paraVarType> >&);
+        MainMenu(Engine*, std::map< std::string, variant<paraVarType> >&);
         virtual ~MainMenu();
 
-        virtual int processInput(int);
+        int hKeyUp();
+        int hKeyDown();
+        int hKeyZ();
+        int hKeyX();
+        int hKeyQ();
+
+        int hRender();
 
         void init(void);
 

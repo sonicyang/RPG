@@ -7,10 +7,11 @@
 #include "json/value.h"
 #include "engine.h"
 #include "utf8.h"
+#include "render.h"
 
 using namespace std;
 
-mapController::mapController(std::string maplist, std::deque< std::vector< variant<paraVarType> > >& s) : ctlCallStack(s)
+mapController::mapController(std::string maplist, Engine* eng) : genericContorller(eng)
 {
     std::string in = get_file_contents(maplist.c_str());
 
@@ -44,36 +45,52 @@ void mapController::setCurrentMap(std::string a){
         currentMap = a;
 }
 
-int mapController::processInput(int c){
-    switch (c) {
-        case KEY_LEFT:
-            movePlayer(Point(-1,0));
-            break;
-        case KEY_RIGHT:
-            movePlayer(Point(1,0));
-            break;
-        case KEY_UP:
-            movePlayer(Point(0,-1));
-            break;
-        case KEY_DOWN:
-            movePlayer(Point(0,1));
-            break;
-        case 'z':
-            if(isPlayerFacingObject()){
-                if(getPlayerFacingObject().getTriggerType() == buttonTrig){
-                    ctlCallStack.push_back(loadStack(svc::setStat, Stats::inEvent));
-                    ctlCallStack.push_back(loadStack(svc::loadEvent, getPlayerFacingObject().getTrigger()));
-                }
-            }
-            break;
-        case KEY_END:
-            ctlCallStack.push_back(loadStack(svc::endGame));
-            break;
-        case 'q':
-            ctlCallStack.push_back(loadStack(svc::loadMainMenu));
-        	ctlCallStack.push_back(loadStack(svc::setStat, Stats::inMainMenu));
-            break;
+int mapController::hKeyUp(){
+    movePlayer(Point(0,-1));
+    return 0;
+}
+
+int mapController::hKeyDown(){
+    movePlayer(Point(0,1));
+    return 0;
+}
+
+int mapController::hKeyLeft(){
+    movePlayer(Point(-1,0));
+    return 0;
+}
+
+int mapController::hKeyRight(){
+    movePlayer(Point(1,0));
+    return 0;
+}
+
+int mapController::hKeyZ(){
+    if(isPlayerFacingObject()){
+        if(getPlayerFacingObject().getTriggerType() == buttonTrig){
+            engine->engineCall(loadStack(svc::loadEvent, getPlayerFacingObject().getTrigger()));
+            engine->engineCall(loadStack(svc::setStat, Stats::inEvent));
+        }
     }
+    return 0;
+}
+
+int mapController::hKeyX(){
+    return 0;
+}
+
+int mapController::hKeyQ(){
+    engine->engineCall(loadStack(svc::loadMainMenu));
+    engine->engineCall(loadStack(svc::setStat, Stats::inMainMenu));
+    return 0;
+}
+
+int mapController::hDoEvent(){
+    return 0;
+}
+
+int mapController::hRender(){
+    render::render_map(map_list[currentMap], player);
     return 0;
 }
 
@@ -90,8 +107,8 @@ int mapController::setPlayerPosition(Point a){
 
     if(isPlayerOnObject()){
         if(getPlayerOnObject().getTriggerType() == stepOnTrig){
-            ctlCallStack.push_back(loadStack(svc::setStat, Stats::inEvent));
-            ctlCallStack.push_back(loadStack(svc::loadEvent, getPlayerOnObject().getTrigger()));
+            engine->engineCall(loadStack(svc::loadEvent, getPlayerOnObject().getTrigger()));
+            engine->engineCall(loadStack(svc::setStat, Stats::inEvent));
         }
     }
 

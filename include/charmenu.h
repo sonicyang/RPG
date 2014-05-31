@@ -1,23 +1,33 @@
 #ifndef CHARMENU_H
 #define CHARMENU_H
 
-#include <menu.h>
+#include "menu.h"
+#include "character.h"
 
+class Engine;
 
 class CharMenu : public Menu
 {
     public:
-        CharMenu(std::deque< std::vector< variant<paraVarType> > >&, std::map< std::string, variant<paraVarType> >&);
+        CharMenu(Engine*, std::map< std::string, variant<paraVarType> >&);
         virtual ~CharMenu();
 
-        virtual int processInput(int);
+        int hKeyUp();
+        int hKeyDown();
+        int hKeyZ();
+        int hKeyX();
+        int hKeyQ();
 
-        void init(int m);
+        int hDoEvent();
+
+        int hRender();
+
+        void init(int m, Character*);
     protected:
     private:
         unsigned int currentPos;
         unsigned int mode;
-        bool processPending = 0;
+        Character* currChara;
 };
 
 #endif // CHARMENU_H

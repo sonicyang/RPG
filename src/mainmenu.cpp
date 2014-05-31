@@ -3,9 +3,10 @@
 #include "mainmenu.h"
 #include "utils.h"
 #include "enum.h"
+#include "engine.h"
 
-MainMenu::MainMenu(std::deque< std::vector< variant<paraVarType> > >& a, std::map< std::string, variant<paraVarType> >& b) :
-    Menu(a, b)
+MainMenu::MainMenu(Engine* eng, std::map< std::string, variant<paraVarType> >& b) :
+    Menu(eng, b)
 {
     mOption.push_back("Team");
     mOption.push_back("Inventory");
@@ -20,44 +21,51 @@ MainMenu::~MainMenu()
 
 }
 
-int MainMenu::processInput(int c){
-    //Wait User input
-    switch (c) {
-        case KEY_UP:
-            currentPos = (currentPos==0)? mOption.size() - 1 : currentPos - 1;
-            break;
-        case KEY_DOWN:
-            currentPos = (currentPos == mOption.size() - 1)? 0 : currentPos + 1;
-            break;
-        case 'z':
-            switch(currentPos){
+int MainMenu::hKeyUp(){
+    currentPos = (currentPos==0)? mOption.size() - 1 : currentPos - 1;
+    return 0;
+}
+
+int MainMenu::hKeyDown(){
+    currentPos = (currentPos == mOption.size() - 1)? 0 : currentPos + 1;
+    return 0;
+}
+
+int MainMenu::hKeyZ(){
+    varMap["MainMenuCurPos"].set<unsigned int>(currentPos);
+
+    switch(currentPos){
             case 0:
-                ctlCallStack.push_back(loadStack(svc::loadTeamMenu, 0));
-                ctlCallStack.push_back(loadStack(svc::setStat, Stats::inTeamMenu));
+                engine->engineCall(loadStack(svc::loadTeamMenu, 0));
+                engine->engineCall(loadStack(svc::setStat, Stats::inTeamMenu));
                 break;
             case 1:
-                ctlCallStack.push_back(loadStack(svc::loadInvMenu, 0));
-                ctlCallStack.push_back(loadStack(svc::setStat, Stats::inInvMenu));
+                engine->engineCall(loadStack(svc::loadInvMenu, 0));
+                engine->engineCall(loadStack(svc::setStat, Stats::inInvMenu));
                 break;
             case 2:
-                ctlCallStack.push_back(loadStack(svc::endGame));
+                engine->engineCall(loadStack(svc::endGame));
                 break;
             }
+    return 0;
+}
 
+int MainMenu::hKeyX(){
+    engine->engineCall(loadStack(svc::restoreStat));
+    return 0;
+}
 
-            break;
-        case 'x':
-        case 'q':
-            ctlCallStack.push_back(loadStack(svc::restoreStat));
-            break;
-    }
+int MainMenu::hKeyQ(){
+    engine->engineCall(loadStack(svc::restoreStat));
+    return 0;
+}
 
-    varMap["MainMenuCurPos"].set<unsigned int>(currentPos);
+int MainMenu::hRender(){
+    render::render_MainMenu(currentPos, mOption);
     return 0;
 }
 
 void MainMenu::init(void){
     currentPos = 0;
-    varMap["MainMenuCurPos"].set<unsigned int>(currentPos);
 }
 
