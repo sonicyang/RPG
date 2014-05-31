@@ -9,7 +9,6 @@
 #include "genericcontorller.h"
 
 class Engine;
-class genericContorller;
 
 class mapController : public genericContorller
 {

@@ -25,7 +25,7 @@ Engine::Engine() :
     inv(),
     team("data/team/team_list.lst"),
     prom(this),
-    battle("data/monsters/monster_list.lst", ctlCall, varMap),
+    battle("data/monsters/monster_list.lst", this, varMap),
     mainmenu(this, varMap),
     teammenu(this, varMap),
     invmenu(this, varMap),
@@ -213,7 +213,7 @@ variant<paraVarType> Engine::engineCall(std::vector< variant<paraVarType> > para
             ctlCall.push_back(loadStack(svc::loadPrompt, UTF8_to_WChar(tmp), UTF8_to_WChar("System")));
             break;
         case svc::battle:
-            battle.loadBattle(team.getNameList().size(), params[1].get< std::vector< std::string> >());
+            battle.loadBattle(&team, params[1].get< std::vector< std::string> >());
             ctlCall.push_back(loadStack(svc::setStat, Stats::inBattle));
             break;
         case svc::loadMainMenu:
@@ -293,11 +293,8 @@ variant<paraVarType> Engine::engineCall(std::vector< variant<paraVarType> > para
         case svc::moveVar:
             varMap[params[1].get<std::string>()].set<int>(varMap[params[2].get<std::string>()].get<int>());
             break;
-        case svc::qureySkillMonsterMenuRequired:
-            ret.set<int>(team[team.getNameList()[params[1].get<unsigned int>()]].getSkillList()[params[2].get<unsigned int>()].geteTarget());
-            break;
-        case svc::qureySkillTeamMenuRequired:
-            ret.set<int>(team[team.getNameList()[params[1].get<unsigned int>()]].getSkillList()[params[2].get<unsigned int>()].getfTarget());
+        case svc::qureySkill:
+            ret.set<Skill>(team[team.getNameList()[params[1].get<unsigned int>()]].getSkillList()[params[2].get<unsigned int>()]);
             break;
         case svc::useSkill:
             ret.set<int>(ItemExec::skillExec(team, params[1].get<unsigned int>(), params[2].get<unsigned int>(), battle.getMonsters(), params[3].get<unsigned int>(), params[4].get<unsigned int>(), rdr));
@@ -405,7 +402,7 @@ void Engine::setStat(int s){
             excute(skillmenu);
             break;
         case inBattle:
-            //battle.processInput(c);
+            excute(battle);
             break;
         case inPrompt:
             excute(prom);

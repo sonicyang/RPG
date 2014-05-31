@@ -90,8 +90,7 @@ enum svc{
     varMP,              //memberIndex, Amount
     varExp,             //memberIndex, Amount
     moveVar,            //dis, src      31
-    qureySkillMonsterMenuRequired, //memberIndex, skillIndex
-    qureySkillTeamMenuRequired, //memberIndex, skillIndex
+    qureySkill,         //memberIndex, skillIndex
     useSkill,           //memberIndex, skillIndex
     setupVender,        //List of Item
     loadVenderInvMenu,

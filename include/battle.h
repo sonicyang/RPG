@@ -8,49 +8,49 @@
 #include "team.h"
 #include "monsterfactory.h"
 #include "render.h"
+#include "genericContorller.h"
+#include "team.h"
 
+class Engine;
 
-class Battle
+class Battle : public genericContorller
 {
     public:
-        Battle(std::string monsterList, std::deque< std::vector< variant<paraVarType> > >&, std::map< std::string, variant<paraVarType> >&);
+        Battle(std::string monsterList, Engine*, std::map< std::string, variant<paraVarType> >&);
         ~Battle();
+        
+        int hKeyUp();
+        int hKeyDown();
+        int hKeyLeft();
+        int hKeyRight();
+        int hKeyZ();
+        int hKeyX();
+        int hKeyQ();
 
-        int processInput(int);
+        int hDoEvent();
 
-        int loadBattle(int memberCount, std::vector<std::string>& monsters, int chance = 0);
+        int hRender();
 
-        int battleStart(std::vector<std::string>& monsters, int chance = 0);
+        int loadBattle(Team* t, std::vector<std::string>& monsters, int chance = 0);
 
         std::vector<Monster>& getMonsters() { return _monsters; };
         int getMonsterTag() { return MonsterMenuCurrentPos; };
         int getCurrentChara() { return _currentChara; };
         int getMenuPos() { return battleMenuCurrentPos; };
 
-        enum process{
+        enum process{ 
             prePlayer = 0,
-            playerDeathCheack,
             BattleMenu,
             MonsterMenu,
             PlayerNormalAttack,
-            PrePlayerSkillQuery,
-            PrePlayerSkill,
-            PrePlayerSkill2,
             skillMonsterMenu,
             PlayerSkill,
-            notEnoughMana,
-            PostPlayerSkill,
-            EscapeFailed,
             PostPlayer,
-            PreMonsterTurn,
             MonsterTurn,
-            TeamWipeOutCheck,
             PostBattle,
-            Escaped
         };
     protected:
     private:
-        std::deque< std::vector< variant<paraVarType> > >& ctlCallStack;
         std::map< std::string, variant<paraVarType> >& varMap;
 
         MonsterFactory _monsterCache;
@@ -58,20 +58,18 @@ class Battle
         std::vector<Monster> _monstersBak;
         unsigned int _memberCount = 0;
         int _chance = 0;
-
+        
+        Team* team;
         unsigned int _currentChara = 0;
 
         std::vector<int> charaAttackBuff;
         std::vector<int> charaDefenseBuff;
 
-        int processPending;
+        int processStat;
 
         unsigned int battleMenuCurrentPos = 0;
         unsigned int MonsterMenuCurrentPos = 0;
 
-        int battleMenu(int i);
-        int monsterMenu();
-        int useSkill(int i);
         bool isMonsterWipeOut();
         void calculateExp();
 };
