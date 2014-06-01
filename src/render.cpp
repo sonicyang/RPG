@@ -455,15 +455,18 @@ void render::render_StartMenu(int curPos, std::vector<std::string> options){
       attron(A_BOLD);
       mvaddstr(16 + 2*curPos, 40 - options[curPos].size()/2, options[curPos].c_str());
       attroff(A_BOLD);
+      refresh();
 }
 
 void render::render_gameOver(){
+    clear();
 
     //Print Selected Options
     attron(A_BOLD);
-    mvaddstr(getmaxy(stdscr) / 2 - 4, getmaxx(stdscr) / 2, "GameOver");
+    mvaddstr(getmaxy(stdscr) / 2, getmaxx(stdscr) / 2 - 4, "GameOver");
     attroff(A_BOLD);
 
+    refresh();
     usleep(2000000);
     return;
 }

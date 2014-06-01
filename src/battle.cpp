@@ -141,8 +141,10 @@ int Battle::hKeyQ(){
 
 int Battle::hDoEvent(){
     if(processStat == prePlayer){
-        for(;engine->engineCall(loadStack(svc::isCharDead, _currentChara)).get<int>() == 1;_currentChara++);
-        processStat = BattleMenu;
+        if((*team)[team->getNameList()[_currentChara]].isDead())
+            processStat = PostPlayer;
+        else
+            processStat = BattleMenu;
     }else if(processStat == PlayerSkill){
         Skill tmp = (*team)[team->getNameList()[_currentChara]].getSkillList()[varMap["SkillMenuCurPos"].get<unsigned int>()];
         if(tmp.getfTarget() == 0){

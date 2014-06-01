@@ -114,11 +114,14 @@ void Engine::parseUserInput(genericContorller& controller){
 
 void Engine::excute(){
     for(;!fullstop;){
-        stop = 0;
-        parseUserInput(startmenu);
-        startmenu.hDoEvent();
-        startmenu.hRender();
-        usleep(16666);
+        try{
+            parseUserInput(startmenu);
+            startmenu.hDoEvent();
+            startmenu.hRender();
+            usleep(16666);
+        }catch(int){
+            stop = 0;
+        }
     }
 }
 
@@ -129,9 +132,11 @@ void Engine::excute(genericContorller& controller){
         controller.hRender();
         usleep(16666);
     }
-    if(stop == 1) //Nested stop signal
-        stop = 0;
-} 
+    if(stop != 1) //Nested stop signal
+        throw(0);
+    else
+       stop = 0; 
+}
 
 variant<paraVarType> Engine::engineCall(std::vector< variant<paraVarType> > params){
     char tmp[100];
@@ -337,59 +342,6 @@ variant<paraVarType> Engine::engineCall(std::vector< variant<paraVarType> > para
     varMap["ret"] = ret;
     return ret;
 }
-
-/*
-void Engine::updateScreen(){
-    switch(stat){
-        case Stats::onMap:
-        case Stats::inEvent:
-            //rdr.render_map(mapCtl.getCurrentMap());
-            //rdr.render_Player(mapCtl.getPlayer());
-            break;
-        case Stats::inMainMenu:
-            rdr.render_MainMenu(varMap["MainMenuCurPos"].get<unsigned int>(), mainmenu.getOptions());
-            break;
-        case Stats::inTeamMenu:
-            rdr.render_TeamMenu(team, varMap["TeamMenuCurPos"].get<unsigned int>());
-            break;
-        case Stats::inInvMenu:
-            rdr.render_InvMenu(inv, varMap["InvMenuCurPos"].get<unsigned int>());
-            break;
-        case Stats::inVendorInvMenu:
-            rdr.render_InvMenu(vendor.getVenderInv(), varMap["InvMenuCurPos"].get<unsigned int>());
-            break;
-        case Stats::inCharMenu:
-            rdr.render_CharMenu(team[team.getNameList()[varMap["TeamMenuCurPos"].get<unsigned int>()]], varMap["CharMenuCurPos"].get<unsigned int>());
-            break;
-        case Stats::inSkillMenu:
-            rdr.render_SkillMenu(team[team.getNameList()[varMap["TeamMenuCurPos"].get<unsigned int>()]], varMap["SkillMenuCurPos"].get<unsigned int>());
-            break;
-        case Stats::inBattle:
-            rdr.render_BattleScene(battle.getMonsters(), battle.getMonsterTag());
-            rdr.render_BattleTeam(team, battle.getCurrentChara());
-            rdr.render_BattleMenu(battle.getMenuPos());
-            break;
-        case Stats::inVender:
-            switch(vendor.getProcessStat()){
-                case 0:
-                    rdr.render_VenderMenu(varMap["VenderTopCurPos"].get<unsigned int>(), vendor.getOptions());
-                    break;
-                case 1:
-                    break;
-                case 2:
-                    break;
-            }
-            break;
-    }
-
-    if(prom.hasMessage()){
-        rdr.render_prompt(prom);
-    }
-
-    rdr.update();
-    return;
-}
-*/
 
 void Engine::setStat(int s){
     switch(s){
