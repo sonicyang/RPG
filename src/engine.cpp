@@ -46,27 +46,33 @@ void Engine::parseUserInput(genericContorller& controller){
     SDL_Event e;
     while(SDL_PollEvent(&e)){
         switch(e.type){
-            /*case KEY_UP:
-                controller.hKeyUp();
+            case SDL_KEYDOWN:
+                switch(e.key.keysym.sym){
+                    case SDLK_UP:
+                        controller.hKeyUp();
+                        break;
+                    case SDLK_DOWN:
+                        controller.hKeyDown();
+                        break;
+                    case SDLK_LEFT:
+                        controller.hKeyLeft();
+                        break;
+                    case SDLK_RIGHT:
+                        controller.hKeyRight();
+                        break;
+                    case SDLK_z:
+                    case SDLK_RETURN:
+                        controller.hKeyZ();
+                        break;
+                    case SDLK_x:
+                        controller.hKeyX();
+                        break;
+                    case SDLK_q:
+                    case SDLK_ESCAPE:
+                        controller.hKeyQ();
+                        break;
+                }
                 break;
-            case KEY_DOWN:
-                controller.hKeyDown();
-                break;
-            case KEY_LEFT:
-                controller.hKeyLeft();
-                break;
-            case KEY_RIGHT:
-                controller.hKeyRight();
-                break;
-            case 'z':
-                controller.hKeyZ();
-                break;
-            case 'x':
-                controller.hKeyX();
-                break;
-            case 'q':
-                controller.hKeyQ();
-                break;*/
             case SDL_QUIT:
                 fullstop = 1;        
                 break;
