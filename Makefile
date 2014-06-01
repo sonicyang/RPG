@@ -1,5 +1,6 @@
 CXX = g++
-CXXFLAG = -Wall -std=c++11 -g
+CXXFLAG = -Wall -std=c++11 -g3
+DEGUBBER = lldb
 
 PWD = .
 
@@ -16,7 +17,15 @@ LIB += -lcurses
 
 OBJDIR = $(PWD)/obj/
 
-OBJ = main.o array2d.o engine.o inventory.o item.o eventcontroller.o gmap.o mapcontroller.o mapobject.o objplayer.o point.o prompt.o render.o utils.o utf8.o battle.o character.o charmenu.o invmenu.o itemexec.o mainmenu.o menu.o monster.o monsterfactory.o  role.o rolefactory.o skill.o skillmenu.o team.o teammenu.o genericcontorller.o vender.o startmenu.o helpmenu.o
+OBJ = main.o engine.o
+OBJ += genericcontorller.o mapcontroller.o eventcontroller.o battle.o prompt.o inventory.o vender.o team.o
+OBJ += menu.o mainmenu.o startmenu.o helpmenu.o invmenu.o teammenu.o skillmenu.o charmenu.o
+OBJ += item.o
+OBJ += gmap.o mapobject.o objplayer.o
+OBJ += rolefactory.o role.o skill.o 
+OBJ += character.o monster.o monsterfactory.o
+OBJ += array2d.o point.o utils.o utf8.o
+OBJ += render.o itemexec.o
 OBJ += json_reader.o json_value.o json_writer.o
 
 
@@ -27,9 +36,9 @@ $(OUT_EXE): $(addprefix $(OBJDIR),$(OBJ))
 	@echo "    LD    "$@
 	@$(CXX) $(addprefix $(OBJDIR),$(OBJ)) $(CXXFLAG) $(LIB) -o $@
 
-debug:  $(OBJ)
-	@echo " LD-DEBUG  "$@
-	@$(CXX) $(OBJDIR)/$(OBJ) $(CXXFLAG) $(LIB) -o $@
+debug: $(OUT_EXE)
+	@echo " START-DEBUG  "$@
+	@$(DEBUGGER) $(PWD)/$(OUT_EXE)
 
 $(OBJDIR)%.o: $(GAMESRC)/%.cpp
 	@echo "    CC    "$@
