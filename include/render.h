@@ -1,14 +1,15 @@
 #ifndef RENDER_H
 #define RENDER_H
 
-#include <curses.h>
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
 #include "point.h"
 #include "mapobject.h"
 #include "inventory.h"
 #include "team.h"
 #include "character.h"
 #include "monster.h"
+#include "texture.h"
 
 class prompt;
 class objPlayer;
@@ -42,8 +43,25 @@ class render
         void update();
     protected:
     private:
+        const int WINDOW_SIZE_X = 800;
+        const int WINDOW_SIZE_Y = 600;
+
         SDL_Window *win = NULL;
         SDL_Renderer *ren = NULL;
+        TTF_Font* font = NULL;
+
+        Texture texture;
+
+        int getmaxx() { return WINDOW_SIZE_X; };
+        int getmaxy() { return WINDOW_SIZE_Y; };
+
+        void clear();
+
+        void mvaddstr(int y, int x, const char*);
+        void addstr (const char*);
+        void mvaddch(int y, int x, char);
+        void mvaddch(int y, int x, wchar_t);
+        void mvaddwstr(int y, int x, const wchar_t*);
 };
 
 #endif // RENDER_H

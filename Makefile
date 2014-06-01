@@ -15,6 +15,7 @@ INCLUDE += $(shell pkg-config --cflags ncursesw)
 LIB += $(shell pkg-config --libs ncursesw)
 LIB += -lcurses
 LIB += -lSDL2
+LIB += -lSDL2_ttf
 
 OBJDIR = $(PWD)/obj/
 
@@ -26,7 +27,7 @@ OBJ += gmap.o mapobject.o objplayer.o
 OBJ += rolefactory.o role.o skill.o 
 OBJ += character.o monster.o monsterfactory.o
 OBJ += array2d.o point.o utils.o utf8.o
-OBJ += render.o itemexec.o
+OBJ += render.o texture.o itemexec.o
 OBJ += json_reader.o json_value.o json_writer.o
 
 
