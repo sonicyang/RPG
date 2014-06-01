@@ -75,8 +75,8 @@ int SkillMenu::hKeyQ(){
     return 0;
 }
 
-int SkillMenu::hRender(){
-    render::render_SkillMenu(*currChara, currentPos);
+int SkillMenu::hRender(render& rdr){
+    rdr.render_SkillMenu(*currChara, currentPos);
     return 0;
 }
 

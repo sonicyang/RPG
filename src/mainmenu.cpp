@@ -60,8 +60,8 @@ int MainMenu::hKeyQ(){
     return 0;
 }
 
-int MainMenu::hRender(){
-    render::render_MainMenu(currentPos, mOption);
+int MainMenu::hRender(render& rdr){
+    rdr.render_MainMenu(currentPos, mOption);
     return 0;
 }
 

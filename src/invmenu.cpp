@@ -64,10 +64,11 @@ int InvMenu::hKeyQ(){
     return 0;
 }
 
-int InvMenu::hRender(){
-    render::render_InvMenu(*inv, currentPos);
+int InvMenu::hRender(render& rdr){
+    rdr.render_InvMenu(*inv, currentPos);
     return 0;
 }
+
 InvMenu::~InvMenu()
 {
     //dtor

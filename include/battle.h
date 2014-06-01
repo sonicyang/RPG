@@ -10,6 +10,7 @@
 #include "render.h"
 #include "genericContorller.h"
 #include "team.h"
+#include "render.h"
 
 class Engine;
 
@@ -29,7 +30,7 @@ class Battle : public genericContorller
 
         int hDoEvent();
 
-        int hRender();
+        int hRender(render&);
 
         int loadBattle(Team* t, std::vector<std::string>& monsters, int chance = 0);
 

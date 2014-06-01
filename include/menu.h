@@ -6,6 +6,7 @@
 #include <deque>
 #include "utils.h"
 #include "genericcontorller.h"
+#include "render.h"
 
 class Engine;
 
@@ -15,8 +16,6 @@ class Menu : public genericContorller
 
         Menu(Engine*, std::map< std::string, variant<paraVarType> >&);
         ~Menu();
-
-
 
     protected:
         std::map< std::string, variant<paraVarType> >& varMap;

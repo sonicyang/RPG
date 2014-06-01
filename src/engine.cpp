@@ -5,6 +5,7 @@
 #include <string>
 #include <algorithm>
 #include <unistd.h>
+#include <SDL2/SDL.h>
 
 #include "gmap.h"
 #include "point.h"
@@ -41,73 +42,35 @@ Engine::~Engine()
 {
 }
 
-/*
-void Engine::getParseUserInput(){
-    int c = getch();
-    switch(stat){
-        case onMap:
-            //mapCtl.processInput(c);
-            break;
-        case inEvent:
-            //evtCtl.processInput(c);
-            break;
-        case inMainMenu:
-            //mainmenu.processInput(c);
-            break;
-        case inTeamMenu:
-            //teammenu.processInput(c);
-            break;
-        case inInvMenu:
-        case inVendorInvMenu:
-            //invmenu.processInput(c);
-            break;
-        case inCharMenu:
-            //charmenu.processInput(c);
-            break;
-        case inSkillMenu:
-            //skillmenu.processInput(c);
-            break;
-        case inBattle:
-            //battle.processInput(c);
-            break;
-        case inPrompt:
-            if(c == 'z'){
-                prom.discardMessage();
-                this->restoreStat();
-            }
-            break;
-        case inVender:
-            vendor.processInput(c);
-            break;
-    }
-}
-*/
-
 void Engine::parseUserInput(genericContorller& controller){
-    int c = getch();
-    switch(c){
-        case KEY_UP:
-            controller.hKeyUp();
-            break;
-        case KEY_DOWN:
-            controller.hKeyDown();
-            break;
-        case KEY_LEFT:
-            controller.hKeyLeft();
-            break;
-        case KEY_RIGHT:
-            controller.hKeyRight();
-            break;
-        case 'z':
-            controller.hKeyZ();
-            break;
-        case 'x':
-            controller.hKeyX();
-            break;
-        case 'q':
-            controller.hKeyQ();
-            break;
-
+    SDL_Event e;
+    while(SDL_PollEvent(&e)){
+        switch(e.type){
+            /*case KEY_UP:
+                controller.hKeyUp();
+                break;
+            case KEY_DOWN:
+                controller.hKeyDown();
+                break;
+            case KEY_LEFT:
+                controller.hKeyLeft();
+                break;
+            case KEY_RIGHT:
+                controller.hKeyRight();
+                break;
+            case 'z':
+                controller.hKeyZ();
+                break;
+            case 'x':
+                controller.hKeyX();
+                break;
+            case 'q':
+                controller.hKeyQ();
+                break;*/
+            case SDL_QUIT:
+                fullstop = 1;        
+                break;
+        }
     }
 
 }
@@ -117,7 +80,7 @@ void Engine::excute(){
         try{
             parseUserInput(startmenu);
             startmenu.hDoEvent();
-            startmenu.hRender();
+            startmenu.hRender(rdr);
             usleep(16666);
         }catch(int){
             stop = 0;
@@ -129,7 +92,7 @@ void Engine::excute(genericContorller& controller){
     for(;!stop;){
         parseUserInput(controller);
         controller.hDoEvent();
-        controller.hRender();
+        controller.hRender(rdr);
         usleep(16666);
     }
     if(stop != 1) //Nested stop signal
@@ -326,7 +289,7 @@ variant<paraVarType> Engine::engineCall(std::vector< variant<paraVarType> > para
             engineCall(loadStack(svc::decItem, inv.getNameList(params[1].get<unsigned int>())[0]));
             break;
         case svc::gameOver:
-            render::render_gameOver();
+            rdr.render_gameOver();
             stop = -1;
             ret.set<int>(-1);
             break;

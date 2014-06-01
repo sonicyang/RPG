@@ -6,6 +6,7 @@
 #include "genericcontorller.h"
 
 class Engine;
+class render;
 
 class prompt : public genericContorller
 {
@@ -15,7 +16,7 @@ class prompt : public genericContorller
         
         int hKeyZ();
 
-        int hRender(); 
+        int hRender(render&); 
 
         void discardMessage();
         void loadMessaage(const wchar_t*, const wchar_t*);

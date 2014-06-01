@@ -50,8 +50,8 @@ int TeamMenu::hKeyQ(){
     return 0;
 }
 
-int TeamMenu::hRender(){
-    render::render_TeamMenu(*team, currentPos);
+int TeamMenu::hRender(render& rdr){
+    rdr.render_TeamMenu(*team, currentPos);
     return 0;
 }
 

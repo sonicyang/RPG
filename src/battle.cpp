@@ -234,13 +234,13 @@ int Battle::hDoEvent(){
     return 0;
 }
 
-int Battle::hRender(){
+int Battle::hRender(render& rdr){
     if(processStat == MonsterMenu || processStat == skillMonsterMenu)
-        render::render_BattleScene(_monsters, MonsterMenuCurrentPos);
+        rdr.render_BattleScene(_monsters, MonsterMenuCurrentPos);
     else
-        render::render_BattleScene(_monsters);
-    render::render_BattleTeam(*team, _currentChara);
-    render::render_BattleMenu(battleMenuCurrentPos);
+        rdr.render_BattleScene(_monsters);
+    rdr.render_BattleTeam(*team, _currentChara);
+    rdr.render_BattleMenu(battleMenuCurrentPos);
     return 0;
 }
 

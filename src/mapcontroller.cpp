@@ -89,8 +89,8 @@ int mapController::hDoEvent(){
     return 0;
 }
 
-int mapController::hRender(){
-    render::render_map(map_list[currentMap], player);
+int mapController::hRender(render& rdr){
+    rdr.render_map(map_list[currentMap], player);
     return 0;
 }
 

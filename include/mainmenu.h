@@ -1,7 +1,8 @@
 #ifndef MAINMENU_H
 #define MAINMENU_H
 
-#include <menu.h>
+#include "menu.h"
+#include "render.h"
 
 class Engine;
 
@@ -17,7 +18,7 @@ class MainMenu : public Menu
         int hKeyX();
         int hKeyQ();
 
-        int hRender();
+        int hRender(render&);
 
         void init(void);
 

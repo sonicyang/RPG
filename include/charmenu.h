@@ -3,11 +3,12 @@
 
 #include "menu.h"
 #include "character.h"
+#include "render.h"
 
 class Engine;
 
 class CharMenu : public Menu
-{
+{ 
     public:
         CharMenu(Engine*, std::map< std::string, variant<paraVarType> >&);
         virtual ~CharMenu();
@@ -20,7 +21,7 @@ class CharMenu : public Menu
 
         int hDoEvent();
 
-        int hRender();
+        int hRender(render&);
 
         void init(int m, Character*);
     protected:

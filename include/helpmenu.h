@@ -1,12 +1,13 @@
 #ifndef HELPMENU_H
 #define HELPMENU_H
 
-#include <menu.h>
+#include "menu.h"
+#include "render.h"
 
 class Engine;
 
 class HelpMenu : public Menu
-{
+{ 
     public:
         HelpMenu(Engine*, std::map< std::string, variant<paraVarType> >&);
         virtual ~HelpMenu();
@@ -14,7 +15,7 @@ class HelpMenu : public Menu
         int hKeyZ();
         int hKeyX();
 
-        int hRender();
+        int hRender(render&);
     
     protected:
     private:

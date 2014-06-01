@@ -26,7 +26,7 @@ class mapController : public genericContorller
 
         int hDoEvent();
 
-        int hRender();
+        int hRender(render&);
 
         const gmap& getCurrentMap();
         void setCurrentMap(std::string);

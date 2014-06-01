@@ -48,8 +48,8 @@ int StartMenu::hKeyZ(){
     return 0;
 }
 
-int StartMenu::hRender(){
-    render::render_StartMenu(currentPos, mOption);
+int StartMenu::hRender(render& rdr){
+    rdr.render_StartMenu(currentPos, mOption);
     return 0;
 }
 

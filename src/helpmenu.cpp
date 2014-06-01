@@ -25,7 +25,7 @@ int HelpMenu::hKeyX(){
     return 0;
 }
 
-int HelpMenu::hRender(){
-    render::render_HelpMenu();
+int HelpMenu::hRender(render& rdr){
+    rdr.render_HelpMenu();
     return 0;
 }

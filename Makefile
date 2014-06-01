@@ -14,6 +14,7 @@ INCLUDE += $(shell pkg-config --cflags ncursesw)
 # Libs flags
 LIB += $(shell pkg-config --libs ncursesw)
 LIB += -lcurses
+LIB += -lSDL2
 
 OBJDIR = $(PWD)/obj/
 

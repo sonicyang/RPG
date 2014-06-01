@@ -1,19 +1,45 @@
 #define _XOPEN_SOURCE_EXTENDED
 
+#include <iostream>
 #include <curses.h>
 #include <unistd.h>
+#include <locale.h>
+#include <SDL2/SDL.h>
 #include "render.h"
 #include "gmap.h"
 #include "point.h"
-#include <locale.h>
-#include "Skill.h"
+#include "skill.h"
+#include "prompt.h"
+#include "objPlayer.h"
+#include "gmap.h"
 
 render::render()
 {
+    if (SDL_Init(SDL_INIT_EVERYTHING) != 0){
+        std::cout << "SDL_Init Error: " << SDL_GetError() << std::endl;
+        throw(122);
+    }
+
+    win = SDL_CreateWindow("Hello World!", 100, 100, 640, 480,
+                SDL_WINDOW_SHOWN);
+    if (win == nullptr){
+        std::cout << "SDL_CreateWindow Error: " << SDL_GetError() << std::endl;
+        throw(122);
+    }
+    
+    ren = SDL_CreateRenderer(win, -1, 
+                SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+    if (ren == nullptr){
+        std::cout << "SDL_CreateRenderer Error: " << SDL_GetError() << std::endl;
+        throw(122);
+    }
 }
 
 render::~render()
 {
+    SDL_DestroyRenderer(ren);
+    SDL_DestroyWindow(win);
+    SDL_Quit();
 }
 
 void render::render_map(gmap toRender, objPlayer mo){
@@ -498,13 +524,3 @@ void render::update(){
     refresh();
     return;
 }
-
-void render::mvaddutf8(int y, int x, wchar_t wc){
-    /*cchar_t c;
-    c.attr = 0;
-    c.chars[0] = wc;
-    c.chars[1] = L'\0';
-
-    mvadd_wch(y, x, &c);*/
-}
-

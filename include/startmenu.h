@@ -2,6 +2,7 @@
 #define STARTMENU_H
 
 #include "menu.h"
+#include "render.h"
 
 class Engine;
 
@@ -15,7 +16,7 @@ class StartMenu : public Menu
         int hKeyDown();
         int hKeyZ();
 
-        int hRender();
+        int hRender(render&);
         
         void init();
 

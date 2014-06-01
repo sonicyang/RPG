@@ -3,11 +3,12 @@
 
 #include "menu.h"
 #include "inventory.h"
+#include "render.h"
 
 class Engine;
 
 class InvMenu : public Menu
-{
+{ 
     public:
         InvMenu(Engine*, std::map< std::string, variant<paraVarType> >&);
         virtual ~InvMenu();
@@ -18,7 +19,7 @@ class InvMenu : public Menu
         int hKeyX();
         int hKeyQ();
 
-        int hRender();
+        int hRender(render&);
 
         void init(int m, inventory* i);
     protected:

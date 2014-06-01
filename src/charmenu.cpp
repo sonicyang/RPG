@@ -64,8 +64,8 @@ int CharMenu::hDoEvent(){
     return 0;
 }
 
-int CharMenu::hRender(){
-    render::render_CharMenu((*currChara), currentPos);
+int CharMenu::hRender(render& rdr){
+    rdr.render_CharMenu((*currChara), currentPos);
     return 0;
 }
 

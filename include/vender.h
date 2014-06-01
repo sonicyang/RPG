@@ -6,6 +6,7 @@
 
 #include "inventory.h"
 #include "genericcontorller.h"
+#include "render.h"
 
 class Engine;
 
@@ -22,7 +23,7 @@ class Vender : public genericContorller
         int hKeyZ();
         int hKeyX();
 
-        int hRender();
+        int hRender(render&);
 
         inventory& getVenderInv(){ return venderInv; };
 

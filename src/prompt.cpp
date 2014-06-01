@@ -21,9 +21,9 @@ int prompt::hKeyZ(){
     return 0;
 }
 
-int prompt::hRender(){
+int prompt::hRender(render& rdr){
     if(hasMessage())
-        render::render_prompt(*this);
+        rdr.render_prompt(*this);
     return 0;
 }
 

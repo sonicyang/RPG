@@ -3,6 +3,7 @@
 
 #include "menu.h"
 #include "team.h"
+#include "render.h"
 
 class Engine;
 
@@ -18,7 +19,7 @@ class TeamMenu : public Menu
         int hKeyX();
         int hKeyQ();
 
-        int hRender();
+        int hRender(render&);
 
         void init(int m, Team* t);
     protected:

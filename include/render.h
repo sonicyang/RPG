@@ -2,15 +2,17 @@
 #define RENDER_H
 
 #include <curses.h>
+#include <SDL2/SDL.h>
 #include "point.h"
-#include "gmap.h"
 #include "mapobject.h"
-#include "objPlayer.h"
-#include "prompt.h"
 #include "inventory.h"
 #include "team.h"
 #include "character.h"
 #include "monster.h"
+
+class prompt;
+class objPlayer;
+class gmap;
 
 class render
 {
@@ -18,31 +20,30 @@ class render
         render();
         ~render();
 
-        static void render_map(gmap, objPlayer);
-        //static void render_Player(objPlayer);
-        static void render_prompt(prompt& P);
+        void render_map(gmap, objPlayer);
+        void render_prompt(prompt& P);
 
-        static void render_MainMenu(int curPos, std::vector<std::string> options);
-        static void render_TeamMenu(Team&, unsigned int curPos);
-        static void render_InvMenu(inventory& inv, int curPos);
-        static void render_CharMenu(Character& chara, int curPos);
-        static void render_SkillMenu(Character& chara, int curPos);
+        void render_MainMenu(int curPos, std::vector<std::string> options);
+        void render_TeamMenu(Team&, unsigned int curPos);
+        void render_InvMenu(inventory& inv, int curPos);
+        void render_CharMenu(Character& chara, int curPos);
+        void render_SkillMenu(Character& chara, int curPos);
 
-        static void render_BattleScene(std::vector<Monster> m, int tag = -1);
-        static void render_BattleTeam(Team& team, unsigned int turn);
-        static void render_BattleMenu(unsigned int curPos);
+        void render_BattleScene(std::vector<Monster> m, int tag = -1);
+        void render_BattleTeam(Team& team, unsigned int turn);
+        void render_BattleMenu(unsigned int curPos);
 
-        static void render_VenderMenu(int curPos, std::vector<std::string> options);
+        void render_VenderMenu(int curPos, std::vector<std::string> options);
 
-        static void render_StartMenu(int curPos, std::vector<std::string> options);
-        static void render_gameOver();
-        static void render_HelpMenu();
+        void render_StartMenu(int curPos, std::vector<std::string> options);
+        void render_gameOver();
+        void render_HelpMenu();
 
-        static void update();
+        void update();
     protected:
     private:
-
-        static void mvaddutf8(int y, int x, wchar_t);
+        SDL_Window *win = NULL;
+        SDL_Renderer *ren = NULL;
 };
 
 #endif // RENDER_H

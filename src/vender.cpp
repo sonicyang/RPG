@@ -78,7 +78,7 @@ int Vender::hKeyX(){
     return 0;
 }
 
-int Vender::hRender(){
-    render::render_VenderMenu(topCurPos, mOptions);
+int Vender::hRender(render& rdr){
+    rdr.render_VenderMenu(topCurPos, mOptions);
     return 0;
 }

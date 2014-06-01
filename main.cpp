@@ -18,12 +18,6 @@ using namespace std;
 int main()
 {
     Engine gCtl;
-    initscr();
-    cbreak();
-    noecho();
-    nodelay(stdscr, true);
-    keypad(stdscr, TRUE);
     gCtl.excute();
-    endwin();
     return 0;
 }

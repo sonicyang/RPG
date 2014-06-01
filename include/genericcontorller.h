@@ -5,6 +5,7 @@
 #include "utils.h"
 
 class Engine;
+class render;
 
 class genericContorller
 {
@@ -22,7 +23,7 @@ class genericContorller
 
         virtual int hDoEvent() {return 0;};
 
-        virtual int hRender() {return 0;};
+        virtual int hRender(render&) {return 0;};
     protected:
         Engine* engine;
     private:
