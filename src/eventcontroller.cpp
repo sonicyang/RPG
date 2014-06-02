@@ -1,6 +1,5 @@
 #include <algorithm>
 #include <cstring>
-#include <curses.h>
 #include "prompt.h"
 #include "utils.h"
 #include "eventcontroller.h"

@@ -1,7 +1,6 @@
 #ifndef BATTLE_H
 #define BATTLE_H
 
-#include <curses.h>
 #include <string>
 #include <vector>
 #include "inventory.h"

@@ -12,8 +12,7 @@
 #include "objPlayer.h"
 #include "gmap.h"
 
-render::render() :
-    texture(ren, font)
+render::render()
 {
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0){
         std::cout << "SDL_Init Error: " << SDL_GetError() << std::endl;
@@ -36,7 +35,11 @@ render::render() :
 
     TTF_Init();
 
-    font = TTF_OpenFont( "Arial.ttf", 16  );
+    font = TTF_OpenFont("Arial.ttf", 10);
+    if(font == nullptr){
+        std::cout << "Font Error: " << SDL_GetError() << std::endl;
+        throw(122);
+    }
 }
 
 render::~render()
@@ -82,7 +85,8 @@ void render::render_map(gmap toRender, objPlayer mo){
     }else{
         mvaddch(mo.GetCord().Get_y() + offset.m_y, mo.GetCord().Get_x() + offset.m_x, mo.Geticon());
     }
-
+    
+    update();
     return;
 }
 
@@ -483,6 +487,8 @@ void render::render_StartMenu(int curPos, std::vector<std::string> options){
       //attron(A_BOLD);
       mvaddstr(16 + 2*curPos, 40 - options[curPos].size()/2, options[curPos].c_str());
       //attroff(A_BOLD);
+      
+      update();
 }
 
 void render::render_gameOver(){
@@ -517,10 +523,11 @@ void render::render_HelpMenu(){
     mvaddstr(14, 2, "\t q - Menu");
     mvaddstr(16, 2, "\t Arrow Keys - Move");
 
-   
+    update();   
 }
 
 void render::update(){
+    SDL_RenderPresent(ren);
     return;
 }
 
@@ -529,8 +536,15 @@ void render::clear(){
     return;
 }
 
-void render::mvaddstr(int y, int x, const char*){
+void render::mvaddstr(int y, int x, const char* str){
+    _currX = x;
+    _currY = y;
 
+    SDL_Color textColor = { 255, 255, 255  };
+    texture.loadFromRenderedText(str, textColor, ren, font);
+
+    texture.render(ren, x * 10, y * 10);
+    return;
 }
 
 void render::addstr (const char*){

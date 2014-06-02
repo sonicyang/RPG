@@ -1,4 +1,3 @@
-#include <curses.h>
 #include <cstdlib>
 #include <string>
 #include <cstring>

@@ -8,17 +8,18 @@
 class Texture{
 
     public:
-        Texture(SDL_Renderer* ren, TTF_Font* font);
+        Texture();
         ~Texture();
 
-        bool loadFromRenderedText(std::string textureText, SDL_Color textColor);
+        bool loadFromRenderedText(const char* textureText, SDL_Color textColor, SDL_Renderer*, TTF_Font*);
 
-        void free(); 
+        void free();
+
+        void render(SDL_Renderer*, int, int, SDL_Rect* = NULL, double = 0.0, SDL_Point* = NULL, SDL_RendererFlip = SDL_FLIP_NONE);
+
         int getWidth() const { return _Width; };
         int getHeight() const { return _Height; };
     private:
-        SDL_Renderer* gRenderer;
-        TTF_Font* gFont;
         SDL_Texture* _Texture = NULL;
         int _Width;
         int _Height;

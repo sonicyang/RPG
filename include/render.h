@@ -56,6 +56,9 @@ class render
         int getmaxy() { return WINDOW_SIZE_Y; };
 
         void clear();
+        
+        int _currX = 0;
+        int _currY = 0;
 
         void mvaddstr(int y, int x, const char*);
         void addstr (const char*);

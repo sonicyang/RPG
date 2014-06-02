@@ -3,7 +3,6 @@
 
 #include <map>
 #include <string>
-#include <curses.h>
 #include <deque>
 #include "gmap.h"
 #include "render.h"

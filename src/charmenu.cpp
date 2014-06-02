@@ -1,5 +1,3 @@
-#include <curses.h>
-
 #include "charmenu.h"
 #include "utils.h"
 #include "enum.h"

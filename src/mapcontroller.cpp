@@ -1,5 +1,4 @@
 #include <cstdlib>
-#include <curses.h>
 #include <deque>
 #include "mapcontroller.h"
 #include "utils.h"

@@ -1,9 +1,7 @@
 #include "texture.h"
 
 
-Texture::Texture(SDL_Renderer* ren, TTF_Font* font) :
-    gRenderer(ren),
-    gFont(font)
+Texture::Texture()
 {
 
 }
@@ -13,10 +11,10 @@ Texture::~Texture(){
 }
 
 
-bool Texture::loadFromRenderedText(std::string textureText, SDL_Color textColor){
+bool Texture::loadFromRenderedText(const char* textureText, SDL_Color textColor, SDL_Renderer* gRenderer, TTF_Font* gFont){
     free();
     
-    SDL_Surface* textSurface = TTF_RenderText_Solid( gFont, textureText.c_str(), textColor );
+    SDL_Surface* textSurface = TTF_RenderText_Solid( gFont, textureText, textColor );
     if( textSurface != NULL ){
         _Texture = SDL_CreateTextureFromSurface( gRenderer, textSurface );
         if( _Texture != NULL ){
@@ -38,3 +36,16 @@ void Texture::free(){
         _Height = 0;
     }
 }
+
+void Texture::render(SDL_Renderer* gRenderer, int x, int y, SDL_Rect* clip, double angle, SDL_Point* center, SDL_RendererFlip flip){
+    SDL_Rect renderQuad = { x, y, _Width, _Height };
+
+    if( clip != NULL )
+    {
+        renderQuad.w = clip->w;
+        renderQuad.h = clip->h;
+    }
+
+    SDL_RenderCopyEx( gRenderer, _Texture, clip, &renderQuad, angle, center, flip );
+}
+

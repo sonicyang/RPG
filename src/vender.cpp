@@ -1,5 +1,3 @@
-#include <curses.h>
-
 #include "vender.h"
 
 #include "utils.h"
