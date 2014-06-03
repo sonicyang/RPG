@@ -206,11 +206,6 @@ void render::render_InvMenu(inventory& inv, int curPos){
     std::vector<std::string> nameList = inv.getNameList(curPos);
 
     clear();
-
-    char mString[40];
-    sprintf(mString, "Money: $%d", inv.getMoney());
-    mvaddstr(getmaxy() - 2, 28, mString);
-
     texture.loadFromFile("data/menu/frame_side.png", ren);
     texture.render(ren, 0, 0);
 
@@ -226,6 +221,12 @@ void render::render_InvMenu(inventory& inv, int curPos){
     texture.render(ren, offset.m_x - texture.getWidth() / 2, 5);
 
     font = TTF_OpenFont(FONT_NAME.c_str(), 16);
+
+    char mString[40];
+    sprintf(mString, "Money: $%d", inv.getMoney());
+    texture.loadFromRenderedText(mString, textColor, ren, font);
+    texture.render(ren, 300, 560);
+
     for (unsigned int i = 0; i < nameList.size(); i++){
         texture.loadFromRenderedText(nameList[i].c_str(), textColor, ren, font);
         texture.render(ren, 20, 100 + i * texture.getHeight());
