@@ -9,7 +9,6 @@
 #include "mapcontroller.h"
 #include "eventcontroller.h"
 #include "mapobject.h"
-#include "objPlayer.h"
 #include "inventory.h"
 #include "utils.h"
 #include "variant.h"

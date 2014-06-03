@@ -14,18 +14,17 @@ class mapObject
         friend class mapController;
 
         mapObject();
-        mapObject(std::string, int, int, int, int, wchar_t, std::string, bool, int);
+        mapObject(std::string, int, int, int, int, std::string, Point, std::string, bool, int);
         virtual ~mapObject();
-        mapObject(const mapObject& other);
-        mapObject& operator=(const mapObject& other);
 
-        Point GetCord() { return Cord; }
+        Point GetCord() const { return Cord; }
         std::string Getname() { return name; }
         int GetID() { return ID; }
         int Gettype() { return type; }
         bool canStepOn() { return _canStep; }
 
-        virtual wchar_t Geticon() const { return icon; }
+        std::string getTile() const { return tile; }
+        virtual Point Geticon() const { return icon; }
 
         int getTriggerType() { return triggerType; };
         std::string getTrigger() { return trigger; };
@@ -37,7 +36,8 @@ class mapObject
         std::string name;
         int ID;
         int type;
-        wchar_t icon;
+        std::string tile;
+        Point icon;
         bool _canStep;
         std::string trigger;
         int triggerType;

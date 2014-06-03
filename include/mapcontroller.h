@@ -3,7 +3,6 @@
 
 #include "gmap.h"
 #include "mapObject.h"
-#include "objPLayer.h"
 #include "variant.h"
 #include "point.h"
 #include "genericcontorller.h"
@@ -34,7 +33,7 @@ class mapController : public genericContorller
         int setPlayerPosition(Point a);
         Point getPlayerPosition();
         int movePlayer(Point a);
-        const objPlayer& getPlayer() { return player; }
+        const mapObject& getPlayer() { return player; }
 
         bool isPlayerFacingObject();
         mapObject& getPlayerFacingObject();
@@ -50,11 +49,9 @@ class mapController : public genericContorller
         std::map<std::string, gmap> map_list;
         unsigned int map_count;
 
-        objPlayer player;
+        mapObject player;
 
         Point getPlayerFacing();
-
-        //std::deque< std::vector< variant<paraVarType> > >& ctlCallStack;
 };
 
 #endif // MAPCONTROLLER_H

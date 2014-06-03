@@ -12,7 +12,7 @@
 #include "texture.h"
 
 class prompt;
-class objPlayer;
+class mapObject;
 class gmap;
 
 class render
@@ -21,7 +21,7 @@ class render
         render();
         ~render();
 
-        void render_map(gmap, objPlayer);
+        void render_map(gmap, mapObject);
         void render_prompt(prompt& P);
 
         void render_MainMenu(int curPos, std::vector<std::string> options);

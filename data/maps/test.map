@@ -12,7 +12,8 @@
 					"canStep" : 0,
 					"x"		:	4,
 					"y"		:	4,
-					"Icon"	:	"☹",
+					"Tile"  :   "data/tiles/fullsheet.bmp",
+					"Icon"	:   { "x" : 1, "y" : 1 },
 					"Trigger" : "DavidTrigger",
 					"trigType" : 1
 				},{
@@ -21,7 +22,8 @@
 					"canStep" : 1,
 					"x"		:	8,
 					"y"		:	4,
-					"Icon"	:	"Ｏ",
+					"Tile"  :   "data/tiles/fullsheet.bmp",
+					"Icon"	:	{ "x" : 2, "y" : 2 },
 					"Trigger" : "TrapTrigger",
 					"trigType" : 2
 
@@ -31,7 +33,8 @@
 					"canStep" : 1,
 					"x"		:	11,
 					"y"		:	3,
-					"Icon"	:	"　",
+					"Tile"  :   "data/tiles/fullsheet.bmp",
+					"Icon"	:	{ "x" : 2, "y" : 2 },
 					"Trigger" : "test_test2Trigger",
 					"trigType" : 2
 				}]

@@ -10,7 +10,8 @@
 					"canStep" : 0,
 					"x"		:	4,
 					"y"		:	4,
-					"Icon"	:	"Ｋ",
+					"Tile"  :   "data/tiles/fullsheets.bmp",
+					"Icon"	:	{ "x" : 1, "y" : 1 },
 					"Trigger" : "DavidTrigger",
 					"trigType" : 1
 				}]

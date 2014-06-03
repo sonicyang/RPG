@@ -9,7 +9,6 @@
 #include "point.h"
 #include "skill.h"
 #include "prompt.h"
-#include "objPlayer.h"
 #include "gmap.h"
 
 render::render()
@@ -50,7 +49,7 @@ render::~render()
     SDL_Quit();
 }
 
-void render::render_map(gmap toRender, objPlayer mo){
+void render::render_map(gmap toRender, mapObject mo){
     clear();
     mvaddstr(1, 1, "CurrentMap:");
     addstr(toRender.Getname().c_str());
@@ -60,32 +59,28 @@ void render::render_map(gmap toRender, objPlayer mo){
     offset.m_x = getmaxx() / 2 - toRender.Getsize().m_x;
     offset.m_y = (getmaxy() - toRender.Getsize().m_y) / 2;
 
-     texture.loadFromFile(toRender.getTile(), ren);
+    texture.loadFromFile(toRender.getTile(), ren);
 
-     for(unsigned int i = 0; i < toRender.Getsize().m_y; i++){
-        for(unsigned int j = 0; j < toRender.Getsize().m_x; j++){
-            SDL_Rect ROI = {(int)toRender.Getdata_x()[i][j] * 16, (int)toRender.Getdata_y()[i][j] * 16, 16 , 16};
-            texture.render(ren, j * 16, i * 16, &ROI);
-         }
-     }
-
+    for(unsigned int i = 0; i < toRender.Getsize().m_y; i++){
+       for(unsigned int j = 0; j < toRender.Getsize().m_x; j++){
+           SDL_Rect ROI = {(int)toRender.Getdata_x()[i][j] * 16, (int)toRender.Getdata_y()[i][j] * 16, 16 , 16};
+           texture.render(ren, j * 16, i * 16, &ROI);
+        }
+    }
 
     std::map<Point,mapObject>::const_iterator it = toRender.getObjects().begin();
     for(; it != toRender.getObjects().end(); it++){
-        if(it->second.Geticon() < 128){
-            mvaddch(it->first.m_y + offset.m_y, it->first.m_x + offset.m_x, it->second.Geticon());
-        }else{
-            mvaddch(it->first.m_y + offset.m_y, it->first.m_x + offset.m_x, it->second.Geticon());
-        }
-
+        texture.loadFromFile(it->second.getTile(), ren);
+        SDL_Rect ROI = {(int)it->second.Geticon().m_x * 16, (int)it->second.Geticon().m_y * 16, 16 , 16};
+        texture.render(ren, it->second.GetCord().m_x * 16, it->second.GetCord().m_y * 16, &ROI);
     }
-
+/*
     if(mo.Geticon() < 128){
         mvaddch(mo.GetCord().Get_y() + offset.m_y, mo.GetCord().Get_x() + offset.m_x, mo.Geticon());
     }else{
         mvaddch(mo.GetCord().Get_y() + offset.m_y, mo.GetCord().Get_x() + offset.m_x, mo.Geticon());
     }
-
+*/
     update();
     return;
 }

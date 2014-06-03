@@ -68,12 +68,19 @@ gmap::gmap(const char * filename)
 
         for(unsigned int i = 0; i < root["Objects"].size(); i++){
             Point cord(root["Objects"][i]["x"].asInt(), root["Objects"][i]["y"].asInt());
-            mapObject toAdd(root["Objects"][i]["Name"].asString(), i, root["Objects"][i]["Type"].asInt(), cord.m_x, cord.m_y, UTF8_to_WChar(root["Objects"][i]["Icon"].asCString())[0], root["Objects"][i]["Trigger"].asString(), root["Objects"][i]["canStep"].asInt(), root["Objects"][i]["trigType"].asInt());
+            mapObject toAdd(root["Objects"][i]["Name"].asString(), i, 
+                            root["Objects"][i]["Type"].asInt(), 
+                            cord.m_x, cord.m_y, 
+                            root["Objects"][i]["Tile"].asString(),
+                            Point(root["Objects"][i]["Icon"]["x"].asInt(), root["Objects"][i]["Icon"]["y"].asInt()), 
+                            root["Objects"][i]["Trigger"].asString(), 
+                            root["Objects"][i]["canStep"].asInt(), 
+                            root["Objects"][i]["trigType"].asInt());
             objects.insert(objects.begin(),std::pair<Point,mapObject>(cord, toAdd));
         }
 
     }else{
-        std::cout  << "Failed to parse configuration€n"  << reader.getFormatedErrorMessages();
+        std::cout  << "Failed to parse configuration\n"  << reader.getFormatedErrorMessages();
         exit(128);
     }
 }
