@@ -98,13 +98,13 @@ void render::render_prompt(prompt& P){
     std::wstring tmp = P.getMessage();
 
     unsigned int i;
-    for(i = 50; tmp.size() > i; i += 50){
-        texture.loadFromRenderedText(tmp.substr(i-50, i).c_str(), textColor, ren, font);
-        texture.render(ren, 6, 465 + (i / 50 - 1) * 20);
+    for(i = 65; tmp.size() > i; i += 65){
+        texture.loadFromRenderedText(tmp.substr(i - 65, 65).c_str(), textColor, ren, font);
+        texture.render(ren, 6, 465 + (i / 65 - 1) * 20);
     }
 
-    texture.loadFromRenderedText(tmp.substr(i-50, tmp.size()).c_str(), textColor, ren, font);
-    texture.render(ren, 6, 465 + (i / 50 - 1) * 20);
+    texture.loadFromRenderedText(tmp.substr(i-65, tmp.size()).c_str(), textColor, ren, font);
+    texture.render(ren, 6, 465 + (i / 65 - 1) * 20);
 
     update();
     return;
