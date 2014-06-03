@@ -111,12 +111,6 @@ void render::render_prompt(prompt& P){
 void render::render_MainMenu(int curPos, std::vector<std::string> options){
     clear();
 
-    //Print Selected Options
-    //attron(A_BOLD);
-    mvaddstr(4 + 2*curPos, 2, options[curPos].c_str());
-    //attroff(A_BOLD);
-
-
     texture.loadFromFile("data/menu/frame.png", ren);
     texture.render(ren, 0, 0);
 
@@ -141,7 +135,6 @@ void render::render_MainMenu(int curPos, std::vector<std::string> options){
     textColor = { 0xF4, 0xF0, 0xDD };
     texture.loadFromRenderedText(options[curPos].c_str(), textColor, ren, font);
     texture.render(ren, offset.m_x - texture.getWidth() / 2, offset.m_y - options.size() / 2 * texture.getHeight() + texture.getHeight() * curPos);
-
 
     update();
     return;
@@ -214,45 +207,62 @@ void render::render_InvMenu(inventory& inv, int curPos){
 
     clear();
 
-    //Make Frame and Print Title
-    for(int i = 0; i < getmaxx(); i++)
-        mvaddch(0, i, '=');
-    for(int i = 1; i < getmaxy(); i++)mvaddch(i, 0, '|'),mvaddch(i, getmaxx() - 1, '|');
-    for(int i = 0; i < getmaxx(); i++)
-        mvaddch(getmaxy() - 1, i, '=');
-    for(int i = 0; i < getmaxx(); i++)
-        mvaddch(2, i, '=');
-    for(int i = 3; i < getmaxy(); i++)
-        mvaddch(i, 25, '|');
-    for(int i = 26; i < getmaxx(); i++)
-        mvaddch(getmaxy() - 3, i, '=');
-
-    mvaddstr(1, getmaxx()/2 - 5, "INVENTORY");
-
     char mString[40];
     sprintf(mString, "Money: $%d", inv.getMoney());
     mvaddstr(getmaxy() - 2, 28, mString);
 
+    texture.loadFromFile("data/menu/frame_side.png", ren);
+    texture.render(ren, 0, 0);
+
+    Point offset;
+    offset.m_x = getmaxx() / 2;
+    offset.m_y = getmaxy() / 2;
+
+    SDL_Color textColor = {0xD8, 0xC6, 0x91};
+
+    //Print Title
+    font = TTF_OpenFont(FONT_NAME.c_str(), 50);
+    texture.loadFromRenderedText("INVENTORY", textColor, ren, font);
+    texture.render(ren, offset.m_x - texture.getWidth() / 2, 5);
+
+    font = TTF_OpenFont(FONT_NAME.c_str(), 16);
     for (unsigned int i = 0; i < nameList.size(); i++){
-        mvaddstr(i*2 + 4, 2, nameList[i].c_str());
+        texture.loadFromRenderedText(nameList[i].c_str(), textColor, ren, font);
+        texture.render(ren, 20, 100 + i * texture.getHeight());
     }
 
     if(!nameList.empty()){
         //Print Selected Options
-        //attron(A_BOLD);
-        mvaddstr(4, 2, nameList[0].c_str());
-        //attroff(A_BOLD);
+        textColor = { 0xF4, 0xF0, 0xDD };
+        texture.loadFromRenderedText(nameList[0].c_str(), textColor, ren, font);
+        texture.render(ren, 20, 100);
+        textColor = {0xD8, 0xC6, 0x91};
 
+        char tmp[100];
         //Print Informations
-        mvaddstr(4, 27, "Name:");
-        mvaddstr(4, 33, inv[nameList[0]].item.getName().c_str());
-        mvaddstr(6, 27, "Currently Have:");
-        char tmp[10];
-        sprintf(tmp, "%d", inv[nameList[0]].count);
-        mvaddstr(6, 43, tmp);
-        mvaddstr(8, 27, "Description:");
-        mvaddstr(9, 33, inv[nameList[0]].item.getDescription().c_str());
+        sprintf(tmp, "Name : %s", inv[nameList[0]].item.getName().c_str());
+        texture.loadFromRenderedText(tmp, textColor, ren, font);
+        texture.render(ren, 300, 100);
+
+        sprintf(tmp, "Currently Have : %d", inv[nameList[0]].count);
+        texture.loadFromRenderedText(tmp, textColor, ren, font);
+        texture.render(ren, 300, 130);
+
+        texture.loadFromRenderedText("Description : ", textColor, ren, font);
+        texture.render(ren, 300, 160);
+
+        unsigned int i;
+        for(i = 45; inv[nameList[0]].item.getDescription().size() > i; i += 45){
+            texture.loadFromRenderedText(inv[nameList[0]].item.getDescription().substr(i - 45, 45).c_str(), textColor, ren, font);
+            texture.render(ren, 320, 180 + (i / 45 - 1) * 20);
+        }
+
+        texture.loadFromRenderedText(inv[nameList[0]].item.getDescription().substr(i - 45, inv[nameList[0]].item.getDescription().size()).c_str(), textColor, ren, font);
+        texture.render(ren, 320, 180 + (i / 45 - 1) * 20);
+
     }
+
+    update();
 }
 
 void render::render_CharMenu(Character& chara, int curPos){
