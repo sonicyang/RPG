@@ -28,6 +28,34 @@ bool Texture::loadFromRenderedText(const char* textureText, SDL_Color textColor,
     return _Texture != NULL;
 }
 
+bool Texture::loadFromRenderedText(const wchar_t* textureText, SDL_Color textColor, SDL_Renderer* gRenderer, TTF_Font* gFont){
+    free();
+
+    std::wstring text(textureText);
+
+    const Uint16* utext = 0;
+    #if defined( _MSC_VER ) // Visual studio compiler version
+        assert( sizeof( Uint16 ) == sizeof( wchar_t ) );
+        utext = reinterpret_cast<const Uint16*>( text.c_str() );
+    #else
+        u16string stext( text.begin(), text.end() );
+        utext = stext.c_str();
+    #endif
+
+    SDL_Surface* textSurface = TTF_RenderUNICODE_Solid( gFont, utext, textColor );
+    if( textSurface != NULL ){
+        _Texture = SDL_CreateTextureFromSurface( gRenderer, textSurface );
+        if( _Texture != NULL ){
+            _Width = textSurface->w;
+            _Height = textSurface->h;
+        }
+
+        SDL_FreeSurface( textSurface );
+    }
+
+    return _Texture != NULL;
+}
+
 bool Texture::loadFromFile( std::string path, SDL_Renderer* gRenderer)
 {
 	//Get rid of preexisting texture

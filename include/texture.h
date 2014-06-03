@@ -9,10 +9,13 @@
 class Texture{
 
     public:
+        typedef std::basic_string<Uint16, std::char_traits<Uint16>, std::allocator<Uint16> > u16string;
+
         Texture();
         ~Texture();
 
         bool loadFromRenderedText(const char* textureText, SDL_Color textColor, SDL_Renderer*, TTF_Font*);
+        bool loadFromRenderedText(const wchar_t* textureText, SDL_Color textColor, SDL_Renderer*, TTF_Font*);
         bool loadFromFile(std::string path, SDL_Renderer*);
 
         void free();

@@ -34,11 +34,7 @@ render::render()
 
     TTF_Init();
 
-    font = TTF_OpenFont("Arial.ttf", 16);
-    if(font == nullptr){
-        std::cout << "Font Error: " << SDL_GetError() << std::endl;
-        throw(122);
-    }
+    font = TTF_OpenFont(FONT_NAME.c_str(), 16);
 }
 
 render::~render()
@@ -76,8 +72,10 @@ void render::render_map(gmap toRender, mapObject mo){
     SDL_Rect ROI = {(int)mo.Geticon().m_x * TILE_SIZE, (int)mo.Geticon().m_y * TILE_SIZE, TILE_SIZE , TILE_SIZE};
     texture.render(ren, mo.GetCord().m_x * TILE_SIZE + offset.m_x, mo.GetCord().m_y * TILE_SIZE + offset.m_y, &ROI);
 
+    font = TTF_OpenFont(FONT_NAME.c_str(), 16);
+
     char tmp[100];
-    sprintf(tmp, "CurrentMap:%s", toRender.Getname().c_str());
+    sprintf(tmp, "Current Map : %s", toRender.Getname().c_str());
 
     SDL_Color textColor = { 255, 255, 255  };
     texture.loadFromRenderedText(tmp, textColor, ren, font);
@@ -88,35 +86,27 @@ void render::render_map(gmap toRender, mapObject mo){
 }
 
 void render::render_prompt(prompt& P){
-    //attron(A_BOLD);
-    mvaddstr(getmaxy() - 7, 0, "=========");
-    mvaddstr(getmaxy() - 6, 0, "|       |");
-    for(int i = 0; i < getmaxx() ; i++)
-        mvaddch(getmaxy() - 5, i, '=');
+    texture.loadFromFile("data/menu/prompt.png", ren);
+    texture.render(ren, 0, 400);
 
-    for(int j = 4; j > 1; j--){
-        mvaddch(getmaxy() - j, 0, '|');
-        for(int i = 1; i < getmaxx() - 1; i++)mvaddch(getmaxy() - j, i, ' ');
-        mvaddch(getmaxy() - j, getmaxx() - 1, '|');
+    font = TTF_OpenFont("data/font/Arial.ttf", 16);
+
+    SDL_Color textColor = { 0xF4, 0xF0, 0xDD };
+    texture.loadFromRenderedText(P.getWhom().c_str(), textColor, ren, font);
+    texture.render(ren, 6, 425);
+
+    std::wstring tmp = P.getMessage();
+
+    unsigned int i;
+    for(i = 50; tmp.size() > i; i += 50){
+        texture.loadFromRenderedText(tmp.substr(i-50, i).c_str(), textColor, ren, font);
+        texture.render(ren, 6, 465 + (i / 50 - 1) * 20);
     }
 
-    for(int i = 0; i < getmaxx() ; i++)
-        mvaddch(getmaxy() - 1, i, '=');
-    //attroff(A_BOLD);
+    texture.loadFromRenderedText(tmp.substr(i-50, tmp.size()).c_str(), textColor, ren, font);
+    texture.render(ren, 6, 465 + (i / 50 - 1) * 20);
 
-    mvaddwstr(getmaxy() - 6, 1, P.getWhom().c_str());
-
-    const wchar_t* inner = P.getMessage().c_str();
-    int cur = 1;
-    unsigned int line = 0;
-    while((*inner) != 0){
-        mvaddch(getmaxy() - 4 + line, cur, *inner);
-        cur++;inner++;
-        if(cur > getmaxx() - 2){
-            cur = 1;
-            line++;
-        }
-    }
+    update();
     return;
 }
 
@@ -405,7 +395,7 @@ void render::render_BattleTeam(Team& team, unsigned int turn){
     for(int i = getmaxy() - 7; i < getmaxy(); i++)
         mvaddch(i, 30, '|');
 
-    ::std::vector<std::string> nameList = team.getNameList();
+    std::vector<std::string> nameList = team.getNameList();
     for(unsigned int i = 0; i < nameList.size(); i++){
 
         if(i == turn)/*attron(A_BOLD)*/;{
@@ -475,22 +465,32 @@ void render::render_VenderMenu(int curPos, std::vector<std::string> options){
 
 void render::render_StartMenu(int curPos, std::vector<std::string> options){
     clear();
+    texture.loadFromFile("data/menu/frame_title.png", ren);
+    texture.render(ren, 0, 0);
+
+    font = TTF_OpenFont(FONT_NAME.c_str(), 36);
 
     Point offset;
     offset.m_x = getmaxx() / 2;
     offset.m_y = getmaxy() / 2;
 
-    SDL_Color textColor = { 128, 128, 128  };
+    SDL_Color textColor = {0xD8, 0xC6, 0x91};
+
+    texture.loadFromRenderedText("This is a Mini RPG Game", textColor, ren, font);
+    texture.render(ren, offset.m_x - texture.getWidth() / 2, 100);
+
+    font = TTF_OpenFont(FONT_NAME.c_str(), 24);
+
     //Print All Options
     for(unsigned int i = 0; i < options.size(); i++){
         texture.loadFromRenderedText(options[i].c_str(), textColor, ren, font);
-        texture.render(ren, offset.m_x - texture.getWidth() / 2, offset.m_y + (i - 1) * 20);
+        texture.render(ren, offset.m_x - texture.getWidth() / 2, offset.m_y + (i - 1) * 40);
     }
 
     //Print Selected Options
-    textColor = { 255, 255, 255  };
+    textColor = { 0xF4, 0xF0, 0xDD };
     texture.loadFromRenderedText(options[curPos].c_str(), textColor, ren, font);
-    texture.render(ren, offset.m_x - texture.getWidth() / 2, offset.m_y + (curPos - 1) * 20);
+    texture.render(ren, offset.m_x - texture.getWidth() / 2, offset.m_y + (curPos - 1) * 40);
 
     update();
     return;
@@ -499,11 +499,16 @@ void render::render_StartMenu(int curPos, std::vector<std::string> options){
 void render::render_gameOver(){
     clear();
 
+    texture.loadFromFile("data/menu/frame_title.png", ren);
+    texture.render(ren, 0, 0);
+
     Point offset;
     offset.m_x = getmaxx() / 2;
     offset.m_y = getmaxy() / 2;
 
-    SDL_Color textColor = { 255, 255, 255  };
+    font = TTF_OpenFont(FONT_NAME.c_str(), 36);
+
+    SDL_Color textColor = { 0xF4, 0xF0, 0xDD };
     texture.loadFromRenderedText("GameOver", textColor, ren, font);
     texture.render(ren, offset.m_x - texture.getWidth() / 2, offset.m_y - texture.getHeight() / 2);
 
@@ -521,29 +526,34 @@ void render::render_HelpMenu(){
     mvaddstr(24, 0, "===============================================================================");
     mvaddstr(2, 0, "================================================================================");*/
 
+    texture.loadFromFile("data/menu/frame.png", ren);
+    texture.render(ren, 0, 0);
+
     Point offset;
     offset.m_x = getmaxx() / 2;
     offset.m_y = getmaxy() / 2;
 
-    SDL_Color textColor = {255, 255, 255};
+    SDL_Color textColor = {0xD8, 0xC6, 0x91};
 
     //Print Title
+    font = TTF_OpenFont(FONT_NAME.c_str(), 50);
     texture.loadFromRenderedText("HELP", textColor, ren, font);
     texture.render(ren, offset.m_x - texture.getWidth() / 2, 5);
 
     texture.loadFromRenderedText("This is a Mini RPG Game", textColor, ren, font);
-    texture.render(ren, offset.m_x - texture.getWidth() / 2, 25);
-
-    texture.loadFromRenderedText("Key Mapping:", textColor, ren, font);
-    texture.render(ren, offset.m_x - texture.getWidth() / 2, 60);
-    texture.loadFromRenderedText("Select -- z or Enter", textColor, ren, font);
-    texture.render(ren, offset.m_x - texture.getWidth() / 2, 80);
-    texture.loadFromRenderedText("Cancel -- x", textColor, ren, font);
     texture.render(ren, offset.m_x - texture.getWidth() / 2, 100);
+
+    font = TTF_OpenFont(FONT_NAME.c_str(), 32);
+    texture.loadFromRenderedText("Key Mapping:", textColor, ren, font);
+    texture.render(ren, offset.m_x - texture.getWidth() / 2, 200);
+    texture.loadFromRenderedText("Select -- z or Enter", textColor, ren, font);
+    texture.render(ren, offset.m_x - texture.getWidth() / 2, 250);
+    texture.loadFromRenderedText("Cancel -- x", textColor, ren, font);
+    texture.render(ren, offset.m_x - texture.getWidth() / 2, 300);
     texture.loadFromRenderedText("Menu -- q or ESC", textColor, ren, font);
-    texture.render(ren, offset.m_x - texture.getWidth() / 2, 120);
+    texture.render(ren, offset.m_x - texture.getWidth() / 2, 350);
     texture.loadFromRenderedText("Move -- Arrow Keys", textColor, ren, font);
-    texture.render(ren, offset.m_x - texture.getWidth() / 2, 140);
+    texture.render(ren, offset.m_x - texture.getWidth() / 2, 400);
 
     update();
 }

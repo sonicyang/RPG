@@ -47,6 +47,8 @@ class render
         const int WINDOW_SIZE_Y = 600;
         const int TILE_SIZE = 32;
 
+        const std::string FONT_NAME = "data/font/KMKDSP__.ttf";
+
         SDL_Window *win = NULL;
         SDL_Renderer *ren = NULL;
         TTF_Font* font = NULL;

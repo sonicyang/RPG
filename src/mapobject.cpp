@@ -28,3 +28,10 @@ mapObject::mapObject(std::string n, int i, int t, int x, int y, std::string ti, 
 mapObject::~mapObject()
 {
 }
+
+void mapObject::setFacing(int f){
+    if(f < 0 || f > 3)
+        return;
+    facing = f;
+    return;
+}

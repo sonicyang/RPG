@@ -28,6 +28,9 @@ class mapObject
 
         int getTriggerType() { return triggerType; };
         std::string getTrigger() { return trigger; };
+
+        int getFacing() { return facing; }
+        void setFacing(int);
     protected:
         Point Cord;
         void SetCord(Point val) { Cord = val; }
@@ -41,6 +44,8 @@ class mapObject
         bool _canStep;
         std::string trigger;
         int triggerType;
+
+        int facing;
 };
 
 #endif // MAPOBJECT_H

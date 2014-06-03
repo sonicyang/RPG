@@ -68,13 +68,13 @@ gmap::gmap(const char * filename)
 
         for(unsigned int i = 0; i < root["Objects"].size(); i++){
             Point cord(root["Objects"][i]["x"].asInt(), root["Objects"][i]["y"].asInt());
-            mapObject toAdd(root["Objects"][i]["Name"].asString(), i, 
-                            root["Objects"][i]["Type"].asInt(), 
-                            cord.m_x, cord.m_y, 
+            mapObject toAdd(root["Objects"][i]["Name"].asString(), i,
+                            root["Objects"][i]["Type"].asInt(),
+                            cord.m_x, cord.m_y,
                             root["Objects"][i]["Tile"].asString(),
-                            Point(root["Objects"][i]["Icon"]["x"].asInt(), root["Objects"][i]["Icon"]["y"].asInt()), 
-                            root["Objects"][i]["Trigger"].asString(), 
-                            root["Objects"][i]["canStep"].asInt(), 
+                            Point(root["Objects"][i]["Icon"]["x"].asInt(), root["Objects"][i]["Icon"]["y"].asInt()),
+                            root["Objects"][i]["Trigger"].asString(),
+                            root["Objects"][i]["canStep"].asInt(),
                             root["Objects"][i]["trigType"].asInt());
             objects.insert(objects.begin(),std::pair<Point,mapObject>(cord, toAdd));
         }
@@ -123,11 +123,11 @@ gmap& gmap::operator=(const gmap& rhs)
 }
 
 bool gmap::isObstacle(Point a){
-    /*if(blocks.find(m_data[a.m_y][a.m_x]) != blocks.end())
+    if(m_data_state[a.m_y][a.m_x] != 0)
         return true;
     if(objects.find(a) != objects.end())
         if(!objects.find(a)->second.canStepOn())
-            return true;*/
+            return true;
     return false;
 }
 

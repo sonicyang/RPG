@@ -115,10 +115,10 @@ int mapController::setPlayerPosition(Point a){
 
 int mapController::movePlayer(Point a){
     Point curr = player.GetCord();
-    if(a.m_y != 0);
-        //player.setFacing(a.m_y + 1);
-    //else
-        //player.setFacing(a.m_x * -1 + 2);
+    if(a.m_y != 0)
+        player.setFacing(a.m_y + 1);
+    else
+        player.setFacing(a.m_x * -1 + 2);
     return setPlayerPosition(curr + a);
 }
 
@@ -128,7 +128,7 @@ Point mapController::getPlayerPosition(){
 
 Point mapController::getPlayerFacing(){
     Point cordFacing = player.GetCord();
- /*   switch(player.getFacing()){
+    switch(player.getFacing()){
         case 0:
             cordFacing += Point(0,-1);
             break;
@@ -141,7 +141,7 @@ Point mapController::getPlayerFacing(){
         case 3:
             cordFacing += Point(-1,0);
             break;
-    }*/
+    }
     return cordFacing;
 }
 
