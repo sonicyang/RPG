@@ -64,7 +64,7 @@ void render::render_map(gmap toRender, objPlayer mo){
 
      for(unsigned int i = 0; i < toRender.Getsize().m_y; i++){
         for(unsigned int j = 0; j < toRender.Getsize().m_x; j++){
-            SDL_Rect ROI = {(int)toRender.Getdata_x()[i][j], (int)toRender.Getdata_y()[i][j], 16 , 16};
+            SDL_Rect ROI = {(int)toRender.Getdata_x()[i][j] * 16, (int)toRender.Getdata_y()[i][j] * 16, 16 , 16};
             texture.render(ren, j * 16, i * 16, &ROI);
          }
      }

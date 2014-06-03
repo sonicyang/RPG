@@ -36,6 +36,8 @@ gmap::gmap(const char * filename)
     if (stat){
         this->m_name = root.get("Name", "NULL" ).asString();
 
+        this->tile = root["Tile"].asString();
+
         m_size.Set_x(root["Size"]["x"].asInt());
         m_size.Set_y(root["Size"]["y"].asInt());
 
@@ -85,6 +87,8 @@ gmap::gmap(const gmap& other)
     m_name = other.m_name;
     m_size = other.m_size;
 
+    tile = other.tile;
+
     m_data_x = other.m_data_x;
     m_data_y = other.m_data_y;
     m_data_state = other.m_data_state;
@@ -99,6 +103,8 @@ gmap& gmap::operator=(const gmap& rhs)
     if (this == &rhs) return *this; // handle self assignment
         m_name = rhs.m_name;
         m_size = rhs.m_size;
+
+        tile = rhs.tile;
 
         m_data_x = rhs.m_data_x;
         m_data_y = rhs.m_data_y;

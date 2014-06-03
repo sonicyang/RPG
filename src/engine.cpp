@@ -74,7 +74,8 @@ void Engine::parseUserInput(genericContorller& controller){
                 }
                 break;
             case SDL_QUIT:
-                fullstop = 1;        
+                fullstop = 1;
+                stop = -1;
                 break;
         }
     }
@@ -104,7 +105,7 @@ void Engine::excute(genericContorller& controller){
     if(stop != 1) //Nested stop signal
         throw(0);
     else
-       stop = 0; 
+       stop = 0;
 }
 
 variant<paraVarType> Engine::engineCall(std::vector< variant<paraVarType> > params){
@@ -168,7 +169,7 @@ variant<paraVarType> Engine::engineCall(std::vector< variant<paraVarType> > para
             break;
         case svc::addMoney:
             ret.set<int>(inv.addMoney(params[1].get<int>()));
-            
+
             if(ret.get<int>() != -1){
                 if(params[1].get<int>() > 0)
                     sprintf(tmp, "You gained $%d", params[1].get<int>());
