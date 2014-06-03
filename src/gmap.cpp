@@ -19,8 +19,9 @@ gmap::gmap()
     m_size.Set_x(1);
     m_size.Set_y(1);
 
-    m_data = Array2D<wchar_t>(m_size);
-    m_data_state = Array2D<wchar_t>(m_size);
+    m_data_x = Array2D<int>(m_size);
+    m_data_y = Array2D<int>(m_size);
+    m_data_state = Array2D<int>(m_size);
 }
 
 
@@ -38,8 +39,26 @@ gmap::gmap(const char * filename)
         m_size.Set_x(root["Size"]["x"].asInt());
         m_size.Set_y(root["Size"]["y"].asInt());
 
-        m_data = Array2D<wchar_t>(m_size, UTF8_to_WChar(root["Floor"].asCString()));
-        m_data_state = Array2D<wchar_t>(m_size, UTF8_to_WChar(root["State"].asCString()));
+        m_data_x = Array2D<int>(m_size);
+        for(int i = 0; i < m_size.m_y; i++){
+            for(int j = 0; j < m_size.m_x; j++){
+                m_data_x[i][j] = root["Floorx"][i * m_size.m_x + j].asInt();
+            }
+        }
+
+        m_data_y = Array2D<int>(m_size);
+        for(int i = 0; i < m_size.m_y; i++){
+            for(int j = 0; j < m_size.m_x; j++){
+                m_data_y[i][j] = root["Floory"][i * m_size.m_x + j].asInt();
+            }
+        }
+
+        m_data_state = Array2D<int>(m_size);
+        for(int i = 0; i < m_size.m_y; i++){
+            for(int j = 0; j< m_size.m_x; j++){
+                m_data_state[i][j] = root["Floors"][i * m_size.m_x + j].asInt();
+            }
+        }
 
         for(unsigned int i = 0; i < root["Blocks"].size(); i++){
             blocks.insert(UTF8_to_WChar(root["Blocks"][i].asCString())[0]);
@@ -52,7 +71,7 @@ gmap::gmap(const char * filename)
         }
 
     }else{
-        std::cout  << "Failed to parse configuration\n"  << reader.getFormatedErrorMessages();
+        std::cout  << "Failed to parse configuration€n"  << reader.getFormatedErrorMessages();
         exit(128);
     }
 }
@@ -66,7 +85,8 @@ gmap::gmap(const gmap& other)
     m_name = other.m_name;
     m_size = other.m_size;
 
-    m_data = other.m_data;
+    m_data_x = other.m_data_x;
+    m_data_y = other.m_data_y;
     m_data_state = other.m_data_state;
 
     blocks = other.blocks;
@@ -80,7 +100,8 @@ gmap& gmap::operator=(const gmap& rhs)
         m_name = rhs.m_name;
         m_size = rhs.m_size;
 
-        m_data = rhs.m_data;
+        m_data_x = rhs.m_data_x;
+        m_data_y = rhs.m_data_y;
         m_data_state = rhs.m_data_state;
 
         blocks = rhs.blocks;
@@ -89,11 +110,11 @@ gmap& gmap::operator=(const gmap& rhs)
 }
 
 bool gmap::isObstacle(Point a){
-    if(blocks.find(m_data[a.m_y][a.m_x]) != blocks.end())
+    /*if(blocks.find(m_data[a.m_y][a.m_x]) != blocks.end())
         return true;
     if(objects.find(a) != objects.end())
         if(!objects.find(a)->second.canStepOn())
-            return true;
+            return true;*/
     return false;
 }
 

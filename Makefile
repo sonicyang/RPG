@@ -16,6 +16,7 @@ LIB += $(shell pkg-config --libs ncursesw)
 LIB += -lcurses
 LIB += -lSDL2
 LIB += -lSDL2_ttf
+LIB += -lSDL2_image
 
 OBJDIR = $(PWD)/obj/
 
@@ -38,7 +39,7 @@ $(OUT_EXE): $(addprefix $(OBJDIR),$(OBJ))
 	@echo "    LD    "$@
 	@$(CXX) $(addprefix $(OBJDIR),$(OBJ)) $(CXXFLAG) $(LIB) -o $@
 
-debug: $(OUT_EXE)
+Debug: $(OUT_EXE)
 	@echo " START-DEBUG  "$@
 	@$(DEBUGGER) $(PWD)/$(OUT_EXE)
 

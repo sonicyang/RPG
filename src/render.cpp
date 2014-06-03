@@ -25,8 +25,8 @@ render::render()
         std::cout << "SDL_CreateWindow Error: " << SDL_GetError() << std::endl;
         throw(122);
     }
-    
-    ren = SDL_CreateRenderer(win, -1, 
+
+    ren = SDL_CreateRenderer(win, -1,
                 SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     if (ren == nullptr){
         std::cout << "SDL_CreateRenderer Error: " << SDL_GetError() << std::endl;
@@ -60,15 +60,15 @@ void render::render_map(gmap toRender, objPlayer mo){
     offset.m_x = getmaxx() / 2 - toRender.Getsize().m_x;
     offset.m_y = (getmaxy() - toRender.Getsize().m_y) / 2;
 
-    for(unsigned int i = 0; i < toRender.Getsize().m_y; i++){
+     texture.loadFromFile(toRender.getTile(), ren);
+
+     for(unsigned int i = 0; i < toRender.Getsize().m_y; i++){
         for(unsigned int j = 0; j < toRender.Getsize().m_x; j++){
-            if(toRender.Getdata()[i][j] < 128){
-                mvaddch(i + offset.m_y, j*2 + offset.m_x, toRender.Getdata()[i][j]);
-            }else{
-                mvaddch(i + offset.m_y, j + offset.m_x, toRender.Getdata()[i][j]);
-             }
+            SDL_Rect ROI = {(int)toRender.Getdata_x()[i][j], (int)toRender.Getdata_y()[i][j], 16 , 16};
+            texture.render(ren, j * 16, i * 16, &ROI);
          }
      }
+
 
     std::map<Point,mapObject>::const_iterator it = toRender.getObjects().begin();
     for(; it != toRender.getObjects().end(); it++){
@@ -85,7 +85,7 @@ void render::render_map(gmap toRender, objPlayer mo){
     }else{
         mvaddch(mo.GetCord().Get_y() + offset.m_y, mo.GetCord().Get_x() + offset.m_x, mo.Geticon());
     }
-    
+
     update();
     return;
 }
@@ -487,7 +487,7 @@ void render::render_StartMenu(int curPos, std::vector<std::string> options){
       //attron(A_BOLD);
       mvaddstr(16 + 2*curPos, 40 - options[curPos].size()/2, options[curPos].c_str());
       //attroff(A_BOLD);
-      
+
       update();
 }
 
@@ -518,12 +518,12 @@ void render::render_HelpMenu(){
     mvaddstr(4, 2, "This is a Mini RPG Game");
 
     mvaddstr(8, 2, "Key Mapping:");
-    mvaddstr(10, 2, "\t z - Select");
-    mvaddstr(12, 2, "\t x - Cancel");
-    mvaddstr(14, 2, "\t q - Menu");
-    mvaddstr(16, 2, "\t Arrow Keys - Move");
+    mvaddstr(10, 2, "€t z - Select");
+    mvaddstr(12, 2, "€t x - Cancel");
+    mvaddstr(14, 2, "€t q - Menu");
+    mvaddstr(16, 2, "€t Arrow Keys - Move");
 
-    update();   
+    update();
 }
 
 void render::update(){

@@ -23,7 +23,7 @@ Array2D<T>::Array2D(Point s)
         m_data[i] = m_data[0] + i * m_size.m_x;
 }
 
-template<class T>
+/*template<class T>
 Array2D<T>::Array2D(Point s, void* loading)
 {
     m_size = s;
@@ -32,7 +32,7 @@ Array2D<T>::Array2D(Point s, void* loading)
     for(unsigned int i = 1; i < m_size.m_y; i++)
         m_data[i] = m_data[0] + i * m_size.m_x;
     memcpy(m_data[0], loading, sizeof(T) * (m_size.m_x) * (m_size.m_y));
-}
+}*/
 
 template<class T>
 Array2D<T>::~Array2D()
@@ -49,7 +49,12 @@ Array2D<T>::Array2D(const Array2D& other)
     m_data[0] = new T[m_size.m_x * m_size.m_y];
     for(unsigned int i = 1; i < m_size.m_y; i++)
         m_data[i] = m_data[0] + i * m_size.m_x;
-    memcpy(m_data[0], other.m_data[0], sizeof(T) * (m_size.m_x) * (m_size.m_y));
+
+    for(unsigned int i = 0; i < m_size.m_y; i++){
+        for(unsigned int j = 0; j < m_size.m_x; j++){
+            m_data[i][j] = other.m_data[i][j];
+        }
+    }
 }
 
 template<class T>
@@ -65,19 +70,23 @@ Array2D<T>& Array2D<T>::operator=(const Array2D& rhs)
     m_data[0] = new T[m_size.m_x * m_size.m_y];
     for(unsigned int i = 1; i < m_size.m_y; i++)
         m_data[i] = m_data[0] + i * m_size.m_x;
-    memcpy(m_data[0],rhs.m_data[0], sizeof(T) * (m_size.m_x) * (m_size.m_y));
+    for(unsigned int i = 0; i < m_size.m_y; i++){
+        for(unsigned int j = 0; j < m_size.m_x; j++){
+            m_data[i][j] = rhs.m_data[i][j];
+        }
+    }
 
     return *this;
 }
 
-template<class T>
+/*template<class T>
 int Array2D<T>::operator=(const std::string& rhs)
 {
     if(rhs.size() != (m_size.m_x * m_size.m_y))
         return -1;
     memcpy(m_data[0], rhs.c_str(), sizeof(T) * (m_size.m_x) * (m_size.m_y));
     return 0;
-}
+}*/
 
 template<class T>
 T* Array2D<T>::operator[](unsigned int subscript)
@@ -97,4 +106,5 @@ Point Array2D<T>::size()
 template class Array2D<char>;
 template class Array2D<int>;
 template class Array2D<wchar_t>;
+template class Array2D<Point>;
 

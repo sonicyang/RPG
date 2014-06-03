@@ -4,6 +4,7 @@
 #include <string>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL_image.h>
 
 class Texture{
 
@@ -12,6 +13,7 @@ class Texture{
         ~Texture();
 
         bool loadFromRenderedText(const char* textureText, SDL_Color textColor, SDL_Renderer*, TTF_Font*);
+        bool loadFromFile(std::string path, SDL_Renderer*);
 
         void free();
 
