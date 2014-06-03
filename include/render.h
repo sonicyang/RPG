@@ -45,6 +45,7 @@ class render
     private:
         const int WINDOW_SIZE_X = 800;
         const int WINDOW_SIZE_Y = 600;
+        const int TILE_SIZE = 32;
 
         SDL_Window *win = NULL;
         SDL_Renderer *ren = NULL;
@@ -56,7 +57,7 @@ class render
         int getmaxy() { return WINDOW_SIZE_Y; };
 
         void clear();
-        
+
         int _currX = 0;
         int _currY = 0;
 

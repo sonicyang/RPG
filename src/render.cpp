@@ -34,7 +34,7 @@ render::render()
 
     TTF_Init();
 
-    font = TTF_OpenFont("Arial.ttf", 10);
+    font = TTF_OpenFont("Arial.ttf", 16);
     if(font == nullptr){
         std::cout << "Font Error: " << SDL_GetError() << std::endl;
         throw(122);
@@ -51,40 +51,38 @@ render::~render()
 
 void render::render_map(gmap toRender, mapObject mo){
     clear();
-    mvaddstr(1, 1, "CurrentMap:");
-    addstr(toRender.Getname().c_str());
 
     Point offset;
-
-    offset.m_x = getmaxx() / 2 - toRender.Getsize().m_x;
-    offset.m_y = (getmaxy() - toRender.Getsize().m_y) / 2;
+    offset.m_x = (getmaxx() - toRender.Getsize().m_x * TILE_SIZE) / 2;
+    offset.m_y = (getmaxy() - toRender.Getsize().m_y * TILE_SIZE) / 2;
 
     texture.loadFromFile(toRender.getTile(), ren);
 
     for(unsigned int i = 0; i < toRender.Getsize().m_y; i++){
        for(unsigned int j = 0; j < toRender.Getsize().m_x; j++){
-           SDL_Rect ROI = {(int)toRender.Getdata_x()[i][j] * 16, (int)toRender.Getdata_y()[i][j] * 16, 16 , 16};
-           texture.render(ren, j * 16, i * 16, &ROI);
+           SDL_Rect ROI = {(int)toRender.Getdata_x()[i][j] * TILE_SIZE, (int)toRender.Getdata_y()[i][j] * TILE_SIZE, TILE_SIZE , TILE_SIZE};
+           texture.render(ren, j * TILE_SIZE + offset.m_x, i * TILE_SIZE + offset.m_y, &ROI);
         }
     }
 
     std::map<Point,mapObject>::const_iterator it = toRender.getObjects().begin();
     for(; it != toRender.getObjects().end(); it++){
         texture.loadFromFile(it->second.getTile(), ren);
-        SDL_Rect ROI = {(int)it->second.Geticon().m_x * 16, (int)it->second.Geticon().m_y * 16, 16 , 16};
-        texture.render(ren, it->second.GetCord().m_x * 16, it->second.GetCord().m_y * 16, &ROI);
+        SDL_Rect ROI = {(int)it->second.Geticon().m_x * TILE_SIZE, (int)it->second.Geticon().m_y * TILE_SIZE, TILE_SIZE , TILE_SIZE};
+        texture.render(ren, it->second.GetCord().m_x * TILE_SIZE + offset.m_x, it->second.GetCord().m_y * TILE_SIZE + offset.m_y, &ROI);
     }
 
     texture.loadFromFile(mo.getTile(), ren);
-    SDL_Rect ROI = {(int)mo.Geticon().m_x * 16, (int)mo.Geticon().m_y * 16, 16 , 16};
-    texture.render(ren, mo.GetCord().m_x * 16, mo.GetCord().m_y * 16, &ROI);
-/*
-    if(mo.Geticon() < 128){
-        mvaddch(mo.GetCord().Get_y() + offset.m_y, mo.GetCord().Get_x() + offset.m_x, mo.Geticon());
-    }else{
-        mvaddch(mo.GetCord().Get_y() + offset.m_y, mo.GetCord().Get_x() + offset.m_x, mo.Geticon());
-    }
-*/
+    SDL_Rect ROI = {(int)mo.Geticon().m_x * TILE_SIZE, (int)mo.Geticon().m_y * TILE_SIZE, TILE_SIZE , TILE_SIZE};
+    texture.render(ren, mo.GetCord().m_x * TILE_SIZE + offset.m_x, mo.GetCord().m_y * TILE_SIZE + offset.m_y, &ROI);
+
+    char tmp[100];
+    sprintf(tmp, "CurrentMap:%s", toRender.Getname().c_str());
+
+    SDL_Color textColor = { 255, 255, 255  };
+    texture.loadFromRenderedText(tmp, textColor, ren, font);
+    texture.render(ren, 5, 5);
+
     update();
     return;
 }
@@ -476,29 +474,41 @@ void render::render_VenderMenu(int curPos, std::vector<std::string> options){
 }
 
 void render::render_StartMenu(int curPos, std::vector<std::string> options){
-      clear();
+    clear();
 
-      //Print All Options
-      for(unsigned int i = 0; i < options.size(); i++)
-          mvaddstr(16 + 2*i, 40 - options[i].size()/2, options[i].c_str());
+    Point offset;
+    offset.m_x = getmaxx() / 2;
+    offset.m_y = getmaxy() / 2;
 
-      //Print Selected Options
-      //attron(A_BOLD);
-      mvaddstr(16 + 2*curPos, 40 - options[curPos].size()/2, options[curPos].c_str());
-      //attroff(A_BOLD);
+    SDL_Color textColor = { 128, 128, 128  };
+    //Print All Options
+    for(unsigned int i = 0; i < options.size(); i++){
+        texture.loadFromRenderedText(options[i].c_str(), textColor, ren, font);
+        texture.render(ren, offset.m_x - texture.getWidth() / 2, offset.m_y + (i - 1) * 20);
+    }
 
-      update();
+    //Print Selected Options
+    textColor = { 255, 255, 255  };
+    texture.loadFromRenderedText(options[curPos].c_str(), textColor, ren, font);
+    texture.render(ren, offset.m_x - texture.getWidth() / 2, offset.m_y + (curPos - 1) * 20);
+
+    update();
+    return;
 }
 
 void render::render_gameOver(){
     clear();
 
-    //Print Selected Options
-    //attron(A_BOLD);
-    mvaddstr(getmaxy() / 2, getmaxx() / 2 - 4, "GameOver");
-    //attroff(A_BOLD);
+    Point offset;
+    offset.m_x = getmaxx() / 2;
+    offset.m_y = getmaxy() / 2;
+
+    SDL_Color textColor = { 255, 255, 255  };
+    texture.loadFromRenderedText("GameOver", textColor, ren, font);
+    texture.render(ren, offset.m_x - texture.getWidth() / 2, offset.m_y - texture.getHeight() / 2);
 
     usleep(2000000);
+    update();
     return;
 }
 
@@ -506,21 +516,34 @@ void render::render_HelpMenu(){
     clear();
 
     //Make Frame and Print Title
-    mvaddstr(0, 0, "================================================================================");
+    /*mvaddstr(0, 0, "================================================================================");
     for(int i = 1; i < 24; i++)mvaddch(i, 0, '|'),mvaddch(i, 79, '|');
     mvaddstr(24, 0, "===============================================================================");
-    mvaddstr(2, 0, "================================================================================");
+    mvaddstr(2, 0, "================================================================================");*/
+
+    Point offset;
+    offset.m_x = getmaxx() / 2;
+    offset.m_y = getmaxy() / 2;
+
+    SDL_Color textColor = {255, 255, 255};
 
     //Print Title
-    mvaddstr(1, 38, "HELP");
+    texture.loadFromRenderedText("HELP", textColor, ren, font);
+    texture.render(ren, offset.m_x - texture.getWidth() / 2, 5);
 
-    mvaddstr(4, 2, "This is a Mini RPG Game");
+    texture.loadFromRenderedText("This is a Mini RPG Game", textColor, ren, font);
+    texture.render(ren, offset.m_x - texture.getWidth() / 2, 25);
 
-    mvaddstr(8, 2, "Key Mapping:");
-    mvaddstr(10, 2, "€t z - Select");
-    mvaddstr(12, 2, "€t x - Cancel");
-    mvaddstr(14, 2, "€t q - Menu");
-    mvaddstr(16, 2, "€t Arrow Keys - Move");
+    texture.loadFromRenderedText("Key Mapping:", textColor, ren, font);
+    texture.render(ren, offset.m_x - texture.getWidth() / 2, 60);
+    texture.loadFromRenderedText("Select -- z or Enter", textColor, ren, font);
+    texture.render(ren, offset.m_x - texture.getWidth() / 2, 80);
+    texture.loadFromRenderedText("Cancel -- x", textColor, ren, font);
+    texture.render(ren, offset.m_x - texture.getWidth() / 2, 100);
+    texture.loadFromRenderedText("Menu -- q or ESC", textColor, ren, font);
+    texture.render(ren, offset.m_x - texture.getWidth() / 2, 120);
+    texture.loadFromRenderedText("Move -- Arrow Keys", textColor, ren, font);
+    texture.render(ren, offset.m_x - texture.getWidth() / 2, 140);
 
     update();
 }
