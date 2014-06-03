@@ -25,13 +25,12 @@ mapController::mapController(std::string maplist, Engine* eng) : genericContorll
             map_list.insert (map_list.begin(), std::pair<std::string,gmap>(tmp.Getname(),tmp));
         }
         defaultMap = currentMap = root["Default"].asString();
+
+        player = mapObject("Player", 0, 0, 1, 1, root["pTile"].asString(), Point(root["pIcon"]["x"].asInt(), root["pIcon"]["y"].asInt()), "", 0, 0);
     }else{
         std::cout << "Failed to parse configuration\n"  << reader.getFormatedErrorMessages();
         exit(128);
     }
-
-    //std::wstring icons( L"\uFE3F\uFF1E\uFF36\uFF1C" ); //UTF8 code for  ^>V< in full-width
-    //player = objPlayer("Player", 0, 0, 1, 1, icons, EAST);
 }
 
 mapController::~mapController()

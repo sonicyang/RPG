@@ -34,7 +34,7 @@
 					"x"		:	11,
 					"y"		:	3,
 					"Tile"  :   "data/tiles/fullsheet.bmp",
-					"Icon"	:	{ "x" : 2, "y" : 2 },
+					"Icon"	:	{ "x" : 1, "y" : 2 },
 					"Trigger" : "test_test2Trigger",
 					"trigType" : 2
 				}]

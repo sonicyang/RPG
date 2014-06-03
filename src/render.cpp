@@ -74,6 +74,10 @@ void render::render_map(gmap toRender, mapObject mo){
         SDL_Rect ROI = {(int)it->second.Geticon().m_x * 16, (int)it->second.Geticon().m_y * 16, 16 , 16};
         texture.render(ren, it->second.GetCord().m_x * 16, it->second.GetCord().m_y * 16, &ROI);
     }
+
+    texture.loadFromFile(mo.getTile(), ren);
+    SDL_Rect ROI = {(int)mo.Geticon().m_x * 16, (int)mo.Geticon().m_y * 16, 16 , 16};
+    texture.render(ren, mo.GetCord().m_x * 16, mo.GetCord().m_y * 16, &ROI);
 /*
     if(mo.Geticon() < 128){
         mvaddch(mo.GetCord().Get_y() + offset.m_y, mo.GetCord().Get_x() + offset.m_x, mo.Geticon());
