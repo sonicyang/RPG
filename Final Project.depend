@@ -394,7 +394,7 @@
 1399780742 source:c:\users\sonicyang\github\rpg\src\point.cpp
 	"point.h"
 
-1401816456 source:c:\users\sonicyang\github\rpg\src\render.cpp
+1401817552 source:c:\users\sonicyang\github\rpg\src\render.cpp
 	<iostream>
 	<unistd.h>
 	<locale.h>

@@ -143,62 +143,62 @@ void render::render_MainMenu(int curPos, std::vector<std::string> options){
 void render::render_TeamMenu(Team& team, unsigned int curPos){
     clear();
 
-    //Make Frame and Print Title
-    for(int i = 0; i < getmaxx(); i++)
-        mvaddch(0, i, '=');
-    for(int i = 1; i < getmaxy(); i++)mvaddch(i, 0, '|'),mvaddch(i, getmaxx() - 1, '|');
-    for(int i = 0; i < getmaxx(); i++)
-        mvaddch(getmaxy() - 1, i, '=');
-    for(int i = 0; i < getmaxx(); i++)
-        mvaddch(2, i, '=');
-
-    mvaddstr(1, getmaxx()/2 - 2, "TEAM");
-
     std::vector<std::string> memberList = team.getNameList();
+
+    clear();
+    texture.loadFromFile("data/menu/frame.png", ren);
+    texture.render(ren, 0, 0);
+
+    Point offset;
+    offset.m_x = getmaxx() / 2;
+    offset.m_y = getmaxy() / 2;
+
+    SDL_Color textColor = {0xD8, 0xC6, 0x91};
+
+    //Print Title
+    font = TTF_OpenFont(FONT_NAME.c_str(), 50);
+    texture.loadFromRenderedText("TEAM", textColor, ren, font);
+    texture.render(ren, offset.m_x - texture.getWidth() / 2, 5);
+
+    font = TTF_OpenFont(FONT_NAME.c_str(), 16);
 
     for (unsigned int i = 0; i < memberList.size(); i++){
         if(i == curPos)
-            //attron(A_BOLD);
+            texture.loadFromFile("data/menu/charmenu_selected.png", ren);
+        else
+            texture.loadFromFile("data/menu/charmenu.png", ren);
 
-        //draw per frame
-        for(int j = 1; j < getmaxx() - 1; j++){
-            mvaddch(3 + i * 6, j, '~');
-            mvaddch(3 + i * 6 + 5, j, '~');
-        }
+        texture.render(ren, 10, 80 + i * 130);
 
-        char tmp[10];
+        char tmp[100];
 
         //Print Informations
-        mvaddstr(3 + i * 6 + 1, 2, "Name:");
-        mvaddstr(3 + i * 6 + 1, 8, team[memberList[i]].getName().c_str());
+        sprintf(tmp, "Name : %s", team[memberList[i]].getName().c_str());
+        texture.loadFromRenderedText(tmp, textColor, ren, font);
+        texture.render(ren, 20, 90 + i * 130);
 
-        mvaddstr(3 + i * 6 + 1, 25, "Level:");
-        sprintf(tmp, "%d", team[memberList[i]].getLevel());
-        mvaddstr(3 + i * 6 + 1, 32, tmp);
+        sprintf(tmp, "Level : %d", team[memberList[i]].getLevel());
+        texture.loadFromRenderedText(tmp, textColor, ren, font);
+        texture.render(ren, 350, 90 + i * 130);
 
-        mvaddstr(3 + i * 6 + 1, 40, "Role:");
-        mvaddstr(3 + i * 6 + 1, 46, team[memberList[i]].getRoleName().c_str());
+        sprintf(tmp, "Role : %s", team[memberList[i]].getRoleName().c_str());
+        texture.loadFromRenderedText(tmp, textColor, ren, font);
+        texture.render(ren, 20, 120 + i * 130);
 
-        mvaddstr(3 + i * 6 + 2, 2, "HP:");
-        sprintf(tmp, "%d", team[memberList[i]].getHP());
-        mvaddstr(3 + i * 6 + 2, 6, tmp);
-        sprintf(tmp, "/%d", team[memberList[i]].getMaxHP());
-        addstr(tmp);
+        sprintf(tmp, "HP : %d/%d", team[memberList[i]].getHP(), team[memberList[i]].getMaxHP());
+        texture.loadFromRenderedText(tmp, textColor, ren, font);
+        texture.render(ren, 20, 150 + i * 130);
 
-        mvaddstr(3 + i * 6 + 3, 2, "MP:");
-        sprintf(tmp, "%d", team[memberList[i]].getMP());
-        mvaddstr(3 + i * 6 + 3, 6, tmp);
-        sprintf(tmp, "/%d", team[memberList[i]].getMaxMP());
-        addstr(tmp);
+        sprintf(tmp, "MP : %d/%d", team[memberList[i]].getMP(), team[memberList[i]].getMaxMP());
+        texture.loadFromRenderedText(tmp, textColor, ren, font);
+        texture.render(ren, 300, 150 + i * 130);
 
-        mvaddstr(3 + i * 6 + 2, 20, "EXP:");
-        sprintf(tmp, "%d", team[memberList[i]].getExp());
-        mvaddstr(3 + i * 6 + 2, 25, tmp);
-        sprintf(tmp, "/%d", team[memberList[i]].getLevelUpExp());
-        addstr(tmp);
-
-        //attroff(A_BOLD);
+        sprintf(tmp, "EXP : %d/%d", team[memberList[i]].getExp(), team[memberList[i]].getLevelUpExp());
+        texture.loadFromRenderedText(tmp, textColor, ren, font);
+        texture.render(ren, 600, 150 + i * 130);
     }
+
+    update();
 
 }
 
