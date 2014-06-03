@@ -95,15 +95,13 @@ void render::render_prompt(prompt& P){
     texture.loadFromRenderedText(P.getWhom().c_str(), textColor, ren, font);
     texture.render(ren, 6, 425);
 
-    std::wstring tmp = P.getMessage();
-
     unsigned int i;
-    for(i = 65; tmp.size() > i; i += 65){
-        texture.loadFromRenderedText(tmp.substr(i - 65, 65).c_str(), textColor, ren, font);
+    for(i = 65; P.getMessage().size() > i; i += 65){
+        texture.loadFromRenderedText(P.getMessage().substr(i - 65, 65).c_str(), textColor, ren, font);
         texture.render(ren, 6, 465 + (i / 65 - 1) * 20);
     }
 
-    texture.loadFromRenderedText(tmp.substr(i-65, tmp.size()).c_str(), textColor, ren, font);
+    texture.loadFromRenderedText(P.getMessage().substr(i-65, P.getMessage().size()).c_str(), textColor, ren, font);
     texture.render(ren, 6, 465 + (i / 65 - 1) * 20);
 
     update();
@@ -113,26 +111,40 @@ void render::render_prompt(prompt& P){
 void render::render_MainMenu(int curPos, std::vector<std::string> options){
     clear();
 
-    //Make Frame and Print Title
-    for(int i = 0; i < getmaxx(); i++)
-        mvaddch(0, i, '=');
-    for(int i = 1; i < getmaxy(); i++)mvaddch(i, 0, '|'),mvaddch(i, getmaxx() - 1, '|');
-    for(int i = 0; i < getmaxx(); i++)
-        mvaddch(getmaxy() - 1, i, '=');
-    for(int i = 0; i < getmaxx(); i++)
-        mvaddch(2, i, '=');
-    for(int i = 3; i < getmaxy(); i++)mvaddch(i, 25, '|');
-
-    mvaddstr(1, getmaxx()/2 - 2, "MENU");
-
-    //Print All Options
-    for(unsigned int i = 0; i < options.size(); i++)
-        mvaddstr(4 + 2*i, 2, options[i].c_str());
-
     //Print Selected Options
     //attron(A_BOLD);
     mvaddstr(4 + 2*curPos, 2, options[curPos].c_str());
     //attroff(A_BOLD);
+
+
+    texture.loadFromFile("data/menu/frame.png", ren);
+    texture.render(ren, 0, 0);
+
+    Point offset;
+    offset.m_x = getmaxx() / 2;
+    offset.m_y = getmaxy() / 2;
+
+    SDL_Color textColor = {0xD8, 0xC6, 0x91};
+
+    //Print Title
+    font = TTF_OpenFont(FONT_NAME.c_str(), 50);
+    texture.loadFromRenderedText("MENU", textColor, ren, font);
+    texture.render(ren, offset.m_x - texture.getWidth() / 2, 5);
+
+    font = TTF_OpenFont(FONT_NAME.c_str(), 32);
+    for(unsigned int i = 0; i < options.size(); i++){
+        texture.loadFromRenderedText(options[i].c_str(), textColor, ren, font);
+        texture.render(ren, offset.m_x - texture.getWidth() / 2, offset.m_y - options.size() / 2 * texture.getHeight() + texture.getHeight() * i);
+    }
+
+    //Print Selected Options
+    textColor = { 0xF4, 0xF0, 0xDD };
+    texture.loadFromRenderedText(options[curPos].c_str(), textColor, ren, font);
+    texture.render(ren, offset.m_x - texture.getWidth() / 2, offset.m_y - options.size() / 2 * texture.getHeight() + texture.getHeight() * curPos);
+
+
+    update();
+    return;
 }
 
 void render::render_TeamMenu(Team& team, unsigned int curPos){
@@ -519,12 +531,6 @@ void render::render_gameOver(){
 
 void render::render_HelpMenu(){
     clear();
-
-    //Make Frame and Print Title
-    /*mvaddstr(0, 0, "================================================================================");
-    for(int i = 1; i < 24; i++)mvaddch(i, 0, '|'),mvaddch(i, 79, '|');
-    mvaddstr(24, 0, "===============================================================================");
-    mvaddstr(2, 0, "================================================================================");*/
 
     texture.loadFromFile("data/menu/frame.png", ren);
     texture.render(ren, 0, 0);
