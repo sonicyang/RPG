@@ -268,86 +268,93 @@ void render::render_InvMenu(inventory& inv, int curPos){
 
 void render::render_CharMenu(Character& chara, int curPos){
     clear();
+    texture.loadFromFile("data/menu/frame_side.png", ren);
+    texture.render(ren, 0, 0);
 
-    //Make Frame and Print Title
-    for(int i = 0; i < getmaxx(); i++)
-        mvaddch(0, i, '=');
-    for(int i = 1; i < getmaxy(); i++)mvaddch(i, 0, '|'),mvaddch(i, getmaxx() - 1, '|');
-    for(int i = 0; i < getmaxx(); i++)
-        mvaddch(getmaxy() - 1, i, '=');
-    for(int i = 0; i < getmaxx(); i++)
-        mvaddch(2, i, '=');
-    for(int i = 3; i < getmaxy(); i++)
-        mvaddch(i, 25, '|');
+    Point offset;
+    offset.m_x = getmaxx() / 2;
+    offset.m_y = getmaxy() / 2;
 
-    mvaddstr(1, (getmaxx() - chara.getName().size())/2, chara.getName().c_str());
+    SDL_Color textColor = {0xD8, 0xC6, 0x91};
 
+    //Print Title
+    font = TTF_OpenFont(FONT_NAME.c_str(), 50);
+    texture.loadFromRenderedText(chara.getName().c_str(), textColor, ren, font);
+    texture.render(ren, offset.m_x - texture.getWidth() / 2, 5);
 
-    char tmp[10];
+    font = TTF_OpenFont(FONT_NAME.c_str(), 16);
 
+    char tmp[100];
     //Print Informations
-    mvaddstr(4, 2, "Name:");
-    mvaddstr(5, 4, chara.getName().c_str());
+    sprintf(tmp, "Name : %s", chara.getName().c_str());
+    texture.loadFromRenderedText(tmp, textColor, ren, font);
+    texture.render(ren, 300, 100);
 
-    mvaddstr(7, 2, "Level:");
-    sprintf(tmp, "%d", chara.getLevel());
-    mvaddstr(8, 4, tmp);
+    sprintf(tmp, "Level : %d", chara.getLevel());
+    texture.loadFromRenderedText(tmp, textColor, ren, font);
+    texture.render(ren, 300, 130);
 
-    mvaddstr(10, 2, "Role:");
-    mvaddstr(11, 4, chara.getRoleName().c_str());
+    sprintf(tmp, "Role : %s", chara.getRoleName().c_str());
+    texture.loadFromRenderedText(tmp, textColor, ren, font);
+    texture.render(ren, 300, 160);
 
-    mvaddstr(13, 2, "HP:");
-    sprintf(tmp, "%d + ", chara.getBaseHP());
-    mvaddstr(14, 4, tmp);
-    sprintf(tmp, "%d", chara.getAdditionalHP());
-    addstr(tmp);
+    sprintf(tmp, "HP : %d + %d", chara.getBaseHP(), chara.getAdditionalHP());
+    texture.loadFromRenderedText(tmp, textColor, ren, font);
+    texture.render(ren, 300, 190);
 
-    mvaddstr(16, 2, "MP:");
-    sprintf(tmp, "%d + ", chara.getBaseMP());
-    mvaddstr(17, 4, tmp);
-    sprintf(tmp, "%d", chara.getAdditionalMP());
-    addstr(tmp);
+    sprintf(tmp, "MP : %d + %d", chara.getBaseMP(), chara.getAdditionalMP());
+    texture.loadFromRenderedText(tmp, textColor, ren, font);
+    texture.render(ren, 300, 220);
 
-    mvaddstr(19, 2, "Attack:");
-    sprintf(tmp, "%d + ", chara.getBaseAttack());
-    mvaddstr(20, 4, tmp);
-    sprintf(tmp, "%d", chara.getAdditionalAttack());
-    addstr(tmp);
+    sprintf(tmp, "Attack : %d + %d", chara.getBaseAttack(), chara.getAdditionalAttack());
+    texture.loadFromRenderedText(tmp, textColor, ren, font);
+    texture.render(ren, 300, 250);
 
-    mvaddstr(22, 2, "Defense:");
-    sprintf(tmp, "%d + ", chara.getBaseDefense());
-    mvaddstr(24, 4, tmp);
-    sprintf(tmp, "%d", chara.getAdditionalDefense());
-    addstr(tmp);
+    sprintf(tmp, "Defense : %d + %d", chara.getBaseDefense(), chara.getAdditionalDefense());
+    texture.loadFromRenderedText(tmp, textColor, ren, font);
+    texture.render(ren, 300, 280);
 
-    if(curPos == 0)/*attron(A_BOLD)*/;{
-        mvaddstr(4, 27, "Head   : ");
-        addstr(chara.getHead().getName().c_str());
-    }//attroff(A_BOLD);
+    if(curPos == 0)textColor = { 0xF4, 0xF0, 0xDD };{
+        texture.loadFromRenderedText("Head : ", textColor, ren, font);
+        texture.render(ren, 20, 100);
+        texture.loadFromRenderedText(chara.getHead().getName().c_str(), textColor, ren, font);
+        texture.render(ren, 40, 120);
+    }textColor = {0xD8, 0xC6, 0x91};
 
-    if(curPos == 1)/*attron(A_BOLD)*/;{
-        mvaddstr(5, 27, "Armor  : ");
-        addstr(chara.getArmor().getName().c_str());
-    }//attroff(A_BOLD);
+    if(curPos == 1)textColor = { 0xF4, 0xF0, 0xDD };{
+        texture.loadFromRenderedText("Armor : ", textColor, ren, font);
+        texture.render(ren, 20, 150);
+        texture.loadFromRenderedText(chara.getArmor().getName().c_str(), textColor, ren, font);
+        texture.render(ren, 40, 170);
+    }textColor = {0xD8, 0xC6, 0x91};
 
-    if(curPos == 2)/*attron(A_BOLD)*/;{
-        mvaddstr(6, 27, "Legs   : ");
-        addstr(chara.getLegs().getName().c_str());
-    }//attroff(A_BOLD);
+    if(curPos == 2)textColor = { 0xF4, 0xF0, 0xDD };{
+        texture.loadFromRenderedText("Legs : ", textColor, ren, font);
+        texture.render(ren, 20, 200);
+        texture.loadFromRenderedText(chara.getLegs().getName().c_str(), textColor, ren, font);
+        texture.render(ren, 40, 220);
+    }textColor = {0xD8, 0xC6, 0x91};
 
-    if(curPos == 3)/*attron(A_BOLD)*/;{
-        mvaddstr(7, 27, "Shoes  : ");
-        addstr(chara.getShoes().getName().c_str());
-    }//attroff(A_BOLD);
+    if(curPos == 3)textColor = { 0xF4, 0xF0, 0xDD };{
+        texture.loadFromRenderedText("Shoes : ", textColor, ren, font);
+        texture.render(ren, 20, 250);
+        texture.loadFromRenderedText(chara.getShoes().getName().c_str(), textColor, ren, font);
+        texture.render(ren, 40, 270);
+    }textColor = {0xD8, 0xC6, 0x91};
 
-    if(curPos == 4)/*attron(A_BOLD)*/;{
-        mvaddstr(9, 27, "Weapon : ");
-        addstr(chara.getWeapon().getName().c_str());
-    }//attroff(A_BOLD);
+    if(curPos == 4)textColor = { 0xF4, 0xF0, 0xDD };{
+        texture.loadFromRenderedText("Weapon : ", textColor, ren, font);
+        texture.render(ren, 20, 300);
+        texture.loadFromRenderedText(chara.getWeapon().getName().c_str(), textColor, ren, font);
+        texture.render(ren, 40, 320);
+    }textColor = {0xD8, 0xC6, 0x91};
 
-    if(curPos == 5)/*attron(A_BOLD)*/;{
-        mvaddstr(15, 27, "Show Skills");
-    }//attroff(A_BOLD);
+    if(curPos == 5)textColor = { 0xF4, 0xF0, 0xDD };{
+        texture.loadFromRenderedText("Show Skills", textColor, ren, font);
+        texture.render(ren, 20, 350);
+    }textColor = {0xD8, 0xC6, 0x91};
+
+    update();
 }
 
 void render::render_SkillMenu(Character& chara, int curPos){
