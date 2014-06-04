@@ -115,13 +115,13 @@ void render::render_prompt(prompt& P){
     texture.render(ren, 6, 425);
 
     unsigned int i;
-    for(i = 65; P.getMessage().size() > i; i += 65){
-        texture.loadFromRenderedText(P.getMessage().substr(i - 65, 65).c_str(), textColor, ren, font_arial16);
-        texture.render(ren, 6, 465 + (i / 65 - 1) * 20);
+    for(i = ((getmaxx()) / 13); P.getMessage().size() > i; i += ((getmaxx()) / 13)){
+        texture.loadFromRenderedText(P.getMessage().substr(i - ((getmaxx()) / 13), ((getmaxx()) / 13)).c_str(), textColor, ren, font_arial16);
+        texture.render(ren, 6, 465 + (i / ((getmaxx()) / 13) - 1) * 20);
     }
 
-    texture.loadFromRenderedText(P.getMessage().substr(i-65, P.getMessage().size()).c_str(), textColor, ren, font_arial16);
-    texture.render(ren, 6, 465 + (i / 65 - 1) * 20);
+    texture.loadFromRenderedText(P.getMessage().substr(i - ((getmaxx()) / 13), P.getMessage().size()).c_str(), textColor, ren, font_arial16);
+    texture.render(ren, 6, 465 + (i / ((getmaxx()) / 13) - 1) * 20);
 
     update();
     return;
@@ -263,14 +263,15 @@ void render::render_InvMenu(inventory& inv, int curPos){
         texture.loadFromRenderedText("Description : ", textColor, ren, font_comic16);
         texture.render(ren, 300, 160);
 
+        unsigned int xoff = (getmaxx() - 260) / 13;
         unsigned int i;
-        for(i = 45; inv[nameList[0]].item.getDescription().size() > i; i += 45){
-            texture.loadFromRenderedText(inv[nameList[0]].item.getDescription().substr(i - 45, 45).c_str(), textColor, ren, font_comic16);
-            texture.render(ren, 320, 180 + (i / 45 - 1) * 20);
+        for(i = xoff; inv[nameList[0]].item.getDescription().size() > i; i += xoff){
+            texture.loadFromRenderedText(inv[nameList[0]].item.getDescription().substr(i - xoff, xoff).c_str(), textColor, ren, font_comic16);
+            texture.render(ren, 320, 180 + (i / xoff - 1) * 20);
         }
 
-        texture.loadFromRenderedText(inv[nameList[0]].item.getDescription().substr(i - 45, inv[nameList[0]].item.getDescription().size()).c_str(), textColor, ren, font_comic16);
-        texture.render(ren, 320, 180 + (i / 45 - 1) * 20);
+        texture.loadFromRenderedText(inv[nameList[0]].item.getDescription().substr(i - xoff, inv[nameList[0]].item.getDescription().size()).c_str(), textColor, ren, font_comic16);
+        texture.render(ren, 320, 180 + (i / xoff - 1) * 20);
 
     }
 
@@ -390,7 +391,6 @@ void render::render_SkillMenu(Character& chara, int curPos){
     if(!skills.empty()){
         //Print Selected Options
         textColor = { 0xF4, 0xF0, 0xDD };
-        mvaddstr(4, 2, skills[0].getName().c_str());
         texture.loadFromRenderedText(skills[0].getName().c_str(), textColor, ren, font_comic16);
         texture.render(ren, 20, 100);
         textColor = {0xD8, 0xC6, 0x91};
@@ -401,9 +401,19 @@ void render::render_SkillMenu(Character& chara, int curPos){
         texture.loadFromRenderedText(tmp, textColor, ren, font_comic16);
         texture.render(ren, 300, 100);
 
-        sprintf(tmp, "Description : %s", skills[0].getDescription().c_str());
+        sprintf(tmp, "Description :");
         texture.loadFromRenderedText(tmp, textColor, ren, font_comic16);
         texture.render(ren, 300, 130);
+
+        unsigned int xoff = (getmaxx() - 260) / 13;
+        unsigned int i;
+        for(i = xoff; skills[0].getDescription().size() > i; i += xoff){
+            texture.loadFromRenderedText(skills[0].getDescription().substr(i - xoff, xoff).c_str(), textColor, ren, font_comic16);
+            texture.render(ren, 320, 150 + (i / xoff - 1) * 20);
+        }
+
+        texture.loadFromRenderedText(skills[0].getDescription().substr(i - xoff, skills[0].getDescription().size()).c_str(), textColor, ren, font_comic16);
+        texture.render(ren, 320, 150 + (i / xoff - 1) * 20);
     }
 
     update();
@@ -412,73 +422,86 @@ void render::render_SkillMenu(Character& chara, int curPos){
 void render::render_BattleScene(std::vector<Monster> m, int tag){
     clear();
 
-    //Make Frame and Print Title
-    for(int i = 0; i < getmaxx(); i++)
-        mvaddch(0, i, '=');
-    for(int i = 1; i < getmaxy(); i++)mvaddch(i, 0, '|'),mvaddch(i, getmaxx() - 1, '|');
-    for(int i = 0; i < getmaxx(); i++)
-        mvaddch(getmaxy() - 1, i, '=');
+    texture.loadFromFile("data/img/battle.jpg", ren);
+    texture.render(ren, 0, 0);
+
+    SDL_Color textColor = {0xD8, 0xC6, 0x91};
 
     int segment = getmaxx() / (m.size() + 1);
     for(unsigned int i = 0; i < m.size(); i++){
-        if((int)i == tag) //attron(A_BOLD);
-        mvaddstr((getmaxy() - 8) / 2, (i + 1) * segment - m[i].getName().size()/2, m[i].getName().c_str());
 
-        char tmp[10];
-        sprintf(tmp, "%d/", m[i].getHP());
-        mvaddstr((getmaxy() - 8) / 2 + 1, (i + 1) * segment - m[i].getName().size()/2, tmp);
-        sprintf(tmp, "%d", m[i].getMaxHP());
-        addstr(tmp);
+        if((int)i == tag)
+            textColor = { 0xF4, 0xF0, 0xDD };
 
-        //attroff(A_BOLD);
+        texture.loadFromRenderedText(m[i].getName().c_str(), textColor, ren, font_comic16);
+        texture.render(ren, (i + 1) * segment - texture.getWidth()/2, 60);
+
+        char tmp[50];
+        sprintf(tmp, "%d/%d", m[i].getHP(), m[i].getMaxHP());
+        texture.loadFromRenderedText(tmp, textColor, ren, font_comic16);
+        texture.render(ren, (i + 1) * segment - texture.getWidth()/2, 80);
+
+        textColor = {0xD8, 0xC6, 0x91};
     }
+
+    //update();
 }
 
 void render::render_BattleTeam(Team& team, unsigned int turn){
-    for(int i = 0; i < getmaxx(); i++)
-        mvaddch(getmaxy() - 8, i, '=');
-    for(int i = getmaxy() - 7; i < getmaxy(); i++)
-        mvaddch(i, 30, '|');
+    texture.loadFromFile("data/menu/battlemenu.png", ren);
+    texture.render(ren, 0, getmaxy() - 100);
+
+    SDL_Color textColor = {0xD8, 0xC6, 0x91};
 
     std::vector<std::string> nameList = team.getNameList();
     for(unsigned int i = 0; i < nameList.size(); i++){
 
-        if(i == turn)/*attron(A_BOLD)*/;{
+        if(i == turn)textColor = { 0xF4, 0xF0, 0xDD };{
             //Print Informations
-            char tmp[10];
+            char tmp[100];
 
-            mvaddstr(getmaxy() - 6 + i, 2, team[nameList[i]].getName().c_str());
+            texture.loadFromRenderedText(team[nameList[i]].getName().c_str(), textColor, ren, font_comic16);
+            texture.render(ren, 20, getmaxy() - 100 + 15 * (i + 1));
 
-            sprintf(tmp, "%d/", team[nameList[i]].getHP());
-            mvaddstr(getmaxy() - 6 + i, 13, tmp);
-            sprintf(tmp, "%d", team[nameList[i]].getMaxHP());
-            addstr(tmp);
+            sprintf(tmp, "%d/%d", team[nameList[i]].getHP(), team[nameList[i]].getMaxHP());
+            texture.loadFromRenderedText(tmp, textColor, ren, font_comic16);
+            texture.render(ren, 150, getmaxy() - 100 + 15 * (i + 1));
 
-            sprintf(tmp, "%d/", team[nameList[i]].getMP());
-            mvaddstr(getmaxy() - 6 + i, 23, tmp);
-            sprintf(tmp, "%d", team[nameList[i]].getMaxMP());
-            addstr(tmp);
+            sprintf(tmp, "%d/%d", team[nameList[i]].getMP(), team[nameList[i]].getMaxMP());
+            texture.loadFromRenderedText(tmp, textColor, ren, font_comic16);
+            texture.render(ren, 250, getmaxy() - 100 + 15 * (i + 1));
 
-        }//attroff(A_BOLD);
+        }textColor = {0xD8, 0xC6, 0x91};
     }
+
+    //update();
 }
 
 void render::render_BattleMenu(unsigned int curPos){
-    if(curPos == 0)/*attron(A_BOLD)*/;{
-        mvaddstr(getmaxy() - 6, 32, "Attack");
-    }//attroff(A_BOLD);
+    SDL_Color textColor = {0xD8, 0xC6, 0x91};
 
-    if(curPos == 1)/*attron(A_BOLD)*/;{
+    if(curPos == 0)textColor = { 0xF4, 0xF0, 0xDD };{
+        texture.loadFromRenderedText("Attack", textColor, ren, font_comic16);
+        texture.render(ren, 420, getmaxy() - 100 + 15);
+    }textColor = {0xD8, 0xC6, 0x91};
+
+    if(curPos == 1)textColor = { 0xF4, 0xF0, 0xDD };{
+        texture.loadFromRenderedText("Skills", textColor, ren, font_comic16);
+        texture.render(ren, 520, getmaxy() - 100 + 15);
         mvaddstr(getmaxy() - 6, 42, "Skills");
-    }//attroff(A_BOLD);
+    }textColor = {0xD8, 0xC6, 0x91};
 
-    if(curPos == 2)/*attron(A_BOLD)*/;{
-        mvaddstr(getmaxy() - 4, 32, "Inventory");
-    }//attroff(A_BOLD);
+    if(curPos == 2)textColor = { 0xF4, 0xF0, 0xDD };{
+        texture.loadFromRenderedText("Inventory", textColor, ren, font_comic16);
+        texture.render(ren, 420, getmaxy() - 100 + 50);
+    }textColor = {0xD8, 0xC6, 0x91};
 
-    if(curPos == 3)/*attron(A_BOLD)*/;{
-        mvaddstr(getmaxy() - 4, 42, "Escape");
-    }//attroff(A_BOLD);
+    if(curPos == 3)textColor = { 0xF4, 0xF0, 0xDD };{
+        texture.loadFromRenderedText("Escape", textColor, ren, font_comic16);
+        texture.render(ren, 520, getmaxy() - 100 + 50);
+    }textColor = {0xD8, 0xC6, 0x91};
+
+    update();
 }
 
 void render::render_VenderMenu(int curPos, std::vector<std::string> options){
