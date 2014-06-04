@@ -7,7 +7,7 @@
 #include "team.h"
 #include "monsterfactory.h"
 #include "render.h"
-#include "genericContorller.h"
+#include "genericcontorller.h"
 #include "team.h"
 #include "render.h"
 
@@ -18,7 +18,7 @@ class Battle : public genericContorller
     public:
         Battle(std::string monsterList, Engine*, std::map< std::string, variant<paraVarType> >&);
         ~Battle();
-        
+
         int hKeyUp();
         int hKeyDown();
         int hKeyLeft();
@@ -35,7 +35,7 @@ class Battle : public genericContorller
 
         std::vector<Monster>& getMonsters() { return _monsters; };
 
-        enum process{ 
+        enum process{
             prePlayer = 0,
             BattleMenu,
             MonsterMenu,
@@ -55,7 +55,7 @@ class Battle : public genericContorller
         std::vector<Monster> _monstersBak;
         unsigned int _memberCount = 0;
         int _chance = 0;
-        
+
         Team* team;
         unsigned int _currentChara = 0;
 

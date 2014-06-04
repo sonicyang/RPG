@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 #include "character.h"
-#include "RoleFactory.h"
+#include "rolefactory.h"
 
 class Team
 {

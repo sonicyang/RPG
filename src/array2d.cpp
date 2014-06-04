@@ -1,6 +1,6 @@
 #include <string>
 #include <cstring>
-#include "Point.h"
+#include "point.h"
 #include "array2d.h"
 
 template<class T>

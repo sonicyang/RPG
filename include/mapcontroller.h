@@ -2,7 +2,7 @@
 #define MAPCONTROLLER_H
 
 #include "gmap.h"
-#include "mapObject.h"
+#include "mapobject.h"
 #include "variant.h"
 #include "point.h"
 #include "genericcontorller.h"
