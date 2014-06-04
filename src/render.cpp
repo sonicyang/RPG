@@ -379,19 +379,49 @@ void render::render_SkillMenu(Character& chara, int curPos){
         mvaddstr(i*2 + 4, 2, skills[i].getName().c_str());
     }
 
-    if(!skills.empty()){
-        //Print Selected Options
-        //attron(A_BOLD);
-        mvaddstr(4, 2, skills[0].getName().c_str());
-        //attroff(A_BOLD);
 
-        //Print Informations
-        mvaddstr(4, 27, "Name:");
-        mvaddstr(5, 30, skills[0].getName().c_str());
-        mvaddstr(8, 27, "Description:");
-        mvaddstr(9, 30, skills[0].getDescription().c_str());
+    clear();
+    texture.loadFromFile("data/menu/frame_side.png", ren);
+    texture.render(ren, 0, 0);
+
+    Point offset;
+    offset.m_x = getmaxx() / 2;
+    offset.m_y = getmaxy() / 2;
+
+    SDL_Color textColor = {0xD8, 0xC6, 0x91};
+
+    //Print Title
+    font = TTF_OpenFont(FONT_NAME.c_str(), 50);
+    texture.loadFromRenderedText("Skills", textColor, ren, font);
+    texture.render(ren, offset.m_x - texture.getWidth() / 2, 5);
+
+    font = TTF_OpenFont(FONT_NAME.c_str(), 16);
+
+    for (unsigned int i = 0; i < skills.size(); i++){
+        texture.loadFromRenderedText(skills[i].getName().c_str(), textColor, ren, font);
+        texture.render(ren, 20, 100 + i * texture.getHeight());
     }
 
+    if(!skills.empty()){
+        //Print Selected Options
+        textColor = { 0xF4, 0xF0, 0xDD };
+        mvaddstr(4, 2, skills[0].getName().c_str());
+        texture.loadFromRenderedText(skills[0].getName().c_str(), textColor, ren, font);
+        texture.render(ren, 20, 100);
+        textColor = {0xD8, 0xC6, 0x91};
+
+        char tmp[100];
+        //Print Informations
+        sprintf(tmp, "Name : %s", skills[0].getName().c_str());
+        texture.loadFromRenderedText(tmp, textColor, ren, font);
+        texture.render(ren, 300, 100);
+
+        sprintf(tmp, "Description : %d", skills[0].getDescription().c_str());
+        texture.loadFromRenderedText(tmp, textColor, ren, font);
+        texture.render(ren, 300, 130);
+    }
+    
+    update();
 }
 
 void render::render_BattleScene(std::vector<Monster> m, int tag){
