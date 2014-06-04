@@ -5,7 +5,7 @@ Monster::Monster()
     //ctor
 }
 
-Monster::Monster(std::string name, int hp, int mp, int atk, int def, int exp, std::vector<Skill> skills) :
+Monster::Monster(std::string name, int hp, int mp, int atk, int def, int exp, std::vector<Skill> skills, std::string img) :
     _name(name),
     max_hp(hp),
     max_mp(mp),
@@ -14,7 +14,8 @@ Monster::Monster(std::string name, int hp, int mp, int atk, int def, int exp, st
     _hp(max_hp),
     _mp(max_mp),
     _exp(exp),
-    _skills(skills)
+    _skills(skills),
+    _img(img)
 {
     //ctor
 }

@@ -5,5 +5,6 @@
 	"ATK" : 5,
 	"DEF" : 5,
 	"EXP" : 50,
-	"Skills" : ["Burst"]
+	"Skills" : ["Burst"],
+	"Image" : "data/imgs/goblin.png"
 }

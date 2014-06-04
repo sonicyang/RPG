@@ -9,7 +9,7 @@ class Monster
 {
     public:
         Monster();
-        Monster(std::string, int, int, int, int, int, std::vector<Skill>);
+        Monster(std::string, int, int, int, int, int, std::vector<Skill>, std::string);
         virtual ~Monster();
 
         /* setters and getters */
@@ -38,6 +38,8 @@ class Monster
         bool isDead();
 
         std::vector<Skill> getSkillList() { return _skills; };
+
+        std::string getImg() { return _img; };
     protected:
     private:
 
@@ -52,6 +54,8 @@ class Monster
         int _exp; // Stores the experience of the player, >= 0. Will not reset to zero after level-up
 
         std::vector<Skill> _skills;
+
+        std::string _img;
 
 };
 

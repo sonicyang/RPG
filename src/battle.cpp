@@ -140,12 +140,6 @@ int Battle::hKeyX(){
     return 0;
 }
 
-int Battle::hKeyQ(){
-    engine->engineCall(loadStack(svc::loadMainMenu));
-    engine->engineCall(loadStack(svc::setStat, Stats::inMainMenu));
-    return 0;
-}
-
 int Battle::hDoEvent(){
     if(processStat == prePlayer){
         if((*team)[team->getNameList()[_currentChara]].isDead())

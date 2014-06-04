@@ -26,7 +26,6 @@ class Battle : public genericContorller
         int hKeyRight();
         int hKeyZ();
         int hKeyX();
-        int hKeyQ();
 
         int hDoEvent();
 

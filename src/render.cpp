@@ -471,14 +471,17 @@ void render::render_BattleScene(std::vector<Monster> m, int tag){
             textColor = { 0xF4, 0xF0, 0xDD };
 
         texture.loadFromRenderedText(m[i].getName().c_str(), textColor, ren, font_comic16);
-        texture.render(ren, (i + 1) * segment - texture.getWidth()/2, 60);
+        texture.render(ren, (i + 1) * segment - texture.getWidth()/2, getmaxy()/2 - 208);
 
         char tmp[50];
         sprintf(tmp, "%d/%d", m[i].getHP(), m[i].getMaxHP());
         texture.loadFromRenderedText(tmp, textColor, ren, font_comic16);
-        texture.render(ren, (i + 1) * segment - texture.getWidth()/2, 80);
+        texture.render(ren, (i + 1) * segment - texture.getWidth()/2, getmaxy()/2 - 188);
 
         textColor = {0xD8, 0xC6, 0x91};
+
+        texture.loadFromFile(m[i].getImg().c_str(), ren);
+        texture.render(ren, (i + 1) * segment - texture.getWidth()/2, getmaxy()/2 - 168);
     }
 
     //update();

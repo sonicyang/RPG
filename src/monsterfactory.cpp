@@ -30,7 +30,11 @@ MonsterFactory::MonsterFactory(std::string monsterList)
                         skills.push_back(Skill(root2["Skills"][k].asString()));
                     }
 
-	            	Monster monster(root2["Name"].asString(), root2["HP"].asInt(), root2["MP"].asInt(), root2["ATK"].asInt(), root2["DEF"].asInt(), root2["EXP"].asInt(), skills);
+	            	Monster monster(root2["Name"].asString(),
+                                    root2["HP"].asInt(), root2["MP"].asInt(),
+                                    root2["ATK"].asInt(), root2["DEF"].asInt(), root2["EXP"].asInt(),
+                                    skills,
+                                    root2["Image"].asString());
 
 	                _monsterCache.insert(_monsterCache.begin(), std::pair<std::string, Monster>(root2["Name"].asString(), monster));
 	            }else{
