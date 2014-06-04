@@ -16,7 +16,7 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-    Engine gCtl;
+    Engine gCtl("data/setting.manifest");
     gCtl.excute();
     return 0;
 }

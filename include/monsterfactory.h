@@ -8,6 +8,7 @@
 class MonsterFactory
 {
     public:
+        MonsterFactory();
         MonsterFactory(std::string monsterList);
         virtual ~MonsterFactory();
 

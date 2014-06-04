@@ -14,7 +14,8 @@ class Engine;
 class eventController : public genericContorller
 {
     public:
-        eventController(std::string event_list, Engine*, std::map< std::string, variant<paraVarType> >&);
+        eventController(Engine*, std::map< std::string, variant<paraVarType> >*);
+        eventController(std::string event_list, Engine*, std::map< std::string, variant<paraVarType> >*);
         virtual ~eventController();
 
         virtual int hDoEvent();
@@ -26,13 +27,12 @@ class eventController : public genericContorller
     protected:
     private:
         std::vector<event> eventStack;
-        std::map< std::string, variant<paraVarType> >& varMap;
+        std::map< std::string, variant<paraVarType> >* varMap;
 
         std::map<std::string, event> event_list;
         unsigned event_count;
 
         int userInputRequired;
-
 
         //sspreate form the rest to avoid naming collison
         enum eventCode{

@@ -4,7 +4,12 @@
 #include "json/reader.h"
 #include "utils.h"
 
-Team::Team(std::string teamList) : roleCache("data/roles/role_list.lst"), null()
+Team::Team() : roleCache(), null()
+{
+
+}
+
+Team::Team(std::string teamList, std::string roleList) : roleCache(roleList), null()
 {
     std::string in = get_file_contents(teamList.c_str());
 

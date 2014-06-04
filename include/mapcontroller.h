@@ -12,6 +12,7 @@ class Engine;
 class mapController : public genericContorller
 {
     public:
+        mapController(Engine* eng);
         mapController(std::string maplist, Engine* eng);
         ~mapController();
 

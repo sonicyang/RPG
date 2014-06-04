@@ -6,6 +6,10 @@
 #include "json/value.h"
 #include "utils.h"
 
+MonsterFactory::MonsterFactory()
+{
+}
+
 MonsterFactory::MonsterFactory(std::string monsterList)
 {
     std::string in = get_file_contents(monsterList.c_str());

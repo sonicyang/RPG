@@ -6,6 +6,11 @@
 #include "json/value.h"
 #include "utils.h"
 
+RoleFactory::RoleFactory()
+{
+
+}
+
 RoleFactory::RoleFactory(std::string roleList)
 {
     std::string in = get_file_contents(roleList.c_str());

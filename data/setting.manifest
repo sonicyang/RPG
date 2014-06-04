@@ -1,0 +1,22 @@
+{
+	"MapList" 		: "data/maps/maplist.lst",
+	"EventList" 	: "data/events/eventlist.lst",
+	"MonsterList" 	: "data/monsters/monsterlist.lst",
+	"RoleList"		: "data/roles/rolelist.lst",
+	"TeamList"		: "data/team/teamlist.lst",
+	
+	"FontArial"	: "data/font/Arial.ttf",
+	"FontComic"	: "data/font/KMKDSP__.ttf",
+	
+	"BattleBackground" : "data/imgs/battle.jpg",
+	"Frame"			: "data/imgs/frame.png",
+	"FrameSide"		: "data/imgs/frame_side.png",
+	"FrameTitle"	: "data/imgs/frame_title.png",
+	"Prompt"		: "data/imgs/prompt.png",
+	"CharMenuOption": "data/imgs/charamenu.png",
+	"CharMenuSelect": "data/imgs/charmenu_selected.png",
+	"BattleMenu"	: "data/imgs/battlemenu.png",
+	
+	"WindowSize"	: { "x" : 1024, "y" : 768},
+	"TileSize"		: 32
+}

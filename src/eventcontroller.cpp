@@ -10,7 +10,13 @@
 
 using namespace std;
 
-eventController::eventController(std::string eventlist, Engine* eng, std::map< std::string, variant<paraVarType> >& m) :
+eventController::eventController(Engine* eng, std::map< std::string, variant<paraVarType> >* m) :
+    genericContorller(eng),
+    varMap(m)
+{
+}
+
+eventController::eventController(std::string eventlist, Engine* eng, std::map< std::string, variant<paraVarType> >* m) :
     genericContorller(eng),
     varMap(m),
     userInputRequired(0)
@@ -112,38 +118,38 @@ int eventController::execTopEvent(){
             engine->engineCall(loadStack(svc::addMoney, atoi(ss[1].c_str())));
             break;
         case eventCode::jner:
-            if(varMap[ss[1]].get<int>() != atoi(ss[2].c_str())){
+            if(varMap->at(ss[1]).get<int>() != atoi(ss[2].c_str())){
                 currentEvent.pc += atoi(ss[3].c_str());
                 if(eventStack.back().pc >= currentEvent.stk.size())
                     throw(64);
             }
             break;
         case eventCode::jer:
-            if(varMap[ss[1]].get<int>() == atoi(ss[2].c_str())){
+            if(varMap->at(ss[1]).get<int>() == atoi(ss[2].c_str())){
                 currentEvent.pc += atoi(ss[3].c_str());
                 if(currentEvent.pc >= currentEvent.stk.size())
                     throw(64);
             }
             break;
         case eventCode::jne:
-            if(varMap[ss[1]].get<int>() != atoi(ss[2].c_str())){
+            if(varMap->at(ss[1]).get<int>() != atoi(ss[2].c_str())){
                 currentEvent.pc = atoi(ss[3].c_str());
                 if(eventStack.back().pc >= currentEvent.stk.size())
                     throw(64);
             }
             break;
         case eventCode::je:
-            if(varMap[ss[1]].get<int>() == atoi(ss[2].c_str())){
+            if(varMap->at(ss[1]).get<int>() == atoi(ss[2].c_str())){
                 currentEvent.pc = atoi(ss[3].c_str());
                 if(currentEvent.pc >= currentEvent.stk.size())
                     throw(64);
             }
             break;
         case eventCode::mov:
-            varMap[ss[1]].set<int>(varMap[ss[2]].get<int>());
+            varMap->at(ss[1]).set<int>(varMap->at(ss[2]).get<int>());
             break;
         case eventCode::set:
-            varMap[ss[1]].set<int>(atoi(ss[2].c_str()));
+            varMap->at(ss[1]).set<int>(atoi(ss[2].c_str()));
             break;
         case eventCode::addCharToTeam:
             engine->engineCall(loadStack(svc::addCharToTeam, ss[1]));

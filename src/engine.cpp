@@ -19,13 +19,14 @@
 #include "itemexec.h"
 #include "utf8.h"
 
-Engine::Engine() :
-    mapCtl("data/maps/maplist.lst", this),
-    evtCtl("data/events/eventlist.lst", this, varMap),
+Engine::Engine(std::string manifest) :
+    rdr(manifest),
+    mapCtl(this),
+    evtCtl(this, &varMap),
     inv(),
-    team("data/team/team_list.lst"),
+    team(),
     prom(this),
-    battle("data/monsters/monster_list.lst", this, varMap),
+    battle(this, &varMap),
     mainmenu(this, varMap),
     teammenu(this, varMap),
     invmenu(this, varMap),
@@ -35,7 +36,20 @@ Engine::Engine() :
     startmenu(this, varMap),
     helpmenu(this, varMap)
 {
+    std::string in = get_file_contents(manifest.c_str());
 
+    Json::Value root;
+    Json::Reader reader;
+    bool stat = reader.parse( in, root );
+    if (stat){
+        mapCtl = mapController(root["MapList"].asString(), this);
+        evtCtl = eventController(root["EventList"].asString(), this, &varMap);
+        team = Team(root["TeamList"].asString(), root["RoleList"].asString());
+        battle = Battle(root["MonsterList"].asString(), this, &varMap);
+    }else{
+        std::cout << "Failed to parse manifest\n"  << reader.getFormatedErrorMessages();
+        exit(128);
+    }
 }
 
 Engine::~Engine()

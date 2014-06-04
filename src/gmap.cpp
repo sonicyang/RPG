@@ -42,22 +42,22 @@ gmap::gmap(const char * filename)
         m_size.Set_y(root["Size"]["y"].asInt());
 
         m_data_x = Array2D<int>(m_size);
-        for(int i = 0; i < m_size.m_y; i++){
-            for(int j = 0; j < m_size.m_x; j++){
+        for(unsigned int i = 0; i < m_size.m_y; i++){
+            for(unsigned int j = 0; j < m_size.m_x; j++){
                 m_data_x[i][j] = root["Floorx"][i * m_size.m_x + j].asInt();
             }
         }
 
         m_data_y = Array2D<int>(m_size);
-        for(int i = 0; i < m_size.m_y; i++){
-            for(int j = 0; j < m_size.m_x; j++){
+        for(unsigned int i = 0; i < m_size.m_y; i++){
+            for(unsigned int j = 0; j < m_size.m_x; j++){
                 m_data_y[i][j] = root["Floory"][i * m_size.m_x + j].asInt();
             }
         }
 
         m_data_state = Array2D<int>(m_size);
-        for(int i = 0; i < m_size.m_y; i++){
-            for(int j = 0; j< m_size.m_x; j++){
+        for(unsigned int i = 0; i < m_size.m_y; i++){
+            for(unsigned int j = 0; j< m_size.m_x; j++){
                 m_data_state[i][j] = root["Floors"][i * m_size.m_x + j].asInt();
             }
         }

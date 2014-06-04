@@ -8,7 +8,14 @@
 #include "engine.h"
 #include "render.h"
 
-Battle::Battle(std::string monsterList, Engine* eng, std::map< std::string, variant<paraVarType> >& b) :
+Battle::Battle(Engine* eng, std::map< std::string, variant<paraVarType> >* b) :
+    genericContorller(eng),
+    varMap(b)
+{
+
+}
+
+Battle::Battle(std::string monsterList, Engine* eng, std::map< std::string, variant<paraVarType> >* b) :
     genericContorller(eng),
     varMap(b),
     _monsterCache(monsterList)
@@ -79,8 +86,8 @@ int Battle::hKeyZ(){
             case 1:
                 engine->engineCall(loadStack(svc::loadSkillMenu, 1, _currentChara));
                 engine->engineCall(loadStack(svc::setStat, Stats::inSkillMenu));
-                if(varMap["SkillMenuCurPos"].get<unsigned int>() != 0xffffffff){
-                    Skill tmp = (*team)[team->getNameList()[_currentChara]].getSkillList()[varMap["SkillMenuCurPos"].get<unsigned int>()];
+                if(varMap->at("SkillMenuCurPos").get<unsigned int>() != 0xffffffff){
+                    Skill tmp = (*team)[team->getNameList()[_currentChara]].getSkillList()[varMap->at("SkillMenuCurPos").get<unsigned int>()];
                     if(tmp.geteTarget() != 0){
                         processStat = PlayerSkill;
                     }else{
@@ -146,22 +153,22 @@ int Battle::hDoEvent(){
         else
             processStat = BattleMenu;
     }else if(processStat == PlayerSkill){
-        Skill tmp = (*team)[team->getNameList()[_currentChara]].getSkillList()[varMap["SkillMenuCurPos"].get<unsigned int>()];
+        Skill tmp = (*team)[team->getNameList()[_currentChara]].getSkillList()[varMap->at("SkillMenuCurPos").get<unsigned int>()];
         if(tmp.getfTarget() == 0){
             engine->engineCall(loadStack(svc::loadTeamMenu, 1));
             engine->engineCall(loadStack(svc::setStat, Stats::inTeamMenu));
-            if(varMap["TeamMenuCurPos"].get<unsigned int>() == 0xffffffff){
+            if(varMap->at("TeamMenuCurPos").get<unsigned int>() == 0xffffffff){
                 processStat = process::BattleMenu;
                 return -1;
             }
         }
-        int p = engine->engineCall(loadStack(svc::useSkill, _currentChara, varMap["SkillMenuCurPos"].get<unsigned int>(), MonsterMenuCurrentPos, varMap["TeamMenuCurPos"].get<unsigned int>())).get<int>();
+        int p = engine->engineCall(loadStack(svc::useSkill, _currentChara, varMap->at("SkillMenuCurPos").get<unsigned int>(), MonsterMenuCurrentPos, varMap->at("TeamMenuCurPos").get<unsigned int>())).get<int>();
         if(!p){
             engine->engineCall(loadStack(svc::loadPrompt, UTF8_to_WChar("Not Enough Mana!"), UTF8_to_WChar("System")));
             processStat = BattleMenu;
         }else{
            processStat = PostPlayer;
-    
+
         }
     }else if(processStat == PostPlayer){
         if(isMonsterWipeOut()){

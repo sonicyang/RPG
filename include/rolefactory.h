@@ -8,6 +8,7 @@
 class RoleFactory
 {
     public:
+        RoleFactory();
         RoleFactory(std::string roleList);
         virtual ~RoleFactory();
 

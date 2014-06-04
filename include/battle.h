@@ -16,7 +16,8 @@ class Engine;
 class Battle : public genericContorller
 {
     public:
-        Battle(std::string monsterList, Engine*, std::map< std::string, variant<paraVarType> >&);
+        Battle(Engine*, std::map< std::string, variant<paraVarType> >*);
+        Battle(std::string monsterList, Engine*, std::map< std::string, variant<paraVarType> >*);
         ~Battle();
 
         int hKeyUp();
@@ -48,7 +49,7 @@ class Battle : public genericContorller
         };
     protected:
     private:
-        std::map< std::string, variant<paraVarType> >& varMap;
+        std::map< std::string, variant<paraVarType> >* varMap;
 
         MonsterFactory _monsterCache;
         std::vector<Monster> _monsters;

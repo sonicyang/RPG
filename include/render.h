@@ -20,6 +20,7 @@ class render
 {
     public:
         render();
+        render(std::string);
         ~render();
 
         void render_map(gmap, mapObject);
@@ -44,12 +45,12 @@ class render
         void update();
     protected:
     private:
-        const int WINDOW_SIZE_X = 800;
-        const int WINDOW_SIZE_Y = 600;
-        const int TILE_SIZE = 32;
+        int WINDOW_SIZE_X;
+        int WINDOW_SIZE_Y;
+        int TILE_SIZE;
 
-        const std::string FONT_NAME_COMIC = "data/font/KMKDSP__.ttf";
-        const std::string FONT_NAME_ARIAL = "data/font/Arial.ttf";
+        std::string FONT_NAME_COMIC;
+        std::string FONT_NAME_ARIAL;
 
         SDL_Window *win = NULL;
         SDL_Renderer *ren = NULL;
@@ -58,6 +59,16 @@ class render
         TTF_Font* font_comic16 = NULL;
         TTF_Font* font_comic32 = NULL;
         TTF_Font* font_comic50 = NULL;
+
+        std::string BATTLEBACKGROUND;
+
+        std::string FRAME;
+        std::string FRAME_SIDE;
+        std::string FRAME_TITLE;
+        std::string CHAR_MENU;
+        std::string CHAR_MENU_SELECTED;
+        std::string PROMPT;
+        std::string BATTLEMENU;
 
         Texture texture;
 

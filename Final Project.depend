@@ -212,7 +212,7 @@
 	<cstring>
 	"chararray2d.h"
 
-1401790425 source:c:\users\sonicyang\github\rpg\main.cpp
+1401890334 source:c:\users\sonicyang\github\rpg\main.cpp
 	<iostream>
 	<cstdlib>
 	<fstream>
@@ -282,7 +282,7 @@
 	"objPlayer.h"
 	"utils.h"
 
-1401875016 c:\users\sonicyang\github\rpg\include\render.h
+1401897875 c:\users\sonicyang\github\rpg\include\render.h
 	<map>
 	<SDL2/SDL.h>
 	<SDL2/SDL_ttf.h>
@@ -326,7 +326,7 @@
 	"enum.h"
 	"skill.h"
 
-1401808051 source:c:\users\sonicyang\github\rpg\src\gmap.cpp
+1401897115 source:c:\users\sonicyang\github\rpg\src\gmap.cpp
 	<cstdlib>
 	<cstring>
 	<string>
@@ -395,11 +395,13 @@
 1399780742 source:c:\users\sonicyang\github\rpg\src\point.cpp
 	"point.h"
 
-1401884640 source:c:\users\sonicyang\github\rpg\src\render.cpp
+1401898275 source:c:\users\sonicyang\github\rpg\src\render.cpp
 	<iostream>
 	<unistd.h>
 	<locale.h>
 	<SDL2/SDL.h>
+	<json/reader.h>
+	<json/value.h>
 	"render.h"
 	"gmap.h"
 	"point.h"
@@ -434,14 +436,14 @@
 1400261745 source:c:\users\sonicyang\github\rpg\src\objplayer.cpp
 	"objplayer.h"
 
-1401788849 c:\users\sonicyang\github\rpg\include\mapcontroller.h
+1401894684 c:\users\sonicyang\github\rpg\include\mapcontroller.h
 	"gmap.h"
-	"mapObject.h"
+	"mapobject.h"
 	"variant.h"
 	"point.h"
 	"genericcontorller.h"
 
-1401808057 source:c:\users\sonicyang\github\rpg\src\mapcontroller.cpp
+1401894673 source:c:\users\sonicyang\github\rpg\src\mapcontroller.cpp
 	<cstdlib>
 	<deque>
 	"mapcontroller.h"
@@ -452,7 +454,7 @@
 	"utf8.h"
 	"render.h"
 
-1401770554 c:\users\sonicyang\github\rpg\include\eventcontroller.h
+1401896965 c:\users\sonicyang\github\rpg\include\eventcontroller.h
 	<vector>
 	<deque>
 	<map>
@@ -466,7 +468,7 @@
 	<string>
 	"genericcontorller.h"
 
-1401788849 source:c:\users\sonicyang\github\rpg\src\eventcontroller.cpp
+1401897073 source:c:\users\sonicyang\github\rpg\src\eventcontroller.cpp
 	<algorithm>
 	<cstring>
 	"prompt.h"
@@ -727,17 +729,17 @@
 	<cstring>
 	<cstdarg>
 
-1401788849 source:c:\users\sonicyang\github\rpg\src\array2d.cpp
+1401885503 source:c:\users\sonicyang\github\rpg\src\array2d.cpp
 	<string>
 	<cstring>
-	"Point.h"
+	"point.h"
 	"array2d.h"
 
 1401788849 c:\users\sonicyang\github\rpg\include\array2d.h
 	"point.h"
 	<string>
 
-1401788849 source:c:\users\sonicyang\github\rpg\src\engine.cpp
+1401896949 source:c:\users\sonicyang\github\rpg\src\engine.cpp
 	<cstdlib>
 	<string>
 	<cstring>
@@ -758,7 +760,7 @@
 	"itemexec.h"
 	"utf8.h"
 
-1401788849 c:\users\sonicyang\github\rpg\include\engine.h
+1401886412 c:\users\sonicyang\github\rpg\include\engine.h
 	<map>
 	<string>
 	<deque>
@@ -862,7 +864,7 @@
 	"role.h"
 	<cmath>
 
-1401770554 source:c:\users\sonicyang\github\rpg\src\rolefactory.cpp
+1401895227 source:c:\users\sonicyang\github\rpg\src\rolefactory.cpp
 	<cstdlib>
 	<iostream>
 	"rolefactory.h"
@@ -870,24 +872,24 @@
 	"json/value.h"
 	"utils.h"
 
-1401770554 c:\users\sonicyang\github\rpg\include\rolefactory.h
+1401895237 c:\users\sonicyang\github\rpg\include\rolefactory.h
 	<string>
 	<map>
 	"role.h"
 
-1401770554 source:c:\users\sonicyang\github\rpg\src\team.cpp
+1401898228 source:c:\users\sonicyang\github\rpg\src\team.cpp
 	<cstdlib>
 	"team.h"
 	"json/value.h"
 	"json/reader.h"
 	"utils.h"
 
-1401770554 c:\users\sonicyang\github\rpg\include\team.h
+1401896082 c:\users\sonicyang\github\rpg\include\team.h
 	<map>
 	<string>
 	<vector>
 	"character.h"
-	"RoleFactory.h"
+	"rolefactory.h"
 
 1401770554 source:c:\users\sonicyang\github\rpg\src\itemexec.cpp
 	"itemexec.h"
@@ -903,7 +905,7 @@
 	"render.h"
 	"monster.h"
 
-1401788849 source:c:\users\sonicyang\github\rpg\src\battle.cpp
+1401896764 source:c:\users\sonicyang\github\rpg\src\battle.cpp
 	"battle.h"
 	<unistd.h>
 	<cstdlib>
@@ -912,18 +914,18 @@
 	"engine.h"
 	"render.h"
 
-1401788849 c:\users\sonicyang\github\rpg\include\battle.h
+1401896270 c:\users\sonicyang\github\rpg\include\battle.h
 	<string>
 	<vector>
 	"inventory.h"
 	"team.h"
 	"monsterfactory.h"
 	"render.h"
-	"genericContorller.h"
+	"genericcontorller.h"
 	"team.h"
 	"render.h"
 
-1401770554 c:\users\sonicyang\github\rpg\include\monsterfactory.h
+1401895259 c:\users\sonicyang\github\rpg\include\monsterfactory.h
 	<string>
 	<map>
 	"monster.h"
@@ -936,7 +938,7 @@
 1401770554 source:c:\users\sonicyang\github\rpg\src\monster.cpp
 	"monster.h"
 
-1401770554 source:c:\users\sonicyang\github\rpg\src\monsterfactory.cpp
+1401895272 source:c:\users\sonicyang\github\rpg\src\monsterfactory.cpp
 	"monsterfactory.h"
 	<cstdlib>
 	"json/reader.h"

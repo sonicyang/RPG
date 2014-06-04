@@ -10,6 +10,11 @@
 
 using namespace std;
 
+mapController::mapController(Engine* eng) : genericContorller(eng)
+{
+
+}
+
 mapController::mapController(std::string maplist, Engine* eng) : genericContorller(eng)
 {
     std::string in = get_file_contents(maplist.c_str());

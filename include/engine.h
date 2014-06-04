@@ -32,7 +32,7 @@ class mapController;
 class Engine
 {
     public:
-        Engine();
+        Engine(std::string);
         ~Engine();
 
         void excute();
@@ -44,7 +44,7 @@ class Engine
     private:
         int stop = 0;
         int fullstop = 0;
-        
+
         render rdr;
 
         std::map< std::string, variant<paraVarType> > varMap;

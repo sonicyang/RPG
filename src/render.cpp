@@ -4,6 +4,8 @@
 #include <unistd.h>
 #include <locale.h>
 #include <SDL2/SDL.h>
+#include <json/reader.h>
+#include <json/value.h>
 #include "render.h"
 #include "gmap.h"
 #include "point.h"
@@ -13,6 +15,41 @@
 
 render::render()
 {
+}
+
+render::render(std::string manifest)
+{
+
+
+    std::string in = get_file_contents(manifest.c_str());
+
+    Json::Value root;
+    Json::Reader reader;
+    bool stat = reader.parse( in, root );
+    if (stat){
+        FONT_NAME_ARIAL = root["FontArial"].asString();
+        FONT_NAME_COMIC = root["FontComic"].asString();
+
+        WINDOW_SIZE_X = root["WindowSize"]["x"].asInt();
+        WINDOW_SIZE_Y = root["WindowSize"]["y"].asInt();
+
+        TILE_SIZE = root["TileSize"].asInt();
+
+        BATTLEBACKGROUND = root["BattleBackground"].asString();
+
+        FRAME = root["Frame"].asString();
+        FRAME_SIDE = root["FrameSide"].asString();
+        FRAME_TITLE = root["FrameTitle"].asString();
+        CHAR_MENU = root["CharMenuOption"].asString();
+        CHAR_MENU_SELECTED = root["CharMenuSelect"].asString();
+        PROMPT = root["Prompt"].asString();
+        BATTLEMENU = root["BattleMenu"].asString();
+    }else{
+        std::cout << "Failed to parse manifest\n"  << reader.getFormatedErrorMessages();
+        exit(128);
+    }
+
+
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0){
         std::cout << "SDL_Init Error: " << SDL_GetError() << std::endl;
         throw(122);
@@ -107,7 +144,7 @@ void render::render_map(gmap toRender, mapObject mo){
 }
 
 void render::render_prompt(prompt& P){
-    texture.loadFromFile("data/menu/prompt.png", ren);
+    texture.loadFromFile(PROMPT, ren);
     texture.render(ren, 0, 400);
 
     SDL_Color textColor = { 0xF4, 0xF0, 0xDD };
@@ -130,7 +167,7 @@ void render::render_prompt(prompt& P){
 void render::render_MainMenu(int curPos, std::vector<std::string> options){
     clear();
 
-    texture.loadFromFile("data/menu/frame.png", ren);
+    texture.loadFromFile(FRAME, ren);
     texture.render(ren, 0, 0);
 
     Point offset;
@@ -163,7 +200,7 @@ void render::render_TeamMenu(Team& team, unsigned int curPos){
     std::vector<std::string> memberList = team.getNameList();
 
     clear();
-    texture.loadFromFile("data/menu/frame.png", ren);
+    texture.loadFromFile(FRAME, ren);
     texture.render(ren, 0, 0);
 
     Point offset;
@@ -220,7 +257,7 @@ void render::render_InvMenu(inventory& inv, int curPos){
     std::vector<std::string> nameList = inv.getNameList(curPos);
 
     clear();
-    texture.loadFromFile("data/menu/frame_side.png", ren);
+    texture.loadFromFile(FRAME_SIDE, ren);
     texture.render(ren, 0, 0);
 
     Point offset;
@@ -280,7 +317,7 @@ void render::render_InvMenu(inventory& inv, int curPos){
 
 void render::render_CharMenu(Character& chara, int curPos){
     clear();
-    texture.loadFromFile("data/menu/frame_side.png", ren);
+    texture.loadFromFile(FRAME_SIDE, ren);
     texture.render(ren, 0, 0);
 
     Point offset;
@@ -370,7 +407,7 @@ void render::render_SkillMenu(Character& chara, int curPos){
     std::vector<Skill> skills = chara.getSkillList();
 
     clear();
-    texture.loadFromFile("data/menu/frame_side.png", ren);
+    texture.loadFromFile(FRAME_SIDE, ren);
     texture.render(ren, 0, 0);
 
     Point offset;
@@ -422,7 +459,7 @@ void render::render_SkillMenu(Character& chara, int curPos){
 void render::render_BattleScene(std::vector<Monster> m, int tag){
     clear();
 
-    texture.loadFromFile("data/img/battle.jpg", ren);
+    texture.loadFromFile(BATTLEBACKGROUND, ren);
     texture.render(ren, 0, 0);
 
     SDL_Color textColor = {0xD8, 0xC6, 0x91};
@@ -448,7 +485,7 @@ void render::render_BattleScene(std::vector<Monster> m, int tag){
 }
 
 void render::render_BattleTeam(Team& team, unsigned int turn){
-    texture.loadFromFile("data/menu/battlemenu.png", ren);
+    texture.loadFromFile(BATTLEMENU, ren);
     texture.render(ren, 0, getmaxy() - 100);
 
     SDL_Color textColor = {0xD8, 0xC6, 0x91};
@@ -506,7 +543,7 @@ void render::render_BattleMenu(unsigned int curPos){
 
 void render::render_VenderMenu(int curPos, std::vector<std::string> options){
     clear();
-    texture.loadFromFile("data/menu/frame_title.png", ren);
+    texture.loadFromFile(FRAME_TITLE, ren);
     texture.render(ren, 0, 0);
 
     Point offset;
@@ -535,7 +572,7 @@ void render::render_VenderMenu(int curPos, std::vector<std::string> options){
 
 void render::render_StartMenu(int curPos, std::vector<std::string> options){
     clear();
-    texture.loadFromFile("data/menu/frame_title.png", ren);
+    texture.loadFromFile(FRAME_TITLE, ren);
     texture.render(ren, 0, 0);
 
     Point offset;
@@ -565,7 +602,7 @@ void render::render_StartMenu(int curPos, std::vector<std::string> options){
 void render::render_gameOver(){
     clear();
 
-    texture.loadFromFile("data/menu/frame_title.png", ren);
+    texture.loadFromFile(FRAME_TITLE, ren);
     texture.render(ren, 0, 0);
 
     Point offset;
@@ -584,7 +621,7 @@ void render::render_gameOver(){
 void render::render_HelpMenu(){
     clear();
 
-    texture.loadFromFile("data/menu/frame.png", ren);
+    texture.loadFromFile(FRAME, ren);
     texture.render(ren, 0, 0);
 
     Point offset;

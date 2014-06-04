@@ -10,7 +10,8 @@
 class Team
 {
     public:
-        Team(std::string);
+        Team();
+        Team(std::string teamList, std::string roleList);
         virtual ~Team();
 
         std::vector<std::string> getNameList() const;
