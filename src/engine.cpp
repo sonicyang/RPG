@@ -43,8 +43,11 @@ Engine::Engine(std::string manifest) :
     bool stat = reader.parse( in, root );
     if (stat){
         mapCtl = mapController(root["MapList"].asString(), this);
+        mapList = root["MapList"].asString();
         evtCtl = eventController(root["EventList"].asString(), this, &varMap);
         team = Team(root["TeamList"].asString(), root["RoleList"].asString());
+        teamList = root["TeamList"].asString();
+        roleList = root["RoleList"].asString();
         battle = Battle(root["MonsterList"].asString(), this, &varMap);
     }else{
         std::cout << "Failed to parse manifest\n"  << reader.getFormatedErrorMessages();
@@ -105,6 +108,9 @@ void Engine::excute(){
             usleep(16666);
         }catch(int){
             stop = 0;
+            mapCtl = mapController(mapList, this);
+            team = Team(teamList, roleList);
+            inv = inventory();
         }
     }
 }

@@ -66,6 +66,10 @@ class Engine
         HelpMenu helpmenu;
 
         void setStat(int s);
+
+        std::string mapList;
+        std::string teamList;
+        std::string roleList;
 };
 
 #endif // CONTROLLER_H
