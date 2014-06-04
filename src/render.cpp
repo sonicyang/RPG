@@ -506,29 +506,31 @@ void render::render_BattleMenu(unsigned int curPos){
 
 void render::render_VenderMenu(int curPos, std::vector<std::string> options){
     clear();
+    texture.loadFromFile("data/menu/frame_title.png", ren);
+    texture.render(ren, 0, 0);
 
-    //Make Frame and Print Title
-    for(int i = 0; i < getmaxx(); i++)
-        mvaddch(0, i, '=');
-    for(int i = 1; i < getmaxy(); i++)mvaddch(i, 0, '|'),mvaddch(i, getmaxx() - 1, '|');
-    for(int i = 0; i < getmaxx(); i++)
-        mvaddch(getmaxy() - 1, i, '=');
-    for(int i = 0; i < getmaxx(); i++)
-        mvaddch(2, i, '=');
-    for(int i = 3; i < getmaxy(); i++)
-        mvaddch(i, 25, '|');
+    Point offset;
+    offset.m_x = getmaxx() / 2;
+    offset.m_y = getmaxy() / 2;
 
-    mvaddstr(1, getmaxx()/2 - 3, "Vendor");
+    SDL_Color textColor = {0xD8, 0xC6, 0x91};
 
+    texture.loadFromRenderedText("Vendor", textColor, ren, font_comic32);
+    texture.render(ren, offset.m_x - texture.getWidth() / 2, 100);
 
     //Print All Options
-    for(unsigned int i = 0; i < options.size(); i++)
-        mvaddstr(4 + 2*i, 2, options[i].c_str());
+    for(unsigned int i = 0; i < options.size(); i++){
+        texture.loadFromRenderedText(options[i].c_str(), textColor, ren, font_comic16);
+        texture.render(ren, offset.m_x - texture.getWidth() / 2, offset.m_y + (i - 1) * 40);
+    }
 
     //Print Selected Options
-    //attron(A_BOLD);
-    mvaddstr(4 + 2*curPos, 2, options[curPos].c_str());
-    //attroff(A_BOLD);
+    textColor = { 0xF4, 0xF0, 0xDD };
+    texture.loadFromRenderedText(options[curPos].c_str(), textColor, ren, font_comic16);
+    texture.render(ren, offset.m_x - texture.getWidth() / 2, offset.m_y + (curPos - 1) * 40);
+
+    update();
+    return;
 }
 
 void render::render_StartMenu(int curPos, std::vector<std::string> options){
