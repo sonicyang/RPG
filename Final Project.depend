@@ -282,7 +282,8 @@
 	"objPlayer.h"
 	"utils.h"
 
-1401805795 c:\users\sonicyang\github\rpg\include\render.h
+1401875016 c:\users\sonicyang\github\rpg\include\render.h
+	<map>
 	<SDL2/SDL.h>
 	<SDL2/SDL_ttf.h>
 	"point.h"
@@ -394,7 +395,7 @@
 1399780742 source:c:\users\sonicyang\github\rpg\src\point.cpp
 	"point.h"
 
-1401845770 source:c:\users\sonicyang\github\rpg\src\render.cpp
+1401874993 source:c:\users\sonicyang\github\rpg\src\render.cpp
 	<iostream>
 	<unistd.h>
 	<locale.h>

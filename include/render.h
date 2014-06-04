@@ -1,6 +1,7 @@
 #ifndef RENDER_H
 #define RENDER_H
 
+#include <map>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 #include "point.h"
@@ -47,11 +48,16 @@ class render
         const int WINDOW_SIZE_Y = 600;
         const int TILE_SIZE = 32;
 
-        const std::string FONT_NAME = "data/font/KMKDSP__.ttf";
+        const std::string FONT_NAME_COMIC = "data/font/KMKDSP__.ttf";
+        const std::string FONT_NAME_ARIAL = "data/font/Arial.ttf";
 
         SDL_Window *win = NULL;
         SDL_Renderer *ren = NULL;
-        TTF_Font* font = NULL;
+
+        TTF_Font* font_arial16 = NULL;
+        TTF_Font* font_comic16 = NULL;
+        TTF_Font* font_comic32 = NULL;
+        TTF_Font* font_comic50 = NULL;
 
         Texture texture;
 
