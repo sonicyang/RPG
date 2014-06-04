@@ -65,11 +65,15 @@
 		<Unit filename="include/eventcontroller.h">
 			<Option virtualFolder="include/event/" />
 		</Unit>
-		<Unit filename="include/genericcontorller.h" />
+		<Unit filename="include/genericcontorller.h">
+			<Option virtualFolder="include/controller/" />
+		</Unit>
 		<Unit filename="include/gmap.h">
 			<Option virtualFolder="include/map/" />
 		</Unit>
-		<Unit filename="include/helpmenu.h" />
+		<Unit filename="include/helpmenu.h">
+			<Option virtualFolder="include/menu/" />
+		</Unit>
 		<Unit filename="include/inventory.h">
 			<Option virtualFolder="include/inventory/" />
 		</Unit>
@@ -127,7 +131,9 @@
 		<Unit filename="include/skillmenu.h">
 			<Option virtualFolder="include/menu/" />
 		</Unit>
-		<Unit filename="include/startmenu.h" />
+		<Unit filename="include/startmenu.h">
+			<Option virtualFolder="include/menu/" />
+		</Unit>
 		<Unit filename="include/team.h">
 			<Option virtualFolder="include/team/" />
 		</Unit>
@@ -144,7 +150,9 @@
 		<Unit filename="include/variant.h">
 			<Option virtualFolder="include/tools/" />
 		</Unit>
-		<Unit filename="include/vender.h" />
+		<Unit filename="include/vender.h">
+			<Option virtualFolder="include/inventory/" />
+		</Unit>
 		<Unit filename="main.cpp" />
 		<Unit filename="src/array2d.cpp">
 			<Option virtualFolder="src/tools/" />
@@ -164,11 +172,15 @@
 		<Unit filename="src/eventcontroller.cpp">
 			<Option virtualFolder="src/event/" />
 		</Unit>
-		<Unit filename="src/genericcontorller.cpp" />
+		<Unit filename="src/genericcontorller.cpp">
+			<Option virtualFolder="src/controller/" />
+		</Unit>
 		<Unit filename="src/gmap.cpp">
 			<Option virtualFolder="src/map/" />
 		</Unit>
-		<Unit filename="src/helpmenu.cpp" />
+		<Unit filename="src/helpmenu.cpp">
+			<Option virtualFolder="src/menu/" />
+		</Unit>
 		<Unit filename="src/inventory.cpp">
 			<Option virtualFolder="src/inventory/" />
 		</Unit>
@@ -179,7 +191,7 @@
 			<Option virtualFolder="src/inventory/" />
 		</Unit>
 		<Unit filename="src/itemexec.cpp">
-			<Option virtualFolder="src/" />
+			<Option virtualFolder="src/menu/" />
 		</Unit>
 		<Unit filename="src/lib_json/json_batchallocator.h" />
 		<Unit filename="src/lib_json/json_internalarray.inl" />
@@ -226,7 +238,9 @@
 		<Unit filename="src/skillmenu.cpp">
 			<Option virtualFolder="src/menu/" />
 		</Unit>
-		<Unit filename="src/startmenu.cpp" />
+		<Unit filename="src/startmenu.cpp">
+			<Option virtualFolder="src/menu/" />
+		</Unit>
 		<Unit filename="src/team.cpp">
 			<Option virtualFolder="src/team/" />
 		</Unit>
@@ -240,7 +254,9 @@
 		<Unit filename="src/utils.cpp">
 			<Option virtualFolder="src/tools/" />
 		</Unit>
-		<Unit filename="src/vender.cpp" />
+		<Unit filename="src/vender.cpp">
+			<Option virtualFolder="src/inventory/" />
+		</Unit>
 		<Extensions>
 			<code_completion />
 			<envvars />
