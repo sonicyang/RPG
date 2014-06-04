@@ -2,6 +2,6 @@
 	"Count" : 2,
 	"Path" : ["data/maps/test.map", "data/maps/test2.map"],
 	"Default" : "Test",
-    "pTile" : "data/tiles/obj_misk_atlas.bmp",
-    "pIcon" : { "x" : 0, "y" : 0 }
+    "pTile" : "data/tiles/base_out_atlas.png",
+    "pIcon" : { "x" : 15, "y" : 15 }
 }

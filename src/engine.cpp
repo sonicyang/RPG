@@ -105,7 +105,7 @@ void Engine::excute(){
             parseUserInput(startmenu);
             startmenu.hDoEvent();
             startmenu.hRender(rdr);
-            usleep(10000);
+            usleep(5000);
         }catch(int){
             stop = 0;
             mapCtl = mapController(mapList, this);
@@ -120,7 +120,7 @@ void Engine::excute(genericContorller& controller){
         parseUserInput(controller);
         controller.hDoEvent();
         controller.hRender(rdr);
-        usleep(10000);
+        usleep(5000);
     }
     if(stop != 1) //Nested stop signal
         throw(0);
