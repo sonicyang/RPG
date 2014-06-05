@@ -14,7 +14,7 @@ class mapObject
         friend class mapController;
 
         mapObject();
-        mapObject(std::string, int, int, int, int, std::string, Point, std::string, bool, int);
+        mapObject(std::string, int, int, int, int, std::string, Point, std::string, bool, int, int);
         virtual ~mapObject();
 
         Point GetCord() const { return Cord; }
@@ -29,7 +29,7 @@ class mapObject
         int getTriggerType() { return triggerType; };
         std::string getTrigger() { return trigger; };
 
-        int getFacing() { return facing; }
+        int getFacing() const { return facing; }
         void setFacing(int);
     protected:
         Point Cord;
@@ -45,7 +45,7 @@ class mapObject
         std::string trigger;
         int triggerType;
 
-        int facing;
+        int facing = faceing::SOUTH;
 };
 
 #endif // MAPOBJECT_H

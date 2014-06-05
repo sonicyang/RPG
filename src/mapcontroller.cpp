@@ -31,7 +31,7 @@ mapController::mapController(std::string maplist, Engine* eng) : genericContorll
         }
         defaultMap = currentMap = root["Default"].asString();
 
-        player = mapObject("Player", 0, 0, 1, 1, root["pTile"].asString(), Point(root["pIcon"]["x"].asInt(), root["pIcon"]["y"].asInt()), "", 0, 0);
+        player = mapObject("Player", 0, 0, 1, 1, root["pTile"].asString(), Point(root["pIcon"]["x"].asInt(), root["pIcon"]["y"].asInt()), "", 0, 0, faceing::EAST);
     }else{
         std::cout << "Failed to parse configuration\n"  << reader.getFormatedErrorMessages();
         exit(128);

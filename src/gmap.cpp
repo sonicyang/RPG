@@ -75,7 +75,8 @@ gmap::gmap(const char * filename)
                             Point(root["Objects"][i]["Icon"]["x"].asInt(), root["Objects"][i]["Icon"]["y"].asInt()),
                             root["Objects"][i]["Trigger"].asString(),
                             root["Objects"][i]["canStep"].asInt(),
-                            root["Objects"][i]["trigType"].asInt());
+                            root["Objects"][i]["trigType"].asInt(),
+                            root["Objects"][i]["Facing"].asInt());
             objects.insert(objects.begin(),std::pair<Point,mapObject>(cord, toAdd));
         }
 
