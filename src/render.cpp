@@ -112,6 +112,14 @@ void render::render_map(gmap toRender, mapObject mo){
     offset.m_x = (getmaxx() - toRender.Getsize().m_x * TILE_SIZE) / 2;
     offset.m_y = (getmaxy() - toRender.Getsize().m_y * TILE_SIZE) / 2;
 
+    std::string tmp2 = toRender.getBackground();
+
+    if(tmp2.size() > 0){
+        texture.loadFromFile(toRender.getBackground(), ren, false);
+        texture.render(ren, 0, 0);
+    }
+
+
     texture.loadFromFile(toRender.getTile(), ren, true);
 
     for(unsigned int i = 0; i < toRender.Getsize().m_y; i++){

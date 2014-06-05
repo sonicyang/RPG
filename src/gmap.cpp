@@ -79,6 +79,8 @@ gmap::gmap(const char * filename)
             objects.insert(objects.begin(),std::pair<Point,mapObject>(cord, toAdd));
         }
 
+        Background = root["Background"].asString();
+
     }else{
         std::cout  << "Failed to parse configuration\n"  << reader.getFormatedErrorMessages();
         exit(128);
@@ -103,6 +105,8 @@ gmap::gmap(const gmap& other)
     blocks = other.blocks;
 
     objects = other.objects;
+
+    Background = other.Background;
 }
 
 gmap& gmap::operator=(const gmap& rhs)
@@ -119,6 +123,8 @@ gmap& gmap::operator=(const gmap& rhs)
 
         blocks = rhs.blocks;
         objects = rhs.objects;
+
+        Background = rhs.Background;
     return *this;
 }
 

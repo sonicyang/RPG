@@ -35,6 +35,8 @@ class gmap
         mapObject* getObject(Point);
         const std::map<Point,mapObject>& getObjects() { return objects; };
 
+        std::string getBackground() { return Background; };
+
     protected:
     private:
         Point m_size;
@@ -46,6 +48,8 @@ class gmap
         std::set<wchar_t> blocks;
 
         std::map<Point, mapObject> objects;
+
+        std::string Background;
 };
 
 #endif // GMAP_H
