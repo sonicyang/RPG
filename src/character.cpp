@@ -65,11 +65,17 @@ int Character::LevelUP(){
     return 0;
 }
 
+void Character::setLevel(int val){
+    _level = val;
+    _role.setLevel(_level);
+    return;
+}
+
 int Character::setExp(const int a){
     if(a >= 0 && a < getLevelUpExp()){
         this->_exp = a;
     }else if(a >= 0 && a >= getLevelUpExp()){
-        
+
         int cc = setExp(a - getLevelUpExp()) + 1;
         LevelUP();
         return cc;
@@ -179,6 +185,7 @@ void Character::setRole(std::string val){
     Role tmpRole = (*_roleCache)[val];
     if(tmpRole.getName() != "NULL")
         _role = tmpRole;
+    _role.setLevel(_level);
     return;
 }
 

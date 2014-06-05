@@ -35,6 +35,9 @@ class inventory
         int getMoney() const { return _money; };
         void setMoney(int val) { _money = val; };
         int addMoney(int val);
+
+        std::string save();
+        void load(std::string);
     protected:
     private:
         std::map<std::string, inventorySlot> _inventorySlots;

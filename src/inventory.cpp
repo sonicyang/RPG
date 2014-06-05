@@ -1,3 +1,7 @@
+#include <json/value.h>
+#include <json/writer.h>
+#include <json/reader.h>
+
 #include "inventory.h"
 
 inventory::inventory() : _inventorySlots()
@@ -90,7 +94,32 @@ int inventory::addMoney(int val){
         if(_money >= (-1) * val)
             _money += val;
         else
-            return -1;   
+            return -1;
     }
     return 0;
+}
+
+std::string inventory::save(){
+    Json::Value root;
+    root["Money"] = _money;
+    int i = 0;
+    for(auto it = _inventorySlots.begin(); it != _inventorySlots.end(); it++, i++){
+        root["Slot"][i]["Name"] = it->second.item.getName();
+        root["Slot"][i]["Count"] = it->second.count;
+    }
+
+    Json::StyledWriter writer;
+
+    return writer.write(root);
+}
+
+void inventory::load(std::string data){
+    Json::Reader reader;
+    Json::Value root;
+    reader.parse(data, root);
+
+    _money = root["Money"].asInt();
+    for(unsigned int i = 0; i < root["Slot"].size(); i++){
+        addItem(root["Slot"][i]["Name"].asString(), root["Slot"][i]["Count"].asInt());
+    }
 }

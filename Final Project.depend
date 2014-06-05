@@ -811,10 +811,13 @@
 1401770554 c:\users\sonicyang\github\rpg\include\item.h
 	<string>
 
-1401770554 source:c:\users\sonicyang\github\rpg\src\inventory.cpp
+1401940525 source:c:\users\sonicyang\github\rpg\src\inventory.cpp
+	<json/value.h>
+	<json/writer.h>
+	<json/reader.h>
 	"inventory.h"
 
-1401770554 c:\users\sonicyang\github\rpg\include\inventory.h
+1401939618 c:\users\sonicyang\github\rpg\include\inventory.h
 	<map>
 	<string>
 	<vector>
@@ -844,7 +847,7 @@
 	"genericcontorller.h"
 	"render.h"
 
-1401770554 source:c:\users\sonicyang\github\rpg\src\character.cpp
+1401943809 source:c:\users\sonicyang\github\rpg\src\character.cpp
 	"character.h"
 	"enum.h"
 
@@ -877,14 +880,15 @@
 	<map>
 	"role.h"
 
-1401898228 source:c:\users\sonicyang\github\rpg\src\team.cpp
+1401943364 source:c:\users\sonicyang\github\rpg\src\team.cpp
 	<cstdlib>
 	"team.h"
 	"json/value.h"
 	"json/reader.h"
+	"json/writer.h"
 	"utils.h"
 
-1401896082 c:\users\sonicyang\github\rpg\include\team.h
+1401939643 c:\users\sonicyang\github\rpg\include\team.h
 	<map>
 	<string>
 	<vector>

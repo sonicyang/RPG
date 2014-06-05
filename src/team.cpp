@@ -2,6 +2,7 @@
 #include "team.h"
 #include "json/value.h"
 #include "json/reader.h"
+#include "json/writer.h"
 #include "utils.h"
 
 Team::Team() : roleCache(), null()
@@ -73,4 +74,47 @@ bool Team::isWipeOut(){
         flag &= it->second.isDead();
     }
     return flag;
+}
+
+std::string Team::save(){
+    Json::Value root;
+    int i = 0;
+    for(auto it = _team.begin(); it != _team.end(); it++, i++){
+        root["Member"][i]["Name"] = it->second.getName();
+        root["Member"][i]["HP"] = it->second.getHP();
+        root["Member"][i]["MP"] = it->second.getMP();
+        root["Member"][i]["EXP"] = it->second.getExp();
+        root["Member"][i]["Level"] = it->second.getLevel();
+        root["Member"][i]["Head"] = it->second.getHead().getName();
+        root["Member"][i]["Armor"] = it->second.getArmor().getName();
+        root["Member"][i]["Legs"] = it->second.getLegs().getName();
+        root["Member"][i]["Shoes"] = it->second.getShoes().getName();
+        root["Member"][i]["Weapon"] = it->second.getWeapon().getName();
+        root["Member"][i]["Role"] = it->second.getRoleName();
+    }
+
+    Json::StyledWriter writer;
+
+    return writer.write(root);
+}
+
+void Team::load(std::string data){
+    Json::Reader reader;
+    Json::Value root;
+    reader.parse(data, root);
+
+    _team.clear();
+    for(unsigned int i = 0; i < root["Slot"].size(); i++){
+        addCharToTeam(root["Member"][i]["Name"].asString());
+        _team[root["Member"][i]["Name"].asString()].setRole(root["Member"][i]["Role"].asString());
+        _team[root["Member"][i]["Name"].asString()].setLevel(root["Member"][i]["Level"].asInt());
+        _team[root["Member"][i]["Name"].asString()].setHead(Item(root["Member"][i]["Head"].asString()));
+        _team[root["Member"][i]["Name"].asString()].setArmor(Item(root["Member"][i]["Armor"].asString()));
+        _team[root["Member"][i]["Name"].asString()].setLegs(Item(root["Member"][i]["Legs"].asString()));
+        _team[root["Member"][i]["Name"].asString()].setShoes(Item(root["Member"][i]["Shoes"].asString()));
+        _team[root["Member"][i]["Name"].asString()].setWeapon(Item(root["Member"][i]["Weapon"].asString()));
+        _team[root["Member"][i]["Name"].asString()].setHP(root["Member"][i]["HP"].asInt());
+        _team[root["Member"][i]["Name"].asString()].setMP(root["Member"][i]["MP"].asInt());
+        _team[root["Member"][i]["Name"].asString()].setExp(root["Member"][i]["EXP"].asInt());
+    }
 }

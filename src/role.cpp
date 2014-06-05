@@ -59,8 +59,12 @@ void Role::setLevel(int val){
     defense = _defense_base + _defense_mpx *5;
     lvup_exp = ceil(pow(10, log2(val + 1)));
 
-    if(_skillsCache.find(val) != _skillsCache.end()){
-        _skills.push_back(_skillsCache[val]);
+    for(int i = 0; i < val; i++){
+        if(_skillsCache.find(i) != _skillsCache.end()){
+            _skills.push_back(_skillsCache[i]);
+        }
     }
+
+
     return;
 }
