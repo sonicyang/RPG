@@ -42,7 +42,8 @@ class mapController : public genericContorller
         bool isPlayerOnObject();
         mapObject& getPlayerOnObject();
 
-
+        std::string save();
+        void load(std::string);
     protected:
     private:
         std::string currentMap;

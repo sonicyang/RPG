@@ -98,6 +98,8 @@ enum svc{
     sellItem,           //itemIndex
     gameOver,
     endGame = 255,       //
+    loadGame,
+    saveGame,
     closeGame
 };
 

@@ -19,7 +19,7 @@ class gmap
 
         Point Getsize() { return m_size; }
 
-        std::string Getname() { return m_name; }
+        std::string Getname() const { return m_name; }
         void Setname(std::string val) { m_name = val; }
 
         std::string getTile() { return tile; }

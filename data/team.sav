@@ -1,0 +1,17 @@
+{
+   "Member" : [
+      {
+         "Armor" : "Empty",
+         "EXP" : 0,
+         "HP" : 200,
+         "Head" : "Empty",
+         "Legs" : "Empty",
+         "Level" : 1,
+         "MP" : 65,
+         "Name" : "Alex",
+         "Role" : "GeneralPlayer",
+         "Shoes" : "Empty",
+         "Weapon" : "Empty"
+      }
+   ]
+}

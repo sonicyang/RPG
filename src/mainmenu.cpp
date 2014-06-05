@@ -8,6 +8,7 @@ MainMenu::MainMenu(Engine* eng, std::map< std::string, variant<paraVarType> >& b
 {
     mOption.push_back("Team");
     mOption.push_back("Inventory");
+    mOption.push_back("Save");
     mOption.push_back("Exit");
 
     currentPos = 0;
@@ -42,6 +43,9 @@ int MainMenu::hKeyZ(){
                 engine->engineCall(loadStack(svc::setStat, Stats::inInvMenu));
                 break;
             case 2:
+                engine->engineCall(loadStack(svc::saveGame));
+                break;
+            case 3:
                 engine->engineCall(loadStack(svc::endGame));
                 break;
             }

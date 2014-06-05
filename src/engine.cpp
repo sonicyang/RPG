@@ -322,6 +322,27 @@ variant<paraVarType> Engine::engineCall(std::vector< variant<paraVarType> > para
             stop = -1;
             ret.set<int>(0);
             break;
+        case loadGame:
+            mapCtl.load(get_file_contents("data/map.sav"));
+            inv.load(get_file_contents("data/inv.sav"));
+            team.load(get_file_contents("data/team.sav"));
+
+            engineCall(loadStack(svc::loadPrompt, UTF8_to_WChar("Game Loaded!"), UTF8_to_WChar("System")));
+            break;
+        case saveGame:{
+            std::ofstream map_s("data/map.sav");
+            std::ofstream inv_s("data/inv.sav");
+            std::ofstream team_s("data/team.sav");
+            map_s << mapCtl.save();
+            inv_s << inv.save();
+            team_s << team.save();
+            map_s.close();
+            inv_s.close();
+            team_s.close();
+
+            engineCall(loadStack(svc::loadPrompt, UTF8_to_WChar("Game Saved!"), UTF8_to_WChar("System")));
+            break;
+            }
         case svc::closeGame:
             fullstop = 1;
             break;

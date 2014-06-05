@@ -7,6 +7,7 @@ StartMenu::StartMenu(Engine* eng, std::map< std::string, variant<paraVarType> >&
     Menu(eng, b)
 {
     mOption.push_back("Start");
+    mOption.push_back("Load");
     mOption.push_back("Help/Keys");
     mOption.push_back("Exit");
 
@@ -37,9 +38,13 @@ int StartMenu::hKeyZ(){
                 engine->engineCall(loadStack(svc::setStat, Stats::onMap));
                 break;
             case 1:
-                engine->engineCall(loadStack(svc::setStat, Stats::inHelp));
+                engine->engineCall(loadStack(svc::loadGame));
+                engine->engineCall(loadStack(svc::setStat, Stats::onMap));
                 break;
             case 2:
+                engine->engineCall(loadStack(svc::setStat, Stats::inHelp));
+                break;
+            case 3:
                 engine->engineCall(loadStack(svc::closeGame));
                 break;
             }

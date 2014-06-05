@@ -4,6 +4,7 @@
 #include "utils.h"
 #include "json/reader.h"
 #include "json/value.h"
+#include "json/writer.h"
 #include "engine.h"
 #include "utf8.h"
 #include "render.h"
@@ -170,4 +171,26 @@ bool mapController::isPlayerOnObject(){
 
 mapObject& mapController::getPlayerOnObject(){
     return *map_list[currentMap].getObject(player.GetCord());
+}
+
+std::string mapController::save(){
+    Json::Value root;
+    root["Cord"]["x"] = player.GetCord().m_x;
+    root["Cord"]["y"] = player.GetCord().m_y;
+    root["Map"] = getCurrentMap().Getname();
+
+    Json::StyledWriter writer;
+
+    return writer.write(root);
+}
+
+void mapController::load(std::string data){
+    Json::Reader reader;
+    Json::Value root;
+    reader.parse(data, root);
+
+    player.SetCord(Point(root["Cord"]["x"].asInt(), root["Cord"]["y"].asInt()));
+    setCurrentMap(root["Map"].asString());
+
+    return;
 }
