@@ -16,7 +16,7 @@ class Texture{
 
         bool loadFromRenderedText(const char* textureText, SDL_Color textColor, SDL_Renderer*, TTF_Font*);
         bool loadFromRenderedText(const wchar_t* textureText, SDL_Color textColor, SDL_Renderer*, TTF_Font*);
-        bool loadFromFile(std::string path, SDL_Renderer*);
+        bool loadFromFile(std::string path, SDL_Renderer*, bool enableKeying = false);
 
         void free();
 

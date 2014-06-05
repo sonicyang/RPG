@@ -112,7 +112,7 @@ void render::render_map(gmap toRender, mapObject mo){
     offset.m_x = (getmaxx() - toRender.Getsize().m_x * TILE_SIZE) / 2;
     offset.m_y = (getmaxy() - toRender.Getsize().m_y * TILE_SIZE) / 2;
 
-    texture.loadFromFile(toRender.getTile(), ren);
+    texture.loadFromFile(toRender.getTile(), ren, true);
 
     for(unsigned int i = 0; i < toRender.Getsize().m_y; i++){
        for(unsigned int j = 0; j < toRender.Getsize().m_x; j++){
@@ -123,12 +123,12 @@ void render::render_map(gmap toRender, mapObject mo){
 
     std::map<Point,mapObject>::const_iterator it = toRender.getObjects().begin();
     for(; it != toRender.getObjects().end(); it++){
-        texture.loadFromFile(it->second.getTile(), ren);
+        texture.loadFromFile(it->second.getTile(), ren, true);
         SDL_Rect ROI = {(int)it->second.Geticon().m_x * TILE_SIZE, (int)it->second.Geticon().m_y * TILE_SIZE, TILE_SIZE , TILE_SIZE};
         texture.render(ren, it->second.GetCord().m_x * TILE_SIZE + offset.m_x, it->second.GetCord().m_y * TILE_SIZE + offset.m_y, &ROI);
     }
 
-    texture.loadFromFile(mo.getTile(), ren);
+    texture.loadFromFile(mo.getTile(), ren, true);
     SDL_Rect ROI = {(int)mo.Geticon().m_x * TILE_SIZE, (int)mo.Geticon().m_y * TILE_SIZE, TILE_SIZE , TILE_SIZE};
     texture.render(ren, mo.GetCord().m_x * TILE_SIZE + offset.m_x, mo.GetCord().m_y * TILE_SIZE + offset.m_y, &ROI);
 

@@ -56,7 +56,7 @@ bool Texture::loadFromRenderedText(const wchar_t* textureText, SDL_Color textCol
     return _Texture != NULL;
 }
 
-bool Texture::loadFromFile( std::string path, SDL_Renderer* gRenderer)
+bool Texture::loadFromFile( std::string path, SDL_Renderer* gRenderer, bool enableKeying)
 {
 	//Get rid of preexisting texture
 	free();
@@ -68,7 +68,8 @@ bool Texture::loadFromFile( std::string path, SDL_Renderer* gRenderer)
 	SDL_Surface* loadedSurface = IMG_Load( path.c_str() );
 	if( loadedSurface != NULL ){
 		//Color key image
-		SDL_SetColorKey( loadedSurface, SDL_TRUE, SDL_MapRGB( loadedSurface->format, 0, 0xFF, 0xFF ) );
+		if(enableKeying)
+            SDL_SetColorKey( loadedSurface, SDL_TRUE, SDL_MapRGB( loadedSurface->format, 0xFF, 0xFF, 0xFF ) );
 
 		//Create texture from surface pixels
         newTexture = SDL_CreateTextureFromSurface( gRenderer, loadedSurface );

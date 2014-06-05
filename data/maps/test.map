@@ -1,7 +1,7 @@
 {
 	"Name" : "Test",
 	"Size" : { "x" : 12, "y" : 12},
-	"Tile" : "data/tiles/base_out_atlas.png",
+	"Tile" : "data/tiles/base_out_atlas.bmp",
 	"Floorx" : 	[ 	5, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 7, 
 					5, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 7, 
 					5, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 7, 
@@ -41,13 +41,14 @@
 					1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 
 					1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 	"Blocks" : ["1", "＃"],
+	"Background" : "data/imgs/battle.jpg",
 	"Objects" : [{
 					"Name" 	: 	"David",
 					"Type" 	: 	1,
 					"canStep" : 0,
 					"x"		:	4,
 					"y"		:	4,
-					"Tile"  :   "data/tiles/base_out_atlas.png",
+					"Tile"  :   "data/tiles/base_out_atlas.bmp",
 					"Icon"	:   { "x" : 6, "y" : 10 },
 					"Trigger" : "DavidTrigger",
 					"trigType" : 1
@@ -57,7 +58,7 @@
 					"canStep" : 1,
 					"x"		:	8,
 					"y"		:	4,
-					"Tile"  :   "data/tiles/base_out_atlas.png",
+					"Tile"  :   "data/tiles/base_out_atlas.bmp",
 					"Icon"	:	{ "x" : 12, "y" : 0 },
 					"Trigger" : "TrapTrigger",
 					"trigType" : 2
@@ -68,7 +69,7 @@
 					"canStep" : 1,
 					"x"		:	11,
 					"y"		:	3,
-					"Tile"  :   "data/tiles/base_out_atlas.png",
+					"Tile"  :   "data/tiles/base_out_atlas.bmp",
 					"Icon"	:	{ "x" : 6, "y" : 1 },
 					"Trigger" : "test_test2Trigger",
 					"trigType" : 2
