@@ -72,26 +72,34 @@ int ItemExec::changeItem(inventory& inv, int item, Team& team, int chara, int sl
 int ItemExec::skillExec(Team& _team, int chara, int skill, std::vector<Monster>& _monsters, int monsterId, int friendlyId){
     std::vector<std::string> memberList = _team.getNameList();
     Skill tmp = _team[memberList[chara]].getSkillList()[skill];
-    
+
     if(_team[memberList[chara]].getMP() < tmp.getMPC())
         return 0;
 
     if(tmp.geteTarget() == 0){
         _monsters[monsterId].varHP(tmp.geteHPv());
         _monsters[monsterId].varMP(tmp.geteMPv());
+        _monsters[monsterId].varAttack(tmp.geteATKv());
+        _monsters[monsterId].varDefense(tmp.geteDEFv());
     }else if(tmp.geteTarget() == 1){
         for(unsigned int m = 0; m < _monsters.size(); m++){
             _monsters[m].varHP(tmp.geteHPv());
             _monsters[m].varMP(tmp.geteMPv());
+            _monsters[m].varAttack(tmp.geteATKv());
+            _monsters[m].varDefense(tmp.geteDEFv());
         }
     }
     if(tmp.getfTarget() == 0){
         _team[memberList[friendlyId]].varHP(tmp.getfHPv());
         _team[memberList[friendlyId]].varMP(tmp.getfMPv());
+        _team[memberList[friendlyId]].varMP(tmp.getfATKv());
+        _team[memberList[friendlyId]].varMP(tmp.getfDEFv());
     }else if(tmp.getfTarget() == 1){
         for(unsigned int m = 0; m < memberList.size(); m++){
             _team[memberList[m]].varHP(tmp.getfHPv());
             _team[memberList[m]].varMP(tmp.getfMPv());
+            _team[memberList[m]].varMP(tmp.getfATKv());
+            _team[memberList[m]].varMP(tmp.getfDEFv());
         }
     }
 

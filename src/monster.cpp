@@ -95,10 +95,12 @@ bool Monster::isDead(){
     return _hp == 0;
 }
 
-void varAttack(const int val){
-
+void Monster::varAttack(const int val){
+    attack = attack + val;
+    return;
 }
 
-void varDefense(const int val){
-
+void Monster::varDefense(const int val){
+    defense = defense + val;
+    return;
 }

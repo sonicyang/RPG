@@ -38,7 +38,9 @@ int Battle::loadBattle(Team* t, std::vector<std::string>& monsters, int chance){
     }
     _monstersBak = _monsters;
     charaAttackBuff.resize(_memberCount);
+    charaAttackBuff.clear();
     charaDefenseBuff.resize(_memberCount);
+    charaDefenseBuff.clear();
     team = t;
     processStat = 0;
     return 0;
@@ -196,10 +198,14 @@ int Battle::hDoEvent(){
                 if(tmp.getfTarget() == 0){
                     _monsters[i].varHP(tmp.getfHPv());
                     _monsters[i].varMP(tmp.getfMPv());
+                    _monsters[i].varAttack(tmp.getfATKv());
+                    _monsters[i].varDefense(tmp.getfDEFv());
                 }else if(tmp.getfTarget() == 1){
                     for(unsigned int m = 0; m < _monsters.size(); m++){
                         _monsters[m].varHP(tmp.getfHPv());
                         _monsters[m].varMP(tmp.getfMPv());
+                        _monsters[m].varAttack(tmp.getfATKv());
+                        _monsters[m].varDefense(tmp.getfDEFv());
                     }
                 }
 
@@ -207,10 +213,14 @@ int Battle::hDoEvent(){
                     unsigned int target = rand() %  _memberCount;
                     engine->engineCall(loadStack(svc::varHP, target, tmp.geteHPv()));
                     engine->engineCall(loadStack(svc::varMP, target, tmp.geteMPv()));
+                    charaAttackBuff[target] += tmp.geteATKv();
+                    charaDefenseBuff[target] += tmp.geteATKv();
                 }else if(tmp.geteTarget() == 1){
                     for(unsigned int m = 0; m < _memberCount; m++){
                         engine->engineCall(loadStack(svc::varHP, m, tmp.geteHPv()));
                         engine->engineCall(loadStack(svc::varMP, m, tmp.geteMPv()));
+                        charaAttackBuff[m] += tmp.geteATKv();
+                        charaDefenseBuff[m] += tmp.geteATKv();
                     }
                 }
             }
