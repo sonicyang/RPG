@@ -227,34 +227,34 @@ void render::render_TeamMenu(Team& team, unsigned int curPos){
         else
             texture.loadFromFile("data/imgs/charmenu.png", ren);
 
-        texture.render(ren, 10, 80 + i * 130);
+        texture.render(ren, 10, 80 + i * 135);
 
         char tmp[100];
 
         //Print Informations
         sprintf(tmp, "Name : %s", team[memberList[i]].getName().c_str());
         texture.loadFromRenderedText(tmp, textColor, ren, font_comic16);
-        texture.render(ren, 20, 100 + i * 130);
+        texture.render(ren, 20, 100 + i * 135);
 
         sprintf(tmp, "Level : %d", team[memberList[i]].getLevel());
         texture.loadFromRenderedText(tmp, textColor, ren, font_comic16);
-        texture.render(ren, 350, 100 + i * 130);
+        texture.render(ren, 350, 100 + i * 135);
 
         sprintf(tmp, "Role : %s", team[memberList[i]].getRoleName().c_str());
         texture.loadFromRenderedText(tmp, textColor, ren, font_comic16);
-        texture.render(ren, 20, 130 + i * 130);
+        texture.render(ren, 20, 130 + i * 135);
 
         sprintf(tmp, "HP : %d/%d", team[memberList[i]].getHP(), team[memberList[i]].getMaxHP());
         texture.loadFromRenderedText(tmp, textColor, ren, font_comic16);
-        texture.render(ren, 20, 160 + i * 130);
+        texture.render(ren, 20, 160 + i * 135);
 
         sprintf(tmp, "MP : %d/%d", team[memberList[i]].getMP(), team[memberList[i]].getMaxMP());
         texture.loadFromRenderedText(tmp, textColor, ren, font_comic16);
-        texture.render(ren, 300, 160 + i * 130);
+        texture.render(ren, 300, 160 + i * 135);
 
         sprintf(tmp, "EXP : %d/%d", team[memberList[i]].getExp(), team[memberList[i]].getLevelUpExp());
         texture.loadFromRenderedText(tmp, textColor, ren, font_comic16);
-        texture.render(ren, 600, 160 + i * 130);
+        texture.render(ren, 600, 160 + i * 135);
     }
 
     update();
