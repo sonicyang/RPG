@@ -10,7 +10,7 @@ class Character
 {
     public:
         Character();
-        Character(RoleFactory*, std::string, int, Role);
+        Character(std::map<std::string, Role>&, std::string, int, Role);
         virtual ~Character();
 
         /* setters and getters */
@@ -70,7 +70,7 @@ class Character
         std::vector<Skill> getSkillList() { return _role.getSkillList(); };
     protected:
     private:
-        RoleFactory* _roleCache;
+        std::map<std::string, Role> _roleCache;
 
         std::string _name; // Stores the name of the player
         int _hp; // Stores the HP of the player, >= 0

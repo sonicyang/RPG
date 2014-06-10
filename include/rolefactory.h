@@ -13,6 +13,7 @@ class RoleFactory
         virtual ~RoleFactory();
 
         Role operator[](std::string val);
+        Role at(std::string val);
     protected:
     private:
 

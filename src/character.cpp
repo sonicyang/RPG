@@ -1,7 +1,7 @@
 #include "character.h"
 #include "enum.h"
 
-Character::Character (RoleFactory* rf, std::string n, int lvl, Role role) : _roleCache(rf), _name(n), _exp(0), _role(role)
+Character::Character (std::map<std::string, Role>& rc, std::string n, int lvl, Role role) : _roleCache(rc), _name(n), _exp(0), _role(role)
 {
     _role.setLevel(lvl);
     _level = lvl;
@@ -182,7 +182,7 @@ std::string Character::getRoleName(void) {
 }
 
 void Character::setRole(std::string val){
-    Role tmpRole = (*_roleCache)[val];
+    Role tmpRole = _roleCache.at(val);
     if(tmpRole.getName() != "NULL")
         _role = tmpRole;
     _role.setLevel(_level);

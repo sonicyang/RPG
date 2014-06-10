@@ -1,6 +1,6 @@
 {
 	"Count" : 2,
-	"All" : [{"Name" : "Alex", "Role" : "GeneralPlayer", "Level" : 1},
+	"All" : [{"Name" : "Alex", "Role" : "Magica", "Level" : 1},
 			 {"Name" : "George", "Role" : "GeneralPlayer", "Level" : 1}
 	
 			],

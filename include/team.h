@@ -27,7 +27,8 @@ class Team
         void load(std::string);
     protected:
     private:
-        RoleFactory roleCache;
+        int _roleCount;
+        std::map<std::string, Role> roleCache;
 
         std::map<std::string, Character> _team;
 

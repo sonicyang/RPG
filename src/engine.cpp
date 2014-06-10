@@ -313,6 +313,9 @@ variant<paraVarType> Engine::engineCall(std::vector< variant<paraVarType> > para
             engineCall(loadStack(svc::addMoney, inv[inv.getNameList(params[1].get<unsigned int>())[0]].item.getSellPrice()));
             engineCall(loadStack(svc::decItem, inv.getNameList(params[1].get<unsigned int>())[0]));
             break;
+        case svc::setRole:            //memberIndex, RoleName
+            team[params[1].get<std::string>()].setRole(params[2].get<std::string>());
+            break;
         case svc::gameOver:
             rdr.render_gameOver();
             stop = -1;

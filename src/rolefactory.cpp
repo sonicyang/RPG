@@ -60,3 +60,9 @@ Role RoleFactory::operator[](std::string val){
         return _roleCache[val];
     return _null;
 }
+
+Role RoleFactory::at(std::string val){
+    if(_roleCache.find(val) != _roleCache.end())
+        return _roleCache[val];
+    return _null;
+}

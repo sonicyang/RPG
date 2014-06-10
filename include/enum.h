@@ -96,6 +96,7 @@ enum svc{
     setupVender,        //List of Item
     loadVenderInvMenu,
     sellItem,           //itemIndex
+    setRole,            //memberIndex, RoleName
     gameOver,
     endGame = 255,       //
     loadGame,

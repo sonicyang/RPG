@@ -1,0 +1,9 @@
+{
+	"Name" : "MagicaTrigger",
+	"triggerType" : 1,
+	"Command" : [
+				"01|System|Alex發現了一本書，開始翻閱...Alex變成了魔法師!",
+				"18|Alex|Magica",
+				"02"
+				]
+}

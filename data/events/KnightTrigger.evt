@@ -1,0 +1,9 @@
+{
+	"Name" : "KnightTrigger",
+	"triggerType" : 1,
+	"Command" : [
+				"01|System|Alex發現了一本書，開始翻閱...Alex變成了騎士!",
+				"18|Alex|Knight",
+				"02"
+				]
+}

@@ -63,5 +63,27 @@
 					"Icon"	:	{ "x" : 6, "y" : 1 },
 					"Trigger" : "Two_OneTrigger",
 					"trigType" : 2
+				},{
+					"Name" 	: 	"Knight",
+					"Type" 	: 	1,
+					"canStep" : 0,
+					"x"		:	1,
+					"y"		:	11,
+					"Facing" : 	0,
+					"Tile"  :   "data/tiles/base_out_atlas.bmp",
+					"Icon"	:	{ "x" : 1, "y" : 1 },
+					"Trigger" : "KnightTrigger",
+					"trigType" : 1
+				},{
+					"Name" 	: 	"Magica",
+					"Type" 	: 	1,
+					"canStep" : 0,
+					"x"		:	2,
+					"y"		:	11,
+					"Facing" : 	0,
+					"Tile"  :   "data/tiles/base_out_atlas.bmp",
+					"Icon"	:	{ "x" : 1, "y" : 1 },
+					"Trigger" : "MagicaTrigger",
+					"trigType" : 1
 				}]
 }

@@ -52,7 +52,8 @@ class eventController : public genericContorller
             addCharToTeam,      //Name
             removeCharFromTeam,  //Name          15,
             battle,               //Name, Name, Name, Name
-            vendor               //itemNames
+            vendor,               //itemNames
+            setRole
         };
 
 };

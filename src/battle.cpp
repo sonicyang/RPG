@@ -194,6 +194,14 @@ int Battle::hDoEvent(){
 
             }else{//Skills
                 Skill tmp = _monsters[i].getSkillList()[us - 1];
+                unsigned int target = rand() %  _memberCount;
+
+                char tt[100];
+                if(tmp.geteTarget() == 0)
+                    sprintf(tt, "Monster used %s on %s", tmp.getName().c_str(), team->getNameList()[target].c_str());
+                else
+                    sprintf(tt, "Monster used %s", tmp.getName().c_str());
+                engine->engineCall(loadStack(svc::loadPrompt, UTF8_to_WChar(tt), UTF8_to_WChar("System")));
 
                 if(tmp.getfTarget() == 0){
                     _monsters[i].varHP(tmp.getfHPv());
@@ -210,7 +218,6 @@ int Battle::hDoEvent(){
                 }
 
                 if(tmp.geteTarget() == 0){
-                    unsigned int target = rand() %  _memberCount;
                     engine->engineCall(loadStack(svc::varHP, target, tmp.geteHPv()));
                     engine->engineCall(loadStack(svc::varMP, target, tmp.geteMPv()));
                     charaAttackBuff[target] += tmp.geteATKv();
@@ -223,8 +230,6 @@ int Battle::hDoEvent(){
                         charaDefenseBuff[m] += tmp.geteATKv();
                     }
                 }
-
-                engine->engineCall(loadStack(svc::loadPrompt, UTF8_to_WChar(("Monster Used Skill" + tmp.getName()).c_str()), UTF8_to_WChar("System")));
             }
             usleep(1000000);
         }

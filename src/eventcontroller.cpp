@@ -172,6 +172,9 @@ int eventController::execTopEvent(){
             engine->engineCall(loadStack(svc::setStat, Stats::inVender));
             break;
             }
+        case eventCode::setRole:
+            engine->engineCall(loadStack(svc::setRole, ss[1], ss[2]));
+            break;
     }
     currentEvent.pc++;
     return 1;
