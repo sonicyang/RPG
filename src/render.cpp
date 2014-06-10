@@ -223,9 +223,9 @@ void render::render_TeamMenu(Team& team, unsigned int curPos){
 
     for (unsigned int i = 0; i < memberList.size(); i++){
         if(i == curPos)
-            texture.loadFromFile("data/menu/charmenu_selected.png", ren);
+            texture.loadFromFile("data/imgs/charmenu_selected.png", ren);
         else
-            texture.loadFromFile("data/menu/charmenu.png", ren);
+            texture.loadFromFile("data/imgs/charmenu.png", ren);
 
         texture.render(ren, 10, 80 + i * 130);
 
