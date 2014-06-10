@@ -1,0 +1,10 @@
+{
+   "ATKv" : 0,
+   "Comsumable" : 0,
+   "DEFv" : 5,
+   "Description" : "Iron Legs\nHP + 20\nMP + 5\nDEF + 5",
+   "HPv" : 20,
+   "MPv" : 5,
+   "Name" : "Iron Legs",
+   "Type" : 4
+}

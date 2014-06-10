@@ -1,0 +1,17 @@
+{
+   "Attack" : [ 20, 10 ],
+   "Defense" : [ 20, 10 ],
+   "HP" : [ 100, 15 ],
+   "MP" : [ 80, 10 ],
+   "Name" : "Magica",
+   "Skills" : [
+      {
+         "Level" : 5,
+         "Name" : "Burst"
+      },
+      {
+         "Level" : 7,
+         "Name" : "Heal"
+      }
+   ]
+}

@@ -1,8 +1,9 @@
 {
-	"Count" : 4,
-	"Path" : [	"data/events/DavidTrigger.evt", 
+	"Count" : 5,
+	"Path" : [	"data/events/DavidTrigger.evt",
+				"data/events/VendorTrigger.evt", 
 				"data/events/TrapTrigger.evt", 
-				"data/events/test_test2Trigger.evt",
-				"data/events/notEnoughItemHook.evt"
+				"data/events/Two_OneTrigger.evt", 
+				"data/events/test_test2Trigger.evt"
 			 ]
 }

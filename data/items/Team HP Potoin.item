@@ -1,0 +1,10 @@
+{
+   "ATKv" : 0,
+   "Comsumable" : 1,
+   "DEFv" : 0,
+   "Description" : "Recover Everyone's HP by 100 points",
+   "HPv" : 100,
+   "MPv" : 0,
+   "Name" : "Team HP Potoin",
+   "Type" : 1
+}

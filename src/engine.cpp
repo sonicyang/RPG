@@ -105,7 +105,7 @@ void Engine::excute(){
             parseUserInput(startmenu);
             startmenu.hDoEvent();
             startmenu.hRender(rdr);
-        }catch(int){
+        }catch(char){
             stop = 0;
             mapCtl = mapController(mapList, this);
             team = Team(teamList, roleList);
@@ -121,7 +121,7 @@ void Engine::excute(genericContorller& controller){
         controller.hRender(rdr);
     }
     if(stop != 1) //Nested stop signal
-        throw(0);
+        throw('x');
     else
        stop = 0;
 }

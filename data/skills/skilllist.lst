@@ -1,4 +1,8 @@
 {
-   "Count" : 2,
-   "Skills" : [ "data/skills/Burst.skl", "data/skills/Heal.skl" ]
+   "Count" : 3,
+   "Skills" : [
+      "data/skills/Burst.skl",
+      "data/skills/Heal.skl",
+      "data/skills/Troll.skl"
+   ]
 }

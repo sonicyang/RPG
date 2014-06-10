@@ -2,10 +2,8 @@
 	"Name" : "TrapTrigger",
 	"triggerType" : 2,
 	"Command" : [
-				"01|System|You fall in a trap...",
-				"05|TestItem|01",
-				"08|ret|-1|1",
-				"01|System|Don't Have engouh Items",
+				"01|System|你掉進了一個洞裡，裡面有怪物",
+				"16|Creeper|Goblin|Goblin",
 				"02"
 				]
 }

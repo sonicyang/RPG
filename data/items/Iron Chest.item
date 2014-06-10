@@ -1,0 +1,10 @@
+{
+   "ATKv" : 0,
+   "Comsumable" : 0,
+   "DEFv" : 5,
+   "Description" : "Iron Chest\nHP + 30\nMP + 10\nDEF + 5",
+   "HPv" : 30,
+   "MPv" : 10,
+   "Name" : "Iron Chest",
+   "Type" : 3
+}

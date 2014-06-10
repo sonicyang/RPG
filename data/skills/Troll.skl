@@ -1,0 +1,15 @@
+{
+   "Description" : "Troll a Enemy, Attack + 5 Defense - 5\nMP - 10",
+   "MPC" : 10,
+   "Name" : "Troll",
+   "eATKv" : 5,
+   "eDEFv" : -5,
+   "eHPv" : 0,
+   "eMPv" : 0,
+   "eTarget" : 0,
+   "fATKv" : 0,
+   "fDEFv" : 0,
+   "fHPv" : 0,
+   "fMPv" : 0,
+   "fTarget" : -1
+}

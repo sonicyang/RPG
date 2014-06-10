@@ -1,6 +1,6 @@
 {
-   "Description" : "Null",
-   "MPC" : 0,
+   "Description" : "Heal a Friendly by 50 pts\nMP - 20",
+   "MPC" : 20,
    "Name" : "Heal",
    "eATKv" : 0,
    "eDEFv" : 0,
@@ -9,7 +9,7 @@
    "eTarget" : -1,
    "fATKv" : 0,
    "fDEFv" : 0,
-   "fHPv" : 0,
+   "fHPv" : 50,
    "fMPv" : 0,
-   "fTarget" : -1
+   "fTarget" : 0
 }

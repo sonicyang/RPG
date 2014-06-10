@@ -1,0 +1,13 @@
+{
+   "Attack" : [ 40, 15 ],
+   "Defense" : [ 35, 10 ],
+   "HP" : [ 200, 20 ],
+   "MP" : [ 40, 5 ],
+   "Name" : "Knight",
+   "Skills" : [
+      {
+         "Level" : 5,
+         "Name" : "Troll"
+      }
+   ]
+}

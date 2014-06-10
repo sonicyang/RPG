@@ -1,17 +1,7 @@
 {
-   "Attack" : [ 100, 0 ],
+   "Attack" : [ 25, 0 ],
    "Defense" : [ 0, 0 ],
    "HP" : [ 100, 10 ],
    "MP" : [ 40, 5 ],
-   "Name" : "GeneralPlayer",
-   "Skills" : [
-      {
-         "Level" : 5,
-         "Name" : "Burst"
-      },
-      {
-         "Level" : 10,
-         "Name" : "Heal"
-      }
-   ]
+   "Name" : "GeneralPlayer"
 }

@@ -1,0 +1,9 @@
+{
+	"Name" : "VendorTrigger",
+	"triggerType" : 1,
+	"Command" : [
+				"01|???|大特賣大特賣",
+				"17|Iron Chest|Iron Head|Iron Legs|Iron Shoes|Iron Sword|Large HP Potion",
+				"02"
+				]
+}

@@ -1,4 +1,8 @@
 {
-   "Count" : 2,
-   "Path" : [ "data/roles/GeneralPlayer.rol", "data/roles/asdf.rol" ]
+   "Count" : 3,
+   "Path" : [
+      "data/roles/GeneralPlayer.rol",
+      "data/roles/Magica.rol",
+      "data/roles/Knight.rol"
+   ]
 }

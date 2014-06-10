@@ -1,9 +1,10 @@
 {
-   "ATK" : 0,
-   "DEF" : 0,
-   "EXP" : 9,
-   "HP" : 9999,
-   "Image" : "",
-   "MP" : 9999,
-   "Name" : "Creeper"
+   "ATK" : 75,
+   "DEF" : 10,
+   "EXP" : 40,
+   "HP" : 250,
+   "Image" : "data/imgs/goblin.png",
+   "MP" : 20,
+   "Name" : "Creeper",
+   "Skills" : [ "Troll" ]
 }

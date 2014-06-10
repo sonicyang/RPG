@@ -1,0 +1,10 @@
+{
+   "ATKv" : 0,
+   "Comsumable" : 1,
+   "DEFv" : 0,
+   "Description" : "Recover some HP",
+   "HPv" : 50,
+   "MPv" : 0,
+   "Name" : "Large HP Potion",
+   "Type" : 0
+}

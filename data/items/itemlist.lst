@@ -1,4 +1,13 @@
 {
-   "Count" : 1,
-   "Items" : [ "data/items/TestItem.item" ]
+   "Count" : 8,
+   "Items" : [
+      "data/items/Iron Chest.item",
+      "data/items/Iron Head.item",
+      "data/items/Iron Legs.item",
+      "data/items/Iron Shoes.item",
+      "data/items/Iron Sword.item",
+      "data/items/Large HP Potion.item",
+      "data/items/Small HP Potion.item",
+      "data/items/Team HP Potoin.item"
+   ]
 }

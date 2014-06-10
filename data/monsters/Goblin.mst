@@ -1,10 +1,10 @@
 {
-   "ATK" : 5,
-   "DEF" : 5,
+   "ATK" : 30,
+   "DEF" : 25,
    "EXP" : 50,
-   "HP" : 100,
+   "HP" : 400,
    "Image" : "data/imgs/goblin.png",
-   "MP" : 20,
+   "MP" : 50,
    "Name" : "Goblin",
    "Skills" : [ "Burst" ]
 }
