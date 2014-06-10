@@ -1,0 +1,9 @@
+{
+   "ATK" : 0,
+   "DEF" : 0,
+   "EXP" : 9,
+   "HP" : 9999,
+   "Image" : "",
+   "MP" : 9999,
+   "Name" : "Creeper"
+}

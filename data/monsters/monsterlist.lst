@@ -1,5 +1,4 @@
 {
-	"Count" : 1,
-	"Path" : [	"data/monsters/Goblin.mst"
-			 ]
+   "Count" : 2,
+   "Path" : [ "data/monsters/Creeper.mst", "data/monsters/Goblin.mst" ]
 }

@@ -281,7 +281,7 @@ void render::render_InvMenu(inventory& inv, int curPos){
     char mString[40];
     sprintf(mString, "Money: $%d", inv.getMoney());
     texture.loadFromRenderedText(mString, textColor, ren, font_comic16);
-    texture.render(ren, 300, 560);
+    texture.render(ren, getmaxx() * 0.35, getmaxy() - 50);
 
     for (unsigned int i = 0; i < nameList.size(); i++){
         texture.loadFromRenderedText(nameList[i].c_str(), textColor, ren, font_comic16);
@@ -306,7 +306,7 @@ void render::render_InvMenu(inventory& inv, int curPos){
         texture.render(ren, getmaxx() * 0.35, 130);
 
         texture.loadFromRenderedText("Description : ", textColor, ren, font_comic16);
-        texture.render(ren, 300, 160);
+        texture.render(ren, getmaxx() * 0.35, 160);
 
         unsigned int xoff = (getmaxx() - 260) / 13;
         unsigned int i;

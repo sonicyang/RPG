@@ -223,6 +223,8 @@ int Battle::hDoEvent(){
                         charaDefenseBuff[m] += tmp.geteATKv();
                     }
                 }
+
+                engine->engineCall(loadStack(svc::loadPrompt, UTF8_to_WChar(("Monster Used Skill" + tmp.getName()).c_str()), UTF8_to_WChar("System")));
             }
             usleep(1000000);
         }
