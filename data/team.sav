@@ -3,13 +3,13 @@
       {
          "Armor" : "Empty",
          "EXP" : 0,
-         "HP" : 200,
+         "HP" : 250,
          "Head" : "Empty",
          "Legs" : "Empty",
          "Level" : 1,
-         "MP" : 65,
+         "MP" : 130,
          "Name" : "Alex",
-         "Role" : "GeneralPlayer",
+         "Role" : "Knight",
          "Shoes" : "Empty",
          "Weapon" : "Empty"
       }

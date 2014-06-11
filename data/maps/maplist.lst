@@ -2,6 +2,6 @@
 	"Count" : 2,
 	"Path" : ["data/maps/One.map", "data/maps/Two.map"],
 	"Default" : "One",
-    "pTile" : "data/tiles/base_out_atlas.bmp",
-    "pIcon" : { "x" : 15, "y" : 15 }
+    "pTile" : "data/imgs/Fighter.png",
+    "pIcon" : { "x" : 0, "y" : 0 }
 }

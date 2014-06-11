@@ -41,16 +41,16 @@
 					1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 
 					1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 	"Blocks" : ["1", "＃"],
-	"Background" : "data/imgs/battle.jpg",
+	"Background" : "data/imgs/back.jpg",
 	"Objects" : [{
 					"Name" 	: 	"David",
 					"Type" 	: 	1,
 					"canStep" : 0,
 					"x"		:	4,
 					"y"		:	4,
-					"Facing" : 	3,
-					"Tile"  :   "data/tiles/base_out_atlas.bmp",
-					"Icon"	:   { "x" : 6, "y" : 10 },
+					"Facing" : 	2,
+					"Tile"  :   "data/imgs/Bard.png",
+					"Icon"	:   { "x" : 0, "y" : 0 },
 					"Trigger" : "DavidTrigger",
 					"trigType" : 1
 				},{
@@ -61,7 +61,7 @@
 					"y"		:	4,
 					"Facing" : 	0,
 					"Tile"  :   "data/tiles/base_out_atlas.bmp",
-					"Icon"	:	{ "x" : 12, "y" : 0 },
+					"Icon"	:	{ "x" : 12, "y" : 7 },
 					"Trigger" : "TrapTrigger",
 					"trigType" : 2
 

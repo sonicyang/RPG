@@ -41,15 +41,16 @@
 					1, 0, 0, 0, 0, 1, 
 					1, 1, 1, 1, 1, 1],
 	"Blocks" : ["1", "＃"],
+	"Background" : "data/imgs/back.jpg",
 	"Objects" : [{
 					"Name" 	: 	"Vendor",
 					"Type" 	: 	1,
 					"canStep" : 0,
 					"x"		:	4,
 					"y"		:	4,
-					"Facing" : 	3,
-					"Tile"  :   "data/tiles/base_out_atlas.bmp",
-					"Icon"	:	{ "x" : 1, "y" : 1 },
+					"Facing" : 	0,
+					"Tile"  :   "data/imgs/Oldman.png",
+					"Icon"	:	{ "x" : 0, "y" : 0 },
 					"Trigger" : "VendorTrigger",
 					"trigType" : 1
 				},{
@@ -68,21 +69,21 @@
 					"Type" 	: 	1,
 					"canStep" : 0,
 					"x"		:	1,
-					"y"		:	11,
+					"y"		:	10,
 					"Facing" : 	0,
 					"Tile"  :   "data/tiles/base_out_atlas.bmp",
-					"Icon"	:	{ "x" : 1, "y" : 1 },
+					"Icon"	:	{ "x" : 11, "y" : 7 },
 					"Trigger" : "KnightTrigger",
 					"trigType" : 1
 				},{
 					"Name" 	: 	"Magica",
 					"Type" 	: 	1,
 					"canStep" : 0,
-					"x"		:	2,
-					"y"		:	11,
+					"x"		:	3,
+					"y"		:	10,
 					"Facing" : 	0,
 					"Tile"  :   "data/tiles/base_out_atlas.bmp",
-					"Icon"	:	{ "x" : 1, "y" : 1 },
+					"Icon"	:	{ "x" : 11, "y" : 7 },
 					"Trigger" : "MagicaTrigger",
 					"trigType" : 1
 				}]
