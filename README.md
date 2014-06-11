@@ -32,7 +32,8 @@ Compiling:
 		
 	Linux:
 		1. Install DL2 and its developemnt packages
-			Ubuntu : issue "sudo apt-get install libsdl2-dev libsdl2-image-dev libsdl2-ttf-dev"
+			Ubuntu >= 14.04 : issue "sudo apt-get install libsdl2-2.0-0 libsdl2-dev libsdl2-image-dev libsdl2-image-2.0-0 libsdl2-ttf-2.0-0 libsdl2-ttf-dev"
+			Ubuntu < 14.04  : issue "sudo apt-get install libsdl2-2.0-0 libsdl2-dev libsdl2-image-dev libsdl2-image-2.0-0" and compile SDL_ttf by your Self(As Other)
 			Other  : Use your own Package Manager or compile using source : 
 				http://www.libsdl.org/release/SDL2-2.0.3.tar.gz
 				https://www.libsdl.org/projects/SDL_image/release/SDL2_image-2.0.0.tar.gz
