@@ -246,9 +246,9 @@ variant<paraVarType> Engine::engineCall(std::vector< variant<paraVarType> > para
             ret.set<int>(inv[inv.getNameList(params[1].get<unsigned int>())[0]].item.getType());
             break;
         case svc::useItem:
+            sprintf(tmp, "Used %s", inv[inv.getNameList(params[1].get<unsigned int>())[0]].item.getName().c_str());
             ItemExec::Exec(inv, params[1].get<unsigned int>(), team, params[2].get<unsigned int>());
-            //sprintf(tmp, "Used %s", inv[inv.getNameList(params[1].get<unsigned int>())[0]].item.getName().c_str());
-            //engineCall(loadStack(svc::loadPrompt, UTF8_to_WChar(tmp), UTF8_to_WChar("System")));
+            engineCall(loadStack(svc::loadPrompt, UTF8_to_WChar(tmp), UTF8_to_WChar("System")));
             break;
         case svc::isCharDead:
             ret.set<int>(team[team.getNameList()[params[1].get<unsigned int>()]].isDead());
